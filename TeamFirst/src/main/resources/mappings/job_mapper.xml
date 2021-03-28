@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.java.job.service.impl.JobMapper">
+	<!-- select 일때는 반드시 resultType이 있어야 한다 -->
+	<!-- parameterType 은 #{변수이름} 으로 값을 넣는다 == (?) -->
+
+	<!-- result, parameterType 에는 com.java.emp.JobVO 를 바로 넣을수도있고 mybatis-config 
+		에 typeAlias 설정해서 간단한이름으로 넣을수도있다 -->
+
+	<select id="getJob" resultType="job" parameterType="job">
+		select * from
+		jobs where job_id =
+		#{job_id}
+	</select>
+
+	<select id="getSearchJob" resultType="job" parameterType="job">
+		select * from jobs
+		<where>
+
+			<if test="min_salary !=null and min_salary !=''">
+				min_salary = #{min_salary}
+			</if>
+			<if test="max_salary !=null and max_salary !=''">
+				and max_salary = #{max_salary}
+			</if>
+			<if test="job_title !=null and job_titl !=''">
+				and upper(job_title) like '%'||upper(#{job_title})||'%'
+			</if>
+		</where>
+
+		order by job_id
+	</select>
+
+	<insert id="insertJob" parameterType="job">
+		insert into jobs
+		(
+		job_id,
+		last_name,
+		email,
+		hire_date,
+		job_id
+		<if test="first_name !=null">
+			,first_name
+		</if>
+		<if test="manager_id !=null">
+			,salary
+		</if>
+		<if test="manager_id !=null">
+			,manager_id
+		</if>
+		)
+		values
+		(
+		#{job_id},
+		#{last_name},
+		#{email},
+		to_date(#{hire_date},'yyyy-mm-dd'),
+		#{job_id}
+		<if test="first_name !=null">
+			,#{first_name}
+		</if>
+		<if test="manager_id !=null">
+			,#{salary}
+		</if>
+		<if test="manager_id !=null">
+			,#{manager_id}
+		</if>
+		)
+	</insert>
+	<update id="updateJob" parameterType="job">
+		update jobs
+		<set>
+			<if test="first_name !=null">first_name= #{first_name},</if>
+			<if test="last_name !=null">last_name= #{last_name},</if>
+			<if test="email !=null">email= #{email},</if>
+			<if test="job_id !=null">job_id= #{job_id},</if>
+			<if test="salary !=null">salary= #{salary}</if>
+		</set>
+		where
+		job_id= #{job_id}
+	</update>
+
+	<delete id="deleteJob" parameterType="job">
+		delete from jobs where
+		job_id = #{job_id}
+
+	</delete>
+</mapper>

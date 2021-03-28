@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ <settings>
+ <setting name="cacheEnabled" value="true"/>
+ <setting name="lazyLoadingEnabled" value="false"/>
+ <setting name="multipleResultSetsEnabled" value="true"/>
+ <setting name="useColumnLabel" value="true"/>
+ <setting name="useGeneratedKeys" value="false"/>
+ <setting name="defaultExecutorType" value="SIMPLE"/>
+ <setting name="defaultStatementTimeout" value="25000"/>
+ <!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
+ <setting name="mapUnderscoreToCamelCase" value="false"/>
+ </settings>
+ <typeAliases>
+<!--  <package name="co.team.user"/> -->
+  <!-- 자동으로 alias 걸어줌(이름 첫글자만 소문자로 바뀌는규칙. 하지만 대소문자 관계 x) -->
+ </typeAliases>
+ <!-- 
+  Alias 설정 
+ <typeAliases>
+ <typeAlias alias="board" type="com.springbook.biz.board.BoardVO"/>
+ </typeAliases>
+ <typeHandlers>
+ java.sql.Timestamp 를 java.util.Date 형으로 반환
+ <typeHandler javaType="java.sql.Timestamp" handler="org.apache.ibatis.type.DateTypeHandler"/>
+ <typeHandler javaType="java.sql.Date" handler="org.apache.ibatis.type.DateTypeHandler"/>
+ </typeHandlers> 
+ 
+ -->
+</configuration>
