@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.team.board.service.impl.AdminNoticeBoardMapper">
+	<insert id="insertBoard"
+		parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
+		<selectKey keyProperty="board_no" resultType="string"
+			order="BEFORE">
+			SELECT NVL(MAX(SEQ), 0) + 1 FROM ADMIN_NOTICE_BOARD
+			<!-- select seqund_ojb.nextval from dual -->
+
+		</selectKey>
+		INSERT INTO ADMIN_NOTICE_BOARD( BOARD_NO
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		)
+		VALUES( #{board_no}
+		,#{title}
+		,#{content}
+		,#{reg_date}
+		,#{hit}
+		
+		)
+	</insert>
+
+	<!-- 단건 조회 -->
+	<select id="AdminNoticeBoardVO" resultType="AdminNoticeBoardVO"
+		parameterType="AdminNoticeBoardVO">
+		SELECT BOARD_NO
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		
+		FROM ADMIN_NOTICE_BOARD
+		WHERE board_no = #{board_no}
+
+	</select>
+</mapper>
