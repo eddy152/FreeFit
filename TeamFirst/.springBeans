@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.9.16.202103111552-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.9.16.202101120103-CI-B2760]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -10,8 +10,11 @@
 		<config>src/main/resources/mybatis-config.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/config/transaction-context.xml</config>
+		<config>src/main/resources/config/root-context.xml</config>
+		<config>src/main/resources/config/datasource-context.xml</config>
+		<config>src/main/resources/config/mybatis-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
-		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

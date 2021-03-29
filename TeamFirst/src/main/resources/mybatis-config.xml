@@ -13,7 +13,7 @@
  <setting name="mapUnderscoreToCamelCase" value="false"/>
  </settings>
  <typeAliases>
-<!--  <package name="co.team.user"/> -->
+<package name="co.team"/>
   <!-- 자동으로 alias 걸어줌(이름 첫글자만 소문자로 바뀌는규칙. 하지만 대소문자 관계 x) -->
  </typeAliases>
  <!-- 
