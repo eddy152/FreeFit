@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles
+Configuration 2.1//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+	<!-- <definition name="home" template="/WEB-INF/views/home.jsp" /> -->
+	<!-- <definition name="home" template="/WEB-INF/views/main/main.jsp" /> -->
+
+
+
+<!-- 이후 홈페이지/ 프로그램 /웹 세단계로 나누어야 함 -->
+<!--  홈페이지 : header=메뉴, content=기본컨텐츠, footer=기타정보 -->
+<!--  프로그램 : header=타이틀, side=메뉴, content=기본컨텐츠 -->
+<!-- 앱 : header=메뉴, content=기본컨텐츠 -->
+
+	<definition name="mainTemplate"
+		template="/WEB-INF/views/tiles/layout.jsp">
+		<put-attribute name="content"
+			value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/tiles/side.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/footer.jsp" />
+	</definition>
+
+<!-- 레이아웃 컨텐츠 칸에 views/?/?.jsp 페이지를 삽입 -->
+	<definition name="*/*" extends="mainTemplate">
+		<put-attribute name="content"
+			value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+
+<!-- 레이아웃 컨텐츠 칸에 views/?.jsp 페이지를 삽입 -->
+	<definition name="*" extends="mainTemplate">
+		<put-attribute name="content"
+			value="/WEB-INF/views/{1}.jsp" />
+
+	</definition>
+
+</tiles-definitions>
