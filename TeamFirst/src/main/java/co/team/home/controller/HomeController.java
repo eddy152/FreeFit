@@ -1,4 +1,4 @@
-package co.team.spring.controller;
+package co.team.home.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

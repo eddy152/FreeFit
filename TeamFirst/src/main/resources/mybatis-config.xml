@@ -15,17 +15,7 @@
  <typeAliases>
 <package name="co.team"/>
   <!-- 자동으로 alias 걸어줌(이름 첫글자만 소문자로 바뀌는규칙. 하지만 대소문자 관계 x) -->
+
  </typeAliases>
- <!-- 
-  Alias 설정 
- <typeAliases>
- <typeAlias alias="board" type="com.springbook.biz.board.BoardVO"/>
- </typeAliases>
- <typeHandlers>
- java.sql.Timestamp 를 java.util.Date 형으로 반환
- <typeHandler javaType="java.sql.Timestamp" handler="org.apache.ibatis.type.DateTypeHandler"/>
- <typeHandler javaType="java.sql.Date" handler="org.apache.ibatis.type.DateTypeHandler"/>
- </typeHandlers> 
- 
- -->
+
 </configuration>

@@ -1,4 +1,4 @@
-package co.team.spring.service;
+package co.team.admin.service;
 
 
 import lombok.AllArgsConstructor;
@@ -6,12 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+//admin vo
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeptVO {
+public class AdminVO {
 
-	private String department_id;
-	private String department_name;
+	private String admin_id;
+	private String password;
 }
