@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="EmpDAO"> -->
+
+<mapper namespace="com.java.emp.service.impl.EmpMapper">
+	<!-- select 일때는 반드시 resultType이 있어야 한다 -->
+	<!-- parameterType 은 #{변수이름} 으로 값을 넣는다 == (?) -->
+
+	<!-- result, parameterType 에는 "com.java.emp.EmpVO" 를 바로 넣을수도있고 mybatis-config 
+		에 typeAlias 설정해서 간단한이름으로 넣을수도있다 -->
+
+	<select id="getEmp" resultType="emp" parameterType="emp">
+		select * from
+		employees where employee_id =
+		#{employee_id}
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from employees
+		<where>
+			<if test="department_id!=null and department_id != ''">
+				department_id = #{department_id}
+			</if>
+			<if test="job_id!=null and job_id !=''">
+				and job_id = #{job_id}
+			</if>
+			<if test="first_name!=null and first_name !=''">
+				and upper(first_name) like '%'||upper(#{first_name})||'%'
+			</if>
+		</where>
+	</select>
+
+	<select id="getSearchEmp" resultType="searchVO"
+		parameterType="searchVO">
+
+		select b.* from (select rownum rn, a.* from (
+
+		select * from employees e left outer join departments d on e.department_id=d.department_id 
+			left outer join jobs j on e.job_id=j.job_id
+			<where>
+			<if test="department_id!=null and department_id != ''">
+				and e.department_id = #{department_id}
+			</if>
+			<if test="job_id!=null and job_id !=''">
+				and e.job_id = #{job_id}
+			</if>
+			<if test="first_name!=null and first_name !=''">
+				and upper(e.first_name) like '%'||upper(#{first_name})||'%'
+			</if>
+			</where>
+		
+
+		) a) b
+		<where>
+		<if test="start!=null and start !=''">
+		
+			rn between #{start} and #{end}
+		</if>
+			
+		</where>
+
+		order by employee_id
+	</select>
+
+	<insert id="insertEmp" parameterType="emp">
+		insert into employees
+		(
+		employee_id,
+		last_name,
+		email,
+		hire_date,
+		job_id
+		<if test="first_name !=null">
+			,first_name
+		</if>
+		<if test="salary !=null">
+			,salary
+		</if>
+		<if test="manager_id !=null">
+			,manager_id
+		</if>
+		)
+		values
+		(
+		#{employee_id},
+		#{last_name},
+		#{email},
+		to_date(#{hire_date},'yyyy-mm-dd'),
+		#{job_id}
+		<if test="first_name !=null">
+			,#{first_name}
+		</if>
+		<if test="salary !=null">
+			,#{salary}
+		</if>
+		<if test="manager_id !=null">
+			,#{manager_id}
+		</if>
+		)
+	</insert>
+	<update id="updateEmp" parameterType="emp">
+		update employees
+		<set>
+			<if test="first_name !=null">first_name= #{first_name},</if>
+			<if test="last_name !=null">last_name= #{last_name},</if>
+			<if test="email !=null">email= #{email},</if>
+			<if test="job_id !=null">job_id= #{job_id},</if>
+			<if test="salary !=null">salary= #{salary}</if>
+		</set>
+		where
+		employee_id= #{employee_id}
+	</update>
+
+	<delete id="deleteEmp" parameterType="emp">
+		delete from employees where
+		employee_id = #{employee_id}
+
+	</delete>
+</mapper>
