@@ -1,4 +1,4 @@
-package co.team.admin.service;
+package co.team.exercise.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExerciseListVO
+public class ExerciseProgramBasicVO
 {
-	int exe_no;
-	String exe_kinds;
-	String exe_part;
-	String exe_name;
+	int exep_no;
+	String exep_name;
 }

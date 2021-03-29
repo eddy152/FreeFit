@@ -1,6 +1,4 @@
-package co.team.admin.service;
-
-import java.sql.Date;
+package co.team.exercise.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserWeightVO
+public class ExerciseListVO
 {
-	int weight_no;
-	String user_id;
-	int weight;
-	Date check_date;
+	int exe_no;
+	String exe_kinds;
+	String exe_part;
+	String exe_name;
 }

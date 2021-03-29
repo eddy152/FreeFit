@@ -1,4 +1,4 @@
-package co.team.admin.service;
+package co.team.exercise.service;
 
 import java.sql.Date;
 

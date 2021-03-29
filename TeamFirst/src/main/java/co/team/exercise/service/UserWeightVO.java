@@ -1,4 +1,4 @@
-package co.team.admin.service;
+package co.team.exercise.service;
 
 import java.sql.Date;
 
@@ -11,12 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExerciseProgramPersonalVO
+public class UserWeightVO
 {
-	int exep_no;
-	String trainer_id;
-	String exep_name;
-	String exep_trainer_name;
-	Date exep_date;
+	int weight_no;
 	String user_id;
+	int weight;
+	Date check_date;
 }

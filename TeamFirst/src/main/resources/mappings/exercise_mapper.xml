@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- users_mapper.xml -->
+<mapper namespace="co.team.admin.service.impl.ExerciseMapper">
+
+<!-- EXERCISE_LIST start -->
+<!-- EXERCISE_LIST select -->
+	<select id="getSearchExerciseList" resultType="ExerciseListVO" parameterType="ExerciseListVO">
+		SELECT *
+		FROM exercise_list
+	</select>
+	
+<!-- EXERCISE_LIST select one -->
+	<select id="getExerciseList"  resultType="ExerciseListVO" parameterType="ExerciseListVO">
+		SELECT *
+		FROM exercise_list
+		WHERE exe_no = #{exe_no}
+	</select>
+	
+<!-- EXERCISE_LIST insert -->	
+	<insert id="insertExerciseList" parameterType="ExerciseListVO">
+		INSERT INTO exercise_list
+		(
+			"exe_no",
+			"exe_kinds", 
+			"exe_part", 
+			"exe_name"
+		)
+		VALUSE
+		(
+			#{exe_no},
+			#{exe_kinds},
+			#{exe_part},
+			#{exe_name}
+		)
+	</insert>
+	
+<!-- EXERCISE_LIST update -->
+	<update id="updateExerciseList" parameterType="ExerciseListVO">
+		UPDATE exercise_list
+		SET exe_kinds = #{exe_kinds},
+			exe_part = #{exe_part},
+			exe_name = #{exe_name}
+		WHERE exe_no = #{exe_no}
+	</update>
+	
+<!-- EXERCISE_LIST delete -->
+	<delete id="deleteExerciseList" parameterType="ExerciseListVO">
+		DELETE FROM exercise_list
+		WHERE exe_no = #{exe_no}
+	</delete>
+<!-- EXERCISE_LIST end -->
+	
+<!-- EXERCISE_PROGRAM_BASIC start -->
+<!-- EXERCISE_PROGRAM_BASIC select -->
+	<select id="getSearchExerciseProgramBasic" resultType="ExerciseProgramBasicVO" parameterType="ExerciseProgramBasicVO">
+		SELECT *
+		FROM exercise_program_basic
+	</select>
+	
+<!-- EXERCISE_PROGRAM_BASIC select one -->
+	<select id="getExerciseProgramBasic"  resultType="ExerciseProgramBasicVO" parameterType="ExerciseProgramBasicVO">
+		SELECT *
+		FROM exercise_program_basic
+		WHERE exep_no = #{exep_no}
+	</select>
+	
+<!-- EXERCISE_PROGRAM_BASIC insert -->	
+	<insert id="insertExerciseProgramBasic" parameterType="ExerciseProgramBasicVO">
+		INSERT INTO exercise_program_basic
+		(
+			"exep_no",
+			"exep_name"
+		)
+		VALUSE
+		(
+			#{exep_no},
+			#{exep_name}
+		)
+	</insert>
+	
+<!-- EXERCISE_PROGRAM_BASIC update -->
+	<update id="updateExerciseProgramBasic" parameterType="ExerciseProgramBasicVO">
+		UPDATE exercise_program_basic
+		SET exep_name = #{exep_name}
+		WHERE exep_no = #{exep_no}
+	</update>
+	
+<!-- EXERCISE_PROGRAM_BASIC delete -->
+	<delete id="deleteExerciseProgramBasic" parameterType="ExerciseProgramBasicVO">
+		DELETE FROM exercise_program_basic
+		WHERE exep_no = #{exep_no}
+	</delete>
+<!-- EXERCISE_PROGRAM_BASIC end -->
+	
+<!-- start -->
+</mapper>

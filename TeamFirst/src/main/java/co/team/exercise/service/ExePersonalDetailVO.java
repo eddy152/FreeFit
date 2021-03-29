@@ -1,4 +1,4 @@
-package co.team.admin.service;
+package co.team.exercise.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,15 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FFUserVO
+public class ExePersonalDetailVO
 {
+	int epd_no;
+	int exep_no;
+	int exe_no;
+	int epd_set;
+	int epd_count;
+	int epd_weight;
 	String user_id;
-	String password;
-	String phone_number;
-	String name;
-	int age;
-	int height;
-	String notice;
-	int gender;
-	int mem_reg_id;
 }
