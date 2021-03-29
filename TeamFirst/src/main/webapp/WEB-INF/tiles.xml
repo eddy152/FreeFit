@@ -7,15 +7,28 @@ Configuration 2.1//EN"
 <!-- <definition name="home" template="/WEB-INF/views/home.jsp" /> -->
 <!-- <definition name="home" template="/WEB-INF/views/main/main.jsp" /> -->
 
-	<definition name="layout"	template="/WEB-INF/views/tiles/layout.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-		<put-attribute name="content" value="/WEB-INF/views/tiles/content.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+	<definition name="mainTemplate" template="/WEB-INF/views/tiles/layout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/top.jsp" />
+	</definition>
+	
+	<definition name="*/*" extends="mainTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="*" extends="mainTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+
+	<!--<definition name="layout"	template="/WEB-INF/views/tiles/layout.jsp">
+	<put-attribute name="content" value="/WEB-INF/views/tiles/content.jsp" />
+	 	<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" /> 
 	</definition>
 	<definition name="mypage/*"	template="/WEB-INF/views/tiles/mypageLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/mypage/{1}.jsp" />
 	</definition>
 	<definition name="home"	template="/WEB-INF/views/tiles/layout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/main/main.jsp" />
-	</definition>
+	</definition>-->
 </tiles-definitions>

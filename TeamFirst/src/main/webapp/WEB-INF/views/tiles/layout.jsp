@@ -25,7 +25,7 @@
 #content{
 	float: left;
 	width : 85%;
-	background-color:  blue;
+	background-color:  green;
 }
 
 #footer{
@@ -43,10 +43,7 @@
 </head>
 <body>
 <div style="width: 100%; height: 100%;">
-	<div id="hedaer"><tiles:insertAtrribute name="header" /></div>
-	<div id="menu"><tiles:insertAtrribute name="menu" /></div>
-	<div id="content"><tiles:insertAtrribute name="content" /></div>
-	<div id="footer"><tiles:insertAtrribute name="footer" /></div>
+	<div id="content"><tiles:insertAttribute name="content" /></div>
 </div>
 </body>
 </html>
