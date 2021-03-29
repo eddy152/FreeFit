@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- users_mapper.xml -->
-<mapper namespace="co.team.admin.service.impl.ExerciseMapper">
+<mapper namespace="co.team.exercise.service.impl.ExerciseMapper">
 
 <!-- EXERCISE_LIST start -->
 <!-- EXERCISE_LIST select -->

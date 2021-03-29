@@ -6,7 +6,7 @@ import co.team.admin.service.AdminVO;
 import co.team.exercise.service.ExerciseListVO;
 
 public interface ExerciseMapper {
-	public List<AdminVO> getSearchExerciseList(ExerciseListVO vo);
+	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo);
 	public ExerciseListVO getExerciseList(ExerciseListVO vo);
 	public int insertExerciseList(ExerciseListVO vo);
 	public int updateExerciseList(ExerciseListVO vo);

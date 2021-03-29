@@ -19,7 +19,7 @@ public class ExerciseController {
 	// 리스트 조회
 	@ResponseBody
 	@GetMapping("/getSearchExerciseList") 
-	public List<AdminVO> getSearchExerciseList(ExerciseListVO vo) {
+	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo) {
 
 		return service.getSearchExerciseList(vo);
 	}

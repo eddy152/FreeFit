@@ -14,8 +14,8 @@ public class ExerciseServiceImpl implements ExerciseMapper
 	@Autowired ExerciseMapper dao;
 
 	@Override
-	public List<AdminVO> getSearchExerciseList(ExerciseListVO vo) {
-		return getSearchExerciseList(vo);
+	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo) {
+		return dao.getSearchExerciseList(vo);
 	}
 
 	@Override
