@@ -18,10 +18,12 @@
 				<li><a href="#">3</a></li>
 			</ul>
 		</div>
+		<h2> 확인 </h2>
 		<div class="profile-avatar">
 			<a href="#"><img src="images/yd.png"></a>
 		</div>
 	</div>
+	<span class="text">내정보수정</span>
 
 
 </div>	

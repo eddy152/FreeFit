@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans:beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
@@ -20,12 +21,12 @@
 
 	</beans:bean>
 
-	<context:component-scan
-		base-package="co.team" />
+	<context:component-scan base-package="co.team" />
 
 	<mvc:annotation-driven />
 
-<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<mvc:resources location="/resources/"
+		mapping="/resources/**"></mvc:resources>
 	<!-- TransactionManager bean 등록 -->
 	<beans:bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -46,5 +47,35 @@
 		<aop:advisor pointcut-ref="trPointcut"
 			advice-ref="txAdvice" />
 	</aop:config>
-     
+
+
+
+	<!-- Tiles -->
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<!-- 해당 경로의 모든 xml 파일을 읽어 들인다. -->
+				<beans:value>/WEB-INF/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+
+	</beans:bean>
+	<!-- tilesVieResolver를 이용하여 화면을 표시한다. -->
+	<beans:bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<beans:property name="order" value="1"></beans:property>
+	</beans:bean>
+	<!-- 일반 viewResolver로 화면을 표시한다. -->
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
+	</beans:bean>
+
+
+
 </beans:beans>
