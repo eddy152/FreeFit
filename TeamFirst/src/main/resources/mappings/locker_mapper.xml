@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="co.team.locker.service.impl.LockerMapper_kdh">
+ 	
+ 	<select id="getSearchLocker" resultType="LockerVO" parameterType="LockerVO">
+ 		select * from locker
+ 	
+ 	</select>
+ 	
+ 	<select id="getLocker" parameterType="LockerVO">
+ 		select * from locker where lock_num=#{lock_num}
+ 	</select>
+ </mapper>
