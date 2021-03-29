@@ -7,7 +7,6 @@
 <body>
 <h1>
 	Hello world!  
-	tt
 </h1>
 
 <P>  The time on the server is ${serverTime}.sdfdsfdsf </P>
