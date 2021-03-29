@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import co.team.admin.service.AdminService;
 import co.team.admin.service.AdminVO;
 
-@Controller
+@Controller //컨트롤러 어노테이션 달기
 public class AdminController {
 	@Autowired
 	AdminService service;

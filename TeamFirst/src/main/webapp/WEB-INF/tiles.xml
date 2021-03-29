@@ -14,6 +14,25 @@ Configuration 2.1//EN"
 <!--  프로그램 : header=타이틀, side=메뉴, content=기본컨텐츠 -->
 <!-- 앱 : header=메뉴, content=기본컨텐츠 -->
 
+
+<!-- 
+ex)
+<definition name="homepage/*" extends="sample-template">
+<definition name="app/*" extends="sample-template">
+가 있을 시에
+
+자바 ★controller★ 단에서 ★return★ 값을 다르게 준다면
+
+ex)
+return "homepage/sample";
+return "app/sample";
+
+각각 다른 layout 적용이 가능하다 
+
+
+-->
+
+
 	<definition name="mainTemplate"
 		template="/WEB-INF/views/tiles/layout.jsp">
 		<put-attribute name="content"
