@@ -4,12 +4,34 @@
  
  <mapper namespace="co.team.locker.service.impl.LockerMapper_kdh">
  	
+
+<!-- LOCKER 전체 리스트 -->
  	<select id="getSearchLocker" resultType="LockerVO" parameterType="LockerVO">
  		select * from locker
- 	
  	</select>
  	
- 	<select id="getLocker" parameterType="LockerVO">
- 		select * from locker where lock_num=#{lock_num}
+<!-- LOCKER 단건 조회 -->
+ 	<select id="getLocker"  resultType="LockerVO" parameterType="LockerVO">
+ 		select * from locker WHERE lock_no=#{lock_no}
  	</select>
+
+<!-- LOCKER 등록 -->
+	<insert id="insertLocker" parameterType="LockerVO">
+		insert into locker
+		values (#{lock_no}, #{mem_reg_id}, #{broken_locker}, #{first_date}, #{final_date}, #{user_id}, #{room_no})
+	</insert>
+
+<!-- LOCKER 수정 -->
+	<update id="updateLocker" parameterType="LockerVO">
+		update locker set broken_locker=#{broken_locker}, first_date=#{first_date}, final_date=#{final_date}, user_id=#{user_id}, room_no=#{room_no}
+		where lock_no = #{lock_no}
+	</update>
+<!-- LOCKER 삭제 -->
+ 	<delete id="deleteLocker" parameterType="LockerVO">
+ 		delete * from locker
+ 		where lock_no = #{lock_no}
+ 	</delete>
+
+
+	
  </mapper>
