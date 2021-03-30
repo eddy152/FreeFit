@@ -4,36 +4,82 @@ Configuration 2.1//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
 
-	<!-- <definition name="home" template="/WEB-INF/views/home.jsp" /> -->
-	<!-- <definition name="home" template="/WEB-INF/views/main/main.jsp" /> -->
 
 
-
-<!-- 이후 홈페이지/ 프로그램 /웹 세단계로 나누어야 함 -->
-<!--  홈페이지 : header=메뉴, content=기본컨텐츠, footer=기타정보 -->
-<!--  프로그램 : header=타이틀, side=메뉴, content=기본컨텐츠 -->
-<!-- 앱 : header=메뉴, content=기본컨텐츠 -->
-
-
+<!-- views / app, homepage, program 에 들어있는 test 폴더는 테스트용  -->
 <!-- 
+
+
+★ content용 파일 저장 위치 ★
+
+homepage 일 경우 views/homepage/[폴더명]/[파일명]
+program 일 경우 views/program/[폴더명]/[파일명]
+app 일 경우 views/app/[폴더명]/[파일명]
+
 ex)
-<definition name="homepage/*" extends="sample-template">
-<definition name="app/*" extends="sample-template">
-가 있을 시에
-
-자바 ★controller★ 단에서 ★return★ 값을 다르게 준다면
-
-ex)
-return "homepage/sample";
-return "app/sample";
-
-각각 다른 layout 적용이 가능하다 
+app/test/home.jsp
 
 
--->
+컨트롤러 적용방법은 co.team.home.controller 		HomeController.java 참조
+
+ -->
 
 
-	<definition name="mainTemplate"
+<!-- 홈페이지 : 헤더 컨텐츠 푸터 -->
+<definition name="homepage"
+		template="/WEB-INF/views/tiles/homepage/layout.jsp">
+		<put-attribute name="content"
+			value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/homepage/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/homepage/footer.jsp" />
+	</definition>
+
+	<definition name="homepage/*/*" extends="homepage">
+		<put-attribute name="content"
+			value="/WEB-INF/views/homepage/{1}/{2}.jsp" />
+	</definition>
+
+
+<!-- 프로그램 : 헤더 사이드바 컨텐츠 -->
+<definition name="program"
+		template="/WEB-INF/views/tiles/program/layout.jsp">
+		<put-attribute name="content"
+			value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/program/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/tiles/program/side.jsp" />
+	</definition>
+
+	<definition name="program/*/*" extends="program">
+		<put-attribute name="content"
+			value="/WEB-INF/views/program/{1}/{2}.jsp" />
+	</definition>
+
+
+<!-- 앱 : 헤더 컨텐츠 -->
+
+<definition name="app"
+		template="/WEB-INF/views/tiles/app/layout.jsp">
+		<put-attribute name="content"
+			value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/app/header.jsp" />
+
+	</definition>
+
+	<definition name="app/*/*" extends="app">
+		<put-attribute name="content"
+			value="/WEB-INF/views/app/{1}/{2}.jsp" />
+	</definition>
+	
+	
+<!-- 타일즈 없는 단일 페이지(팝업 등) -->
+
+
+<!-- 	<definition name="mainTemplate"
 		template="/WEB-INF/views/tiles/layout.jsp">
 		<put-attribute name="content"
 			value="/WEB-INF/views/home.jsp" />
@@ -45,17 +91,17 @@ return "app/sample";
 			value="/WEB-INF/views/tiles/footer.jsp" />
 	</definition>
 
-<!-- 레이아웃 컨텐츠 칸에 views/?/?.jsp 페이지를 삽입 -->
-	<definition name="*/*" extends="mainTemplate">
+
+	<definition name="not_tiles/*" extends="mainTemplate">
 		<put-attribute name="content"
-			value="/WEB-INF/views/{1}/{2}.jsp" />
+			value="/WEB-INF/views/app/{1}.jsp" />
 	</definition>
 
-<!-- 레이아웃 컨텐츠 칸에 views/?.jsp 페이지를 삽입 -->
+
 	<definition name="*" extends="mainTemplate">
 		<put-attribute name="content"
 			value="/WEB-INF/views/{1}.jsp" />
 
-	</definition>
+	</definition> -->
 
 </tiles-definitions>
