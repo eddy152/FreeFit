@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.team.exercise.service.ExeBasicDetailVO;
 import co.team.exercise.service.ExerciseListVO;
 import co.team.exercise.service.ExerciseProgramBasicVO;
+import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseService;
 
 @Controller
@@ -58,7 +60,6 @@ public class ExerciseController {
 	@ResponseBody
 	@GetMapping("/getSearchExerciseProgramBasic")
 	public List<ExerciseProgramBasicVO> getSearchExerciseProgramBasic(ExerciseProgramBasicVO vo) {
-
 		return service.getSearchExerciseProgramBasic(vo);
 	}
 
@@ -90,5 +91,79 @@ public class ExerciseController {
 		return "redirect:/getSearchExerciseProgramBasic";
 	}
 	// EXERCISE_PROGRAM_BASIC end
+
+	// EXERCISE_BASIC_DETAIL start
+	// 리스트 조회
+	@ResponseBody
+	@GetMapping("/getSearchExerciseBasicDetail")
+	public List<ExeBasicDetailVO> getSearchExerciseBasicDetail(ExeBasicDetailVO vo) {
+		return service.getSearchExerciseBasicDetail(vo);
+	}
+
+	// 단건 조회
+	@ResponseBody
+	@GetMapping("/getExerciseBasicDetailProc")
+	public ExeBasicDetailVO getExerciseBasicDetailProc(ExeBasicDetailVO vo) {
+		return service.getExerciseBasicDetailProc(vo);
+	}
+
+	// 단건 등록
+	@GetMapping("/insertExerciseBasicDetail")
+	public String insertExerciseBasicDetail(ExeBasicDetailVO vo) {
+		service.insertExerciseBasicDetail(vo);
+		return "redirect:/getSearchExerciseBasicDetail";
+	}
+
+	// 단건 수정
+	@GetMapping("/updateExerciseBasicDetail")
+	public String updateExerciseBasicDetail(ExeBasicDetailVO vo) {
+		service.updateExerciseBasicDetail(vo);
+		return "redirect:/getSearchExerciseBasicDetail";
+	}
+
+	// 단건 삭제
+	@GetMapping("/deleteExerciseBasicDetail")
+	public String deleteExerciseBasicDetail(ExeBasicDetailVO vo) {
+		service.deleteExerciseBasicDetail(vo);
+		return "redirect:/getSearchExerciseBasicDetail";
+	}
+	// EXERCISE_BASIC_DETAIL end
+
+	// EXERCISE_PROGRAM_PERSONAL start
+	// 리스트 조회
+	@ResponseBody
+	@GetMapping("/getSearchExerciseProgramPersonal")
+	public List<ExerciseProgramPersonalVO> getSearchExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
+		return service.getSearchExerciseProgramPersonal(vo);
+	}
+
+	// 단건 조회
+	@ResponseBody
+	@GetMapping("/getExerciseProgramPersonalProc")
+	public ExerciseProgramPersonalVO getExerciseProgramPersonalProc(ExerciseProgramPersonalVO vo) {
+		return service.getExerciseProgramPersonalProc(vo);
+	}
+
+	// 단건 등록
+	@GetMapping("/insertExerciseProgramPersonal")
+	public String insertExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
+		service.insertExerciseProgramPersonal(vo);
+		return "redirect:/getSearchExerciseProgramPersonal";
+	}
+
+	// 단건 수정
+	@GetMapping("/updateExerciseProgramPersonal")
+	public String updateExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
+		service.updateExerciseProgramPersonal(vo);
+		return "redirect:/getSearchExerciseProgramPersonal";
+	}
+
+	// 단건 삭제
+	@GetMapping("/deleteExerciseProgramPersonal")
+	public String deleteExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
+		service.deleteExerciseProgramPersonal(vo);
+		return "redirect:/getSearchExerciseProgramPersonal";
+	}
+	// EXERCISE_PROGRAM_PERSONAL end
 
 }

@@ -5,29 +5,35 @@
 <mapper namespace="co.team.exercise.service.impl.ExerciseMapper">
 
 <!-- EXERCISE_LIST start -->
-<!-- EXERCISE_LIST select -->
+	<!-- EXERCISE_LIST select -->
 	<select id="getSearchExerciseList" resultType="ExerciseListVO" parameterType="ExerciseListVO">
-		SELECT *
+		SELECT  exe_no,
+				exe_kinds, 
+				exe_part, 
+				exe_name
 		FROM exercise_list
 	</select>
 	
-<!-- EXERCISE_LIST select one -->
-	<select id="getExerciseList"  resultType="ExerciseListVO" parameterType="ExerciseListVO">
-		SELECT *
+	<!-- EXERCISE_LIST select one -->
+	<select id="getExerciseListProc"  resultType="ExerciseListVO" parameterType="ExerciseListVO">
+		SELECT  exe_no,
+				exe_kinds, 
+				exe_part, 
+				exe_name
 		FROM exercise_list
 		WHERE exe_no = #{exe_no}
 	</select>
 	
-<!-- EXERCISE_LIST insert -->	
+	<!-- EXERCISE_LIST insert -->	
 	<insert id="insertExerciseList" parameterType="ExerciseListVO">
 		INSERT INTO exercise_list
 		(
-			"exe_no",
-			"exe_kinds", 
-			"exe_part", 
-			"exe_name"
+			exe_no,
+			exe_kinds, 
+			exe_part, 
+			exe_name
 		)
-		VALUSE
+		VALUES
 		(
 			#{exe_no},
 			#{exe_kinds},
@@ -36,7 +42,7 @@
 		)
 	</insert>
 	
-<!-- EXERCISE_LIST update -->
+	<!-- EXERCISE_LIST update -->
 	<update id="updateExerciseList" parameterType="ExerciseListVO">
 		UPDATE exercise_list
 		SET exe_kinds = #{exe_kinds},
@@ -45,7 +51,7 @@
 		WHERE exe_no = #{exe_no}
 	</update>
 	
-<!-- EXERCISE_LIST delete -->
+	<!-- EXERCISE_LIST delete -->
 	<delete id="deleteExerciseList" parameterType="ExerciseListVO">
 		DELETE FROM exercise_list
 		WHERE exe_no = #{exe_no}
@@ -53,46 +59,195 @@
 <!-- EXERCISE_LIST end -->
 	
 <!-- EXERCISE_PROGRAM_BASIC start -->
-<!-- EXERCISE_PROGRAM_BASIC select -->
+	<!-- EXERCISE_PROGRAM_BASIC select -->
 	<select id="getSearchExerciseProgramBasic" resultType="ExerciseProgramBasicVO" parameterType="ExerciseProgramBasicVO">
-		SELECT *
+		SELECT  exep_no,
+				exep_name
 		FROM exercise_program_basic
 	</select>
 	
-<!-- EXERCISE_PROGRAM_BASIC select one -->
-	<select id="getExerciseProgramBasic"  resultType="ExerciseProgramBasicVO" parameterType="ExerciseProgramBasicVO">
-		SELECT *
+	<!-- EXERCISE_PROGRAM_BASIC select one -->
+	<select id="getExerciseProgramBasicProc"  resultType="ExerciseProgramBasicVO" parameterType="ExerciseProgramBasicVO">
+		SELECT  exep_no,
+				exep_name
 		FROM exercise_program_basic
 		WHERE exep_no = #{exep_no}
 	</select>
 	
-<!-- EXERCISE_PROGRAM_BASIC insert -->	
+	<!-- EXERCISE_PROGRAM_BASIC insert -->	
 	<insert id="insertExerciseProgramBasic" parameterType="ExerciseProgramBasicVO">
 		INSERT INTO exercise_program_basic
 		(
-			"exep_no",
-			"exep_name"
+			exep_no,
+			exep_name
 		)
-		VALUSE
+		VALUES
 		(
 			#{exep_no},
 			#{exep_name}
 		)
 	</insert>
 	
-<!-- EXERCISE_PROGRAM_BASIC update -->
+	<!-- EXERCISE_PROGRAM_BASIC update -->
 	<update id="updateExerciseProgramBasic" parameterType="ExerciseProgramBasicVO">
 		UPDATE exercise_program_basic
 		SET exep_name = #{exep_name}
 		WHERE exep_no = #{exep_no}
 	</update>
 	
-<!-- EXERCISE_PROGRAM_BASIC delete -->
+	<!-- EXERCISE_PROGRAM_BASIC delete -->
 	<delete id="deleteExerciseProgramBasic" parameterType="ExerciseProgramBasicVO">
 		DELETE FROM exercise_program_basic
 		WHERE exep_no = #{exep_no}
 	</delete>
 <!-- EXERCISE_PROGRAM_BASIC end -->
+
+<!-- EXERCISE_BASIC_DETAIL start -->
+	<!-- EXERCISE_BASIC_DETAIL select -->
+	<select id="getSearchExerciseBasicDetail" resultType="ExeBasicDetailVO" parameterType="ExeBasicDetailVO">
+		SELECT  ebd_no,
+				exe_no,
+				exep_no,
+				ebd_lower,
+				ebd_middle,
+				ebd_expert,
+				ebd_set,
+				ebd_gender,
+				exer_weight
+		FROM exe_basic_detail
+	</select>
 	
-<!-- start -->
+	<!-- EXERCISE_BASIC_DETAIL select one -->
+	<select id="getExerciseBasicDetailProc"  resultType="ExeBasicDetailVO" parameterType="ExeBasicDetailVO">
+		SELECT  ebd_no,
+				exe_no,
+				exep_no,
+				ebd_lower,
+				ebd_middle,
+				ebd_expert,
+				ebd_set,
+				ebd_gender,
+				exer_weight
+		FROM exe_basic_detail
+		WHERE ebd_no = #{ebd_no}
+	</select>
+	
+	<!-- EXERCISE_BASIC_DETAIL insert -->	
+	<insert id="insertExerciseBasicDetail" parameterType="ExeBasicDetailVO">
+		INSERT INTO exe_basic_detail
+		(
+			ebd_no,
+			exe_no,
+			exep_no,
+			ebd_lower,
+			ebd_middle,
+			ebd_expert,
+			ebd_set,
+			ebd_gender,
+			exer_weight
+		)
+		VALUES
+		(
+			#{ebd_no},
+			#{exe_no},
+			#{exep_no},
+			#{ebd_lower},
+			#{ebd_middle},
+			#{ebd_expert},
+			#{ebd_set},
+			#{ebd_gender},
+			#{exer_weight}
+		)
+	</insert>
+	
+	<!-- EXERCISE_BASIC_DETAIL update -->
+	<update id="updateExerciseBasicDetail" parameterType="ExeBasicDetailVO">
+		UPDATE exe_basic_detail
+		SET exe_no = #{exe_no},
+			exep_no = #{exep_no},
+			ebd_lower = #{ebd_lower},
+			ebd_middle = #{ebd_middle},
+			ebd_expert = #{ebd_expert},
+			ebd_set = #{ebd_set},
+			ebd_gender = #{ebd_gender},
+			exer_weight = #{exer_weight}
+		WHERE ebd_no = #{ebd_no}
+	</update>
+	
+	<!-- EXERCISE_BASIC_DETAIL delete -->
+	<delete id="deleteExerciseBasicDetail" parameterType="ExeBasicDetailVO">
+		DELETE FROM exe_basic_detail
+		WHERE ebd_no = #{ebd_no}
+		AND exep_no = #{exep_no}
+	</delete>
+<!-- EXERCISE_BASIC_DETAIL end -->
+
+<!-- EXERCISE_PROGRAM_PERSONAL start -->
+	<!-- EXERCISE_PROGRAM_PERSONAL select -->
+	<select id="getSearchExerciseProgramPersonal" resultType="ExerciseProgramPersonalVO" parameterType="ExerciseProgramPersonalVO">
+		SELECT  exep_no,
+				trainer_id,
+				exep_name,
+				exep_trainer_id,
+				exep_date,
+				user_id
+		FROM exercise_program_personal
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- EXERCISE_PROGRAM_PERSONAL select one -->
+	<select id="getExerciseProgramPersonalProc"  resultType="ExerciseProgramPersonalVO" parameterType="ExerciseProgramPersonalVO">
+		SELECT  exep_no,
+				trainer_id,
+				exep_name,
+				exep_trainer_id,
+				exep_date,
+				user_id
+		FROM exercise_program_personal
+		WHERE exep_no = #{exep_no}
+		AND user_id = #{user_id}
+	</select>
+	
+	<!-- EXERCISE_PROGRAM_PERSONAL insert -->	
+	<insert id="insertExerciseProgramPersonal" parameterType="ExerciseProgramPersonalVO">
+		INSERT INTO exercise_program_personal
+		(
+			exep_no,
+			trainer_id,
+			exep_name,
+			exep_trainer_id,
+			exep_date,
+			user_id
+		)
+		VALUES
+		(
+			#{exep_no},
+			#{trainer_id},
+			#{exep_name},
+			#{exep_trainer_id},
+			#{exep_date},
+			#{user_id}
+		)
+	</insert>
+	
+	<!-- EXERCISE_PROGRAM_PERSONAL update -->
+	<update id="updateExerciseProgramPersonal" parameterType="ExerciseProgramPersonalVO">
+		UPDATE exercise_program_personal
+		SET trainer_id = #{trainer_id},
+			exep_name = #{exep_name},
+			exep_trainer_id = #{exep_trainer_id},
+			exep_date = #{exep_date},
+			user_id = #{user_id}
+		WHERE exep_no = #{exep_no}
+		AND user_id = #{user_id}
+	</update>
+	
+	<!-- EXERCISE_PROGRAM_PERSONAL delete -->
+	<delete id="deleteExerciseProgramPersonal" parameterType="ExerciseProgramPersonalVO">
+		DELETE FROM exercise_program_personal
+		WHERE exep_no = #{exep_no}
+		AND user_id = #{user_id}
+	</delete>
+<!-- EXERCISE_PROGRAM_PERSONAL end -->
+
 </mapper>

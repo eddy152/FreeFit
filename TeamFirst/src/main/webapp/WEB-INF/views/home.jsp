@@ -14,5 +14,7 @@
 <a href="getTest"> dd</a>
 <a href="getSearchExerciseList">exer</a>
 <a href="getSearchExerciseProgramBasic">exerpb</a>
+<a href="getExerciseListProc">exeproc</a>
+<a href="getExerciseProgramBasicProc">123</a>
 </body>
 </html>
