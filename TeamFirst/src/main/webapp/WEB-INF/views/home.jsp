@@ -11,5 +11,8 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}.sdfdsfdsf </P>
+<a href="getTest"> dd</a>
+<a href="getSearchExerciseList">exer</a>
+<a href="getSearchExerciseProgramBasic">exerpb</a>
 </body>
 </html>
