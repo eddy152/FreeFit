@@ -9,8 +9,9 @@
 	Hello world!  
 	tt
 </h1>
-<a href="getAdminNoticeBoardList">board1</a><br>
-<a href="getAdminNoticeBoard">board2</a><br>
+<a href="getAdminNoticeBoardList">asdf</a><br>
+<a href="adminNoticeBoard">ddd</a>
+
 <P>  The time on the server is ${serverTime}.sdfdsfdsf </P>
 </body>
 </html>

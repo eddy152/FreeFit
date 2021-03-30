@@ -33,10 +33,10 @@
 		<Logger name="org.springframework" level="debug"
 			additivity="false">
 			<AppenderRef ref="console_com" />
-		</Logger>
+		</Logger> -->
 		<Root level="error">
 			<AppenderRef ref="console_com" />
-		</Root> -->
-			<!-- <AppenderRef ref="MyFile" /> -->
+		</Root>
+			 <AppenderRef ref="MyFile" />
 	</Loggers>
 </Configuration>

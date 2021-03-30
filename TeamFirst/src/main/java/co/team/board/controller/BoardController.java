@@ -13,15 +13,15 @@ public class BoardController {
 	
 	//전체조회
 	@Autowired AdminNoticeBoardMapper boardMapper;
-	@RequestMapping("/getAdminNoticeBoardList")
+	@RequestMapping("/AdminNoticeBoardList")
 	public String getAdminNoticeBoardList(Model model) {
-		model.addAttribute("list", boardMapper.getAdminNoticeBoardList());
-		return "board/getAdminNoticeBoardList";
+		model.addAttribute("list", boardMapper.adminNoticeBoardList());
+		return "board/adminNoticeBoardList";
 	}
 	//단건조회
-	@RequestMapping("/getAdminNoticeBoard")
+	@RequestMapping("/AdminNoticeBoard")
 	public String getAdminNoticeBoard(Model model, AdminNoticeBoardVO vo) {
-		model.addAttribute("board", boardMapper.getAdminNoticeBoard(vo));
-		return "board/getAdminNoticeBoard";
+		model.addAttribute("board", boardMapper.adminNoticeBoard(vo));
+		return "board/adminNoticeBoard";
 	}
 }

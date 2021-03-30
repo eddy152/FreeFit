@@ -8,22 +8,22 @@
 </head>
 <body>
 <div align="center">
-		<!--<jsp:include page=""/>-->
+		<jsp:include page="../../views/home.jsp"/>
 		<div><h1>공지사항 작성</h1></div>
 	<div>
 		<table border="1"> 
 			<tr>
 				<th width="70">글번호</th>
 				<td align="center" width="50">
-					<input type="text" id="boardNo" name="boardNo">
+					<input type="text" id="board_no" name="board_no">
 				</td>
-				<th width="70">작성자</th>
+				<th width="70">카테고리</th>
 				<td align="center" width="150">
-					<input type="text" id="writer" name="writer">
+					<input type="text" id="category" name="category">
 				</td>	
 				<th width="70">작성일자</th>
 				<td align="center" width="150">
-					<input type="date" id="creationDate" name="creationDate">
+					<input type="date" id="reg_date" name="reg_date">
 				</td>
 			</tr>
 			<tr>
