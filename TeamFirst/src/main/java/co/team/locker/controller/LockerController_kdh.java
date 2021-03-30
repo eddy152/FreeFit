@@ -18,7 +18,7 @@ public class LockerController_kdh {
 	@RequestMapping("/getSearchLocker")
 	public String getSearchLocker(Model model) {
 		model.addAttribute("list", service.getSearchLocker());
-		return "Locker/getSearchLocker";
+		return "homepage/Locker/getSearchLocker";
 	}
 	
 	// 락커 단건 조회
@@ -26,7 +26,7 @@ public class LockerController_kdh {
 	@RequestMapping("/getLocker")
 	public String getLocker(LockerVO vo, Model model) {
 		model.addAttribute("locker", service.getLocker(vo));
-		return "Locker/getLocker";
+		return "homepage/Locker/getLocker";
 	}
 	
 	// 락커 등록

@@ -19,19 +19,15 @@ public class LockerRoomController_kdh {
 	@RequestMapping("/getSearchRoom")
 	public String getSearchRoom(Model model) {
 		model.addAttribute("list", service.getSearchRoom());
-		return "Locker/lockerRoom";
+		return "popup/Locker/lockerRoom";
 	}
 	
-	// 락커룸 수정
-	@GetMapping("/updateRoom")
-	public String updateRoom() {
-		return "";
-	}
-	
+	// 락커룸 수정	
 	@PostMapping("/updateRoom")
 	public String updateRoomProc(LockerRoomVO vo) {
+		System.out.println(vo.getLock_width()+" "+vo.getRoom_no());
 		service.updateRoom(vo);
-		return "redirect:/getSearchRoom";
+		return "redirect:/getSearchLocker";
 	}
 	
 }
