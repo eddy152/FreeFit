@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+	<!-- user notice 유저공지  -->
+	<mapper namespace="co.team.board.service.impl.UserNoticeBoardMapper">
+	
+	<insert id="insertUserNoticeBoard"
+			parameterType="UserNoticeBoardVO">
+		
+		INSERT INTO USER_NOTICE_BOARD( 
+		BOARD_NO
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		)
+		
+		VALUES( 
+		#{board_no}
+		,#{title}
+		,#{content}
+		,#{reg_date}
+		,#{hit}
+		
+		)
+	</insert>
+
+	<update id="updateAdminNoticeBoard" 
+			parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
+			
+			UPDATE ADMIN_NOTICE_BOARD
+			SET CONTENT = #{content}
+			WHERE BOARD_NO = #{board_no} 
+	</update>
+	
+	
+	<delete id="deleteAdminNoticeBoard" 
+			parameterType="AdminNoticeBoardVO">
+		
+		DELETE FROM ADMIN_NOTICE_BOARD
+		
+		WHERE BOARD_NO = #{board_no}
+
+	</delete>
+	
+	<select id="getAdminNoticeBoard" 
+			resultType="AdminNoticeBoardVO"
+			parameterType="AdminNoticeBoardVO">
+			
+			SELECT BOARD_NO
+				,CATEGORY
+				,TITLE
+				,CONTENT
+				,REG_DATE
+				,HIT
+			FROM ADMIN_NOTICE_BOARD
+			WHERE BOARD_NO = #{board_no}
+			
+	</select>
+	
+	<select id="getAdminNoticeBoardList" 
+			parameterType="AdminNoticeBoardVO"
+			resultType="AdminNoticeBoardVO">
+			
+		 	
+			 SELECT BOARD_NO
+				,CATEGORY
+				,TITLE
+				,CONTENT
+				,REG_DATE
+				,HIT
+			FROM ADMIN_NOTICE_BOARD	  
+	</select>
+</mapper>
+
