@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class UserNoticeBoardVO {
+	//유저공지홍보게시판 VO
 	private int board_no;
 	private int mem_board_no;
 	private String category;

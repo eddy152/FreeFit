@@ -15,6 +15,7 @@ import co.team.board.service.AdminQnaBoardVO;
 @Controller
 public class AdminBoardController {
 
+	//어드민 게시판 컨트롤러
 	@Autowired
 	AdminNoticeBoardService service;
 	@Autowired

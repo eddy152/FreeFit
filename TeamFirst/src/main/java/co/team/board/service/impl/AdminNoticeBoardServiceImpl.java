@@ -9,7 +9,7 @@ import co.team.board.service.AdminNoticeBoardService;
 import co.team.board.service.AdminNoticeBoardVO;
 
 @Service
-public class AdminNoticeServiceImpl implements AdminNoticeBoardService{
+public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 	@Autowired AdminNoticeBoardMapper dao;
 
 	@Override

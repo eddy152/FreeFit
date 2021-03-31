@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface AdminQnaBoardService {
 
+	//어드민 문의게시판 서비스
 	//단건 조회
 	public AdminQnaBoardVO getAdminQnaBoard(AdminQnaBoardVO vo);
 	
