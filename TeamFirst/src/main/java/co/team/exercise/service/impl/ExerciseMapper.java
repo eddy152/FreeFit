@@ -1,7 +1,6 @@
 package co.team.exercise.service.impl;
 
 import java.util.List;
-
 import co.team.exercise.service.ExeBasicDetailVO;
 import co.team.exercise.service.ExePersonalDetailVO;
 import co.team.exercise.service.ExerciseListVO;

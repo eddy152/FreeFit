@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExerciseProgramBasicVO
-{
+public class ExerciseProgramBasicVO {
 	int exep_no;
 	String exep_name;
 }

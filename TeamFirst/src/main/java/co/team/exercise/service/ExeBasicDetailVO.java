@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExeBasicDetailVO
-{
+public class ExeBasicDetailVO {
 	int ebd_no;
 	int exe_no;
 	int exep_no;

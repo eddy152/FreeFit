@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FFUserVO
-{
+public class FFUserVO {
 	String user_id;
 	String password;
 	String phone_number;
