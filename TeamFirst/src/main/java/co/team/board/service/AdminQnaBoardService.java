@@ -1,15 +1,13 @@
-package co.team.board.service.impl;
+package co.team.board.service;
 
 import java.util.List;
 
-import co.team.board.service.AdminQnaBoardVO;
+public interface AdminQnaBoardService {
 
-public interface AdminQnaBoardMapper {
-	
-	//단건조회
+	//단건 조회
 	public AdminQnaBoardVO getAdminQnaBoard(AdminQnaBoardVO vo);
 	
-	//전체조회
+	//전체 조회
 	public List<AdminQnaBoardVO> getAdminQnaBoardList(AdminQnaBoardVO vo);
 	
 	//등록
@@ -20,4 +18,5 @@ public interface AdminQnaBoardMapper {
 	
 	//삭제
 	public int deleteAdminQnaBoard(AdminQnaBoardVO vo);
+	
 }

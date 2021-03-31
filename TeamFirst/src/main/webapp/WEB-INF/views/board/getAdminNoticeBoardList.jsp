@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adminNoticeBoardList</title>
+<title>getAdminNoticeBoardList</title>
 </head>
 <!--<jsp:include page="" /> -->
 <body>

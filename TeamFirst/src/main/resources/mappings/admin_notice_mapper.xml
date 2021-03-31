@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+	
+	<!-- admin notice 어드민공지  -->
 	<mapper namespace="co.team.board.service.impl.AdminNoticeBoardMapper">
 	
 	<insert id="insertAdminNoticeBoard"
@@ -62,13 +64,14 @@
 			parameterType="AdminNoticeBoardVO"
 			resultType="AdminNoticeBoardVO">
 			
-		 	SELECT * FROM ADMIN_NOTICE_BOARD
-			<!-- SELECT BOARD_NO
+		 	
+			 SELECT BOARD_NO
 				,CATEGORY
 				,TITLE
 				,CONTENT
 				,REG_DATE
 				,HIT
-			FROM ADMIN_NOTICE_BOARD	 -->	
+			FROM ADMIN_NOTICE_BOARD	  
 	</select>
 </mapper>
+

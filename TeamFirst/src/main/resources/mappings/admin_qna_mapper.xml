@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+	<!-- admin Qna 어드민공지  -->
+	<mapper namespace="co.team.board.service.impl.AdminQnaBoardMapper">
+	
+	<insert id="insertAdminQnaBoard"
+			parameterType="AdminQnaBoardVO">
+		
+		INSERT INTO ADMIN_QNA( 
+		QNA_NO
+		,TITLE
+		,QUESTION
+		,ANSWER
+		,REG_DATE
+		,ADMIN_ID
+		,HIT
+		)
+		
+		VALUES( 
+		#{qna_no}
+		,#{title}
+		,#{question}
+		,#{answer}
+		,#{reg_date}
+		,#{admin_id}
+		,#{hit}
+		
+		)
+	</insert>
+
+	<update id="updateAdminQnaBoard" 
+			parameterType="co.team.board.service.impl.AdminQnaBoardMapper">
+			
+			UPDATE ADMIN_QNA
+			SET ANSWER = #{answer}
+			WHERE QNA_NO = #{qna_no} 
+	</update>
+	
+	
+	<delete id="deleteAdminQnaBoard" 
+			parameterType="AdminQnaBoardVO">
+		
+		DELETE FROM ADMIN_QNA
+		
+		WHERE QNA_NO = #{qna_no}
+
+	</delete>
+	
+	<select id="getAdminQnaBoard" 
+			resultType="AdminQnaBoardVO"
+			parameterType="AdminQnaBoardVO">
+			
+			SELECT QNA_NO
+				,TITLE
+				,QUESTION
+				,ANSWER
+				,REG_DATE
+				,ADMIN_ID
+				,HIT
+			FROM ADMIN_QNA
+			WHERE QNA_NO = #{qna_no}
+			
+	</select>
+	
+	<select id="getAdminQnaBoardList" 
+			parameterType="AdminQnaBoardVO"
+			resultType="AdminQnaBoardVO">
+			
+		 	
+			 SELECT QNA_NO
+				,TITLE
+				,QUESTION				
+				,ANSWER
+				,REG_DATE
+				,ADMIN_ID
+				,HIT
+			FROM ADMIN_QNA	  
+	
+	</select>
+</mapper>
