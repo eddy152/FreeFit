@@ -6,6 +6,8 @@ Configuration 2.1//EN"
 
 
 
+
+
 <!-- views / app, homepage, program 에 들어있는 test 폴더는 테스트용  -->
 <!-- 
 
@@ -15,6 +17,7 @@ Configuration 2.1//EN"
 homepage 일 경우 views/homepage/[폴더명]/[파일명]
 program 일 경우 views/program/[폴더명]/[파일명]
 app 일 경우 views/app/[폴더명]/[파일명]
+tiles 적용 안할 경우 views/popup/[폴더명]/[파일명]
 
 ex)
 app/test/home.jsp
