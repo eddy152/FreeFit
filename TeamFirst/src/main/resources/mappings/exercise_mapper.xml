@@ -250,4 +250,167 @@
 	</delete>
 <!-- EXERCISE_PROGRAM_PERSONAL end -->
 
+<!-- EXERCISE_PERSONAL_DETAIL start -->
+	<!-- EXERCISE_PERSONAL_DETAIL select -->
+	<select id="getSearchExercisePersonalDetail" resultType="ExePersonalDetailVO" parameterType="ExePersonalDetailVO">
+		SELECT  epd_no,
+				exep_no,
+				exe_no,
+				epd_set,
+				epd_count,
+				epd_weight,
+				user_id
+		FROM exe_personal_detail
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- EXERCISE_PERSONAL_DETAIL select one -->
+	<select id="getExercisePersonalDetailProc"  resultType="ExePersonalDetailVO" parameterType="ExePersonalDetailVO">
+		SELECT  epd_no,
+				exep_no,
+				exe_no,
+				epd_set,
+				epd_count,
+				epd_weight,
+				user_id
+		FROM exe_personal_detail
+		WHERE epd_no = #{epd_no}
+		AND user_id = #{user_id}
+	</select>
+	
+	<!-- EXERCISE_PERSONAL_DETAIL insert -->	
+	<insert id="insertExercisePersonalDetail" parameterType="ExePersonalDetailVO">
+		INSERT INTO exe_personal_detail
+		(
+			epd_no,
+			exep_no,
+			exe_no,
+			epd_set,
+			epd_count,
+			epd_weight,
+			user_id
+		)
+		VALUES
+		(
+			#{epd_no},
+			#{exep_no},
+			#{exe_no},
+			#{epd_set},
+			#{epd_count},
+			#{epd_weight},
+			#{user_id}
+		)
+	</insert>
+	
+	<!-- EXERCISE_PERSONAL_DETAIL update -->
+	<update id="updateExercisePersonalDetail" parameterType="ExePersonalDetailVO">
+		UPDATE exe_personal_detail
+		SET exep_no = #{exep_no},
+			exe_no = #{exe_no},
+			epd_set = #{epd_set},
+			epd_count = #{epd_count},
+			epd_weight = #{epd_weight}
+		WHERE epd_no = #{epd_no}
+		AND user_id = #{user_id}
+	</update>
+	
+	<!-- EXERCISE_PERSONAL_DETAIL delete -->
+	<delete id="deleteExercisePersonalDetail" parameterType="ExePersonalDetailVO">
+		DELETE FROM exe_personal_detail
+		WHERE epd_no = #{epd_no}
+		AND user_id = #{user_id}
+	</delete>
+<!-- EXERCISE_PERSONAL_DETAIL end -->
+
+<!-- EXERCISE_RECORD start -->
+	<!-- EXERCISE_RECORD select -->
+	<select id="getSearchExerciseRecord" resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
+		SELECT  exer_no,
+				user_id,
+				exer_count,
+				exer_date,
+				exer_end_date,
+				exer_weight,
+				exer_do_count,
+				exep_no,
+				exe_no,
+				epd_set,
+				exer_do_set
+		FROM exe_personal_detail
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- EXERCISE_RECORD select one -->
+	<select id="getExerciseRecordProc"  resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
+		SELECT  exer_no,
+				user_id,
+				exer_count,
+				exer_date,
+				exer_end_date,
+				exer_weight,
+				exer_do_count,
+				exep_no,
+				exe_no,
+				epd_set,
+				exer_do_set
+		FROM exe_personal_detail
+		WHERE exer_no = #{exer_no}
+		AND user_id = #{user_id}
+	</select>
+	
+	<!-- EXERCISE_RECORD insert -->	
+	<insert id="insertExerciseRecord" parameterType="ExerciseRecordVO">
+		INSERT INTO exe_personal_detail
+		(
+			exer_no,
+			user_id,
+			exer_count,
+			exer_date,
+			exer_end_date,
+			exer_weight,
+			exer_do_count,
+			exep_no,
+			exe_no,
+			epd_set,
+			exer_do_set
+		)
+		VALUES
+		(
+			#{exer_no},
+			#{user_id},
+			#{exer_count},
+			#{exer_date},
+			#{exer_end_date},
+			#{exer_weight},
+			#{exer_do_count},
+			#{exep_no},
+			#{exe_no},
+			#{epd_set},
+			#{exer_do_set}
+		)
+	</insert>
+	
+	<!-- EXERCISE_RECORD update -->
+	<update id="updateExerciseRecord" parameterType="ExerciseRecordVO">
+		UPDATE exe_personal_detail
+		SET exer_count = #{exer_count},
+			exer_date = #{exer_date},
+			exer_end_date = #{exer_end_date},
+			exer_weight = #{exer_weight},
+			exer_do_count = #{exer_do_count},
+			exep_no = #{exep_no},
+			exe_no = #{exe_no},
+			epd_set = #{epd_set},
+			exer_do_set = #{exer_do_set}
+		WHERE exer_no = #{exer_no}
+		AND user_id = #{user_id}
+	</update>
+	
+	<!-- EXERCISE_RECORD delete -->
+	<delete id="deleteExerciseRecord" parameterType="ExerciseRecordVO">
+		DELETE FROM exe_personal_detail
+		WHERE exer_no = #{exer_no}
+		AND user_id = #{user_id}
+	</delete>
+<!-- EXERCISE_RECORD end -->
 </mapper>

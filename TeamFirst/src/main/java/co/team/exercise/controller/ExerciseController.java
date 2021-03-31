@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.exercise.service.ExeBasicDetailVO;
+import co.team.exercise.service.ExePersonalDetailVO;
 import co.team.exercise.service.ExerciseListVO;
 import co.team.exercise.service.ExerciseProgramBasicVO;
 import co.team.exercise.service.ExerciseProgramPersonalVO;
+import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.ExerciseService;
 
 @Controller
@@ -165,5 +167,79 @@ public class ExerciseController {
 		return "redirect:/getSearchExerciseProgramPersonal";
 	}
 	// EXERCISE_PROGRAM_PERSONAL end
+
+	// EXERCISE_PERSONAL_DETAIL start
+	// 리스트 조회
+	@ResponseBody
+	@GetMapping("/getSearchExercisePersonalDetail")
+	public List<ExePersonalDetailVO> getSearchExercisePersonalDetail(ExePersonalDetailVO vo) {
+		return service.getSearchExercisePersonalDetail(vo);
+	}
+
+	// 단건 조회
+	@ResponseBody
+	@GetMapping("/getExercisePersonalDetailProc")
+	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
+		return service.getExercisePersonalDetailProc(vo);
+	}
+
+	// 단건 등록
+	@GetMapping("/insertExercisePersonalDetail")
+	public String insertExercisePersonalDetail(ExePersonalDetailVO vo) {
+		service.insertExercisePersonalDetail(vo);
+		return "redirect:/getSearchExercisePersonalDetail";
+	}
+
+	// 단건 수정
+	@GetMapping("/updateExercisePersonalDetail")
+	public String updateExercisePersonalDetail(ExePersonalDetailVO vo) {
+		service.updateExercisePersonalDetail(vo);
+		return "redirect:/getSearchExercisePersonalDetail";
+	}
+
+	// 단건 삭제
+	@GetMapping("/deleteExercisePersonalDetail")
+	public String deleteExercisePersonalDetail(ExePersonalDetailVO vo) {
+		service.deleteExercisePersonalDetail(vo);
+		return "redirect:/getSearchExercisePersonalDetail";
+	}
+	// EXERCISE_PERSONAL_DETAIL end
+
+	// EXERCISE_RECORD start
+	// 리스트 조회
+	@ResponseBody
+	@GetMapping("/getSearchExerciseRecord")
+	public List<ExerciseRecordVO> getSearchExerciseRecord(ExerciseRecordVO vo) {
+		return service.getSearchExerciseRecord(vo);
+	}
+
+	// 단건 조회
+	@ResponseBody
+	@GetMapping("/getExerciseRecordProc")
+	public ExerciseRecordVO getExerciseRecordProc(ExerciseRecordVO vo) {
+		return service.getExerciseRecordProc(vo);
+	}
+
+	// 단건 등록
+	@GetMapping("/insertExerciseRecord")
+	public String insertExerciseRecord(ExerciseRecordVO vo) {
+		service.insertExerciseRecord(vo);
+		return "redirect:/getSearchExerciseRecord";
+	}
+
+	// 단건 수정
+	@GetMapping("/updateExerciseRecord")
+	public String updateExerciseRecord(ExerciseRecordVO vo) {
+		service.updateExerciseRecord(vo);
+		return "redirect:/getSearchExerciseRecord";
+	}
+
+	// 단건 삭제
+	@GetMapping("/deleteExerciseRecord")
+	public String deleteExerciseRecord(ExerciseRecordVO vo) {
+		service.deleteExerciseRecord(vo);
+		return "redirect:/getSearchExerciseRecord";
+	}
+	// EXERCISE_RECORD end
 
 }

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.team.exercise.service.ExeBasicDetailVO;
+import co.team.exercise.service.ExePersonalDetailVO;
 import co.team.exercise.service.ExerciseListVO;
 import co.team.exercise.service.ExerciseProgramBasicVO;
 import co.team.exercise.service.ExerciseProgramPersonalVO;
+import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.ExerciseService;
 
 @Service
@@ -125,6 +127,62 @@ public class ExerciseServiceImpl implements ExerciseService {
 	@Override
 	public int deleteExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
 		dao.deleteExerciseProgramPersonal(vo);
+		return 0;
+	}
+
+	@Override
+	public List<ExePersonalDetailVO> getSearchExercisePersonalDetail(ExePersonalDetailVO vo) {
+		return dao.getSearchExercisePersonalDetail(vo);
+	}
+
+	@Override
+	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
+		return dao.getExercisePersonalDetailProc(vo);
+	}
+
+	@Override
+	public int insertExercisePersonalDetail(ExePersonalDetailVO vo) {
+		dao.insertExercisePersonalDetail(vo);
+		return 0;
+	}
+
+	@Override
+	public int updateExercisePersonalDetail(ExePersonalDetailVO vo) {
+		dao.updateExercisePersonalDetail(vo);
+		return 0;
+	}
+
+	@Override
+	public int deleteExercisePersonalDetail(ExePersonalDetailVO vo) {
+		dao.deleteExercisePersonalDetail(vo);
+		return 0;
+	}
+
+	@Override
+	public List<ExerciseRecordVO> getSearchExerciseRecord(ExerciseRecordVO vo) {
+		return dao.getSearchExerciseRecord(vo);
+	}
+
+	@Override
+	public ExerciseRecordVO getExerciseRecordProc(ExerciseRecordVO vo) {
+		return dao.getExerciseRecordProc(vo);
+	}
+
+	@Override
+	public int insertExerciseRecord(ExerciseRecordVO vo) {
+		dao.insertExerciseRecord(vo);
+		return 0;
+	}
+
+	@Override
+	public int updateExerciseRecord(ExerciseRecordVO vo) {
+		dao.updateExerciseRecord(vo);
+		return 0;
+	}
+
+	@Override
+	public int deleteExerciseRecord(ExerciseRecordVO vo) {
+		dao.deleteExerciseRecord(vo);
 		return 0;
 	}
 

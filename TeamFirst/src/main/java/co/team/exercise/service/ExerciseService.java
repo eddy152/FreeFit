@@ -26,4 +26,16 @@ public interface ExerciseService {
 	public int insertExerciseProgramPersonal(ExerciseProgramPersonalVO vo);
 	public int updateExerciseProgramPersonal(ExerciseProgramPersonalVO vo);
 	public int deleteExerciseProgramPersonal(ExerciseProgramPersonalVO vo);
+	
+	public List<ExePersonalDetailVO> getSearchExercisePersonalDetail(ExePersonalDetailVO vo);
+	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo);
+	public int insertExercisePersonalDetail(ExePersonalDetailVO vo);
+	public int updateExercisePersonalDetail(ExePersonalDetailVO vo);
+	public int deleteExercisePersonalDetail(ExePersonalDetailVO vo);
+	
+	public List<ExerciseRecordVO> getSearchExerciseRecord(ExerciseRecordVO vo);
+	public ExerciseRecordVO getExerciseRecordProc(ExerciseRecordVO vo);
+	public int insertExerciseRecord(ExerciseRecordVO vo);
+	public int updateExerciseRecord(ExerciseRecordVO vo);
+	public int deleteExerciseRecord(ExerciseRecordVO vo);
 }
