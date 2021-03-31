@@ -7,7 +7,7 @@
 <title>adminNoticeBoard</title>
 </head>
 <body>
-<h3>공지사항 상세보기</h3>
+<h3>공지사항 상세보.기</h3>
 	
 	
 </body>
