@@ -14,6 +14,8 @@ import co.team.exercise.service.ExerciseProgramBasicVO;
 import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.ExerciseService;
+import co.team.exercise.service.FFUserVO;
+import co.team.exercise.service.UserWeightVO;
 
 @Controller
 public class ExerciseController {
@@ -242,4 +244,56 @@ public class ExerciseController {
 	}
 	// EXERCISE_RECORD end
 
+	// FF_USER start
+	// 리스트 조회
+	@ResponseBody
+	@GetMapping("/getSearchFFUser")
+	public List<FFUserVO> getSearchFFUser(FFUserVO vo) {
+		return service.getSearchFFUser(vo);
+	}
+
+	// 단건 조회
+	@ResponseBody
+	@GetMapping("/getFFUserProc")
+	public FFUserVO getFFUserProc(FFUserVO vo) {
+		return service.getFFUserProc(vo);
+	}
+	// FF_USER end
+
+	// USER_WEIGHT start
+	// 리스트 조회
+	@ResponseBody
+	@GetMapping("/getSearchUserWeight")
+	public List<UserWeightVO> getSearchUserWeight(UserWeightVO vo) {
+		return service.getSearchUserWeight(vo);
+	}
+
+	// 단건 조회
+	@ResponseBody
+	@GetMapping("/getUserWeightProc")
+	public UserWeightVO getUserWeightProc(UserWeightVO vo) {
+		return service.getUserWeightProc(vo);
+	}
+
+	// 단건 등록
+	@GetMapping("/insertUserWeight")
+	public String insertUserWeight(UserWeightVO vo) {
+		service.insertUserWeight(vo);
+		return "redirect:/getSearchUserWeight";
+	}
+
+	// 단건 수정
+	@GetMapping("/updateUserWeight")
+	public String updateUserWeight(UserWeightVO vo) {
+		service.updateUserWeight(vo);
+		return "redirect:/getSearchUserWeight";
+	}
+
+	// 단건 삭제
+	@GetMapping("/deleteUserWeight")
+	public String deleteUserWeight(UserWeightVO vo) {
+		service.deleteUserWeight(vo);
+		return "redirect:/getSearchUserWeight";
+	}
+	// USER_WEIGHT end
 }

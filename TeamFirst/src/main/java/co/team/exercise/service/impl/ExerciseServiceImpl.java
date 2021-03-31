@@ -12,6 +12,8 @@ import co.team.exercise.service.ExerciseProgramBasicVO;
 import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.ExerciseService;
+import co.team.exercise.service.FFUserVO;
+import co.team.exercise.service.UserWeightVO;
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService {
@@ -183,6 +185,44 @@ public class ExerciseServiceImpl implements ExerciseService {
 	@Override
 	public int deleteExerciseRecord(ExerciseRecordVO vo) {
 		dao.deleteExerciseRecord(vo);
+		return 0;
+	}
+
+	@Override
+	public List<FFUserVO> getSearchFFUser(FFUserVO vo) {
+		return dao.getSearchFFUser(vo);
+	}
+
+	@Override
+	public FFUserVO getFFUserProc(FFUserVO vo) {
+		return dao.getFFUserProc(vo);
+	}
+
+	@Override
+	public List<UserWeightVO> getSearchUserWeight(UserWeightVO vo) {
+		return dao.getSearchUserWeight(vo);
+	}
+
+	@Override
+	public UserWeightVO getUserWeightProc(UserWeightVO vo) {
+		return dao.getUserWeightProc(vo);
+	}
+
+	@Override
+	public int insertUserWeight(UserWeightVO vo) {
+		dao.insertUserWeight(vo);
+		return 0;
+	}
+
+	@Override
+	public int updateUserWeight(UserWeightVO vo) {
+		dao.updateUserWeight(vo);
+		return 0;
+	}
+
+	@Override
+	public int deleteUserWeight(UserWeightVO vo) {
+		dao.deleteUserWeight(vo);
 		return 0;
 	}
 

@@ -38,4 +38,13 @@ public interface ExerciseService {
 	public int insertExerciseRecord(ExerciseRecordVO vo);
 	public int updateExerciseRecord(ExerciseRecordVO vo);
 	public int deleteExerciseRecord(ExerciseRecordVO vo);
+	
+	public List<FFUserVO> getSearchFFUser(FFUserVO vo);
+	public FFUserVO getFFUserProc(FFUserVO vo);
+	
+	public List<UserWeightVO> getSearchUserWeight(UserWeightVO vo);
+	public UserWeightVO getUserWeightProc(UserWeightVO vo);
+	public int insertUserWeight(UserWeightVO vo);
+	public int updateUserWeight(UserWeightVO vo);
+	public int deleteUserWeight(UserWeightVO vo);
 }

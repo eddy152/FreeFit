@@ -413,4 +413,92 @@
 		AND user_id = #{user_id}
 	</delete>
 <!-- EXERCISE_RECORD end -->
+
+<!-- FF_USER start -->
+	<!-- FF_USER select -->
+	<select id="getSearchFFUser" resultType="FFUserVO" parameterType="FFUserVO">
+		SELECT  user_id,
+				password,
+				phone_number,
+				name,
+				age,
+				height,
+				notice,
+				gender,
+				mem_reg_id
+		FROM ff_user
+	</select>
+	
+	<!-- FF_USER select one -->
+	<select id="getExerciseFFUser"  resultType="FFUserVO" parameterType="FFUserVO">
+		SELECT  user_id,
+				password,
+				phone_number,
+				name,
+				age,
+				height,
+				notice,
+				gender,
+				mem_reg_id
+		FROM ff_user
+		AND user_id = #{user_id}
+	</select>
+<!-- FF_USER start -->
+
+<!-- USER_WEIGHT start -->
+	<!-- USER_WEIGHT select -->
+	<select id="getSearchUserWeight" resultType="UserWeightVO" parameterType="UserWeightVO">
+		SELECT  weight_no,
+				user_id,
+				weight,
+				check_date
+		FROM user_weight
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- USER_WEIGHT select one -->
+	<select id="getUserWeightProc"  resultType="UserWeightVO" parameterType="UserWeightVO">
+		SELECT weight_no,
+				user_id,
+				weight,
+				check_date
+		FROM user_weight
+		WHERE weight_no = #{weight_no}
+		AND user_id = #{user_id}
+	</select>
+	
+	<!-- USER_WEIGHT insert -->	
+	<insert id="insertUserWeight" parameterType="UserWeightVO">
+		INSERT INTO user_weight
+		(
+			weight_no,
+			user_id,
+			weight,
+			check_date
+		)
+		VALUES
+		(
+			#{weight_no},
+			#{user_id},
+			#{weight},
+			#{check_date}
+		)
+	</insert>
+	
+	<!-- USER_WEIGHT update -->
+	<update id="updateUserWeight" parameterType="UserWeightVO">
+		UPDATE user_weight
+		SET weight = #{weight},
+			check_date = #{check_date}
+		WHERE weight_no = #{weight_no}
+		AND user_id = #{user_id}
+	</update>
+	
+	<!-- USER_WEIGHT delete -->
+	<delete id="deleteUserWeight" parameterType="UserWeightVO">
+		DELETE FROM user_weight
+		WHERE weight_no = #{weight_no}
+		AND user_id = #{user_id}
+	</delete>
+<!-- USER_WEIGHT end -->
 </mapper>

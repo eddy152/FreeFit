@@ -8,6 +8,8 @@ import co.team.exercise.service.ExerciseListVO;
 import co.team.exercise.service.ExerciseProgramBasicVO;
 import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseRecordVO;
+import co.team.exercise.service.FFUserVO;
+import co.team.exercise.service.UserWeightVO;
 
 public interface ExerciseMapper {
 	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo);
@@ -45,4 +47,13 @@ public interface ExerciseMapper {
 	public int insertExerciseRecord(ExerciseRecordVO vo);
 	public int updateExerciseRecord(ExerciseRecordVO vo);
 	public int deleteExerciseRecord(ExerciseRecordVO vo);
+	
+	public List<FFUserVO> getSearchFFUser(FFUserVO vo);
+	public FFUserVO getFFUserProc(FFUserVO vo);
+	
+	public List<UserWeightVO> getSearchUserWeight(UserWeightVO vo);
+	public UserWeightVO getUserWeightProc(UserWeightVO vo);
+	public int insertUserWeight(UserWeightVO vo);
+	public int updateUserWeight(UserWeightVO vo);
+	public int deleteUserWeight(UserWeightVO vo);
 }
