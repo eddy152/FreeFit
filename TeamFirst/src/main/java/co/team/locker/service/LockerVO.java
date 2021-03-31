@@ -17,4 +17,5 @@ public class LockerVO {
 	private String final_date;
 	private String user_id;
 	private String room_no;
+	private String gender;
 }

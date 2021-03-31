@@ -8,6 +8,14 @@
 	<select id="getSearchRoom" resultType="LockerRoomVO" parameterType="LockerRoomVO">
 		select *from locker_room
 	</select>
+	
+<!-- LOCKER_ROOM 단건 조회 -->
+	<select id="getRoom" resultType="LockerRoomVO" parameterType="LockerRoomVO">
+		select * from locker_room
+		where room_no = #{room_no}
+
+	</select>
+	
 <!-- LOCKER_ROOM 수정 -->
 	<update id="updateRoom" parameterType="LockerRoomVO">
 		update locker_room set lock_width = #{lock_width}

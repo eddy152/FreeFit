@@ -7,19 +7,27 @@
 
 <!-- LOCKER 전체 리스트 -->
  	<select id="getSearchLocker" resultType="LockerVO" parameterType="LockerVO">
- 		select * from locker
+		select l.lock_no, l.broken_locker, to_char(l.first_date, 'yyyy-MM-dd') first_date, to_char(l.final_date, 'yyyy-MM-dd') final_date, l.user_id, l.room_no, r.gender
+		from locker l, locker_room r
+		where l.room_no = r.room_no
+		<if test="gender != null">
+		And gender = #{gender}
+		</if>
  	</select>
  	
 <!-- LOCKER 단건 조회 -->
  	<select id="getLocker"  resultType="LockerVO" parameterType="LockerVO">
- 		select * from locker WHERE lock_no=#{lock_no}
+ 		select lock_no, broken_locker, to_char(first_date, 'yyyy-MM-dd') first_date, to_char(final_date, 'yyyy-MM-dd') final_date, user_id, room_no
+		from locker 
+		WHERE lock_no=#{lock_no}
  	</select>
+ 	<!-- 계산 컬럼은 alias 사용하기 -->
 
-<!-- LOCKER 등록 -->
-	<insert id="insertLocker" parameterType="LockerVO">
-		insert into locker
-		values (#{lock_no}, #{mem_reg_id}, #{broken_locker}, #{first_date}, #{final_date}, #{user_id}, #{room_no})
-	</insert>
+<!-- LOCKER 회원 정보 등록 -->
+	<update id="insertLocker" parameterType="LockerVO">
+		update locker set first_date=#{first_date}, final_date=#{final_date}, user_id= #{user_id}
+		where lock_no = #{lock_no}
+	</update>
 
 <!-- LOCKER 수정 -->
 	<update id="updateLocker" parameterType="LockerVO">
@@ -27,11 +35,12 @@
 		where lock_no = #{lock_no}
 	</update>
 <!-- LOCKER 삭제 -->
- 	<delete id="deleteLocker" parameterType="LockerVO">
- 		delete * from locker
- 		where lock_no = #{lock_no}
- 	</delete>
+ 	<update id="deleteLocker" parameterType="LockerVO">
+ 		update locker set first_date='', final_date='', user_id=''
+		where lock_no = #{lock_no}
+ 	</update>
 
+<!-- 해당 LOCKER 회수(초기화) -->
 
 	
  </mapper>

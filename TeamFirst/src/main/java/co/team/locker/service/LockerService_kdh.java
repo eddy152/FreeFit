@@ -5,7 +5,7 @@ import java.util.List;
 public interface LockerService_kdh {
 
 	// 락커 전체 리스트
-		public List<LockerVO> getSearchLocker();
+		public List<LockerVO> getSearchLocker(LockerVO vo);
 		
 	// 락커 단건 조회
 		public LockerVO getLocker(LockerVO vo);

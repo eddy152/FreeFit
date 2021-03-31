@@ -15,8 +15,8 @@ public class LockerServiceImpl_kdh implements LockerService_kdh{
 	
 	// 락커 전체 조회
 	@Override
-	public List<LockerVO> getSearchLocker() {
-		return dao.getSearchLocker();
+	public List<LockerVO> getSearchLocker(LockerVO vo) {
+		return dao.getSearchLocker(vo);
 	}
 
 	// 락커 단건 조회

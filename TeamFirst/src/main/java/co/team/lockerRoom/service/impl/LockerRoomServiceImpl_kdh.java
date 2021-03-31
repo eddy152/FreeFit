@@ -20,9 +20,16 @@ public class LockerRoomServiceImpl_kdh implements LockerRoomService_kdh{
 	}
 
 	@Override
+	// 락커룸 단건 조회
+	public LockerRoomVO getRoom(LockerRoomVO vo) {
+		return dao.getRoom(vo);
+	}
+	
+	@Override
 	// 락커룸 수정
 	public void updateRoom(LockerRoomVO vo) {
 		dao.updateRoom(vo);
 	}
+
 	
 }
