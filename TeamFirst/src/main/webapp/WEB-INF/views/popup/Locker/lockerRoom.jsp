@@ -11,16 +11,16 @@
 
 	$(document).ready(function() {
 		$('.roomTr').click(function() {
-			$.ajax({
+		 $.ajax({
 				url: 'getRoom',
 				type: 'get',
-				data: { room_no : $('.roomNO').val() },
+				data: { room_no : $('.roomNO').eq($(".roomTr").index(this)).val() },
 				dataType: 'json',
 				success: roomSelect, // 락커룸 조회
 				error: function() {
 					alert('조회 실패!!');
 				} // error
-			}); // ajax
+			});// ajax
 		}); // click
 	}); //ready
 	
@@ -51,7 +51,9 @@
 	</tr>
 <c:forEach items="${list }" var="room">
 	<tr class="roomTr">
-		<td>${room.room_no }<input class="roomNO" type="hidden" value="${room.room_no }"></td>
+		<td>${room.room_no }
+	<input class="roomNO" type="hidden" value="${room.room_no }">
+		</td>
 		<td>${room.gender }</td>
 		<td>${room.lock_width }</td>
 	</tr>
@@ -59,7 +61,7 @@
 </table>
 <br>
 <div>
-<form action="" method="post">
+<form action="updateRoom" method="post">
 	<table border="1">
 		<tr>
 			<td>락커룸번호</td>

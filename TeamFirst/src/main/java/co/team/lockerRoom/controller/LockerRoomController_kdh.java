@@ -31,10 +31,12 @@ public class LockerRoomController_kdh {
 	
 	// 락커룸 수정	
 	@PostMapping("/updateRoom")
-	public String updateRoomProc(LockerRoomVO vo) {
+	//@ResponseBody
+	public LockerRoomVO updateRoomProc(LockerRoomVO vo) {
 		System.out.println(vo.getLock_width()+" "+vo.getRoom_no());
 		service.updateRoom(vo);
-		return "redirect:/getSearchLocker";
+		return service.getRoom(vo);
+		
 	}
 	
 }
