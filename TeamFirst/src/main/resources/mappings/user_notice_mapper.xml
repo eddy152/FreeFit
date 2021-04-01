@@ -11,67 +11,77 @@
 		
 		INSERT INTO USER_NOTICE_BOARD( 
 		BOARD_NO
+		,MEM_BOARD_NO
+		,CATEGORY
 		,TITLE
 		,CONTENT
 		,REG_DATE
 		,HIT
+		,MEM_REG_ID
 		)
 		
 		VALUES( 
 		#{board_no}
+		,#{mem_board_no}
+		,#{category}
 		,#{title}
 		,#{content}
 		,#{reg_date}
 		,#{hit}
+		,#{mem_reg_id}
 		
 		)
 	</insert>
 
-	<update id="updateAdminNoticeBoard" 
-			parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
+	<update id="updateUserNoticeBoard" 
+			parameterType="co.team.board.service.impl.UserNoticeBoardMapper">
 			
-			UPDATE ADMIN_NOTICE_BOARD
+			UPDATE USER_NOTICE_BOARD
 			SET CONTENT = #{content}
 			WHERE BOARD_NO = #{board_no} 
 	</update>
 	
 	
-	<delete id="deleteAdminNoticeBoard" 
-			parameterType="AdminNoticeBoardVO">
+	<delete id="deleteUserNoticeBoard" 
+			parameterType="UserNoticeBoardVO">
 		
-		DELETE FROM ADMIN_NOTICE_BOARD
+		DELETE FROM USER_NOTICE_BOARD
 		
 		WHERE BOARD_NO = #{board_no}
 
 	</delete>
 	
-	<select id="getAdminNoticeBoard" 
-			resultType="AdminNoticeBoardVO"
-			parameterType="AdminNoticeBoardVO">
+	<select id="getUserNoticeBoard" 
+			resultType="UserNoticeBoardVO"
+			parameterType="UserNoticeBoardVO">
 			
 			SELECT BOARD_NO
+				,MEM_BOARD_NO
 				,CATEGORY
 				,TITLE
 				,CONTENT
 				,REG_DATE
 				,HIT
-			FROM ADMIN_NOTICE_BOARD
+				,MEM_REG_ID
+			FROM USER_NOTICE_BOARD
 			WHERE BOARD_NO = #{board_no}
 			
 	</select>
 	
-	<select id="getAdminNoticeBoardList" 
-			parameterType="AdminNoticeBoardVO"
-			resultType="AdminNoticeBoardVO">
+	<select id="getUserNoticeBoardList" 
+			parameterType="UserNoticeBoardVO"
+			resultType="UserNoticeBoardVO">
 			
 		 	
 			 SELECT BOARD_NO
+				,MEM_BOARD_NO
 				,CATEGORY
 				,TITLE
 				,CONTENT
 				,REG_DATE
 				,HIT
-			FROM ADMIN_NOTICE_BOARD	  
+				,MEM_REG_ID
+			FROM USER_NOTICE_BOARD	  
 	</select>
 </mapper>
 

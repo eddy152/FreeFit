@@ -4,74 +4,80 @@
 
 	
 	<!-- user notice 유저공지  -->
-	<mapper namespace="co.team.board.service.impl.UserNoticeBoardMapper">
+	<mapper namespace="co.team.board.service.impl.UserQnaBoardMapper">
 	
-	<insert id="insertUserNoticeBoard"
-			parameterType="UserNoticeBoardVO">
+	<insert id="insertUserQnaBoard"
+			parameterType="UserQnaBoardVO">
 		
-		INSERT INTO USER_NOTICE_BOARD( 
-		BOARD_NO
+		INSERT INTO USER_QNA( 
+		QNA_NO
 		,TITLE
-		,CONTENT
+		,QUESTION
+		,ANSWER
 		,REG_DATE
-		,HIT
+		,USER_ID
+		,MEM_REG_ID
 		)
 		
 		VALUES( 
-		#{board_no}
+		#{qna_no}
 		,#{title}
-		,#{content}
+		,#{question}
+		,#{answer}
 		,#{reg_date}
-		,#{hit}
+		,#{user_id}
+		,#{mem_reg_id}
 		
 		)
 	</insert>
 
-	<update id="updateAdminNoticeBoard" 
-			parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
+	<update id="updateUserQnaBoard" 
+			parameterType="co.team.board.service.impl.UserQnaBoardMapper">
 			
-			UPDATE ADMIN_NOTICE_BOARD
-			SET CONTENT = #{content}
-			WHERE BOARD_NO = #{board_no} 
+			UPDATE USER_QNA
+			SET CONTENT = #{answer}
+			WHERE QNA_NO = #{qna_no} 
 	</update>
 	
 	
-	<delete id="deleteAdminNoticeBoard" 
-			parameterType="AdminNoticeBoardVO">
+	<delete id="deleteUserQnaBoard" 
+			parameterType="UserQnaBoardVO">
 		
-		DELETE FROM ADMIN_NOTICE_BOARD
+		DELETE FROM USER_QNA
 		
-		WHERE BOARD_NO = #{board_no}
+		WHERE QNA_NO = #{qna_no}
 
 	</delete>
 	
-	<select id="getAdminNoticeBoard" 
-			resultType="AdminNoticeBoardVO"
-			parameterType="AdminNoticeBoardVO">
+	<select id="getUserQnaBoard" 
+			resultType="UserQnaBoardVO"
+			parameterType="UserQnaBoardVO">
 			
-			SELECT BOARD_NO
-				,CATEGORY
+			SELECT QNA_NO
 				,TITLE
-				,CONTENT
+				,QUESTION
+				,ANSWER
 				,REG_DATE
-				,HIT
-			FROM ADMIN_NOTICE_BOARD
-			WHERE BOARD_NO = #{board_no}
+				,USER_ID
+				,MEM_REG_ID
+			FROM USER_QNA
+			WHERE QNA_NO = #{qna_no}
 			
 	</select>
 	
-	<select id="getAdminNoticeBoardList" 
-			parameterType="AdminNoticeBoardVO"
-			resultType="AdminNoticeBoardVO">
+	<select id="getUserQnaBoardList" 
+			parameterType="UserQnaBoardVO"
+			resultType="UserQnaBoardVO">
 			
 		 	
-			 SELECT BOARD_NO
-				,CATEGORY
+			 SELECT QNA_NO
 				,TITLE
-				,CONTENT
+				,QUESTION
+				,ANSWER
 				,REG_DATE
-				,HIT
-			FROM ADMIN_NOTICE_BOARD	  
+				,USER_ID
+				,MEM_REG_ID
+			FROM USER_QNA  
 	</select>
 </mapper>
 

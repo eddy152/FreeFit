@@ -9,11 +9,11 @@
 <h1>
 	Hello world!  
 </h1>
-<a href="getAdminNoticeBoardList">getAdminNoticeBoardList</a><br>
-<a href="getAdminQnaBoardList">getAdminQnaBoardList</a><br>
-<a href="getAdminNoticeBoard">getAdminNoticeBoard</a><br>
-<a href="getAdminQnaBoard">getAdminQnaBoard</a><br>
+<a href="getAdminNoticeBoardList">어드민 공지 이벤트 게시판</a><br>
+<a href="getUserNoticeBoardList">유저 공지 홍보게시판</a><br>
+<a href="getAdminQnaBoardList">어드민 문의게시판</a><br>
+<a href="getUserQnaBoardList">유저 문의게시판</a><br>
 
-<P>  The time on the server is ${serverTime}.sdfdsfdsf </P>
+<P>  The time on the server is ${serverTime}.</P>
 </body>
 </html>
