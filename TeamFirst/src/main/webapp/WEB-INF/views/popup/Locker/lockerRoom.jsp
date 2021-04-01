@@ -30,18 +30,37 @@
 		$('input:text[name="gender"]').val(room.gender);
 		$('input:text[name="lock_width"]').val(room.lock_width);
 	}
-
+	
+	// 락커룸 삭제하기
+	$(document).ready(function() {
+		$('.deleteBtn').click(function() {
+		confirm('정말 삭제하시겠습니까?');
+		
+		$.ajax({
+			url: 'deleteRoom',
+			type: 'post',
+			data: { room_no : $('input:text[name="room_no"]').val() },
+			dataType: 'json',
+			success: function(data) {
+				if(data == 1) {
+				alert('삭제 성공!!');
+				location.reload();
+			}
+				else {
+					alert('삭제 실패!!');					
+					}
+			},
+			error: function() {
+				alert('에러!!');
+			}
+		});
+	});
+});
+	
 </script>
 </head>
 <body>
 <h1>수정하기</h1>
-<%-- <form action="updateRoom" method="post">
-	락커룸 번호 : <input  type="text" name="room_no" value="${room.room_no }">
-	성별 : <input type="text" name="gender" value="${room.gender }">
-	가로 락카 수 : <input type="text" name="lock_width" value="${room.lock_width }">
-	<br>
-	<input type="submit" value="등록하기">
-</form> --%>
 
 <table border="1">
 	<tr>
@@ -78,6 +97,7 @@
 	</table>
 	<input type="submit" value="등록하기">
 </form>
+	<input type="button" class="deleteBtn" value="삭제하기">
 </div>
 </body>
 </html>
