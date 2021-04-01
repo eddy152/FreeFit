@@ -21,6 +21,15 @@ public interface AdminNoticeBoardService {
 	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo);
 
 	
+	//페이징 
+	public static int boardCount(BoardSearchVO boardSearchVO) {
+		return 0;
+	}
+	public static List<AdminNoticeBoardVO> boardList(BoardSearchVO boardSearchVO) {
+		return null;
+	}
+
+	
 
 	
 

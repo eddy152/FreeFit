@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import co.team.board.service.AdminNoticeBoardService;
 import co.team.board.service.AdminNoticeBoardVO;
+import co.team.board.service.BoardSearchVO;
 
 @Service
 public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
@@ -37,9 +38,14 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 		return dao.deleteAdminNoticeBoard(vo);
 	}
 	
-
+	//페이징
+	public int boardCount(BoardSearchVO boardSearchVO) {
+		return AdminNoticeBoardMapper.boardCount(boardSearchVO);
+	}
 	
-	
+	public List<AdminNoticeBoardVO> boardList(BoardSearchVO boardSearchVO){
+		return AdminNoticeBoardMapper.boardList(boardSearchVO);
+	}
 }
 
 

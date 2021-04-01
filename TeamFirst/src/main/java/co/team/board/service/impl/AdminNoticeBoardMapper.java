@@ -3,6 +3,7 @@ package co.team.board.service.impl;
 import java.util.List;
 
 import co.team.board.service.AdminNoticeBoardVO;
+import co.team.board.service.BoardSearchVO;
 
 public interface AdminNoticeBoardMapper {
 	
@@ -21,7 +22,11 @@ public interface AdminNoticeBoardMapper {
 	// 삭제
 	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo);
 	
-
-	
-	
+	//페이징 
+	public static int boardCount(BoardSearchVO boardSearchVO) {
+		return 0;
+	}
+	public static List<AdminNoticeBoardVO> boardList(BoardSearchVO boardSearchVO) {
+		return null;
+	}
 }

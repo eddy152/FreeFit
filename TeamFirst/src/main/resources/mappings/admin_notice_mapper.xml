@@ -2,76 +2,91 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	
-	<!-- admin notice 어드민공지  -->
-	<mapper namespace="co.team.board.service.impl.AdminNoticeBoardMapper">
-	
+
+<!-- admin notice 어드민공지 -->
+<mapper
+	namespace="co.team.board.service.impl.AdminNoticeBoardMapper">
+
 	<insert id="insertAdminNoticeBoard"
-			parameterType="AdminNoticeBoardVO">
-		
-		INSERT INTO ADMIN_NOTICE_BOARD( 
+		parameterType="AdminNoticeBoardVO">
+
+		INSERT INTO ADMIN_NOTICE_BOARD(
 		BOARD_NO
 		,TITLE
 		,CONTENT
 		,REG_DATE
 		,HIT
 		)
-		
-		VALUES( 
+
+		VALUES(
 		#{board_no}
 		,#{title}
 		,#{content}
 		,#{reg_date}
 		,#{hit}
-		
+
 		)
 	</insert>
 
-	<update id="updateAdminNoticeBoard" 
-			parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
-			
-			UPDATE ADMIN_NOTICE_BOARD
-			SET CONTENT = #{content}
-			WHERE BOARD_NO = #{board_no} 
+	<update id="updateAdminNoticeBoard"
+		parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
+
+		UPDATE ADMIN_NOTICE_BOARD
+		SET CONTENT = #{content}
+		WHERE BOARD_NO = #{board_no}
 	</update>
-	
-	
-	<delete id="deleteAdminNoticeBoard" 
-			parameterType="AdminNoticeBoardVO">
-		
+
+
+	<delete id="deleteAdminNoticeBoard"
+		parameterType="AdminNoticeBoardVO">
+
 		DELETE FROM ADMIN_NOTICE_BOARD
-		
+
 		WHERE BOARD_NO = #{board_no}
 
 	</delete>
+
+	<select id="getAdminNoticeBoard" resultType="AdminNoticeBoardVO"
+		parameterType="AdminNoticeBoardVO">
+
+		SELECT BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		FROM ADMIN_NOTICE_BOARD
+		WHERE BOARD_NO = #{board_no}
+
+	</select>
+
+	<select id="getAdminNoticeBoardList"
+		parameterType="AdminNoticeBoardVO" resultType="AdminNoticeBoardVO">
+
+		SELECT BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		FROM ADMIN_NOTICE_BOARD
+	</select>
+
 	
-	<select id="getAdminNoticeBoard" 
-			resultType="AdminNoticeBoardVO"
-			parameterType="AdminNoticeBoardVO">
-			
-			SELECT BOARD_NO
-				,CATEGORY
-				,TITLE
-				,CONTENT
-				,REG_DATE
-				,HIT
-			FROM ADMIN_NOTICE_BOARD
-			WHERE BOARD_NO = #{board_no}
-			
+	<!--  카운트 쿼리 -->
+	<select id="boardCount"
+		parameterType="co.team.board.service.BoardSearchVO" resultType="int">
+		SELECT
+		count(*)
+		FROM ADMIN_NOTICE_BOARD
 	</select>
 	
-	<select id="getAdminNoticeBoardList" 
-			parameterType="AdminNoticeBoardVO"
-			resultType="AdminNoticeBoardVO">
+	<!--  총게시물 가져오는 쿼리 -->
+	<select id="boardList" 
+			parameterType="co.team.board.service.BoardSearchVO" 
+			resultType="co.team.board.service.AdminNoticeBoardVO">
 			
-		 	
-			 SELECT BOARD_NO
-				,CATEGORY
-				,TITLE
-				,CONTENT
-				,REG_DATE
-				,HIT
-			FROM ADMIN_NOTICE_BOARD	  
+			
 	</select>
-</mapper>
+</mapper>	
 
