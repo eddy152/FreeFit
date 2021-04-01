@@ -31,5 +31,14 @@ public class LockerRoomServiceImpl_kdh implements LockerRoomService_kdh{
 		dao.updateRoom(vo);
 	}
 
+	@Override
+	// 락커룸 삭제
+	public int deleteRoom(LockerRoomVO vo) {
+		int i = dao.deleteRoom(vo);
+		if (i==0)
+		{i = -1;}
+		return i;
+	}
+
 	
 }

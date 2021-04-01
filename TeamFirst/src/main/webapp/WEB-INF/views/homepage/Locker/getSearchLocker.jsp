@@ -88,15 +88,13 @@
 			$.ajax({
 				url : 'deleteLocker',
 				method : 'post',
-				data : {
-					lock_no : $('#lock_no').val()
-				},
+				data : {lock_no : $('#lock_no').val() },
 				dataType : 'json',
 				success : function(response) {
 					alert('삭제완료');
 				},
 				error : function(response) {
-					alert('삭제 실패');
+					alert('ERROR');
 				}
 			})
 		})

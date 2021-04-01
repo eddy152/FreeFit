@@ -12,4 +12,7 @@ public interface LockerRoomService_kdh {
 	
 	// 락커룸 수정
 	public void updateRoom(LockerRoomVO vo);
+	
+	// 락커룸 삭제
+	public int deleteRoom(LockerRoomVO vo);
 }
