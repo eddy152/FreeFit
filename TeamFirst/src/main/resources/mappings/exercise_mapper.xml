@@ -12,7 +12,6 @@
 				exe_part, 
 				exe_name
 		FROM exercise_list
-		WHERE exe_kinds = #{exe_kinds}
 		ORDER BY exe_no
 	</select>
 	

@@ -10,10 +10,22 @@
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
 <script>
-	$(function() {
+	/* $(function() {
 		$(".menuLink").on("click", function() {
 			var url = "getExerciseListProc?exe_part=" + $(this)[0].id;
 			$("#tbl1").load(url);
+		});
+	}); */
+	$(function() {
+		$("a").on("click", function() {
+			var title = $(this)[0].id;
+			$("#tbl1").children().remove();
+			$("#tbl1").append('<div style="float: left; width: 30%; padding: 10px;"><ul id="navi"><li class="group" style="text-align: center;"><div class="title">' + title + '</div><ul class="sub"><li><a id="All">전체</a></li><li><a id="기구">기구</a></li><li><a id="맨몸">맨몸</a></li></ul></li></ul></div>');
+		});
+	});
+	$(function() {
+		$("a").on("click", function() {
+			var title = $(this)[0].id;
 		});
 	});
 </script>
@@ -46,6 +58,53 @@
 #topMenu .menuLink:hover {
 	color: red;
 	background-color: #4d4d4d;
+}
+body {
+	margin: 20px auto;
+	padding: 0;
+	font-family: "맑은 고딕";
+	font-size: 0.9em;
+}
+
+ul#navi {
+	text-indent: 10px;
+}
+
+ul#navi, ul#navi ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+li.group {
+	margin-bottom: 3px;
+}
+
+li.group div.title {
+	height: 35px;
+	line-height: 35px;
+	background: #9ab92e;
+	cursor: pointer;
+}
+
+ul.sub li {
+	margin-bottom: 2px;
+	height: 35px;
+	line-height: 35px;
+	background: #f4f4f4;
+	cursor: pointer;
+}
+
+ul.sub li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color: #000;
+}
+
+ul.sub li:hover {
+	background: #cf0;
 }
 </style>
 <title>Insert title here</title>

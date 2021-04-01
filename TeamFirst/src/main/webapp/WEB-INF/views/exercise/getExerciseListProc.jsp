@@ -11,9 +11,8 @@
 	crossorigin="anonymous"></script>
 <script>
 	$(function() {
-		$("#기구").on("click", function() {
-			var url = "getSearchExerciseList";
-			$("#tbl1").load(url);
+		$("a").on("click", function() {
+			$("#exeDiv").append('<button/>');
 		});
 	});
 </script>
@@ -26,7 +25,6 @@ body {
 }
 
 ul#navi {
-	width: 200px;
 	text-indent: 10px;
 }
 
@@ -69,21 +67,22 @@ ul.sub li:hover {
 </style>
 </head>
 <body>
-	<ul id="navi">
-		<li class="group" style="text-align: center;">
-			<div class="title">${list.exe_part }</div>
-			<ul class="sub">
-				<li><a id="All">전체</a></li>
-				<li><a id="기구">기구</a></li>
-				<li><a id="맨몸">맨몸</a></li>
-			</ul>
-		</li>
-	</ul>
-	<table>
-		<tr>
-		
-		</tr>
-		
-	</table>
+	<div style="float: left; width: 30%; padding: 10px;">
+		<ul id="navi">
+			<li class="group" style="text-align: center;">
+				<div class="title">${list.exe_part }</div>
+				<ul class="sub">
+					<li><a id="All">전체</a></li>
+					<li><a id="기구">기구</a></li>
+					<li><a id="맨몸">맨몸</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div id="exeDiv" style="float: left; width: 60%; padding: 10px;">
+		<c:forEach items="exeList" var="exeList">
+			<button onclick=""></button>
+		</c:forEach>
+	</div>
 </body>
 </html>

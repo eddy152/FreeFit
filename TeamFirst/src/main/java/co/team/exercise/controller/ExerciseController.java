@@ -39,6 +39,7 @@ public class ExerciseController {
 	@GetMapping("/getExerciseListProc")
 	public String getExerciseListProc(ExerciseListVO vo, Model model) {
 		model.addAttribute("list", service.getExerciseListProc(vo));
+		model.addAttribute("exeList", service.getSearchExerciseList(vo));
 		return "exercise/getExerciseListProc";
 	}
 
