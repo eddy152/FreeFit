@@ -13,9 +13,12 @@ public interface LockerMapper_kdh {
 	public LockerVO getLocker(LockerVO vo);
 	
 	// 락커 등록
+	public void insertLocker(LockerVO vo);
 	
 	// 락커 수정
+	public void updateLocker(LockerVO vo);
 	
 	// 락커 삭제
+	public void deleteLocker(LockerVO vo);
 	
 }
