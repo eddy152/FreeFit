@@ -1,7 +1,5 @@
 package co.team.board.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,10 +57,17 @@ public class UserBoardController {
 	//유저 QnA 리스트
 	
 	//전체 조회
-	@ResponseBody
-	@GetMapping("/getUserQnaBoardList")
-	public List<UserQnaBoardVO> getUserQnaBoardList(UserQnaBoardVO vo) {
-		return service2.getUserQnaBoardList(vo);
+//	@ResponseBody
+//	@GetMapping("/getUserQnaBoardList")
+//	public List<UserQnaBoardVO> getUserQnaBoardList(UserQnaBoardVO vo) {
+//		return service2.getUserQnaBoardList(vo);
+//	}
+	
+	//전체 조회
+	@RequestMapping("/getUserQnaBoardList")
+	public String getUserQnaBoardlist(UserQnaBoardVO vo, Model model) throws Exception {
+		model.addAttribute("list", service2.getUserQnaBoardList(vo));
+		return "board/getUserQnaBoardList";
 	}
 	//단건 조회
 	@ResponseBody

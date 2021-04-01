@@ -64,7 +64,8 @@ public class AdminBoardController {
 	
 	//전체조회
 	@RequestMapping("/getAdminQnaBoardList")
-	public String getAdminQnaBoardList(AdminQnaBoardVO vo, Model model) {
+	public String getAdminQnaBoardList(AdminQnaBoardVO vo, Model model) throws Exception {
+		model.addAttribute("list", service2.getAdminQnaBoardList(vo));
 		return "board/getAdminQnaBoardList";
 	}
 	//전체조회
@@ -73,7 +74,6 @@ public class AdminBoardController {
 //	public List<AdminQnaBoardVO> getAdminQnaBoardList(AdminQnaBoardVO vo) {
 //		//System.out.println(service2.getAdminQnaBoard(vo));
 //		return service2.getAdminQnaBoardList(vo);
-	
 	
 	//단건조회
 	@ResponseBody
