@@ -5,7 +5,7 @@
 <mapper namespace="co.team.admin.service.impl.AdminMapper">
 
 <!-- ADMIN select 리스트 -->
-	<select id="getAdmin" resultType="AdminVO" parameterType="AdminVO">
+	<select id="getAdmin" resultType="adminVO" parameterType="adminVO">
 		select *
 		from ADMIN
 
@@ -13,7 +13,7 @@
 	
 	
 <!-- ADMIN insert -->	
-	<insert id="insertAdmin" parameterType="AdminVO">
+	<insert id="insertAdmin" parameterType="adminVO">
 		insert into ADMIN("admin_id", "password") values
 		(
 		#{admin_id},

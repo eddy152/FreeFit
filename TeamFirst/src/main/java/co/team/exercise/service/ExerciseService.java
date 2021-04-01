@@ -47,4 +47,7 @@ public interface ExerciseService {
 	public int insertUserWeight(UserWeightVO vo);
 	public int updateUserWeight(UserWeightVO vo);
 	public int deleteUserWeight(UserWeightVO vo);
+	
+	public List<ReservationVO> getSearchReservation(ReservationVO vo);
+	public ReservationVO getReservationProc(ReservationVO vo);
 }

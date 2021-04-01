@@ -12,16 +12,15 @@
 				exe_part, 
 				exe_name
 		FROM exercise_list
+		WHERE exe_kinds = #{exe_kinds}
+		ORDER BY exe_no
 	</select>
 	
-	<!-- EXERCISE_LIST select one -->
+	<!-- EXERCISE_LIST 기구/맨몸 선택 -->
 	<select id="getExerciseListProc"  resultType="ExerciseListVO" parameterType="ExerciseListVO">
-		SELECT  exe_no,
-				exe_kinds, 
-				exe_part, 
-				exe_name
+		SELECT distinct exe_part
 		FROM exercise_list
-		WHERE exe_no = #{exe_no}
+		WHERE exe_part = #{exe_part}
 	</select>
 	
 	<!-- EXERCISE_LIST insert -->	
@@ -430,7 +429,7 @@
 	</select>
 	
 	<!-- FF_USER select one -->
-	<select id="getExerciseFFUser"  resultType="FFUserVO" parameterType="FFUserVO">
+	<select id="getFFUserProc"  resultType="FFUserVO" parameterType="FFUserVO">
 		SELECT  user_id,
 				password,
 				phone_number,
@@ -441,9 +440,9 @@
 				gender,
 				mem_reg_id
 		FROM ff_user
-		AND user_id = #{user_id}
+		WHERE user_id = #{user_id}
 	</select>
-<!-- FF_USER start -->
+<!-- FF_USER end -->
 
 <!-- USER_WEIGHT start -->
 	<!-- USER_WEIGHT select -->
@@ -501,4 +500,31 @@
 		AND user_id = #{user_id}
 	</delete>
 <!-- USER_WEIGHT end -->
+
+<!-- RESERVATION start -->
+	<!-- RESERVATION select -->
+	<select id="getSearchReservation" resultType="ReservationVO" parameterType="ReservationVO">
+		SELECT  reservation_no,
+				user_id,
+				trainer_id,
+				reservation_date,
+				content,
+				reg_date
+		FROM reservation
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- RESERVATION select one -->
+	<select id="getReservationProc"  resultType="ReservationVO" parameterType="ReservationVO">
+		SELECT  reservation_no,
+				user_id,
+				trainer_id,
+				reservation_date,
+				content,
+				reg_date
+		FROM reservation
+		WHERE user_id = #{user_id}
+		AND reservation_no = #{reservation_no}
+	</select>
+<!-- RESERVATION start -->
 </mapper>

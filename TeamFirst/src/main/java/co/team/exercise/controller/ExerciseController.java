@@ -1,8 +1,11 @@
 package co.team.exercise.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,6 +17,7 @@ import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.ExerciseService;
 import co.team.exercise.service.FFUserVO;
+import co.team.exercise.service.ReservationVO;
 import co.team.exercise.service.UserWeightVO;
 
 @Controller
@@ -21,19 +25,21 @@ public class ExerciseController {
 	@Autowired
 	ExerciseService service;
 
+	SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
 	// EXERCISE_LIST start
 	// 리스트 조회
-	@ResponseBody
 	@GetMapping("/getSearchExerciseList")
-	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo) {
-		return service.getSearchExerciseList(vo);
+	public String getSearchExerciseList(ExerciseListVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExerciseList(vo));
+		return "exercise/getSearchExerciseList";
 	}
 
 	// 단건 조회
-	@ResponseBody
 	@GetMapping("/getExerciseListProc")
-	public ExerciseListVO getExerciseListProc(ExerciseListVO vo) {
-		return service.getExerciseListProc(vo);
+	public String getExerciseListProc(ExerciseListVO vo, Model model) {
+		model.addAttribute("list", service.getExerciseListProc(vo));
+		return "exercise/getExerciseListProc";
 	}
 
 	// 단건 등록
@@ -60,10 +66,15 @@ public class ExerciseController {
 
 	// EXERCISE_PROGRAM_BASIC start
 	// 리스트 조회
-	@ResponseBody
 	@GetMapping("/getSearchExerciseProgramBasic")
-	public List<ExerciseProgramBasicVO> getSearchExerciseProgramBasic(ExerciseProgramBasicVO vo) {
-		return service.getSearchExerciseProgramBasic(vo);
+	public String getSearchExerciseProgramBasic(ExerciseProgramBasicVO vo, 
+												ExeBasicDetailVO vo1,
+												ExerciseProgramBasicVO vo2,
+												Model model) {
+		model.addAttribute("exeList", service.getSearchExerciseProgramBasic(vo));
+		model.addAttribute("exeBasicDetail", service.getSearchExerciseBasicDetail(vo1));
+		model.addAttribute("exeProgramBasic", service.getSearchExerciseProgramBasic(vo2));
+		return "exercise/ExerciseProgramBasic";
 	}
 
 	// 단건 조회
@@ -245,17 +256,17 @@ public class ExerciseController {
 
 	// FF_USER start
 	// 리스트 조회
-	@ResponseBody
 	@GetMapping("/getSearchFFUser")
-	public List<FFUserVO> getSearchFFUser(FFUserVO vo) {
-		return service.getSearchFFUser(vo);
+	public String getSearchFFUser(FFUserVO vo, Model model) {
+		model.addAttribute("list", service.getSearchFFUser(vo));
+		return "exercise/getSearchFFUser";
 	}
 
 	// 단건 조회
-	@ResponseBody
 	@GetMapping("/getFFUserProc")
-	public FFUserVO getFFUserProc(FFUserVO vo) {
-		return service.getFFUserProc(vo);
+	public String getFFUserProc(FFUserVO vo, Model model) {
+		model.addAttribute("list", service.getFFUserProc(vo));
+		return "exercise/getFFUserProc";
 	}
 	// FF_USER end
 
@@ -295,4 +306,20 @@ public class ExerciseController {
 		return "redirect:/getSearchUserWeight";
 	}
 	// USER_WEIGHT end
+
+	// RESERVATION start
+	// 리스트 조회
+	@GetMapping("/getSearchReservation")
+	public String getSearchReservation(ReservationVO vo, Model model) {
+		model.addAttribute("list", service.getSearchReservation(vo));
+		return "exercise/getSearchReservation";
+	}
+
+	// 단건 조회
+	@ResponseBody
+	@GetMapping("/getReservationProc")
+	public ReservationVO getReservationProc(ReservationVO vo){
+		return service.getReservationProc(vo);
+	}
+	// RESERVATION end
 }
