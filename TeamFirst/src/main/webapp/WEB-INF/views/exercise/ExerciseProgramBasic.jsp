@@ -26,12 +26,39 @@ $(function() {
 			type: 'get',
 			success: function(result) {
 				$("#exe").html(result);
-				console.log('getSearchExerciseList?exe_kinds=' + kinds + '&exe_part=' + part);
 			}
 		})  // End of ajax
 	})  // End of exeKinds
 	
-})  
+	$(document).on("click", "button[name=exeName]", function() {
+		var exeName = $(this)[0].innerText;
+		var exeNameTd = document.getElementsByName("exeNameTd");
+		;
+		var findExeName = false;
+			for (var i = 0; i < exeNameTd.length; i++) {
+				if (exeNameTd[i].innerText == exeName) {
+					alert("중복된 값이 존재 합니다..");
+					findExeName = true;
+					return ;
+				} 
+			}
+			if(findExeName != true) {
+				$("#exeNameTbl").append('<tr><td name="exeNameTd">' + exeName + '</td></tr>');
+			}
+		}); // End of exeName
+	
+	// 하단 우측 세트 수
+	$(document).on("click", "td[name=exeNameTd]", function() {
+		var exeName = $(this)[0].innerText;
+		console.log('<tr><input type="text" readonly="readonly" id=' + exeName + '></td><td><input type="number" id=' + exeName + 'Count></td></tr>');
+		$("#exeSet").append('<tr><th><input type="text" readonly="readonly" id=' + exeName + ' value=' + exeName + '></th><th>횟수</th></tr>'
+		+ '<tr><td id="1set">1set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="2set">2set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="3set">3set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="4set">4set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="5set">5set</td><td><input type="number" id=' + exeName + 'Count></td></tr>');
+	})// End of set 세트수 tr, form에 보내는 방식 수정 필요
+});
 </script>
 <style type="text/css">
 #topMenu {
@@ -152,8 +179,7 @@ ul.sub li:hover {
 					</tr>
 				</table>
 			</div>
-			<div
-				style="border: 1px solid yellow; float: left; width: 30%; padding: 10px;">
+			<div style="border: 1px solid yellow; float: left; width: 30%; padding: 10px;">
 				<table border="1">
 					<tr>
 						<th>준비 운동</th>
@@ -164,20 +190,15 @@ ul.sub li:hover {
 					</tr>
 				</table>
 			</div>
-			<div
-				style="border: 1px solid red; float: left; width: 30%; padding: 10px;">
-				<table border="1">
+			<div style="border: 1px solid red; float: left; width: 30%; padding: 10px;">
+				<table border="1" id="exeNameTbl">
 					<tr>
-						<th></th>
-					<tr>
+						<td>운동 목록</td>
+					</tr>
 				</table>
 			</div>
-			<div
-				style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
-				<table border="1">
-					<tr>
-						<th></th>
-					<tr>
+			<div style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
+				<table border="1" id="exeSet">
 				</table>
 			</div>
 		</div>

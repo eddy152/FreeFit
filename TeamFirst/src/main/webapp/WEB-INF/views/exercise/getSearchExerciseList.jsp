@@ -16,7 +16,6 @@
 		});
 	});
 </script>
-</style>
 </head>
 <body>
 	<div style="float: left; width: 60%; padding: 10px;">
@@ -24,11 +23,15 @@
 			<li class="group" style="text-align: center;">
 				<ul class="exercise">
 				<c:forEach items="${list}" var="list">
-					<li><a>${list.exe_name }</a></li>
+					<li>
+						<button type="button" name="exeName">${list.exe_name }</button>
+					</li>
 				</c:forEach>
 				</ul>
 			</li>
 		</ul>
+		<input type="text" readonly="readonly">
+		<input type="number" id="">
 	</div>
 </body>
 </html>
