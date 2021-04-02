@@ -29,6 +29,7 @@
 		$('input:text[name="room_no"]').val(room.room_no);
 		$('input:text[name="gender"]').val(room.gender);
 		$('input:text[name="lock_width"]').val(room.lock_width);
+		$('input:text[name="lock_sum"]').val(room.lock_sum);
 	}
 	
 	// 락커룸 삭제하기
@@ -67,6 +68,7 @@
 		<td>락커룸번호</td>
 		<td>성별</td>
 		<td>가로락카수</td>
+		<td>락카수</td>
 	</tr>
 <c:forEach items="${list }" var="room">
 	<tr class="roomTr">
@@ -75,6 +77,7 @@
 		</td>
 		<td>${room.gender }</td>
 		<td>${room.lock_width }</td>
+		<td>${room.lock_sum }</td>
 	</tr>
 </c:forEach>
 </table>
@@ -93,6 +96,10 @@
 		<tr>
 			<td>가로락카수</td>
 			<td><input type="text" name="lock_width"></td>
+		</tr>
+		<tr>
+			<td>락카 수</td>
+			<td><input type="text" name="lock_sum"></td>
 		</tr>
 	</table>
 	<input type="submit" value="등록하기">
