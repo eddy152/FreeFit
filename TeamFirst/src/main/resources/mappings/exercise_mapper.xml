@@ -7,19 +7,24 @@
 <!-- EXERCISE_LIST start -->
 	<!-- EXERCISE_LIST select -->
 	<select id="getSearchExerciseList" resultType="ExerciseListVO" parameterType="ExerciseListVO">
-		SELECT  exe_no,
+		SELECT  exe_part, 
+				exe_no,
 				exe_kinds, 
-				exe_part, 
 				exe_name
 		FROM exercise_list
+		WHERE exe_kinds = #{exe_kinds}
+		AND exe_part = #{exe_part}
 		ORDER BY exe_no
 	</select>
 	
 	<!-- EXERCISE_LIST 기구/맨몸 선택 -->
 	<select id="getExerciseListProc"  resultType="ExerciseListVO" parameterType="ExerciseListVO">
-		SELECT distinct exe_part
+		SELECT  exe_part, 
+				exe_no,
+				exe_kinds, 
+				exe_name
 		FROM exercise_list
-		WHERE exe_part = #{exe_part}
+		WHERE exe_no = #{exe_no}
 	</select>
 	
 	<!-- EXERCISE_LIST insert -->	

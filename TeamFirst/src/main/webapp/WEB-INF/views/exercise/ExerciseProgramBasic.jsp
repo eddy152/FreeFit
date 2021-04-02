@@ -10,24 +10,28 @@
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
 <script>
-	/* $(function() {
-		$(".menuLink").on("click", function() {
-			var url = "getExerciseListProc?exe_part=" + $(this)[0].id;
-			$("#tbl1").load(url);
-		});
-	}); */
-	$(function() {
-		$("a").on("click", function() {
-			var title = $(this)[0].id;
-			$("#tbl1").children().remove();
-			$("#tbl1").append('<div style="float: left; width: 30%; padding: 10px;"><ul id="navi"><li class="group" style="text-align: center;"><div class="title">' + title + '</div><ul class="sub"><li><a id="All">전체</a></li><li><a id="기구">기구</a></li><li><a id="맨몸">맨몸</a></li></ul></li></ul></div>');
-		});
-	});
-	$(function() {
-		$("a").on("click", function() {
-			var title = $(this)[0].id;
-		});
-	});
+$(function() {
+	var part = '가슴';
+	//상단 메뉴바 클릭
+	$(".menuLink").on("click", function() {
+						part = $(this)[0].id;
+						$("#title").html(part);
+	});  // End of a
+
+	//좌측 메뉴 클릭
+	$(document).on("click", "a[name=exeKinds]", function() {
+		var kinds = $(this)[0].text;
+		$.ajax({
+			url: 'getSearchExerciseList?exe_kinds=' + kinds + '&exe_part=' + part,  // 서버 url
+			type: 'get',
+			success: function(result) {
+				$("#exe").html(result);
+				console.log('getSearchExerciseList?exe_kinds=' + kinds + '&exe_part=' + part);
+			}
+		})  // End of ajax
+	})  // End of exeKinds
+	
+})  
 </script>
 <style type="text/css">
 #topMenu {
@@ -49,7 +53,7 @@
 	text-decoration: none;
 	color: white;
 	display: block;
-	width: 150px;
+	width: 130px;
 	font-size: 12px;
 	font-weight: bold;
 	font-family: "Trebuchet MS", Dotum, Arial;
@@ -59,6 +63,7 @@
 	color: red;
 	background-color: #4d4d4d;
 }
+
 body {
 	margin: 20px auto;
 	padding: 0;
@@ -112,17 +117,39 @@ ul.sub li:hover {
 <body>
 	<div align="center">
 		<div style="height: 800px; width: 800px;">
-			<div id="div1">
+			<div id="div1" style="border: 1px solid red; float: left; padding: 10px;">
+						<nav id="topMenu">
+							<ul>
+								<li><a class="menuLink" id="가슴">가슴</a></li>
+								<li><a class="menuLink" id="등">등</a></li>
+								<li><a class="menuLink" id="이두">이두</a></li>
+								<li><a class="menuLink" id="삼두">삼두</a></li>
+								<li><a class="menuLink" id="하체">하체</a></li>
+								<li><a class="menuLink" id="복근">복근</a></li>
+							</ul>
+						</nav>
 				<table id="tbl1" border="1" style="height: 150px; width: 800px;">
-					<nav id="topMenu">
-						<ul>
-							<li><a class="menuLink" id="가슴">가슴</a></li>
-							<li><a class="menuLink" id="등">등</a></li>
-							<li><a class="menuLink" id="이두">이두</a></li>
-							<li><a class="menuLink" id="삼두">삼두</a></li>
-							<li><a class="menuLink" id="하체">하체</a></li>
-						</ul>
-					</nav>
+					<tr>
+						<td>
+							<div style="float: left; width: 150px; padding: 10px;">
+								<ul id="navi">
+									<li class="group" style="text-align: center;">
+										<div class="title" id="title">가슴</div>
+										<ul class="sub">
+											<li><a name="exeKinds">전체</a></li>
+											<li><a name="exeKinds">기구</a></li>
+											<li><a name="exeKinds">맨몸</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</td>
+						<td>
+							<div id="exe" style="float: left; width: 640px; padding: 10px;">
+							
+							</div>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<div
