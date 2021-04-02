@@ -18,7 +18,7 @@
 	
 <!-- LOCKER_ROOM 수정 -->
 	<update id="updateRoom" parameterType="LockerRoomVO">
-		update locker_room set lock_width = #{lock_width}
+		update locker_room set lock_width = #{lock_width}, lock_sum = #{lock_sum}
 		where room_no = #{room_no}
 	</update>
 	

@@ -10,6 +10,7 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 
+
 <script type="text/javascript">
 	// 락커 관리 팝업창
 	function updateLocker() {
@@ -111,15 +112,19 @@
 		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=2'">여자</button>
 		<hr>
 		
+		<table border="1">
+		<tr>
 		<c:forEach var="locker" items="${list }">
-			<input type="button" class="btn" value="${locker.lock_no }">
+			<td><input type="button" class="btn" value="${locker.lock_no }"></td>
 		</c:forEach>
+		</tr>
+		</table>
 	</div>
 
 		<h3>락커 상세보기</h3>
 		<br>
-	
-			<form id="form1">
+	<div>
+			<form id="form1" style="align-content: center;">
 				<table border="1">
 					<tr>
 						<td>락커 번호</td>
@@ -148,7 +153,7 @@
 				</table>
 			</form>
 
-		<div>
+		
 			<input type="button" id="btnInsert" value="추가">&nbsp; 
 			<input type="button" value="수정" id="btnUpdate">&nbsp;
 			<input type="button" value="삭제" id="btnDelete">&nbsp;
