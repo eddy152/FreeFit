@@ -1,4 +1,4 @@
-package co.team.spring.calendar;
+package co.team.calendar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
