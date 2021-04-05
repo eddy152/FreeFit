@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.board.service.AdminNoticeBoardService;
@@ -23,20 +24,34 @@ public class AdminBoardController {
 	
 	//어드민 공지 이벤트 리스트 시작
 	
+	//섬머노트 test
+	@GetMapping("/adminBoard")
+	public String boardWrite() {
+	  return "board/adminBoard";
+	}
+	
 	//전체조회
-	//@ResponseBody
+	//@ResponseBodya
 	//@GetMapping
 	@RequestMapping("/getAdminNoticeBoardList")
 	public String getAdminNoticeBoardList(AdminNoticeBoardVO vo, Model model) throws Exception {
-		model.addAttribute("list", service.getAdminNoticeBoardList(vo));
+		model.addAttribute("board", service.getAdminNoticeBoardList(vo));
 		return "board/getAdminNoticeBoardList";
 	}
 	//단건조회
-	@ResponseBody
+//	@ResponseBody
+//	@GetMapping("/getAdminNoticeBoard")
+//	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo) {
+//		return service.getAdminNoticeBoard(vo);
+//	}
 	@GetMapping("/getAdminNoticeBoard")
-	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo) {
-		return service.getAdminNoticeBoard(vo);
+	public String viewDetail(Model model, @RequestParam("board_no") AdminNoticeBoardVO vo) {
+	  
+	  //model.addAttribute("board", boardService.viewDetail(seq));
+	  model.addAttribute("board", service.getAdminNoticeBoard(vo));
+	  return "board/getAdminNoticeBoard";
 	}
+	
 	//등록
 	@GetMapping("/insertAdminNoticeBoard")
 	public String insertAdminNoticeBoard(AdminNoticeBoardVO vo) {

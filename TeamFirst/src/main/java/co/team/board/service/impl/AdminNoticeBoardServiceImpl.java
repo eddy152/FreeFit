@@ -17,7 +17,11 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		return dao.getAdminNoticeBoard(vo);
 	}
-
+	
+//	@Override
+//	public AdminNoticeBoardVO viewDetail(int board_no) {
+//	  return mapper.viewDetail(board_no);
+//	}
 	@Override
 	public List<AdminNoticeBoardVO> getAdminNoticeBoardList(AdminNoticeBoardVO vo) {
 		return dao.getAdminNoticeBoardList(vo);

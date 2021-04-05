@@ -9,7 +9,8 @@ public interface AdminNoticeBoardMapper {
 	
 	// 단건조회
 	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo);
-	
+	//public AdminNoticeBoardVO viewDetail(int board_no);
+
 	// 전체조회
 	public List<AdminNoticeBoardVO> getAdminNoticeBoardList(AdminNoticeBoardVO vo);
 	
@@ -29,4 +30,5 @@ public interface AdminNoticeBoardMapper {
 	public static List<AdminNoticeBoardVO> boardList(BoardSearchVO boardSearchVO) {
 		return null;
 	}
+	
 }

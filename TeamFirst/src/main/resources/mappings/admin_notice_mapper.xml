@@ -46,6 +46,7 @@
 
 	</delete>
 
+	<!-- 글 상세조회 -->
 	<select id="getAdminNoticeBoard" resultType="AdminNoticeBoardVO"
 		parameterType="AdminNoticeBoardVO">
 
@@ -59,6 +60,8 @@
 		WHERE BOARD_NO = #{board_no}
 
 	</select>
+
+
 
 	<select id="getAdminNoticeBoardList"
 		parameterType="AdminNoticeBoardVO" resultType="AdminNoticeBoardVO">

@@ -6,9 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
-	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>boardList</title>
 </head>
 <body>
@@ -17,7 +19,7 @@
 			<div class="col-lg-8">
 				<!--게시판 넓이 -->
 				<div class="col-lg-12">
-					<h1 class="page-header">어드민 공지사항 리스트</h1>
+					<h1 class="page-header">프리핏 관리자 공지사항</h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
@@ -28,32 +30,35 @@
 					</div>
 				</div>
 				<div class="panel panel-default">
-					<div class="panel-heading">공지사항</div>
-					<div align = "center" class="panel-body">
+					<div class="panel-heading">Free Fit</div>
+					<div align="center" class="panel-body">
 						<table class="table table-hover">
 							<thead>
+								
 								<tr>
 									<th>No</th>
-									<th>제목</th>
 									<th>카테고리</th>
+									<th>제목</th>
+									<th>조회수</th>  
 									<th>작성일</th>
-									<th>조회수</th>
 								</tr>
+							   
 							</thead>
 							<tbody>
-								<c:forEach items="${list}" var="AdminNoticeBoardVO">
+								<c:forEach items="${board}" var="board">
 									<tr>
-										<td>${AdminNoticeBoardVO.board_no}</td>
-										<td>${AdminNoticeBoardVO.title}</td>
-										<td>${AdminNoticeBoardVO.category}</td>
-										<td><fmt:formatDate 
-											pattern="yyyy-MM-dd HH:mm"
-											value="${AdminNoticeBoardVO.reg_date}" /></td>
-										<td>${AdminNoticeBoardVO.hit}</td>
+										<td>${board.board_no}</td>
+										<td>${board.category}</td>
+										<td>${board.title}</td>
+										<td>${board.hit}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+												value="${board.reg_date}" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<input type="button" value="글 목록" style="float: right;"
+							   onclick="location.href='adminBoard';">
 					</div>
 				</div>
 			</div>
