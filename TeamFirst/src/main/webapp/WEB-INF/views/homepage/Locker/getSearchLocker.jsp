@@ -25,7 +25,9 @@
 			$.ajax({
 				url : "getLocker",
 				type : "get",
-				data : { lock_no : $(this).val() },
+				data : {
+					lock_no : $(this).val()
+				},
 				dataType : 'json',
 				success : userSelect, // 회원 조회
 				error : function(xhr, status, msg) {
@@ -44,20 +46,20 @@
 		$('input:text[name="user_id"]').val(user.user_id);
 		$('input:text[name="room_no"]').val(user.room_no);
 	}
-	
+
 	// 락커 등록
 	$(document).ready(function() {
 		$('#btnInsert').click(function() {
 			$.ajax({
-				url: 'insertLocker',
-				method: 'Post',
-				data: $('#form1').serialize(),
-				dataType: 'json',
-				success: function() {
+				url : 'insertLocker',
+				method : 'Post',
+				data : $('#form1').serialize(),
+				dataType : 'json',
+				success : function() {
 					alert('등록 성공!!');
-					 $('#form1').reset();
+					$('#form1').reset();
 				},
-				error: function() {
+				error : function() {
 					alert('등록 실패!!');
 				}
 			})
@@ -74,7 +76,7 @@
 				dataType : 'json',
 				success : function(response) {
 					alert('수정완료');
-					
+
 				},
 				error : function(xhr, status, msg) {
 					alert("상태값 :" + status + " Http에러메시지 :" + msg);
@@ -89,7 +91,9 @@
 			$.ajax({
 				url : 'deleteLocker',
 				method : 'post',
-				data : {lock_no : $('#lock_no').val() },
+				data : {
+					lock_no : $('#lock_no').val()
+				},
 				dataType : 'json',
 				success : function(response) {
 					alert('삭제완료');
@@ -100,8 +104,36 @@
 			})
 		})
 	})
-	
+
+	//락커 로우 정렬
+	function row() {
+		var table = document.getElementById('tbl');
+
+	}
 </script>
+
+<style type="text/css">
+
+ .btn {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #555555;
+  color: white;
+}
+
+</style>
 
 </head>
 <body>
@@ -110,54 +142,60 @@
 		<input type="button" onclick="updateLocker()" value="관리">
 		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
 		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=2'">여자</button>
-		<hr>
-		
-		<table border="1">
-		<tr>
-		<c:forEach var="locker" items="${list }">
-			<td><input type="button" class="btn" value="${locker.lock_no }"></td>
-		</c:forEach>
-		</tr>
-		</table>
 	</div>
 
-		<h3>락커 상세보기</h3>
-		<br>
-	<div>
-			<form id="form1" style="align-content: center;">
-				<table border="1">
-					<tr>
-						<td>락커 번호</td>
-						<td><input type="text" id="lock_no" name="lock_no" readonly="readonly"></td>
-					</tr>
-					<tr>
-						<td>고장 여부</td>
-						<td><input type="text" name="broken_locker"></td>
-					</tr>
-					<tr>
-						<td>첫사용일자</td>
-						<td><input type="date" name="first_date"></td>
-					</tr>
-					<tr>
-						<td>종료일</td>
-						<td><input type="date" name="final_date"></td>
-					</tr>
-					<tr>
-						<td>유저아이디</td>
-						<td><input type="text" name="user_id"></td>
-					</tr>
-					<tr>
-						<td>락커룸 번호</td>
-						<td><input type="text" name="room_no" readonly="readonly"></td>
-					</tr>
-				</table>
-			</form>
+	<hr>
+	<!-- start 락카버튼 -->
+	<table>
+	<tr>
+	<c:set var="j" value="${list[0].lock_width}"/>
+	<c:forEach var="locker" items="${list }">
+			<td><button class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>			
+		<c:if test="${locker.each_lock_no % j == 0}">
+			</tr><tr>
+		</c:if>
+	</c:forEach>
+	</table>
+	<!-- end 락카버튼 -->
 
-		
-			<input type="button" id="btnInsert" value="추가">&nbsp; 
-			<input type="button" value="수정" id="btnUpdate">&nbsp;
-			<input type="button" value="삭제" id="btnDelete">&nbsp;
-		</div>
+	<h3>락커 상세보기</h3>
+	<br>
+	<div>
+		<form id="form1"">
+			<table border="1">
+				<tr>
+					<td>락커 번호</td>
+					<td><input type="text" id="lock_no" name="lock_no"
+						readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td>고장 여부</td>
+					<td><input type="text" name="broken_locker"></td>
+				</tr>
+				<tr>
+					<td>첫사용일자</td>
+					<td><input type="date" name="first_date"></td>
+				</tr>
+				<tr>
+					<td>종료일</td>
+					<td><input type="date" name="final_date"></td>
+				</tr>
+				<tr>
+					<td>유저아이디</td>
+					<td><input type="text" name="user_id"></td>
+				</tr>
+				<tr>
+					<td>락커룸 번호</td>
+					<td><input type="text" name="room_no" readonly="readonly"></td>
+				</tr>
+			</table>
+		</form>
+
+
+		<input type="button" id="btnInsert" value="추가">&nbsp; <input
+			type="button" value="수정" id="btnUpdate">&nbsp; <input
+			type="button" value="삭제" id="btnDelete">&nbsp;
+	</div>
 
 
 </body>

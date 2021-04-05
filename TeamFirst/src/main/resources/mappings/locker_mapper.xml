@@ -7,17 +7,17 @@
 
 <!-- LOCKER 전체 리스트 -->
  	<select id="getSearchLocker" resultType="LockerVO" parameterType="LockerVO">
-		select l.lock_no, l.broken_locker, to_char(l.first_date, 'yyyy-MM-dd') first_date, to_char(l.final_date, 'yyyy-MM-dd') final_date, l.user_id, l.room_no, r.gender
+		select l.lock_no, l.broken_locker, to_char(l.first_date, 'yyyy-MM-dd') first_date, to_char(l.final_date, 'yyyy-MM-dd') final_date, l.user_id, l.room_no, r.gender, l.each_lock_no, r.lock_width
 		from locker l, locker_room r
 		where l.room_no = r.room_no
 		<if test="gender != null">
-		And gender = #{gender}
+		And gender=#{gender}
 		</if>
  	</select>
  	
 <!-- LOCKER 단건 조회 -->
  	<select id="getLocker"  resultType="LockerVO" parameterType="LockerVO">
- 		select lock_no, broken_locker, to_char(first_date, 'yyyy-MM-dd') first_date, to_char(final_date, 'yyyy-MM-dd') final_date, user_id, room_no
+ 		select lock_no, broken_locker, to_char(first_date, 'yyyy-MM-dd') first_date, to_char(final_date, 'yyyy-MM-dd') final_date, user_id, room_no, each_lock_no
 		from locker 
 		WHERE lock_no=#{lock_no}
  	</select>
@@ -40,7 +40,7 @@
 		where lock_no = #{lock_no}
  	</update>
 
-<!-- 해당 LOCKER 회수(초기화) -->
+
 
 	
  </mapper>

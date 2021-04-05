@@ -40,5 +40,13 @@ public class LockerRoomServiceImpl_kdh implements LockerRoomService_kdh{
 		return i;
 	}
 
+	@Override
+	// 락커 갯수 관리
+	public void manageRoom(LockerRoomVO vo) {
+		dao.manageRoom(vo);
+	}
+	
+	
+
 	
 }

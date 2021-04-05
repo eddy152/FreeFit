@@ -45,8 +45,16 @@ public class LockerRoomController_kdh {
 	public int deleteRoom(LockerRoomVO vo) {
 		System.out.println("룸번호 : " + vo.getRoom_no());
 		return service.deleteRoom(vo);
-		
 				
+	}
+	
+	// 락커 갯수 관리
+	@PostMapping("/manageRoom")
+	@ResponseBody
+	public LockerRoomVO manageRoom(LockerRoomVO vo) {
+		service.manageRoom(vo);
+	return service.getRoom(vo);
+		
 	}
 	
 }

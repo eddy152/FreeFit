@@ -19,4 +19,6 @@ public class LockerVO {
 	private String room_no;
 	private String gender;
 	private String lock_sum;
+	private String each_lock_no;
+	private String lock_width;
 }

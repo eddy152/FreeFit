@@ -58,6 +58,28 @@
 	});
 });
 	
+	// 락커갯수 관리하기
+	$(document).ready(function() {
+		$('.manageBtn').click(function() {
+			confirm('정말 수정하시겠습니까?');
+			$.ajax({
+				url: 'manageRoom',
+				type: 'post',
+				data: { room_no : $('input:text[name="room_no"]').val(),
+						lock_sum : $('input:text[name="lock_sum"]').val(),
+						lock_width : $('input:text[name="lock_width"]').val()
+				},
+				dataType: 'json',
+				success: function(data) {
+					alert('성공!!');
+				},
+				error: function() {
+					alert('에러!!');
+				}
+			})
+		})
+	})
+	
 </script>
 </head>
 <body>
@@ -83,7 +105,7 @@
 </table>
 <br>
 <div>
-<form action="updateRoom" method="post">
+<!--<form action="manageRoom" method="post">-->
 	<table border="1">
 		<tr>
 			<td>락커룸번호</td>
@@ -102,8 +124,8 @@
 			<td><input type="text" name="lock_sum"></td>
 		</tr>
 	</table>
-	<input type="submit" value="등록하기">
-</form>
+	<input type="button" class="manageBtn" value="등록하기">
+<!--</form>-->
 	<input type="button" class="deleteBtn" value="삭제하기">
 </div>
 </body>

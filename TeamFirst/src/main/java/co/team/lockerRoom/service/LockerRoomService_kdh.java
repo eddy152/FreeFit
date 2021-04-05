@@ -15,4 +15,7 @@ public interface LockerRoomService_kdh {
 	
 	// 락커룸 삭제
 	public int deleteRoom(LockerRoomVO vo);
+	
+	// 락커 갯수 관리
+	public void manageRoom(LockerRoomVO vo);
 }

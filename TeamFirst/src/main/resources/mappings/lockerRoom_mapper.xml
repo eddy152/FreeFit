@@ -15,17 +15,21 @@
 		where room_no = #{room_no}
 
 	</select>
-	
-<!-- LOCKER_ROOM 수정 -->
-	<update id="updateRoom" parameterType="LockerRoomVO">
-		update locker_room set lock_width = #{lock_width}, lock_sum = #{lock_sum}
-		where room_no = #{room_no}
-	</update>
-	
+
 <!-- LOCKER_ROOM 삭제 -->
 	<delete id="deleteRoom" parameterType="LockerRoomVO">
 		delete from locker_room
 		where room_no = #{room_no}
 	</delete>
+
+<!-- 해당 LOCKER 갯수 관리 -->
+	<insert id="manageRoom" statementType="CALLABLE" parameterType="LockerRoomVO">
+		{call locker_procedure
+								(
+									#{room_no},
+									#{lock_sum},
+									#{lock_width}
+								)}
+	</insert>
 
 </mapper>
