@@ -12,8 +12,6 @@
 <script>
 $(function() {
 	var part = '가슴';
-	var exeName = '';
-	var sets = 4;
 	//상단 메뉴바 클릭
 	$(".menuLink").on("click", function() {
 						part = $(this)[0].id;
@@ -23,25 +21,13 @@ $(function() {
 	//좌측 메뉴 클릭
 	$(document).on("click", "a[name=exeKinds]", function() {
 		var kinds = $(this)[0].text;
-		console.log(kinds);
-		if(kinds == '전체') {
-			$.ajax({
-				url: 'getSearchExerciseListAll?&exe_part=' + part,  // 서버 url
-				type: 'get',
-				success: function(result) {
-					$("#exe").html(result);
-				}
-			})  // End of ajax
-		}
-		else{
-			$.ajax({
-				url: 'getSearchExerciseList?exe_kinds=' + kinds + '&exe_part=' + part,  // 서버 url
-				type: 'get',
-				success: function(result) {
-					$("#exe").html(result);
-				}
-			})  // End of ajax
-		}
+		$.ajax({
+			url: 'getSearchExerciseList?exe_kinds=' + kinds + '&exe_part=' + part,  // 서버 url
+			type: 'get',
+			success: function(result) {
+				$("#exe").html(result);
+			}
+		})  // End of ajax
 	})  // End of exeKinds
 	
 	$(document).on("click", "button[name=exeName]", function() {
@@ -57,35 +43,20 @@ $(function() {
 				} 
 			}
 			if(findExeName != true) {
-				$("#exeNameTbl").append('<tr><td name="exeNameTd" id=' + $(this)[0].id + '>' + exeName + '</td></tr>');
+				$("#exeNameTbl").append('<tr><td name="exeNameTd">' + exeName + '</td></tr>');
 			}
 		}); // End of exeName
 	
 	// 하단 우측 세트 수
 	$(document).on("click", "td[name=exeNameTd]", function() {
-		console.log($(this)[0].id);
-		exeName = $(this)[0].innerText;
-		$("#exeSet").children().remove();
-		$("#divThird button").remove();
-		$("#divThird p").remove();
-		
-		$("#exeSet").append('<tr><th colspan="2"><input type="text" readonly="readonly" id=' + exeName + ' value=' + exeName + '></th>'
-		+ '<th>횟수</th></tr>'
-		+ '<tr><td name="sets">세트수</td>'
-		+ '<td><input type="number" name=epd_set></td>'
-		+ '<td><input type="number" name=epd_count></td></tr>')
-		
-		$("#exeSet").append('<input type="hidden" name=exe_no value=' + $(this)[0].id + '>');
-		$("#insertExercisePersonalDetail").append('<button type="button" name="setMinus">-</button></p>');
-		$("#insertExercisePersonalDetail").append('<button type="button" name="setDel">삭제하기</button><button type="submit" name="setSub">저장하기</button>');
+		var exeName = $(this)[0].innerText;
+		$("#exeSet").append('<tr><th><input type="text" readonly="readonly" id=' + exeName + ' value=' + exeName + '></th><th>횟수</th></tr>'
+		+ '<tr><td id="1set">1set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="2set">2set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="3set">3set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="4set">4set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
+		+ '<tr><td id="5set">5set</td><td><input type="number" id=' + exeName + 'Count></td></tr>');
 	})// End of set 세트수 tr, form에 보내는 방식 수정 필요
-	
-	//버튼 클릭 이벤트(운동 tr 삭제)
-	$(document).on("click", "button[name=setMinus]", function() {
-		$("#exeSet tr:last").remove();
-		$("#exeSet tr:last").remove();
-		sets--;
-	})
 });
 </script>
 <style type="text/css">
@@ -225,15 +196,9 @@ ul.sub li:hover {
 					</tr>
 				</table>
 			</div>
-			<div id="divThird" style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
-				<form action="insertExercisePersonalDetail" id="insertExercisePersonalDetail">
-					<table border="1" id="exeSet">
-					</table>
-					<input type="text" name="epd_no" value="5">운동 프로그램 번호
-					<input type="text" name="exep_no" value="1">프로그램 번호
-					<input type="text" name="epd_weight" value="50">운동 무게
-					<input type="text" name="user_id" value="lee">유저 아이디
-				</form>
+			<div style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
+				<table border="1" id="exeSet">
+				</table>
 			</div>
 		</div>
 	</div>

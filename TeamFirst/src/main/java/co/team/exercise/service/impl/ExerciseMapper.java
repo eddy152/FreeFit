@@ -13,6 +13,7 @@ import co.team.exercise.service.UserWeightVO;
 
 public interface ExerciseMapper {
 	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo);
+	public List<ExerciseListVO> getSearchExerciseListAll(ExerciseListVO vo);
 	public ExerciseListVO getExerciseListProc(ExerciseListVO vo);
 	public int insertExerciseList(ExerciseListVO vo);
 	public int updateExerciseList(ExerciseListVO vo);

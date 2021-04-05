@@ -34,7 +34,13 @@ public class ExerciseController {
 		model.addAttribute("list", service.getSearchExerciseList(vo));
 		return "exercise/getSearchExerciseList";
 	}
-
+	
+	@GetMapping("/getSearchExerciseListAll")
+	public String getSearchExerciseListAll(ExerciseListVO vo, Model model) {
+		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
+		return "exercise/getSearchExerciseListAll";
+	}
+	
 	// 단건 조회
 	@GetMapping("/getExerciseListProc")
 	public String getExerciseListProc(ExerciseListVO vo, Model model) {

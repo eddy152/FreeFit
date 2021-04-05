@@ -24,6 +24,11 @@ public class ExerciseServiceImpl implements ExerciseService {
 	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo) {
 		return dao.getSearchExerciseList(vo);
 	}
+	
+	@Override
+	public List<ExerciseListVO> getSearchExerciseListAll(ExerciseListVO vo) {
+		return dao.getSearchExerciseListAll(vo);
+	}
 
 	@Override
 	public ExerciseListVO getExerciseListProc(ExerciseListVO vo) {

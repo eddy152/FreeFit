@@ -22,9 +22,9 @@
 		<ul id="navi">
 			<li class="group" style="text-align: center;">
 				<ul class="exercise">
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${listAll}" var="listAll">
 					<li>
-						<button type="button" name="exeName" id="${list.exe_no }">${list.exe_name }</button>
+						<button type="button" name="exeName" id="${listAll.exe_no }">${listAll.exe_name }</button>
 					</li>
 				</c:forEach>
 				</ul>

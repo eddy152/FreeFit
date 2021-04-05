@@ -17,6 +17,16 @@
 		ORDER BY exe_no
 	</select>
 	
+	<select id="getSearchExerciseListAll" resultType="ExerciseListVO" parameterType="ExerciseListVO">
+		SELECT  exe_part, 
+				exe_no,
+				exe_kinds, 
+				exe_name
+		FROM exercise_list
+		WHERE  exe_part = #{exe_part}
+		ORDER BY exe_part
+	</select>
+	
 	<!-- EXERCISE_LIST 기구/맨몸 선택 -->
 	<select id="getExerciseListProc"  resultType="ExerciseListVO" parameterType="ExerciseListVO">
 		SELECT  exe_part, 
