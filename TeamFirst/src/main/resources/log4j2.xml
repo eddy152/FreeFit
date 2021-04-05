@@ -15,7 +15,7 @@
 
 
 	<Loggers>
-<!-- 		<Logger name="java.sql" level="debug" additivity="false">
+ 		<Logger name="java.sql" level="debug" additivity="false">
 			<AppenderRef ref="console_com" />
 		</Logger>
 		<Logger name="jdbc.sqltiming" level="INFO" additivity="false">
@@ -23,11 +23,11 @@
 		</Logger>
 		<Logger name="egovframework" level="INFO" additivity="false">
 			<AppenderRef ref="console_com" />
-		</Logger> -->
+		</Logger> 
 <!-- 		<Logger name="com" level="INFO" additivity="false">
 			<AppenderRef ref="console_com" />
 		</Logger> -->
-<!-- 		<Logger name="co.team" level="debug" additivity="false">
+ 		<Logger name="co.team" level="debug" additivity="false">
 			<AppenderRef ref="console_com" />
 		</Logger>
 		<Logger name="org.springframework" level="debug"
@@ -36,7 +36,7 @@
 		</Logger>
 		<Root level="error">
 			<AppenderRef ref="console_com" />
-		</Root> -->
+		</Root> 
 			<!-- <AppenderRef ref="MyFile" /> -->
 	</Loggers>
 </Configuration>
