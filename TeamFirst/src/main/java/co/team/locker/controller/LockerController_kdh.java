@@ -11,15 +11,24 @@ import co.team.locker.service.LockerVO;
 import co.team.locker.service.impl.LockerMapper_kdh;
 import co.team.lockerRoom.service.LockerRoomVO;
 import co.team.lockerRoom.service.impl.LockerRoomMapper_kdh;
+import co.team.user.service.UserVO;
+import co.team.user.service.impl.UserMapper;
 
 @Controller
 public class LockerController_kdh {
 	@Autowired LockerMapper_kdh service;
-	
+	@Autowired LockerRoomMapper_kdh mapper;
+	@Autowired UserMapper userMapper;
 	// 락커 전체 조회
 	@RequestMapping("/getSearchLocker")
-	public String getSearchLocker(Model model, LockerVO vo) {
+	public String getSearchLocker(Model model, LockerVO vo, LockerRoomVO rvo, UserVO uvo) {
+		if(vo.getGender() == null) {
+			vo.setGender("1");
+		}
 		model.addAttribute("list", service.getSearchLocker(vo));
+		model.addAttribute("room", mapper.getSearchRoom());
+		model.addAttribute("user", userMapper.getSearchUser(uvo));
+		
 		return "homepage/Locker/getSearchLocker";
 	}
 	

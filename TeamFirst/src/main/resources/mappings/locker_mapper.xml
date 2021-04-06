@@ -12,6 +12,7 @@
 		where l.room_no = r.room_no
 		<if test="gender != null">
 		And gender=#{gender}
+		order by each_lock_no
 		</if>
  	</select>
  	
