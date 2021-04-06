@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- users_mapper.xml -->
+<mapper namespace="co.team.security.service.impl.MemberMapper">
+
+<!-- ADMIN select 리스트 -->
+	<select id="getMemberById" resultType="memberVO" parameterType="memberVO">
+		
+select id, password from allid where id =#{id}
+
+	</select>
+	
+	
+
+	
+
+	
+</mapper>
