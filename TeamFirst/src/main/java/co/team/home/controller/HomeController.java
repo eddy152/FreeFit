@@ -36,4 +36,33 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	
+	//타일즈 테스트
+	
+
+	//홈페이지 타일즈
+	@RequestMapping("/tilesTestHomepage") //주소는 그냥 원하는 것 적으면 됨
+	public String tilesTestHomepage() {
+		return "homepage/test/home"; //return 값 "homepage/*/*" 
+	}
+	
+	//프로그램 타일즈
+	@RequestMapping("/tilesTestProgram")
+	public String tilesTestProgram() {
+		return "program/test/home";
+	}
+	
+	//앱 타일즈
+	@RequestMapping("/tilesTestApp")
+	public String tilesTestApp() {
+		return "app/test/home";
+	}
+	
+	//타일즈 적용을 원하지 않는 경우 (팝업 등)
+	@RequestMapping("/tilesNo")
+	public String tilesNo() {
+		return "popup/home"; //popup 폴더에 넣기
+	}
+	
 }

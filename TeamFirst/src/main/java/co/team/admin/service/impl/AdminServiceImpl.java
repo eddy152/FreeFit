@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import co.team.admin.service.AdminService;
 import co.team.admin.service.AdminVO;
 
-@Service
-public class AdminServiceImpl implements AdminService {
-@Autowired AdminMapper dao;
+@Service //service 어노테이션 달기
+public class AdminServiceImpl implements AdminService { //implements 서비스
+@Autowired AdminMapper dao; //mapper autowired
 
 @Override
 public List<AdminVO> getAdmin(AdminVO vo) {

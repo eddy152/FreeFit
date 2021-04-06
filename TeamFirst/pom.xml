@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.team</groupId>
 	<artifactId>spring</artifactId>
@@ -11,11 +11,19 @@
 
 
 	<properties>
+
+		<!-- eclipse에서 웹 어플리케이션 프로젝트 작성시 web.xml파일을 작성하지 않고 java-config로 설정할 경우 
+			아래의 설정이 있어야 합니다. -->
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.3.4</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<org.log4j-version>2.9.0</org.log4j-version>
+		<spring.security.version>5.3.8.RELEASE</spring.security.version>
+
+
 	</properties>
 
 	<repositories>
@@ -29,13 +37,6 @@
 
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.5</version>
-		</dependency>
-
 
 
 		<!-- Apache commons DBCP -->
@@ -54,17 +55,16 @@
 
 
 
-
-
-
-
-
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<!-- gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.8.6</version>
 		</dependency>
+
+
+
+
 
 		<!-- Spring -->
 		<dependency>
@@ -79,22 +79,33 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<!-- spring webmvc에 대한 의존성을 추가한다. spring webmvc에 대한 의존성을 추가하게 되면 spring-web, 
+			spring-core등이 자동으로 의존성이 추가된다. -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+
+
+
+		<!-- 스프링 jdbc와 tomcat jdbc 차이는? : -->
+		<!-- spring- jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
+		<!-- tomcat-jdbc -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jdbc</artifactId>
 			<version>8.5.61</version>
 		</dependency>
+
+
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -141,6 +152,7 @@
 		</dependency>
 
 		<!-- Servlet -->
+		<!-- tomcat에 배포될 경우엔 사용되지 않도록 하기 위해서 scope를 provided로 설정. -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -154,6 +166,8 @@
 			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- jstl은 tomcat이 기본 지원하지 않는다. 그렇기 때문에 tomcat에도 배포가 되야 한다. -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -179,6 +193,16 @@
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>19.3.0.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>simplefan</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>ons</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
@@ -250,6 +274,38 @@
 		</dependency>
 		<!-- tiles -->
 
+
+
+
+
+
+		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<!-- Spring security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+
+
+
+		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	</dependencies>
 	<build>
 		<plugins>
