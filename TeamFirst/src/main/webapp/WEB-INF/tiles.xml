@@ -43,6 +43,10 @@ app/test/home.jsp
 		<put-attribute name="content"
 			value="/WEB-INF/views/homepage/{1}/{2}.jsp" />
 	</definition>
+		<definition name="homepage/*" extends="homepage">
+		<put-attribute name="content"
+			value="/WEB-INF/views/homepage/{1}.jsp" />
+	</definition>
 
 
 <!-- 프로그램 : 헤더 사이드바 컨텐츠 -->
