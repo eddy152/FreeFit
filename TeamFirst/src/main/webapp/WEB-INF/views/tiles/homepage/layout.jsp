@@ -21,29 +21,22 @@
 
 <!-- Bootstrap core CSS -->
 <link href="./resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-
+<link href="./resources/assets/dist/css/pricing.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="pricing.css" rel="stylesheet">
+<!-- <link href="pricing.css" rel="stylesheet"> -->
 </head>
 <body>
-	<div id="container">
-		<div id="header">
+
 			<tiles:insertAttribute name="header" />
-		</div>
 
-		<div id="content">
+	<div class="container">
 			<tiles:insertAttribute name="content" />
-		</div>
-		<div id="footer">
-			<tiles:insertAttribute name="footer" />
-		</div>
-
 	</div>
+
+			<tiles:insertAttribute name="footer" />
+
+
 
 </body>
 </html>
