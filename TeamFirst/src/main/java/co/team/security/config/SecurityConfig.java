@@ -84,26 +84,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinformA", 
-//                				"/members/joinA", "/members/welcome").permitAll()
-//                .antMatchers("/securepage", "/members/**").hasRole("USER")
-//                .anyRequest().authenticated()
-//                .and()
-//                    .formLogin()
-//                    .loginPage("/members/loginform")
-//                    .usernameParameter("userId")
-//                    .passwordParameter("password")
-//                    .loginProcessingUrl("/authenticate")
-//                    .failureForwardUrl("/members/loginerror?login_error=1")
-//                    .defaultSuccessUrl("/",true)
-//                    .permitAll()
-//                .and()
-//                    .logout()
-//                    .logoutUrl("/logout")
-//                    .logoutSuccessUrl("/");
-				.csrf().disable();
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinformA", 
+                				"/members/joinA", "/members/welcome").permitAll()
+                .antMatchers("/securepage", "/members/**").hasRole("USER")
+                .anyRequest().authenticated()
+                .and()
+                    .formLogin()
+                    .loginPage("/members/loginform")
+                    .usernameParameter("userId")
+                    .passwordParameter("password")
+                    .loginProcessingUrl("/authenticate")
+                    .failureForwardUrl("/members/loginerror?login_error=1")
+                    .defaultSuccessUrl("/",true)
+                    .permitAll()
+                .and()
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/");
+//				.csrf().disable();
 	}
 
 //    로그인 폼에 대해 설정하고 있습니다. 로그인 폼은 "/members/loginform"이 경로라는 것을 의미합니다.

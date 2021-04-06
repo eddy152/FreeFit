@@ -11,6 +11,7 @@ select id, password from allid where id =#{id}
 
 	</select>
 	
+	<insert id="addAdminMember"></insert>
 	
 
 	

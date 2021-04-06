@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.team.admin.service.AdminVO;
 import co.team.security.service.MemberRoleVO;
@@ -20,12 +21,14 @@ public class MemberServiceImpl implements MemberService {
 	MemberMapper memberMapper;
 	@Autowired
 	MemberRoleMapper memberRoleMapper;
+
 	@Override
 	public UserEntity getUser(String loginUserId) {
-		System.out.println("★memberserviceimpl loginuserid=" +loginUserId);
+		System.out.println("★memberserviceimpl loginuserid=" + loginUserId);
 		MemberVO member = memberMapper.getMemberById(loginUserId);
-		        return new UserEntity(member.getId(), member.getPassword());
+		return new UserEntity(member.getId(), member.getPassword());
 	}
+
 	@Override
 	public List<UserRoleEntity> getUserRoles(String loginUserId) {
 		List<MemberRoleVO> memberRoles = memberRoleMapper.getRolesById(loginUserId);
@@ -36,14 +39,19 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return list;
 	}
+
 	@Override
+	@Transactional(readOnly = false)
 	public void addAdminMember(AdminVO member, boolean b) {
-		// TODO Auto-generated method stub
-		
+		memberMapper.addOwnerMember(member);
+
+		MemberVO selectedMember = memberMapper.getMemberById(member.getId());
+		String memberId = selectedMember.getId();
+		if (b) {
+			memberRoleMapper.addOwnerRole(memberId);
+		}
+		memberRoleMapper.addUserRole(memberId);
+
 	}
-
-	
-
-
 
 }
