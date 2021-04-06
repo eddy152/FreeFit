@@ -15,6 +15,7 @@ public interface AdminNoticeBoardMapper {
 	public List<AdminNoticeBoardVO> getAdminNoticeBoardList(AdminNoticeBoardVO vo);
 	
 	// 등록
+	
 	public int insertAdminNoticeBoard(AdminNoticeBoardVO vo);
 	
 	// 수정

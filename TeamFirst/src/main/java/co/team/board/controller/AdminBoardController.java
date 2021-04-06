@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,19 +54,19 @@ public class AdminBoardController {
 	}
 	
 	//등록
-	@GetMapping("/insertAdminNoticeBoard")
+	@PostMapping("/insertAdminNoticeBoard")
 	public String insertAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.insertAdminNoticeBoard(vo);
-		return "redirect:/getAdminNoticeBoardlist";
+		return "redirect:/getAdminNoticeBoardlist";	
 	}
 	//수정
-	@GetMapping("updateAdminNoticeBoard")
+	@GetMapping("/updateAdminNoticeBoard")
 	public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.updateAdminNoticeBoard(vo);
 		return "redirect:/getAdminNoticeBoardlist";
 	}	
 	//삭제
-	@GetMapping("deleteAdminNoticeBoard")
+	@GetMapping("/deleteAdminNoticeBoard")
 	public String deleteAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.deleteAdminNoticeBoard(vo);
 		return "redirect:/getAdminNoticeBoardlist";

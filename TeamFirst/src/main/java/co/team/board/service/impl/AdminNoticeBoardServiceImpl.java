@@ -2,6 +2,7 @@ package co.team.board.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 	public int insertAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		return dao.insertAdminNoticeBoard(vo);
 	}
-
+	
 	@Override
 	public int updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		return dao.updateAdminNoticeBoard(vo);

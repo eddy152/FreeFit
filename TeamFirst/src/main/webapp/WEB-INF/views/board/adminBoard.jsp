@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,54 +24,62 @@
 <title>글쓰기</title>
 
 <script>
-$(document).ready(function() {
-	  $('#summernote').summernote({
- 	    	placeholder: 'content',
-	        minHeight: 370,
-	        maxHeight: null,
-	        focus: true, 
-	        lang : 'ko-KR'
-	  });
+	$(document).ready(function() {
+		$('#summernote').summernote({
+			placeholder : 'content',
+			minHeight : 370,
+			maxHeight : null,
+			focus : true,
+			lang : 'ko-KR'
+		});
 	});
-
-<script>
-function goWrite(frm)
-	var title = frm.title.value;
-	var content = frm.content.value;
-	var category = frm.category.value;
-	
-		if (title.trim() == ''){
-			alert("제목을 입력해주세요");
-			return false;
-	}
-		if (content.trim() =='') {
-			alert("내용을 입력해주세요");
-			return false;
-	}
-		if (category.trim() =='' {
-			alert("카테고리를 선택해주세요");
-			return false;
-	} 
-}
 </script>
 </head>
 <body>
-	<h2 style="text-align: center;">공지사항 작성</h2>
+	<h2 style="text-align: center;">글 작성</h2>
 	<br>
 	<br>
 	<br>
 
 	<div style="width: 60%; margin: auto;">
-		<form method="post" action="/adminBoard">
-			<input type="text" name="writer" style="width: 40%;"
-				placeholder="작성자" /><br> <input type="text" name="writer"
+		<form method="post" action="adminBoard">
+			<input type="text" name="writer" style="width: 20%;"
+				placeholder="작성자" /><br> <input type="text" name="title"
 				style="width: 40%;" placeholder="제목" /> <br>
 			<br>
 			<textarea id="summernote" name="content"></textarea>
-			<input id="subBtn" type="button" value="글 작성" style="float: right;"
-				onclick="goWrite(this.form)" />
+			<!-- <input id="subBtn" type="button" value="글 작성" style="float: right;"
+				onclick="goWrite(this.form)" />  -->
+		<input type="button" value="글쓰기" style="float: right;" onclick="location.href='/insertAdminNoticeBoard'">
+		<!-- 목록으로 -->
+      	<div class="pull-left">
+         <a href="/board/getAdminNoticeBoardList" class="btn btn-success">목록으로</a>
+      </div>
 		</form>
+		<script>
+			function goWrite(frm) {
+				var title = frm.title.value;
+				var writer = frm.writer.value;
+				var category = frm.category.value;
+
+				if (title.trim() == '') {
+					alert("제목을 입력해주세요");
+					return false;
+				}
+				if (writer.trim() == '') {
+					alert("작성자를 입력해주세요");
+					return false;
+				}
+				if (content.trim() == '') {
+					alert("카테고리를 선택해주세요");
+					return false;
+				}
+				frm.submit();
+			}
+		</script>
+
 	</div>
 
 </body>
 </html>
+

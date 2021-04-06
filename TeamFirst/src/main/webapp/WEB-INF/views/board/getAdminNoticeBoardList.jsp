@@ -23,10 +23,12 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<button type="button"
-							class="btn btn-outline btn-primary pull-right">
-							<i class="fa fa-edit fa-fw"></i> 공지사항 작성
-						</button>
+						<!--<button type="button"
+							  -class="btn btn-outline btn-primary pull-right">
+							<i class="fa fa-edit fa-fw"></i> 공지사항 작성-->
+							<input type="button" value="작성하기" style="float: right;"
+							   onclick="location.href='adminBoard';">
+						<!--  </button>-->
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -57,8 +59,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<input type="button" value="글 목록" style="float: right;"
-							   onclick="location.href='adminBoard';">
+						
 					</div>
 				</div>
 			</div>
