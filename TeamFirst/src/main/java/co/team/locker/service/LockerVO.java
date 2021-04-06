@@ -10,10 +10,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LockerVO {
-	private String lock_num;
+	private String lock_no;
 	private String mem_reg_id;
 	private String broken_locker;
 	private String first_date;
 	private String final_date;
 	private String user_id;
+	private String room_no;
+	private String gender;
+	private String lock_sum;
+	private String each_lock_no;
+	private String lock_width;
 }

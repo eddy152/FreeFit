@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="co.team.lockerRoom.service.impl.LockerRoomMapper_kdh">
+
+<!-- LOCKER_ROOM 전체 리스트 -->
+	<select id="getSearchRoom" resultType="LockerRoomVO" parameterType="LockerRoomVO">
+		select *from locker_room
+	</select>
+	
+<!-- LOCKER_ROOM 단건 조회 -->
+	<select id="getRoom" resultType="LockerRoomVO" parameterType="LockerRoomVO">
+		select * from locker_room
+		where room_no = #{room_no}
+
+	</select>
+
+<!-- LOCKER_ROOM 삭제 -->
+	<delete id="deleteRoom" parameterType="LockerRoomVO">
+		delete from locker_room
+		where room_no = #{room_no}
+	</delete>
+
+<!-- 해당 LOCKER 갯수 관리 -->
+	<insert id="manageRoom" statementType="CALLABLE" parameterType="LockerRoomVO">
+		{call locker_procedure
+								(
+									#{room_no},
+									#{lock_sum},
+									#{lock_width}
+								)}
+	</insert>
+
+</mapper>
