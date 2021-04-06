@@ -22,12 +22,9 @@ import co.team.security.service.security.CustomUserDetailsService;
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //WebSecurityConfigurerAdapter를 상속받으면, 특정 메소드를 오버라이딩 함으로써 좀 더 손쉽게 설정할 수 있습니다.
-	
-	
-	
-    @Autowired
-    CustomUserDetailsService customUserDetailsService;
-	
+
+	@Autowired
+	CustomUserDetailsService customUserDetailsService;
 
 	// <As-Is>
 	// public void configure(WebSecurity web) 메소드를 오버라이딩 하는 이유는
@@ -53,15 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// protected void configure(HttpSecurity http) 메소드를 오버라이딩 한다는 것은 인증/인가에 대한 설정을
 	// 한다는 의미입니다.
 	// 가장 중요한 메소드라고 말할 수 있습니다.
-	
-	
-	
-	
-	
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService);
-    }
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(customUserDetailsService);
+	}
 //    WebSecurityConfigurerAdapter가 가지고 있는 void configure(AuthenticationManagerBuilder auth)를 오버라이딩 하고 있습니다. 
 //    해당 메소드를 오버라이딩 한 후 UserDetailsService인터페이스를 구현하고 있는 객체를 auth.userDetailsService()메소드의 인자로 전달하고 있습니다.
 //
@@ -74,56 +67,45 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    이렇게 설정된 객체는 아이디/암호를 입력 받아 로그인을 처리하는 AuthenticationFilter에서 사용하게 됩니다.
 //
 //    CustomUserDetailsService는 UserDetailsService를 구현하고 있는 객체여야 합니다.
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
-	
 
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception {
 //		http.csrf().disable().authorizeRequests().antMatchers("/", "/main").permitAll().anyRequest().authenticated();
 
-		// http.csrf().disable()는 csrf()라는 기능을 끄라는 설정입니다.
-		// csrf는 보안 설정 중 post방식으로 값을 전송할 때 token을 사용해야하는 보안 설정입니다.
-		// csrf은 기본으로 설정되어 있는데요. csrf를 사용하게 되면 보안성은 높아지지만 개발초기에는 불편함이 있다는 단점이 있습니다.
-		// 그래서 csrf 기능을 끄도록 한 것입니다. disable()메소드는 http(여기에선 HttpSecurity)를 리턴합니다.
-		// 이말은 disable().authorizeRequests()는 http.authoriazeRequests()와 같은 의미를 가집니다.
-		// /, /main에 대한 요청은 누구나 할 수 있지만,
-		// 그 외의 요청은 모두 인증 후 접근 가능합니다.
+	// http.csrf().disable()는 csrf()라는 기능을 끄라는 설정입니다.
+	// csrf는 보안 설정 중 post방식으로 값을 전송할 때 token을 사용해야하는 보안 설정입니다.
+	// csrf은 기본으로 설정되어 있는데요. csrf를 사용하게 되면 보안성은 높아지지만 개발초기에는 불편함이 있다는 단점이 있습니다.
+	// 그래서 csrf 기능을 끄도록 한 것입니다. disable()메소드는 http(여기에선 HttpSecurity)를 리턴합니다.
+	// 이말은 disable().authorizeRequests()는 http.authoriazeRequests()와 같은 의미를 가집니다.
+	// /, /main에 대한 요청은 누구나 할 수 있지만,
+	// 그 외의 요청은 모두 인증 후 접근 가능합니다.
 //	}
-	
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinformA", 
-                				"/members/joinA", "/members/welcome").permitAll()
-                .antMatchers("/securepage", "/members/**").hasRole("USER")
-                .anyRequest().authenticated()
-                .and()
-                    .formLogin()
-                    .loginPage("/members/loginform")
-                    .usernameParameter("userId")
-                    .passwordParameter("password")
-                    .loginProcessingUrl("/authenticate")
-                    .failureForwardUrl("/members/loginerror?login_error=1")
-                    .defaultSuccessUrl("/",true)
-                    .permitAll()
-                .and()
-                    .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/");
-    }
-	
-	
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinformA", 
+//                				"/members/joinA", "/members/welcome").permitAll()
+//                .antMatchers("/securepage", "/members/**").hasRole("USER")
+//                .anyRequest().authenticated()
+//                .and()
+//                    .formLogin()
+//                    .loginPage("/members/loginform")
+//                    .usernameParameter("userId")
+//                    .passwordParameter("password")
+//                    .loginProcessingUrl("/authenticate")
+//                    .failureForwardUrl("/members/loginerror?login_error=1")
+//                    .defaultSuccessUrl("/",true)
+//                    .permitAll()
+//                .and()
+//                    .logout()
+//                    .logoutUrl("/logout")
+//                    .logoutSuccessUrl("/");
+				.csrf().disable();
+	}
+
 //    로그인 폼에 대해 설정하고 있습니다. 로그인 폼은 "/members/loginform"이 경로라는 것을 의미합니다.
 //    해당 경로가 요청 왔을 때 로그인 폼을 보여주는 컨트롤러 메소드를 작성해 줘야 합니다.
 //    로그인 폼에서 input태그의 이름은 "userId", "password"이어야 한다는 설정을 하고 있습니다.
@@ -141,13 +123,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    해당 경로를 처리하는 컨트롤러 메소드는 개발자가 작성해줘야 합니다.
 //    로그인을 성공하게 되면 "/"로 리다이렉트 하게 됩니다.
 //    설정에 permitAll()이 붙어 있다는 것은 해당 로그인 폼이 아무나 접근 가능하다는 것
-	
-	
-	
-	
-	
 
-	
 	// 패스워드 인코더를 빈으로 등록합니다. 암호를 인코딩하거나,
 	// 인코딩된 암호와 사용자가 입력한 암호가 같은 지 확인할 때 사용합니다.
 	@Bean
