@@ -5,7 +5,7 @@
 			<PatternLayout pattern="%d %5p %m%n" />
 		</Console>
 		<Console name="console_com" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{dd HH:mm} %8p %l %m%n" />
+			<PatternLayout pattern="{%d{dd HH:mm} %5p %l %m%n" />
 		</Console>
 
 		<File name="MyFile" fileName="D:/logs/app.html">
@@ -15,19 +15,26 @@
 
 
 	<Loggers>
-		<Logger name="java.sql" level="debug" additivity="false">
+ 		<Logger name="java.sql" level="debug" additivity="false">
 			<AppenderRef ref="console_com" />
 		</Logger>
 		<Logger name="jdbc.sqltiming" level="INFO" additivity="false">
 			<AppenderRef ref="console_com" />
 		</Logger>
-		<Logger name="co.team" level="debug" additivity="false">
+		<Logger name="egovframework" level="INFO" additivity="false">
+			<AppenderRef ref="console_com" />
+		</Logger> 
+<!-- 		<Logger name="com" level="INFO" additivity="false">
+			<AppenderRef ref="console_com" />
+		</Logger> -->
+ 		<Logger name="co.team" level="debug" additivity="false">
 			<AppenderRef ref="console_com" />
 		</Logger>
-		<Logger name="org.springframework" level="info" additivity="false">
+		<Logger name="org.springframework" level="debug"
+			additivity="false">
 			<AppenderRef ref="console_com" />
 		</Logger>
-		<Root level="debug">
+		<Root level="error">
 			<AppenderRef ref="console_com" />
 		</Root> 
 			<!-- <AppenderRef ref="MyFile" /> -->
