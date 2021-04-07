@@ -6,14 +6,28 @@
  
  <!-- Food 전체 리스트 -->
  	<select id="getSearchFood" resultType="FoodVO" parameterType="FoodVO">
- 		select id, name, age, gender, phone_number
+ 		select *
 		from ff_user
  	</select>
  
-  <!-- Food 단건 조회 -->
+  <!-- 회원 단건 조회 -->
  	<select id="getFood" resultType="FoodVO" parameterType="FoodVO">
- 		select id, name, age, gender, phone_number
-		from ff_user
-		where id=#{id}
+ 		select u.*, w.*
+		from ff_user u, user_weight w
+		where u.id = w.user_id
+		and u.id = #{id}
  	</select>
+ 	
+ 	<!-- Food 식단 권장량 -->
+ 	<select id="getRecommendFood" resultType="FoodVO" parameterType="FoodVO">
+ 		select * from recommended_diet
+		where id = #{id}
+ 	</select>
+ 	
+ 	<!-- Food 식단 실제 섭취량 -->
+ 	<select id="getRealFood" resultType="FoodVO" parameterType="FoodVO">
+ 		select * from real_diet
+ 		where id = #{id}
+ 	</select>
+ 	
  </mapper>

@@ -6,25 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Locker/getSearchLocker.jsp</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
-	integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
-	integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
-	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 
 <script type="text/javascript">
@@ -35,13 +21,11 @@
 			$.ajax({
 				url : "getLocker",
 				type : "get",
-				data : {
-					lock_no : $(this).val()
-				},
+				data : { lock_no : $(this).val() },
 				dataType : 'json',
 				success : userSelect, // 회원 조회
-				error : function(xhr, status, msg) {
-					alert("상태값 :" + status + " Http에러메시지 :" + msg);
+				error : function(){
+					alert("실패!");
 				}
 			}) //ajax
 		}); // click
@@ -49,12 +33,14 @@
 
 	// 회원 상세보기 응답
 	function userSelect(user) {
+		console.log(user.name + ", " + user.user_id);
 		$('input:text[name="lock_no"]').val(user.lock_no);
 		$('input:text[name="broken_locker"]').val(user.broken_locker);
 		$('input[name="first_date"]').val(user.first_date);
 		$('input[name="final_date"]').val(user.final_date);
 		$('input:text[name="user_id"]').val(user.user_id);
 		$('input:text[name="room_no"]').val(user.room_no);
+		$('input:text[name="user_name"]').val(user.name);
 	}
 
 	// 락커 등록
@@ -87,6 +73,7 @@
 				data : $('#form1').serialize(),
 				dataType : 'json',
 				success : function(response) {
+					console.log(response.user_id);
 					alert('수정완료');
 					location.reload();
 
@@ -137,7 +124,7 @@
 	
 	// Modal - user
 	$(document).ready(function() {
-		$('.user_id').click(function(e) {
+		$('.user_name').click(function(e) {
 			e.preventDefault();
 			$('#userModal').modal("show");
 		});
@@ -218,6 +205,27 @@
 		})
 	})
 	
+	
+	$(document).ready(function() {
+		$('.userTr').click(function() {
+			console.log($('.id').eq($(".userTr").index(this)).val());
+			$.ajax({
+				url : 'getUser',
+				type: 'get',
+				data : { id: $('.id').eq($(".userTr").index(this)).val()},
+				dataType : 'json',
+				success : function(user) {
+					$('input:text[name="user_id"]').val(user.id);
+					$('.user_name').val(user.name);
+					$('#userModal').modal('hide');
+				},
+				error: function() {
+					alert('실패!');
+				}
+			})
+		});
+	});
+	
  	function inDate() {
 
 		function dataToMd(date) {
@@ -235,24 +243,51 @@
 		final_date.value = dataToMd(new Date(indate.setMonth(indate.getMonth() + 1)));
 	}
 	
+	// 종료일 추가 (+)
 	$(document).ready(function() {
-		$('.userTr').click(function() {
-			console.log($('.id').eq($(".userTr").index(this)).val());
-			$.ajax({
-				url : 'getUser',
-				type: 'get',
-				data : { id: $('.id').eq($(".userTr").index(this)).val()},
-				dataType : 'json',
-				success : function(user) {
-					$('input:text[name="user_id"]').val(user.id);
-					$('#userModal').modal('hide');
-				},
-				error: function() {
-					alert('실패!');
-				}
-			})
-		});
-	});
+		$('#addDate').click(function() {
+			
+			function dataToMd(date) {
+				function pad(num) {
+					num = num + '';
+					return num.length < 2 ? '0' + num : num;
+				} // pad
+				return date.getFullYear() + '-' + pad(date.getMonth() + 1)
+					   + '-' + pad(date.getDate());
+			} // dateToMd
+			
+			var addDate = new Date(final_date.value);
+			console.log(addDate);
+			
+			final_date.value = dataToMd(new Date(addDate.setMonth(addDate.getMonth() + 1 )));
+			
+		})
+	})
+	
+	// 종료일 감소 (-)
+	$(document).ready(function() {
+		$('#delDate').click(function() {
+			
+			function dataToMd(date) {
+				function pad(num) {
+					num = num + '';
+					return num.length < 2 ? '0' + num : num;
+				} // pad
+				return date.getFullYear() + '-' + pad(date.getMonth() + 1)
+					   + '-' + pad(date.getDate());
+			} // dateToMd
+			
+			var delDate = new Date(final_date.value);
+			console.log(delDate);
+			
+			if(first_date.value < final_date.value) {				
+				final_date.value = dataToMd(new Date(delDate.setMonth(delDate.getMonth() - 1 )));
+			} else {
+				alert("종료일은 첫 사용일자 보다 커야합니다.");
+			}			
+		})
+	})
+	
 	
 </script>
 </head>
@@ -266,15 +301,16 @@
 
 	<hr>
 	<!-- start 락카버튼 -->
+	<form id="form2">
 	<table>
 		<tr>
 			<c:set var="j" value="${list[0].lock_width}" />
 			<c:forEach var="locker" items="${list }">
 				<c:if test='${locker.user_id ne null}'>
-					<td style="background-color: gray;"><button class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td style="background-color: gray;"><button type="button" class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.user_id eq null}">
-					<td><button class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button class="btn"  type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.each_lock_no % j == 0}">			
 					</tr>
@@ -282,6 +318,7 @@
 				</c:if>
 			</c:forEach>
 	</table>
+	</form>
 	<!-- end 락카버튼 -->
 
 	<h3>락커 상세보기</h3>
@@ -304,11 +341,17 @@
 				</tr>
 				<tr>
 					<td>종료일</td>
-					<td><input type="date" name="final_date" id="final_date"></td>
+					<td><input type="date" name="final_date" id="final_date">
+						<button type="button" id="addDate" onclick="">+</button>
+						<button type="button" id="delDate" onclick="">-</button>
+					</td>
 				</tr>
 				<tr>
-					<td>유저아이디</td>
-					<td><input type="text" name="user_id" class="user_id"></td>
+					<td>회원이름</td>
+					<td>
+						<input type="text" name="user_name" class="user_name">
+						<input type="text" name="user_id" class="user_id" hidden="hidden">
+					</td>
 				</tr>
 				<tr>
 					<td>락커룸 번호</td>

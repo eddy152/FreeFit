@@ -37,6 +37,7 @@ public class LockerController_kdh {
 	@RequestMapping("/getLocker")
 	@ResponseBody
 	public LockerVO getLocker(LockerVO vo) {
+		System.out.println(vo.getLock_no());
 		return service.getLocker(vo);
 	}
 	

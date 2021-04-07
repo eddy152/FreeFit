@@ -19,10 +19,22 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 		return dao.getSearchFood(vo);
 	}
 
-	// 식단 단건 조회
+	// 회원 단건 조회
 	@Override
 	public FoodVO getFood(FoodVO vo) {
 		return dao.getFood(vo);
+	}
+
+	// 식단 단건 조회(권장량) 
+	@Override
+	public FoodVO getRecommendFood(FoodVO vo) {
+		return dao.getRecommendFood(vo);
+	}
+
+	@Override
+	// 식단 단건 조회(실제섭취량)
+	public FoodVO getRealFood(FoodVO vo) {
+		return dao.getRealFood(vo);
 	}
 	
 }

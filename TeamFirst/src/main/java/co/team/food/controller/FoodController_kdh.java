@@ -21,9 +21,9 @@ public class FoodController_kdh {
 	}
 	// 식단 단건 조회
 	@RequestMapping("/getFood")
-	@ResponseBody
-	public String getFood(FoodVO vo) {
-		service.getFood(vo);
+	//@ResponseBody
+	public String getFood(FoodVO vo, Model model) {
+		model.addAttribute("food", service.getFood(vo));
 		return "homepage/Food/getFood";
 	}
 }
