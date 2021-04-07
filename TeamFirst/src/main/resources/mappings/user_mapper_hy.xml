@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="co.team.user.service.impl.UserMapper_hy">
+ 	
+
+
+	<insert id="addUserMember" parameterType="UserVO">
+		insert into ff_user(
+		id, mem_reg_id, password, phone_number, name, gender ) values
+		(
+		#{id},
+		#{mem_reg_id},
+		#{password},
+		#{phone_number},
+		#{name},
+		#{gender}
+		)
+
+	</insert>
+
+	<select id="getUserId" resultType="string"
+		parameterType="UserVO">
+		select id from ff_user where id=#{id}
+	</select>
+ </mapper>

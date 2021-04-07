@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- users_mapper.xml -->
+<mapper namespace="co.team.trainer.service.impl.TrainerMapper">
+
+
+
+	<insert id="addTrainerMember" parameterType="TrainerVO">
+		insert into trainer(
+		id, mem_reg_id, password, phone_number, name, gender ) values
+		(
+		#{id},
+		#{mem_reg_id},
+		#{password},
+		#{phone_number},
+		#{name},
+		#{gender}
+		)
+
+	</insert>
+
+	<select id="getTrainerId" resultType="string"
+		parameterType="TrainerVO">
+		select id from trainer where id=#{id}
+	</select>
+
+</mapper>
