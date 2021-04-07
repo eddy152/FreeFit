@@ -21,7 +21,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <!-- include summernote-ko-KR -->
 <script src="/resources/js/summernote-ko-KR.js"></script>
-<title>글쓰기</title>
+<title>공지사항/이벤트 작성</title>
 
 <script>
 	$(document).ready(function() {
@@ -43,37 +43,42 @@
 
 	<div style="width: 60%; margin: auto;">
 		<form method="post" action="adminBoard">
-			<input type="text" name="writer" style="width: 20%;"
-				placeholder="작성자" /><br> <input type="text" name="title"
-				style="width: 40%;" placeholder="제목" /> <br>
+			<!--  작성자 : <input type="text" name="writer" style="width: 10%;" value="운영자" readonly="readonly"/><br>--> 
+		 	 제목 :  <input type="text" name="title" style="width: 40%;" placeholder="제목" /><br>
+			<label for="category">카테고리 : </label>
+			<select id="category" name="category">
+				<option value="notice">공지사항</option>
+				<option value="event">이벤트</option>
+			</select>
 			<br>
 			<textarea id="summernote" name="content"></textarea>
 			<!-- <input id="subBtn" type="button" value="글 작성" style="float: right;"
 				onclick="goWrite(this.form)" />  -->
-		<input type="button" value="글쓰기" style="float: right;" onclick="">
-		
+		<input type="button" value="글쓰기" style="float: right;" 
+			   onclick="location.href='insertAdminNoticeBoard';">
+			
 		<!-- 목록으로 -->
       	<input type="button" value="목록으로" style="float: right;"
-							   onclick="location.href='getAdminNoticeBoardList';">
+			   onclick="location.href='getAdminNoticeBoardList';">
 		</form>
 		<script>
 			function goWrite(frm) {
 				var title = frm.title.value;
-				var writer = frm.writer.value;
-				var category = frm.category.value;
-
+				var content = frm.content.value;
+				//var category = frm.category.value;
+				
 				if (title.trim() == '') {
 					alert("제목을 입력해주세요");
 					return false;
 				}
-				if (writer.trim() == '') {
-					alert("작성자를 입력해주세요");
-					return false;
-				}
 				if (content.trim() == '') {
-					alert("카테고리를 선택해주세요");
+					alert("내용을 입력해주세요");
 					return false;
 				}
+				//if (category.trim() == '') {
+				//	alert("카테고리를 선택해주세요");
+				//	return false;
+				//}
 				frm.submit();
 			}
 		</script>

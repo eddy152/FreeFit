@@ -23,7 +23,11 @@ public interface AdminNoticeBoardMapper {
 	// 삭제
 	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo);
 	
-//	//페이징 
+	//조회수증가
+	public boolean adminNoticeBoardHit(int board_no);
+
+	
+	//	//페이징 
 //	public static int boardCount() {
 //		return 0;
 //	}

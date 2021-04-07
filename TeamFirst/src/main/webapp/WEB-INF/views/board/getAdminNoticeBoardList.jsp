@@ -13,12 +13,11 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>boardList</title>
-<script type="text/javascript">
+  <script type="text/javascript">
 	$(function() {
 		$(".dataRow").click(function() {
-			var no = $(this).find(".no").text();
-			lacation = "getAdiminNoticeBoard?no=" + no;
-
+			var no = $(this).find(".board_no").text();
+			location = "getAdminNoticeBoard?board_no=1&no=" + no;
 		})
 	});
 </script>
@@ -58,9 +57,9 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${list}" var="list">
-									<tr>
+									<tr class="dataRow" >
+										<a href="getAdminNoticeBoard?board_no=${list.board_no}"></a>
 										<td>${list.board_no}</td>
-										<a href='detail?board_no=${list.board_no}'><td>${list.title }</td></a>
 										<td>${list.category}</td>
 										<td>${list.title}</td>
 										<td>${list.hit}</td>

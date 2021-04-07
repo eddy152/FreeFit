@@ -22,7 +22,6 @@
 		,#{content}
 		,#{reg_date}
 		,#{hit}
-
 		)
 	</insert>
 
@@ -46,7 +45,7 @@
 	<select id="getAdminNoticeBoard" resultType="AdminNoticeBoardVO"
 		parameterType="int">
 		
-		SELECT * FROM BOARD WHERE BOARD_NO = #{board_no}
+		SELECT * FROM ADMIN_NOTICE_BOARD WHERE BOARD_NO = #{board_no}
 	
 	<!--SELECT BOARD_NO
 		,CATEGORY
@@ -71,8 +70,15 @@
 		,HIT
 		FROM ADMIN_NOTICE_BOARD
 	</select>
-</mapper>	
 	
+	
+	<!-- 조회수 +1 -->
+		<update id="adminNoticeBoardHit" parameterType="int">
+ 		 UPDATE ADMIN_NOTICE_BOARD SET HIT = HIT + 1 WHERE BOARD_NO = #{board_no}
+		 
+		</update>
+	
+</mapper>	
 	<!--  카운트 쿼리 
 	<select id="boardCount"
 		parameterType="co.team.board.service.BoardSearchVO" resultType="int">

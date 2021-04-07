@@ -46,17 +46,28 @@ public class AdminBoardController {
 //		return service.getAdminNoticeBoard(vo);
 //	}
 	
+	//@RequestParam("board_no")int board_no
+	//단건조회
+//	@GetMapping("/getAdminNoticeBoard")
+//	public String getAdminNoticeBoard(Model model, AdminNoticeBoardVO vo) {
+//	  model.addAttribute("board", service.getAdminNoticeBoard(vo.getBoard_no()));
+//	  
+//	  return "board/getAdminNoticeBoard";
+//	}
+	//단건+조회수증가
 	@GetMapping("/getAdminNoticeBoard")
 	public String getAdminNoticeBoard(Model model, @RequestParam("board_no")int board_no) {
-	  model.addAttribute("board", service.getAdminNoticeBoard(board_no));
-	  return "board/getAdminNoticeBoard";
+		model.addAttribute("board", service.getAdminNoticeBoard(board_no));
+		service.adminNoticeBoardHit(board_no);
+		return "board/getAdminNoticeBoard";
 	}
-	
 	//등록
-	@PostMapping("/insertAdminNoticeBoard")
+	@RequestMapping("/insertAdminNoticeBoard")
 	public String insertAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.insertAdminNoticeBoard(vo);
-		return "redirect:/getAdminNoticeBoardlist";	
+		//return "redirect:/getAdminNoticeBoardlist";	
+		return "redirect:/getaAdminNoticeBoard?board_no="+ vo.getBoard_no();
+		//
 	}
 	//수정
 	@GetMapping("/updateAdminNoticeBoard")

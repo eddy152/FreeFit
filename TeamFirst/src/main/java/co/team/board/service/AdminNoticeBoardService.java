@@ -21,6 +21,8 @@ public interface AdminNoticeBoardService {
 	//삭제
 	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo);
 
+	//조회수 증가
+	public boolean adminNoticeBoardHit(int board_no);
 //	
 //	//페이징 
 //	public static int boardCount() {

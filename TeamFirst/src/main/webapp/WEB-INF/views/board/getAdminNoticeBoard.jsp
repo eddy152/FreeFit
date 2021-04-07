@@ -17,17 +17,17 @@ textarea {width: 100%;}
 		 margin: auto; }
 </style>
 	<body>
-	<h2>게시판</h2>
+	<h2>상세보기 페이지</h2>
 	<br>
 	<div id="outter">
 		<table border="1">
 			<tr>
-				<td>제목: ${board.title }</td>
+				<td>작성자: 총관리자</td>
 			</tr>
 			<tr>
-				<td>카테고리: ${board.category } 
+				<td>제목: ${board.title} 
 				<span 			style="float: right;">
-				<fmt:formatDate value="${board.regdate }" 
+				<fmt:formatDate value="${board.reg_date }" 
 					  			pattern="yyyy.MM.dd" />
 			    </span>
 				</td>
@@ -35,9 +35,9 @@ textarea {width: 100%;}
 			<tr>
 				<td><div style="height: 300px; margin: 10px; display: inline-block">${board.content }</div></td>
 			</tr>
-		</table>
+			</table>
 		<input type="button" value="글 목록" style="float: right;"
-			   onclick="location.href='getAdminBoardList';">
+			   onclick="location.href='getAdminNoticeBoardList';">
 	</div>
 </body>
 </html>

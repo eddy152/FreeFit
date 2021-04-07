@@ -37,6 +37,5 @@ public class UserNoticeBoardServiceImpl implements UserNoticeBoardService {
 	public int deleteUserNoticeBoard(UserNoticeBoardVO vo) {
 		return dao.deleteUserNoticeBoard(vo);
 	}
-	
-	
+
 }

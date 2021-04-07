@@ -16,7 +16,9 @@ public interface UserNoticeBoardService {
 	
 	//수정
 	public int updateUserNoticeBoard(UserNoticeBoardVO vo);
-	
+
 	//삭제
 	public int deleteUserNoticeBoard(UserNoticeBoardVO vo);
+
+	
 }
