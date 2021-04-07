@@ -105,21 +105,6 @@
 </script>
 
 
-<style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-</style>
 </head>
 
 
