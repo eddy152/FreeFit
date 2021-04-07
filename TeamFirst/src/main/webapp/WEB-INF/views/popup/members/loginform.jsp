@@ -10,7 +10,7 @@
   <body>
     <div>
       <div>
-        <form method="post" action="/authenticate">
+        <form method="post" action="/spring/authenticate">
           <div>
             <label>ID</label>
             <input type="text" name="userId">

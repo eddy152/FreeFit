@@ -49,6 +49,11 @@ public class MemberController {
 		return "home";
 	}
 	
+	@GetMapping("/denied")
+	public String denied() {
+		return "popup/members/denied";
+	}
+	
 	
 	
 	

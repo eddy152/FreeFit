@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// /webjars/** 경로에 대한 요청은 인증/인가 처리하지 않도록 무시합니다.
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/webjars/**");
+		web.ignoring().antMatchers("/webjars/**", "/resources/**", "/images/**");
 	}
 
 
@@ -99,11 +99,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinO","/members/joinT","/members/joinU", 
-                				 "/members/welcome").permitAll() //누구나 접근가능한 경로
-                .antMatchers("/securepage", "/members/**").hasRole("USER") //로그인함 + 유저 롤만 접근가능
-                .anyRequest().authenticated() // 그 외에는 인증해야만 접근 가능
+                .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinO","/members/joinT","/members/joinU"
+                	,"/**"	).permitAll() //누구나 접근가능한 경로 ("/**" 로 전부 접근가능한 상태 )
+                //.antMatchers("/securepage").hasRole("USER") //로그인함 + 유저 롤만 접근가능
+                //.anyRequest().authenticated() // 그 외에는 인증해야만 접근 가능
                 
+  
                 .and() //loginform 설정
                     .formLogin()
                     .loginPage("/members/loginform")
@@ -117,7 +118,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout()
                     .logoutUrl("/logout") //"/logout"요청이 오면 세션에서 로그인 정보를 삭제한 후 "/"로 리다이렉트
-                    .logoutSuccessUrl("/");
+                    .logoutSuccessUrl("/")
+                    
+                    .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/members/denied");
 
 	}
 

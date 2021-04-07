@@ -54,6 +54,7 @@ public class MemberServiceImpl implements MemberService {
 
 		for (MemberRoleVO memberRole : memberRoles) {
 			list.add(new UserRoleEntity(loginUserId, memberRole.getRole_name()));
+
 		}
 		return list;
 	}
