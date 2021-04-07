@@ -1,4 +1,4 @@
-package co.team.user.service;
+package co.team.food.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVO {
+public class FoodVO {
+	private String real_diet_no;
+	private String take_date;
+	private String diet_content;
+	private String calorie;
 	
 	private String id;
 	private String password;

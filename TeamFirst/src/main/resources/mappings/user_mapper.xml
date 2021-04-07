@@ -10,8 +10,8 @@
  	</select>
  	
  	<!-- user 단건 조회 -->
- 	<select id="getUser" parameterType="UserVO">
+ 	<select id="getUser" parameterType="UserVO" resultType="UserVO">
  		select * from ff_user
- 		where user_id=#{user_id}
+ 		where id=#{id}
  	</select>
  </mapper>

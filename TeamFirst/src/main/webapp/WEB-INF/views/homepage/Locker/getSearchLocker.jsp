@@ -6,18 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Locker/getSearchLocker.jsp</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+	integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+	integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 
 
 <script type="text/javascript">
-	// 락커 관리 팝업창
-	function updateLocker() {
-		var url = 'http://localhost/spring/getSearchRoom';
-		window.open(url, "lockerRoom",
-				"width=400, height=300, left=100, top=50");
-	}
 
 	// 해당 락커의 회원 상세조회
 	$(document).ready(function() {
@@ -57,7 +67,7 @@
 				dataType : 'json',
 				success : function() {
 					alert('등록 성공!!');
-					$('#form1').reset();
+					location.reload();
 				},
 				error : function() {
 					alert('등록 실패!!');
@@ -69,6 +79,8 @@
 	// 락커 수정
 	$(document).ready(function() {
 		$('#btnUpdate').click(function() { // 다중 값을 넘길 때는 class를 사용한다. 단건이면 id 속성 사용
+			if(window.confirm('정말 수정하시겠습니까?')){
+				
 			$.ajax({
 				url : "updateLocker",
 				method : "Post",
@@ -76,18 +88,24 @@
 				dataType : 'json',
 				success : function(response) {
 					alert('수정완료');
+					location.reload();
 
 				},
 				error : function(xhr, status, msg) {
 					alert("상태값 :" + status + " Http에러메시지 :" + msg);
 				}
 			}) //ajax
+			} else {
+				window.alert('취소');
+			}
 		}); // click
 	});// ready
 
 	// 락커 삭제
 	$(document).ready(function() {
 		$('#btnDelete').click(function() {
+			if(window.confirm('정말 삭제하시겠습니까?')){
+				
 			$.ajax({
 				url : 'deleteLocker',
 				method : 'post',
@@ -97,49 +115,151 @@
 				dataType : 'json',
 				success : function(response) {
 					alert('삭제완료');
+					location.reload();
 				},
 				error : function(response) {
 					alert('ERROR');
+					}
+				})
+			} else {
+				window.alert('취소');
+			}
+		})
+	})
+
+	// Modal - 관리팝업창
+	$(document).ready(function() {
+		$('.btn-primary').click(function(e) {
+			e.preventDefault();
+			$('#staticBackdrop').modal("show");
+		});
+	});
+	
+	// Modal - user
+	$(document).ready(function() {
+		$('.user_id').click(function(e) {
+			e.preventDefault();
+			$('#userModal').modal("show");
+		});
+	});
+	
+	$(document).ready(function() {
+		$('.roomTr').click(function() {
+		 $.ajax({
+				url: 'getRoom',
+				type: 'get',
+				data: { room_no : $('.roomNO').eq($(".roomTr").index(this)).val() },
+				dataType: 'json',
+				success: roomSelect, // 락커룸 조회
+				error: function() {
+					alert('조회 실패!!');
+				} // error
+			});// ajax
+		}); // click
+	}); //ready
+	
+	// 락커룸 상세보기 응답
+	function roomSelect(room) {
+		$('input:text[name="room_no"]').val(room.room_no);
+		$('input:text[name="gender"]').val(room.gender);
+		$('input:text[name="lock_width"]').val(room.lock_width);
+		$('input:text[name="lock_sum"]').val(room.lock_sum);
+	}
+	
+	// 락커룸 삭제하기
+	$(document).ready(function() {
+		$('.deleteBtn').click(function() {
+		if(windwo.confirm('정말 삭제하시겠습니까?')) {	
+		$.ajax({
+			url: 'deleteRoom',
+			type: 'post',
+			data: { room_no : $('input:text[name="room_no"]').val() },
+			dataType: 'json',
+			success: function(data) {
+				if(data == 1) {
+				alert('삭제 성공!!');
+				location.reload();
+			}
+				else {
+					alert('삭제 실패!!');					
+					}
+			},
+			error: function() {
+				alert('에러!!');
+			}
+		});
+		} else {
+			alert('취소');
+		}
+	});
+});
+	
+	// 락커갯수 관리하기
+	$(document).ready(function() {
+		$('.manageBtn').click(function() {
+			confirm('정말 수정하시겠습니까?');
+			$.ajax({
+				url: 'manageRoom',
+				type: 'post',
+				data: { room_no : $('input:text[name="room_no"]').val(),
+						lock_sum : $('input:text[name="lock_sum"]').val(),
+						lock_width : $('input:text[name="lock_width"]').val()
+				},
+				dataType: 'json',
+				success: function(data) {
+					alert('성공!!');
+					window.location.reload();
+					
+				},
+				error: function() {
+					alert('에러!!');
 				}
 			})
 		})
 	})
+	
+ 	function inDate() {
 
-	//락커 로우 정렬
-	function row() {
-		var table = document.getElementById('tbl');
-
+		function dataToMd(date) {
+			function pad(num) {
+				num = num + '';
+				return num.length < 2 ? '0' + num : num;
+			} // pad
+			return date.getFullYear() + '-' + pad(date.getMonth() + 1)
+				   + '-' + pad(date.getDate());
+		} // dateToMd
+	
+		var indate = new Date(first_date.value);
+		console.log(indate);
+		
+		final_date.value = dataToMd(new Date(indate.setMonth(indate.getMonth() + 1)));
 	}
+	
+	$(document).ready(function() {
+		$('.userTr').click(function() {
+			console.log($('.id').eq($(".userTr").index(this)).val());
+			$.ajax({
+				url : 'getUser',
+				type: 'get',
+				data : { id: $('.id').eq($(".userTr").index(this)).val()},
+				dataType : 'json',
+				success : function(user) {
+					$('input:text[name="user_id"]').val(user.id);
+					$('#userModal').modal('hide');
+				},
+				error: function() {
+					alert('실패!');
+				}
+			})
+		});
+	});
+	
 </script>
-
-<style type="text/css">
-
- .btn {
-  background-color: white;
-  color: black;
-  border: 2px solid #555555;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #555555;
-  color: white;
-}
-
-</style>
-
 </head>
 <body>
 	<div>
 		<h3>락커관리</h3>
-		<input type="button" onclick="updateLocker()" value="관리">
+		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
 		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
 		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=2'">여자</button>
 	</div>
@@ -147,14 +267,20 @@
 	<hr>
 	<!-- start 락카버튼 -->
 	<table>
-	<tr>
-	<c:set var="j" value="${list[0].lock_width}"/>
-	<c:forEach var="locker" items="${list }">
-			<td><button class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>			
-		<c:if test="${locker.each_lock_no % j == 0}">
-			</tr><tr>
-		</c:if>
-	</c:forEach>
+		<tr>
+			<c:set var="j" value="${list[0].lock_width}" />
+			<c:forEach var="locker" items="${list }">
+				<c:if test='${locker.user_id ne null}'>
+					<td style="background-color: gray;"><button class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+				</c:if>
+				<c:if test="${locker.user_id eq null}">
+					<td><button class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+				</c:if>
+				<c:if test="${locker.each_lock_no % j == 0}">			
+					</tr>
+					<tr>
+				</c:if>
+			</c:forEach>
 	</table>
 	<!-- end 락카버튼 -->
 
@@ -174,15 +300,15 @@
 				</tr>
 				<tr>
 					<td>첫사용일자</td>
-					<td><input type="date" name="first_date"></td>
+					<td><input type="date" name="first_date" id="first_date" oninput="inDate()"></td>
 				</tr>
 				<tr>
 					<td>종료일</td>
-					<td><input type="date" name="final_date"></td>
+					<td><input type="date" name="final_date" id="final_date"></td>
 				</tr>
 				<tr>
 					<td>유저아이디</td>
-					<td><input type="text" name="user_id"></td>
+					<td><input type="text" name="user_id" class="user_id"></td>
 				</tr>
 				<tr>
 					<td>락커룸 번호</td>
@@ -190,11 +316,106 @@
 				</tr>
 			</table>
 		</form>
+		<input type="button" id="btnInsert" value="추가">&nbsp; 
+		<input type="button" value="수정" id="btnUpdate">&nbsp; 
+		<input type="button" value="삭제" id="btnDelete">&nbsp;
+	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close">X</button>
+				</div>
+				<div class="modal-body">
+					<h1>수정하기</h1>
 
-		<input type="button" id="btnInsert" value="추가">&nbsp; <input
-			type="button" value="수정" id="btnUpdate">&nbsp; <input
-			type="button" value="삭제" id="btnDelete">&nbsp;
+					<table border="1">
+						<tr>
+							<td>락커룸번호</td>
+							<td>성별</td>
+							<td>가로락카수</td>
+							<td>락카수</td>
+						</tr>
+						<c:forEach items="${room }" var="room">
+							<tr class="roomTr">
+								<td>${room.room_no }<input class="roomNO" type="hidden" value="${room.room_no }">
+								</td>
+								<td>${room.gender }</td>
+								<td>${room.lock_width }</td>
+								<td>${room.lock_sum }</td>
+							</tr>
+						</c:forEach>
+					</table>
+					<br>
+					<table border="1">
+						<tr>
+							<td>락커룸번호</td>
+							<td><input type="text" name="room_no"></td>
+						</tr>
+						<tr>
+							<td>성별</td>
+							<td><input type="text" name="gender"></td>
+						</tr>
+						<tr>
+							<td>가로락카수</td>
+							<td><input type="text" name="lock_width"></td>
+						</tr>
+						<tr>
+							<td>락카 수</td>
+							<td><input type="text" name="lock_sum"></td>
+						</tr>
+					</table>
+
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="manageBtn" value="등록하기">
+					<input type="button" class="deleteBtn" value="삭제하기">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal - user -->
+	<div class="modal fade" id="userModal" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close">X</button>
+				</div>
+				<div class="modal-body">
+					
+						<table border="1">
+							<tr>
+								<td>회원이름</td>
+								<td>나이</td>
+								<td>성별</td>
+								<td>핸드폰번호</td>
+							</tr>
+					<c:forEach var="user" items="${user}" >
+							<tr class="userTr">
+								<td><input type="hidden" class="id" value="${user.id }">${user.name }</td>
+								<td>${user.age }</td>
+								<td>${user.gender }</td>
+								<td>${user.phone_number }</td>
+							</tr>
+					</c:forEach>
+						</table>
+					
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
 	</div>
 
 
