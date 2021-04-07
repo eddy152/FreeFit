@@ -266,28 +266,32 @@
 <!-- EXERCISE_PERSONAL_DETAIL start -->
 	<!-- EXERCISE_PERSONAL_DETAIL select -->
 	<select id="getSearchExercisePersonalDetail" resultType="ExePersonalDetailVO" parameterType="ExePersonalDetailVO">
-		SELECT  epd_no,
-				exep_no,
-				exe_no,
-				epd_set,
-				epd_count,
-				epd_weight,
-				user_id
-		FROM exe_personal_detail
-		WHERE user_id = #{user_id}
+		SELECT  p.epd_no,
+				p.exep_no,
+				p.exe_no,
+				p.epd_set,
+				p.epd_count,
+				p.epd_weight,
+				p.user_id,
+				e.exe_name
+		FROM exe_personal_detail p, exercise_list e
+		WHERE p.exe_no = e.exe_no
+		AND user_id = #{user_id}
 	</select>
 	
 	<!-- EXERCISE_PERSONAL_DETAIL select one -->
 	<select id="getExercisePersonalDetailProc"  resultType="ExePersonalDetailVO" parameterType="ExePersonalDetailVO">
-		SELECT  epd_no,
-				exep_no,
-				exe_no,
-				epd_set,
-				epd_count,
-				epd_weight,
-				user_id
-		FROM exe_personal_detail
-		WHERE epd_no = #{epd_no}
+		SELECT  p.epd_no,
+				p.exep_no,
+				p.exe_no,
+				p.epd_set,
+				p.epd_count,
+				p.epd_weight,
+				p.user_id,
+				e.exe_name
+		FROM exe_personal_detail p, exercise_list e
+		WHERE p.exe_no = e.exe_no
+		AND epd_no = #{epd_no}
 		AND user_id = #{user_id}
 	</select>
 	
@@ -515,30 +519,4 @@
 	</delete>
 <!-- USER_WEIGHT end -->
 
-<!-- RESERVATION start -->
-	<!-- RESERVATION select -->
-	<select id="getSearchReservation" resultType="ReservationVO" parameterType="ReservationVO">
-		SELECT  reservation_no,
-				user_id,
-				trainer_id,
-				reservation_date,
-				content,
-				reg_date
-		FROM reservation
-		WHERE user_id = #{user_id}
-	</select>
-	
-	<!-- RESERVATION select one -->
-	<select id="getReservationProc"  resultType="ReservationVO" parameterType="ReservationVO">
-		SELECT  reservation_no,
-				user_id,
-				trainer_id,
-				reservation_date,
-				content,
-				reg_date
-		FROM reservation
-		WHERE user_id = #{user_id}
-		AND reservation_no = #{reservation_no}
-	</select>
-<!-- RESERVATION start -->
 </mapper>

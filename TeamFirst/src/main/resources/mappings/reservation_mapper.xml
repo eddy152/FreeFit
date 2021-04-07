@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="co.team.reservation.service.impl.ReservationMapper">
+
+<!-- RESERVATION 전체 조회 -->
+<select id="getReserv" resultType="ReservationVO" parameterType="ReservationVO">
+ 		SELECT reservation_no,
+ 			   to_char(reservation_date, 'yyyy-mm-dd') || 'T' || to_char(reservation_date, 'hh:mi:ss') reservation_date,
+ 			   
+ 			   content
+ 		FROM RESERVATION
+ 	</select>
+
+
+<!-- RESERVATION 단건 조회 -->
+ 	<select id="getReservation" parameterType="ReservationVO">
+ 		SELECT *
+ 		FROM RESERVATION
+ 		WHERE RESERVATION_NO = #{reservation_no}
+ 	</select>
+
+
+<!-- RESERVATION insert -->	
+	<insert id="insertReserv" parameterType="ReservationVO">
+		INSERT INTO reservation
+		(
+			reservation_no,
+			user_id,
+			trainer_id,
+			reservation_date,
+			content
+		)
+		VALUES
+		(
+			reservation_no.nextval,
+			'김예담',
+			'565',
+			#{reservation_date},
+			#{content}
+		)
+	</insert>
+
+
+</mapper> 	

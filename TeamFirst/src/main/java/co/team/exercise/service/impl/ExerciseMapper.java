@@ -1,6 +1,7 @@
 package co.team.exercise.service.impl;
 
 import java.util.List;
+
 import co.team.exercise.service.ExeBasicDetailVO;
 import co.team.exercise.service.ExePersonalDetailVO;
 import co.team.exercise.service.ExerciseListVO;
@@ -8,7 +9,6 @@ import co.team.exercise.service.ExerciseProgramBasicVO;
 import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.FFUserVO;
-import co.team.exercise.service.ReservationVO;
 import co.team.exercise.service.UserWeightVO;
 
 public interface ExerciseMapper {
@@ -57,7 +57,4 @@ public interface ExerciseMapper {
 	public int insertUserWeight(UserWeightVO vo);
 	public int updateUserWeight(UserWeightVO vo);
 	public int deleteUserWeight(UserWeightVO vo);
-	
-	public List<ReservationVO> getSearchReservation(ReservationVO vo);
-	public ReservationVO getReservationProc(ReservationVO vo);
 }

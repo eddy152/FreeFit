@@ -1,6 +1,7 @@
 package co.team.exercise.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,6 @@ import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.ExerciseService;
 import co.team.exercise.service.FFUserVO;
-import co.team.exercise.service.ReservationVO;
 import co.team.exercise.service.UserWeightVO;
 
 @Service
@@ -231,14 +231,5 @@ public class ExerciseServiceImpl implements ExerciseService {
 		return 0;
 	}
 
-	@Override
-	public List<ReservationVO> getSearchReservation(ReservationVO vo) {
-		return dao.getSearchReservation(vo);
-	}
-
-	@Override
-	public ReservationVO getReservationProc(ReservationVO vo) {
-		return dao.getReservationProc(vo);
-	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.exercise.service.ExeBasicDetailVO;
@@ -17,7 +18,6 @@ import co.team.exercise.service.ExerciseProgramPersonalVO;
 import co.team.exercise.service.ExerciseRecordVO;
 import co.team.exercise.service.ExerciseService;
 import co.team.exercise.service.FFUserVO;
-import co.team.exercise.service.ReservationVO;
 import co.team.exercise.service.UserWeightVO;
 
 @Controller
@@ -80,7 +80,7 @@ public class ExerciseController {
 		model.addAttribute("exeList", service.getSearchExerciseProgramBasic(vo));
 		model.addAttribute("exeBasicDetail", service.getSearchExerciseBasicDetail(vo1));
 		model.addAttribute("exeProgramBasic", service.getSearchExerciseProgramBasic(vo2));
-		return "exercise/ExerciseProgramBasic";
+		return "exercise/exerciseProgramBasic";
 	}
 
 	// 단건 조회
@@ -188,14 +188,13 @@ public class ExerciseController {
 
 	// EXERCISE_PERSONAL_DETAIL start
 	// 리스트 조회
-	@ResponseBody
 	@GetMapping("/getSearchExercisePersonalDetail")
-	public List<ExePersonalDetailVO> getSearchExercisePersonalDetail(ExePersonalDetailVO vo) {
-		return service.getSearchExercisePersonalDetail(vo);
+	public String getSearchExercisePersonalDetail(ExePersonalDetailVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExercisePersonalDetail(vo));
+		return "exercise/getSearchExercisePersonalDetail";
 	}
 
 	// 단건 조회
-	@ResponseBody
 	@GetMapping("/getExercisePersonalDetailProc")
 	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
 		return service.getExercisePersonalDetailProc(vo);
@@ -313,19 +312,4 @@ public class ExerciseController {
 	}
 	// USER_WEIGHT end
 
-	// RESERVATION start
-	// 리스트 조회
-	@GetMapping("/getSearchReservation")
-	public String getSearchReservation(ReservationVO vo, Model model) {
-		model.addAttribute("list", service.getSearchReservation(vo));
-		return "exercise/getSearchReservation";
-	}
-
-	// 단건 조회
-	@ResponseBody
-	@GetMapping("/getReservationProc")
-	public ReservationVO getReservationProc(ReservationVO vo){
-		return service.getReservationProc(vo);
-	}
-	// RESERVATION end
 }

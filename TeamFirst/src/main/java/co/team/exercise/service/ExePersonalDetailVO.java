@@ -17,4 +17,5 @@ public class ExePersonalDetailVO {
 	int epd_count;
 	int epd_weight;
 	String user_id;
+	String exe_name;
 }

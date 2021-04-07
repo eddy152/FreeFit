@@ -19,4 +19,5 @@ public class ExeBasicDetailVO {
 	int ebd_set;
 	int ebd_gender;
 	int exer_weight;
+	String exe_name;
 }
