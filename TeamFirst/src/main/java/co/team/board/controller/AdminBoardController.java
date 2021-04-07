@@ -36,7 +36,7 @@ public class AdminBoardController {
 	//@GetMapping
 	@RequestMapping("/getAdminNoticeBoardList")
 	public String getAdminNoticeBoardList(AdminNoticeBoardVO vo, Model model) throws Exception {
-		model.addAttribute("board", service.getAdminNoticeBoardList(vo));
+		model.addAttribute("list", service.getAdminNoticeBoardList(vo));
 		return "board/getAdminNoticeBoardList";
 	}
 	//단건조회
@@ -45,11 +45,10 @@ public class AdminBoardController {
 //	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo) {
 //		return service.getAdminNoticeBoard(vo);
 //	}
+	
 	@GetMapping("/getAdminNoticeBoard")
-	public String viewDetail(Model model, @RequestParam("board_no") AdminNoticeBoardVO vo) {
-	  
-	  //model.addAttribute("board", boardService.viewDetail(seq));
-	  model.addAttribute("board", service.getAdminNoticeBoard(vo));
+	public String getAdminNoticeBoard(Model model, @RequestParam("board_no")int board_no) {
+	  model.addAttribute("board", service.getAdminNoticeBoard(board_no));
 	  return "board/getAdminNoticeBoard";
 	}
 	

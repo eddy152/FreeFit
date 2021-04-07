@@ -4,9 +4,7 @@
 
 
 <!-- admin notice 어드민공지 -->
-<mapper
-	namespace="co.team.board.service.impl.AdminNoticeBoardMapper">
-
+<mapper namespace="co.team.board.service.impl.AdminNoticeBoardMapper">
 	<insert id="insertAdminNoticeBoard"
 		parameterType="AdminNoticeBoardVO">
 
@@ -36,29 +34,28 @@
 		WHERE BOARD_NO = #{board_no}
 	</update>
 
-
 	<delete id="deleteAdminNoticeBoard"
 		parameterType="AdminNoticeBoardVO">
 
 		DELETE FROM ADMIN_NOTICE_BOARD
 
 		WHERE BOARD_NO = #{board_no}
-
 	</delete>
 
 	<!-- 글 상세조회 -->
 	<select id="getAdminNoticeBoard" resultType="AdminNoticeBoardVO"
-		parameterType="AdminNoticeBoardVO">
-
-		SELECT BOARD_NO
+		parameterType="int">
+		
+		SELECT * FROM BOARD WHERE BOARD_NO = #{board_no}
+	
+	<!--SELECT BOARD_NO
 		,CATEGORY
 		,TITLE
 		,CONTENT
 		,REG_DATE
 		,HIT
 		FROM ADMIN_NOTICE_BOARD
-		WHERE BOARD_NO = #{board_no}
-
+		WHERE BOARD_NO = #{board_no}  -->	
 	</select>
 
 
@@ -74,22 +71,22 @@
 		,HIT
 		FROM ADMIN_NOTICE_BOARD
 	</select>
-
+</mapper>	
 	
-	<!--  카운트 쿼리 -->
+	<!--  카운트 쿼리 
 	<select id="boardCount"
 		parameterType="co.team.board.service.BoardSearchVO" resultType="int">
 		SELECT
 		count(*)
 		FROM ADMIN_NOTICE_BOARD
-	</select>
+	</select> -->
 	
-	<!--  총게시물 가져오는 쿼리 -->
+	<!--  총게시물 가져오는 쿼리 
 	<select id="boardList" 
 			parameterType="co.team.board.service.BoardSearchVO" 
-			resultType="co.team.board.service.AdminNoticeBoardVO">
+			resultType="co.team.board.service.AdminNoticeBoardVO"> 
 			
 			
-	</select>
-</mapper>	
+	</select>-->
+
 

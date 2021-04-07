@@ -1,28 +1,27 @@
 package co.team.board.service.impl;
 
+
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.team.board.service.AdminNoticeBoardService;
 import co.team.board.service.AdminNoticeBoardVO;
-import co.team.board.service.BoardSearchVO;
 
 @Service
 public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 	@Autowired AdminNoticeBoardMapper dao;
 
-	@Override
-	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo) {
-		return dao.getAdminNoticeBoard(vo);
-	}
-	
 //	@Override
-//	public AdminNoticeBoardVO viewDetail(int board_no) {
-//	  return mapper.viewDetail(board_no);
+//	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo) {
+//		return dao.getAdminNoticeBoard(vo);
 //	}
+
+	@Override
+	public AdminNoticeBoardVO getAdminNoticeBoard(int board_no) {
+		return dao.getAdminNoticeBoard(board_no);
+	}
 	@Override
 	public List<AdminNoticeBoardVO> getAdminNoticeBoardList(AdminNoticeBoardVO vo) {
 		return dao.getAdminNoticeBoardList(vo);
@@ -41,15 +40,6 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 	@Override
 	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		return dao.deleteAdminNoticeBoard(vo);
-	}
-	
-	//페이징
-	public int boardCount(BoardSearchVO boardSearchVO) {
-		return AdminNoticeBoardMapper.boardCount(boardSearchVO);
-	}
-	
-	public List<AdminNoticeBoardVO> boardList(BoardSearchVO boardSearchVO){
-		return AdminNoticeBoardMapper.boardList(boardSearchVO);
 	}
 }
 

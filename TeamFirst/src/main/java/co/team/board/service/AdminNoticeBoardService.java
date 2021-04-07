@@ -6,9 +6,9 @@ public interface AdminNoticeBoardService {
 	
 	//어드민 공지이벤트게시판 서비스
 	//단건조회
-	public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo);
-	//public AdminNoticeBoardVO viewDetail(int board_no);
-	
+	//public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo);
+	public AdminNoticeBoardVO getAdminNoticeBoard(int board_no);
+
 	//전체조회
 	public List<AdminNoticeBoardVO> getAdminNoticeBoardList(AdminNoticeBoardVO vo);
 	
@@ -21,21 +21,9 @@ public interface AdminNoticeBoardService {
 	//삭제
 	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo);
 
-	
-	//페이징 
-	public static int boardCount(BoardSearchVO boardSearchVO) {
-		return 0;
-	}
-	public static List<AdminNoticeBoardVO> boardList(BoardSearchVO boardSearchVO) {
-		return null;
-	}
-
-	
-
-	
-
-	
-	
-
-
+//	
+//	//페이징 
+//	public static int boardCount() {
+//		return 0;
+//	}
 }

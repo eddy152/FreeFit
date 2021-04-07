@@ -50,15 +50,11 @@
 			<textarea id="summernote" name="content"></textarea>
 			<!-- <input id="subBtn" type="button" value="글 작성" style="float: right;"
 				onclick="goWrite(this.form)" />  -->
-		<input type="button" value="글쓰기" style="float: right;" onclick="location.href='/insertAdminNoticeBoard'">
+		<input type="button" value="글쓰기" style="float: right;" onclick="">
 		
 		<!-- 목록으로 -->
-      	<div class="pull-left">
-         <a href="/board/getAdminNoticeBoardList" class="btn btn-success">목록으로</a>
-      	
-    
-      	
-      </div>
+      	<input type="button" value="목록으로" style="float: right;"
+							   onclick="location.href='getAdminNoticeBoardList';">
 		</form>
 		<script>
 			function goWrite(frm) {

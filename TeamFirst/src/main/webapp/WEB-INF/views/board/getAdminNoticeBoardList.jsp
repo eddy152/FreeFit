@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -12,6 +13,15 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>boardList</title>
+<script type="text/javascript">
+	$(function() {
+		$(".dataRow").click(function() {
+			var no = $(this).find(".no").text();
+			lacation = "getAdiminNoticeBoard?no=" + no;
+
+		})
+	});
+</script>
 </head>
 <body>
 	<div class="page-wrapper">
@@ -26,8 +36,8 @@
 						<!--<button type="button"
 							  -class="btn btn-outline btn-primary pull-right">
 							<i class="fa fa-edit fa-fw"></i> 공지사항 작성-->
-							<input type="button" value="작성하기" style="float: right;"
-							   onclick="location.href='adminBoard';">
+						<input type="button" value="작성하기" style="float: right;"
+							onclick="location.href='adminBoard';">
 						<!--  </button>-->
 					</div>
 				</div>
@@ -36,30 +46,31 @@
 					<div align="center" class="panel-body">
 						<table class="table table-hover">
 							<thead>
-								
+
 								<tr>
 									<th>No</th>
 									<th>카테고리</th>
 									<th>제목</th>
-									<th>조회수</th>  
+									<th>조회수</th>
 									<th>작성일</th>
 								</tr>
-							   
+
 							</thead>
 							<tbody>
-								<c:forEach items="${board}" var="board">
+								<c:forEach items="${list}" var="list">
 									<tr>
-										<td>${board.board_no}</td>
-										<td>${board.category}</td>
-										<td>${board.title}</td>
-										<td>${board.hit}</td>
+										<td>${list.board_no}</td>
+										<a href='detail?board_no=${list.board_no}'><td>${list.title }</td></a>
+										<td>${list.category}</td>
+										<td>${list.title}</td>
+										<td>${list.hit}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-												value="${board.reg_date}" /></td>
+												value="${list.reg_date}" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						
+
 					</div>
 				</div>
 			</div>

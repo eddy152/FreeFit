@@ -35,8 +35,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_271/lib/security/oracle/oraclepki.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_271/lib/security/oracle/osdt_cert.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_271/lib/security/oracle/osdt_core.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

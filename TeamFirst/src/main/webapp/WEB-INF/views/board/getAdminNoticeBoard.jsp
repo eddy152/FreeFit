@@ -9,29 +9,15 @@
 <title>글 상세보기</title>
 </head>
 <style>
-h2 {
-	text-align: center;
-}
-
-table {
-	width: 100%;
-}
-
-textarea {
-	width: 100%;
-}
-
-#outter {
-	display: block;
-	width: 30%;
-	margin: auto;
-}
+h2 {text-align: center;}
+table {width: 100%;}
+textarea {width: 100%;}
+#outter {display: block;
+		 width: 30%;
+		 margin: auto; }
 </style>
-<body>
-
+	<body>
 	<h2>게시판</h2>
-	<br>
-	<br>
 	<br>
 	<div id="outter">
 		<table border="1">
@@ -40,19 +26,18 @@ textarea {
 			</tr>
 			<tr>
 				<td>카테고리: ${board.category } 
-				<span style="float: right;"><fmt:formatDate
-					  value="${board.regdate }" 
-					  pattern="yyyy.MM.dd" /></span>
+				<span 			style="float: right;">
+				<fmt:formatDate value="${board.regdate }" 
+					  			pattern="yyyy.MM.dd" />
+			    </span>
 				</td>
 			</tr>
 			<tr>
-				<td><div style="height: 300px; 
-						        margin: 10px; 
-						        display: inline-block">${board.content }</div></td>
+				<td><div style="height: 300px; margin: 10px; display: inline-block">${board.content }</div></td>
 			</tr>
 		</table>
 		<input type="button" value="글 목록" style="float: right;"
-			onclick="location.href='getAdminBoardList';">
+			   onclick="location.href='getAdminBoardList';">
 	</div>
 </body>
 </html>
