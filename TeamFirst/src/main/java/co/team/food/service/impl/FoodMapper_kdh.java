@@ -1,5 +1,6 @@
 package co.team.food.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.team.food.service.FoodVO;
@@ -16,6 +17,8 @@ public interface FoodMapper_kdh {
 	public FoodVO getRecommendFood(FoodVO vo);
 	
 	// 식단 단건 조회(실체섭취량)
-	public FoodVO getRealFood(FoodVO vo);
+	public List<FoodVO> getRealFood(FoodVO vo);
+
+	
 	
 }

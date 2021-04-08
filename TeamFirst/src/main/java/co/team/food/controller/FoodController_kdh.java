@@ -1,5 +1,8 @@
 package co.team.food.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +22,29 @@ public class FoodController_kdh {
 		model.addAttribute("list", service.getSearchFood(vo));
 		return "homepage/Food/getSearchFood";
 	}
-	// 식단 단건 조회
+	// 회원 단건 조회
 	@RequestMapping("/getFood")
 	//@ResponseBody
 	public String getFood(FoodVO vo, Model model) {
-		model.addAttribute("food", service.getFood(vo));
+		model.addAttribute("food", service.getFood(vo)); 
+		List<FoodVO> foodList = service.getRealFood(vo);
+		model.addAttribute("calories", foodList);
 		return "homepage/Food/getFood";
 	}
+	
+	// 식단 권장량 조회(단건)
+	@RequestMapping("/getRecommendFood")
+	public String getRecommendFood(FoodVO vo, Model model) {
+		model.addAttribute("rec", service.getRecommendFood(vo));
+		return "homepage/Food/getFood";
+	}
+	
+	// 식단 통계 조회(단건)
+	@RequestMapping("/getFoodSelect")
+	@ResponseBody
+	public FoodVO getFoodList(FoodVO vo, Model model) {
+		return (FoodVO) service.getRealFood(vo);
+	}
+	
+
 }

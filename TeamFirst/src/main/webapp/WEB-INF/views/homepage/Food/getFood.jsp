@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <title>Food/getFood.jsp</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -13,18 +13,24 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['1', '½ÇÁ¦¼·Ãë·®', '±ÇÀå·®'],
-          ['2014', 1000, 400],
-          ['2015', 1170, 460],
-          ['2016', 660, 1120],
-          ['2017', 1030, 540]
-        ]);
+    	  // ì¹¼ë¡œë¦¬ ê³„ì‚° ì‹œ í•„ìš”í•œ ì •ë³´ - 1. ì²´ì¤‘
+    	var weight = $('input:text[name="weight"]').val(); // = ëª¸ë¬´ê²Œ
+    	var result = weight * 12 * 1.5;
+    	var arr =[]; 
+    	arr.push( ['ì„­ì·¨ë‚ ì§œ', 'ì‹¤ì œì„­ì·¨ëŸ‰', 'ê¶Œì¥ëŸ‰']);
 
+    	<c:forEach var="calorie" items="${calories }"> 	
+	    		arr.push(['${calorie.take_date}', ${calorie.calorie }, result]);
+		</c:forEach>
+    	
+        var data = google.visualization.arrayToDataTable(arr);
+        
+        console.log(result);
+        
         var options = {
           chart: {
-            title: 'ÀÌ¹øÁÖ ½Ä´Ü',
-            subtitle: $('#name').val() + ' È¸¿ø´ÔÀÇ ½Ä´Ü Åë°è',
+            title: 'ì´ë²ˆì£¼ ì‹ë‹¨',
+            subtitle: $('input:text[name="name"]').val() + ' íšŒì›ë‹˜ì˜ ì‹ë‹¨ í†µê³„',
           }
         };
 
@@ -32,41 +38,101 @@
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
+    	
+    	$(document).ready(function() {
+    		$('#before').click(function() {
+    			
+    			$.ajax({
+        			url: 'getFoodSelect',
+        			data: { id : $('input:text[name="id"]').val() },
+        			dataType: 'json',
+        			method: 'get',
+        			success: drawChart,
+        			error: function() {
+        				alert('ERROR!');
+        			}
+        		    
+        		});
+    		});
+    	});
+    	
+    	function after() {
+    		$.ajax({
+    			url: 'getFoodSelect',
+    			data: { id : $('input:text[name="id"]').val() },
+    			dataType: 'json',
+    			method: 'get',
+    			success: drawChart,
+    			error: function() {
+    				alert('ERROR!');
+    			}
+    		    
+    		});
+    	}
+    	
+    	function inDate() {
+
+    		function dataToMd(date) {
+    			function pad(num) {
+    				num = num + '';
+    				return num.length < 2 ? '0' + num : num;
+    			} // pad
+    			return date.getFullYear() + '-' + pad(date.getMonth() + 1)
+    				   + '-' + pad(date.getDate());
+    		} // dateToMd
+    	
+    		var indate = new Date(first_date.value);
+    		console.log(indate);
+    		
+    		final_date.value = dataToMd(new Date(indate.setMonth(indate.getMonth() + 1)));
+    	}
+    	
     </script>
   </head>
 </head>
 <body>
 
-<h1>È¸¿øÁ¤º¸</h1>
+<h1>íšŒì›ì •ë³´</h1>
 
+<hr>
+<button type="button" onclick="Click()">í´ë¦­</button>
+<input name="id" value="${food.id }" hidden="hidden">
 <table border="1">
 	<tr>
-		<td rowspan="5" style="width:100px;">»çÁø</td>
-		<td>ÀÌ¸§</td>
-		<td id="name">${food.name }</td>
+		<td rowspan="5" style="width:100px;">ì‚¬ì§„</td>
+		<td>ì´ë¦„</td>
+		<td>${food.name }
+			<input name="name" value="${food.name }" hidden="hidden">			
+		</td>
 	</tr>
 	<tr>
-		<td>³ªÀÌ</td>
+		<td>ë‚˜ì´</td>
 		<td>${food.age }</td>
 	</tr>
 	<tr>
-		<td>¼ºº°</td>
+		<td>ì„±ë³„</td>
 		<td>${food.gender }</td>
 	</tr>
 	<tr>
-		<td>Å°</td>
+		<td>í‚¤</td>
 		<td>${food.height }</td>
 	</tr>
 	<tr>
-		<td>¸ö¹«°Ô</td>
-		<td>${food.weight }</td>
+		<td>ëª¸ë¬´ê²Œ</td>
+		<td>${food.weight }
+			<input type="text" hidden="hidden" name="weight" value="${food.weight }">
+		</td>
 	</tr>
 	<tr>
 		<td colspan="3" style="width:200px;">
-			<textarea>Æ¯ÀÌ»çÇ×</textarea>
+			<textarea>íŠ¹ì´ì‚¬í•­</textarea>
 		</td>
 	</tr>
 	</table>
+	<br>
+	<button type="button" id="before" onclick="before()"><</button>
+	<button type="button" id="after" onclick="after()">></button>
+	<br>
 	<br>
 	<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 </body>

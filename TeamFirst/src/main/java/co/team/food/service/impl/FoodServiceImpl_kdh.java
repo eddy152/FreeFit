@@ -33,8 +33,10 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 식단 단건 조회(실제섭취량)
-	public FoodVO getRealFood(FoodVO vo) {
+	public List<FoodVO> getRealFood(FoodVO vo) {
 		return dao.getRealFood(vo);
 	}
+	
+	
 	
 }
