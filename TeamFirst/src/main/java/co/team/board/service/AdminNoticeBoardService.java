@@ -16,10 +16,10 @@ public interface AdminNoticeBoardService {
 	public int insertAdminNoticeBoard(AdminNoticeBoardVO vo);
 	
 	//수정
-	public int updateAdminNoticeBoard(AdminNoticeBoardVO vo);
+	public boolean updateAdminNoticeBoard(AdminNoticeBoardVO vo);
 	
 	//삭제
-	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo);
+	public int deleteAdminNoticeBoard(int board_no);
 
 	//조회수 증가
 	public boolean adminNoticeBoardHit(int board_no);
@@ -28,4 +28,10 @@ public interface AdminNoticeBoardService {
 //	public static int boardCount() {
 //		return 0;
 //	}
+
+	
+
+	
+
+	
 }

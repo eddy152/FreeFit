@@ -6,7 +6,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<script src="/resources/js/summernote-ko-KR.js"></script>
+
 <title>글 상세보기</title>
+
+<script>
+	$(document).ready(function() {
+		$('#summernote').summernote({
+			placeholder : 'content',
+			minHeight : 370,
+			maxHeight : null,
+			focus : true,
+			lang : 'ko-KR'
+		});
+});
+</script>
+<script>
+	function del(board_no) {
+		var check = confirm("정말 삭제하시겠습니까?");
+		if (check) {
+			location.href='deleteAdminNoticeBoard?board_no='+board_no;
+		}
+	}	
+</script>
 </head>
 <style>
 h2 {text-align: center;}
@@ -17,27 +44,18 @@ textarea {width: 100%;}
 		 margin: auto; }
 </style>
 	<body>
-	<h2>상세보기 페이지</h2>
-	<br>
-	<div id="outter">
-		<table border="1">
-			<tr>
-				<td>작성자: 총관리자</td>
-			</tr>
-			<tr>
-				<td>제목: ${board.title} 
-				<span 			style="float: right;">
-				<fmt:formatDate value="${board.reg_date }" 
-					  			pattern="yyyy.MM.dd" />
-			    </span>
-				</td>
-			</tr>
-			<tr>
-				<td><div style="height: 300px; margin: 10px; display: inline-block">${board.content }</div></td>
-			</tr>
-			</table>
-		<input type="button" value="글 목록" style="float: right;"
-			   onclick="location.href='getAdminNoticeBoardList';">
-	</div>
+	<body>
+<h2 style="text-align: center;">상세보기</h2><br><br><br>
+
+<div style="width: 60%; margin: auto;">
+	<form method="post" action="updateAdminNoticeBoard" >
+		<input type="text" name="board_no" value="${board.board_no}">
+		<input type="text" name="title" style="width: 40%;" placeholder="제목" value="${board.title }"/>
+		<br><br> 
+		<textarea id="summernote" name="content"></textarea>
+		<input id="subBtn" type="button" value="글 수정" style="float: right;" onclick="goModify(this.form)"/>
+	</form>
+</div>
+
 </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,6 +14,7 @@ import co.team.board.service.AdminNoticeBoardService;
 import co.team.board.service.AdminNoticeBoardVO;
 import co.team.board.service.AdminQnaBoardService;
 import co.team.board.service.AdminQnaBoardVO;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 public class AdminBoardController {
@@ -62,24 +64,37 @@ public class AdminBoardController {
 		return "board/getAdminNoticeBoard";
 	}
 	//등록
-	@RequestMapping("/insertAdminNoticeBoard")
+	@PostMapping("/insertAdminNoticeBoard")
 	public String insertAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.insertAdminNoticeBoard(vo);
-		//return "redirect:/getAdminNoticeBoardlist";	
-		return "redirect:/getaAdminNoticeBoard?board_no="+ vo.getBoard_no();
-		//
+		return "redirect:/getAdminNoticeBoardList";	
+		//return "redirect:/getaAdminNoticeBoard?board_no="+vo.getBoard_no();
+	
 	}
+	
 	//수정
+//	@PostMapping("updateAdminNoticeBoard")
+//	public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
+//		service.updateAdminNoticeBoard(vo);
+//		return "redirect:/getAdminNoticeBoardList";
+//	}	
 	@GetMapping("/updateAdminNoticeBoard")
+	public String updateAdminNoticeBoard(@RequestParam("board_no")int board_no, Model model) {
+		model.addAttribute("board", service.getAdminNoticeBoard(board_no));
+		return "board/updateAdminNoticeBoard";
+	}
+
+	@PostMapping("/updateAdminNoticeBoard")
 	public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.updateAdminNoticeBoard(vo);
-		return "redirect:/getAdminNoticeBoardlist";
-	}	
+		return "redirect: /updateAdminNoticeBoard?board_no="+ vo.getBoard_no();
+	}
 	//삭제
 	@GetMapping("/deleteAdminNoticeBoard")
-	public String deleteAdminNoticeBoard(AdminNoticeBoardVO vo) {
-		service.deleteAdminNoticeBoard(vo);
-		return "redirect:/getAdminNoticeBoardlist";
+	public String deleteAdminNoticeBoard(AdminNoticeBoardVO vo, Model model, @RequestParam("board_no")int board_no) {
+		model.addAttribute("board", service.deleteAdminNoticeBoard(board_no));
+		service.deleteAdminNoticeBoard(board_no);
+		return "redirect:/getAdminNoticeBoardList";
 	}
 	//어드민 공지 이벤트 리스트 끝
 	

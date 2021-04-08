@@ -10,6 +10,7 @@
 
 		INSERT INTO ADMIN_NOTICE_BOARD(
 		BOARD_NO
+		,CATEGORY
 		,TITLE
 		,CONTENT
 		,REG_DATE
@@ -18,29 +19,59 @@
 
 		VALUES(
 		#{board_no}
+		,#{category}
 		,#{title}
 		,#{content}
 		,#{reg_date}
 		,#{hit}
 		)
 	</insert>
+	
+    <insert id="insertSelectkey">
+    <selectKey keyProperty="reservation_no" order="BEFORE" resultType="int">
+		SELECT RESERVATION_NO.NEXTVAL FROM DUAL
+		
+		INSERT INTO ADMIN_NOTICE_BOARD(
+		BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		)
 
+		VALUES(
+		#{board_no}
+		,#{category}
+		,#{title}
+		,#{content}
+		,#{reg_date}
+		,#{hit}
+		)
+	</selectKey>
+	
+
+    </insert>
+
+	<!-- 글쓰기 수정 -->
 	<update id="updateAdminNoticeBoard"
 		parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
-
 		UPDATE ADMIN_NOTICE_BOARD
 		SET CONTENT = #{content}
 		WHERE BOARD_NO = #{board_no}
 	</update>
-
-	<delete id="deleteAdminNoticeBoard"
-		parameterType="AdminNoticeBoardVO">
-
-		DELETE FROM ADMIN_NOTICE_BOARD
-
-		WHERE BOARD_NO = #{board_no}
+	
+	<!-- 글쓰기 삭제 -->
+	<delete id="deleteAdminNoticeBoard" parameterType="int">
+	DELETE FROM ADMIN_NOTICE_BOARD 
+	WHERE BOARD_NO = #{board_no}
 	</delete>
-
+	
+	<!--  <delete id="deleteAdminNoticeBoard"
+		parameterType="AdminNoticeBoardVO">
+		DELETE FROM ADMIN_NOTICE_BOARD
+		WHERE BOARD_NO = #{board_no}-->
+	
 	<!-- 글 상세조회 -->
 	<select id="getAdminNoticeBoard" resultType="AdminNoticeBoardVO"
 		parameterType="int">
@@ -56,7 +87,11 @@
 		FROM ADMIN_NOTICE_BOARD
 		WHERE BOARD_NO = #{board_no}  -->	
 	</select>
-
+	<!-- 조회수 +1 -->
+		<update id="adminNoticeBoardHit" parameterType="int">
+ 		 UPDATE ADMIN_NOTICE_BOARD SET HIT = HIT + 1 WHERE BOARD_NO = #{board_no}
+		 
+		</update>
 
 
 	<select id="getAdminNoticeBoardList"
@@ -72,11 +107,7 @@
 	</select>
 	
 	
-	<!-- 조회수 +1 -->
-		<update id="adminNoticeBoardHit" parameterType="int">
- 		 UPDATE ADMIN_NOTICE_BOARD SET HIT = HIT + 1 WHERE BOARD_NO = #{board_no}
-		 
-		</update>
+	
 	
 </mapper>	
 	<!--  카운트 쿼리 

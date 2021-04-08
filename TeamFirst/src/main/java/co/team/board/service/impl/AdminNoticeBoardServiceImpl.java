@@ -33,18 +33,19 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 	}
 	
 	@Override
-	public int updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
+	public boolean updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		return dao.updateAdminNoticeBoard(vo);
 	}
-
 	@Override
-	public int deleteAdminNoticeBoard(AdminNoticeBoardVO vo) {
-		return dao.deleteAdminNoticeBoard(vo);
+	public int deleteAdminNoticeBoard(int board_no) {
+		return dao.deleteAdminNoticeBoard(board_no);
 	}
+
 	@Override
 	public boolean adminNoticeBoardHit(int board_no) {
 		return dao.adminNoticeBoardHit(board_no);
 	}
+
 }
 
 

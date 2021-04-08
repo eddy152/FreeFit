@@ -16,8 +16,8 @@
   <script type="text/javascript">
 	$(function() {
 		$(".dataRow").click(function() {
-			var no = $(this).find(".board_no").text();
-			location = "getAdminNoticeBoard?board_no=1&no=" + no;
+			var no = $(this)[0].children[0].innerText
+			location = "getAdminNoticeBoard?board_no="+no;
 		})
 	});
 </script>
@@ -58,13 +58,12 @@
 							<tbody>
 								<c:forEach items="${list}" var="list">
 									<tr class="dataRow" >
-										<a href="getAdminNoticeBoard?board_no=${list.board_no}"></a>
 										<td>${list.board_no}</td>
 										<td>${list.category}</td>
 										<td>${list.title}</td>
 										<td>${list.hit}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-												value="${list.reg_date}" /></td>
+											value="${list.reg_date}" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
