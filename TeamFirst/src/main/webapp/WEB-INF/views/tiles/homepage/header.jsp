@@ -8,5 +8,21 @@
     <a class="p-2 text-dark" href="#">Support</a>
     <a class="p-2 text-dark" href="#">Pricing</a>
   </nav>
-  <a class="btn btn-outline-primary" href="members/loginform">로그인</a>
+  <a class="btn btn-outline-primary" href="members/loginform" id="loginBtn">로그인</a>
 </div>
+
+
+
+
+<script>
+window.onload=function(){
+	var isLogin = '<%= request.getSession().getAttribute("id")!=null ? session.getAttribute("id") : "" %>';
+
+	if(isLogin!=''){
+		loginBtn.text="로그아웃";
+		loginBtn.href="members/logout";
+} 
+
+	
+}
+</script>

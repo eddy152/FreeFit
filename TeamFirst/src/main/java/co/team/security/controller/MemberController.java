@@ -72,24 +72,26 @@ public class MemberController {
 		return "popup/members/loginerror";
 	}
 
-	@GetMapping("/welcome")
-	public String welcome(HttpSession session) {
-		int a=  (int) session.getAttribute("mem_reg_id");
-		System.out.println(a);
-		return "home";
-	}
+
 
 	@GetMapping("/denied")
 	public String denied() {
 		return "popup/members/denied";
 	}
 
-	@GetMapping("/mem_reg_id") //세션저장
-	public String mem_reg_id(HttpSession session) {
+	@GetMapping("/log") //세션저장
+	public String log(HttpSession session) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		MemberVO vo = mapper.getMemberById(username);
-		session.setAttribute("mem_reg_id", vo.getMem_reg_id());
 
+		System.out.println("username="+ username);
+		if (username.equals("anonymousUser")) {
+			session.invalidate();		
+		}
+		else {
+			MemberVO vo = mapper.getMemberById(username);
+			session.setAttribute("mem_reg_id", vo.getMem_reg_id());
+			session.setAttribute("id", vo.getId());
+		}
 		return "popup/members/loginform";
 	}
 
