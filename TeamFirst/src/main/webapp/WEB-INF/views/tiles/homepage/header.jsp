@@ -8,5 +8,5 @@
     <a class="p-2 text-dark" href="#">Support</a>
     <a class="p-2 text-dark" href="#">Pricing</a>
   </nav>
-  <a class="btn btn-outline-primary" href="#">로그인</a>
+  <a class="btn btn-outline-primary" href="members/loginform">로그인</a>
 </div>

@@ -40,8 +40,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public UserEntity getUser(String loginUserId) {
-
+		System.out.println("serviceIMPL : " + loginUserId);
 		MemberVO member = memberMapper.getMemberById(loginUserId);
+
 		return new UserEntity(member.getId(), member.getPassword());
 	}
 

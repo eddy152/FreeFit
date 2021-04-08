@@ -1,6 +1,12 @@
 package co.team.security.controller;
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import co.team.admin.service.AdminVO;
 import co.team.security.service.MemberService;
+import co.team.security.service.MemberVO;
+import co.team.security.service.impl.MemberMapper;
 import co.team.trainer.service.TrainerVO;
 import co.team.user.service.UserVO;
 
@@ -33,9 +41,29 @@ public class MemberController {
 	MemberService memberService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	@Autowired
+	MemberMapper mapper;
+
+	@GetMapping("/loginSuccess")
+
+	public String loginSuccess(HttpServletRequest request) {
+		System.out.println("hello");
+		System.out.println("hellow");
+
+		Enumeration<String> attributes = request.getSession().getAttributeNames();
+		while (attributes.hasMoreElements()) {
+			String attribute = (String) attributes.nextElement();
+			System.out.println(attribute);
+			System.out.println("-----");
+			System.out.println(request.getSession().getAttribute(attribute));
+		}
+
+		return "popup/members/loginSuccess";
+	}
 
 	@GetMapping("/loginform")
-	public String loginform() {
+	public String loginform(HttpSession session) {
+		
 		return "popup/members/loginform";
 	}
 
@@ -45,31 +73,38 @@ public class MemberController {
 	}
 
 	@GetMapping("/welcome")
-	public String welcome() {
+	public String welcome(HttpSession session) {
+		int a=  (int) session.getAttribute("mem_reg_id");
+		System.out.println(a);
 		return "home";
 	}
-	
+
 	@GetMapping("/denied")
 	public String denied() {
 		return "popup/members/denied";
 	}
-	
-	
-	
-	
-	//회원가입 폼 만들기
-	
+
+	@GetMapping("/mem_reg_id") //세션저장
+	public String mem_reg_id(HttpSession session) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		MemberVO vo = mapper.getMemberById(username);
+		session.setAttribute("mem_reg_id", vo.getMem_reg_id());
+
+		return "popup/members/loginform";
+	}
+
+	// 회원가입 폼 만들기
+
 	@GetMapping("/joinformH")
 	public String joinformH() {
-		return "popup/members/loginform"; 
+		return "popup/members/loginform";
 	}
-	
+
 	@GetMapping("/joinformP")
 	public String joinformP() {
 		return "popup/members/loginform";
 	}
-	
-	
+
 	// 오너 가입
 	@PostMapping("/joinO")
 	public String joinOwner(@ModelAttribute AdminVO member) {
@@ -77,8 +112,8 @@ public class MemberController {
 		memberService.addOwnerMember(member);
 		return "home";
 	}
-	
-	//트레이너 가입
+
+	// 트레이너 가입
 	@PostMapping("/joinT")
 	public String joinTrainer(@ModelAttribute TrainerVO member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
@@ -86,7 +121,7 @@ public class MemberController {
 		return "home";
 	}
 
-	//유저 가입
+	// 유저 가입
 	@PostMapping("/joinU")
 	public String joinUser(@ModelAttribute UserVO member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
