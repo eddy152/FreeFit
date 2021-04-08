@@ -125,9 +125,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     
                     .and()
                     .exceptionHandling()
-                    .accessDeniedPage("/members/denied")
-                    .and().authorizeRequests().antMatchers("/members/loginform").anonymous();
-                    ;
+                    .accessDeniedPage("/members/denied");
 
 	}
 
