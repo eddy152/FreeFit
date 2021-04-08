@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.exercise.service.ExeBasicDetailVO;
@@ -35,11 +34,19 @@ public class ExerciseController {
 		return "exercise/getSearchExerciseList";
 	}
 	
+	// ListALL
 	@GetMapping("/getSearchExerciseListAll")
 	public String getSearchExerciseListAll(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
 		return "exercise/getSearchExerciseListAll";
 	}
+	
+	// ListALLDel
+		@GetMapping("/deleteExerciseListForm")
+		public String deleteExerciseListForm(ExerciseListVO vo, Model model) {
+			model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
+			return "exercise/deleteExerciseListForm";
+		}
 	
 	// 단건 조회
 	@GetMapping("/getExerciseListProc")
@@ -54,7 +61,11 @@ public class ExerciseController {
 		service.insertExerciseList(vo);
 		return "redirect:/getSearchExerciseList";
 	}
-
+	//등록 폼
+	@GetMapping("/insertExerciseListForm")
+	public String insertExerciseListForm() {
+		return "exercise/insertExerciseListForm";
+	}
 	// 단건 수정
 	@GetMapping("/updateExerciseList")
 	public String updateExerciseList(ExerciseListVO vo) {
@@ -80,7 +91,7 @@ public class ExerciseController {
 		model.addAttribute("exeList", service.getSearchExerciseProgramBasic(vo));
 		model.addAttribute("exeBasicDetail", service.getSearchExerciseBasicDetail(vo1));
 		model.addAttribute("exeProgramBasic", service.getSearchExerciseProgramBasic(vo2));
-		return "exercise/exerciseProgramBasic";
+		return "exercise/getSearchExerciseProgramBasic";
 	}
 
 	// 단건 조회
@@ -224,10 +235,10 @@ public class ExerciseController {
 
 	// EXERCISE_RECORD start
 	// 리스트 조회
-	@ResponseBody
 	@GetMapping("/getSearchExerciseRecord")
-	public List<ExerciseRecordVO> getSearchExerciseRecord(ExerciseRecordVO vo) {
-		return service.getSearchExerciseRecord(vo);
+	public String getSearchExerciseRecord(ExerciseRecordVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExerciseRecord(vo));
+		return "exercise/getSearchExerciseRecord";
 	}
 
 	// 단건 조회

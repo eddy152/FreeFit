@@ -12,9 +12,9 @@
 <script type="text/javascript">
 	$(function() {
 		$("tr").on("click", function() {
-			var user_id = $(this)[0].firstElementChild.innerText;
-			var url = "getFFUserProc?user_id=";
-			$(location).attr('href', url + user_id);
+			var id = $(this)[0].firstElementChild.innerText;
+			var url = "getFFUserProc?id=";
+			$(location).attr('href', url + id);
 		})
 	})
 </script>
@@ -23,7 +23,7 @@
 	<div align="center">
 		<table border="1">
 			<tr>
-				<th>USER_ID</th>
+				<th>ID</th>
 				<th>NAME</th>
 				<th>AGE</th>
 				<th>GENDER</th>
@@ -31,7 +31,7 @@
 			</tr>
 			<c:forEach items="${list}" var="list">
 				<tr>
-					<td>${list.user_id}</td>
+					<td>${list.id}</td>
 					<td>${list.name}</td>
 					<td>${list.phone_number}</td>
 					<td>${list.age}</td>

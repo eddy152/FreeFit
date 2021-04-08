@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FFUserVO {
-	String user_id;
+	String id;
 	String password;
 	String phone_number;
 	String name;

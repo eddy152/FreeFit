@@ -26,7 +26,6 @@
         		}
         	}
     	}
-		opener.document.getElementById("pInput").value = document.getElementById("cInput").value
 	});
 </script>
 </head>
@@ -52,14 +51,10 @@
 					<td><input type="text" name="exep_no${list.exep_no}" value="${list.exe_name }"></td>
 				</tr>
 			</c:forEach>
-		</table>
-		<br>
-    <b><font size="5" color="gray">자식창</font></b>
-    <br><br>
- 
-    <input type="text" id="cInput"> <input type="button" value="전달하기" id="exePut">
-    <br><br>
-    <input type="button" value="창닫기" onclick="window.close()">
+		</table><br>
+	    <b><font size="5" color="gray">자식창</font></b><br><br>
+	    <input type="button" value="전달하기" id="exePut"><br><br>
+	    <input type="button" value="창닫기" onclick="window.close()">
 	</div>
 </body>
 </html>

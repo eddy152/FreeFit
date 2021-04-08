@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	$(function(){  
 		$("#btnRsv").on("click", function(){
-			var url = "getSearchReservation?user_id=${list.user_id}";
+			var url = "getSearchReservation?id=${list.id}";
 			$(location).attr('href', url);
 		});
 	});
@@ -23,7 +23,7 @@
 	<div align="center">
 		<table border="1">
 			<tr>
-				<th>USER_ID</th>
+				<th>ID</th>
 				<th>PHONE_NUMBER</th>
 				<th>NAME</th>
 				<th>AGE</th>
@@ -33,7 +33,7 @@
 				<th>MEM_REG_ID</th>
 			</tr>
 			<tr>
-				<td>${list.user_id}</td>
+				<td>${list.id}</td>
 				<td>${list.phone_number}</td>
 				<td>${list.name}</td>
 				<td>${list.age}</td>

@@ -82,22 +82,29 @@ $(function() {
 	
 	//버튼 클릭 이벤트(운동 목록 삭제)
 	$(document).on("click", "button[name=setDel]", function() {
-		var enTr = $("#exeNameTbl tr");
-		for(var i = 0; i < enTr.length; i++) {
-			if(enTr[i].innerText == $("#exeSet th input")[0].value) {
-				enTr[i].remove();
+		var jbResult = confirm( '운동을 삭제하시겠습니까?' );
+		if(jbResult) {
+			var enTr = $("#exeNameTbl tr");
+			for(var i = 0; i < enTr.length; i++) {
+				if(enTr[i].innerText == $("#exeSet th input")[0].value) {
+					enTr[i].remove();
+				}
 			}
+			$("#insertExercisePersonalDetail table").children().remove();
 		}
-		$("#insertExercisePersonalDetail table").children().remove();
+	})
+	
+	$(document).on("click", "button[name=setSub]", function() {
+		alert("운동 저장이 완료되었습니다.");
 	})
 	
 	//버튼 클릭 이벤트(운동 추가 & 삭제 & 불러오기)
 	$(document).on("click", "a[name=exeAdd]", function() {
-		console.log("add");
+		window.open("insertExerciseListForm", "insertExeForm", "width=570, height=350, resizable = no, scrollbars = no");
 	})
 	
 	$(document).on("click", "a[name=exeDel]", function() {
-		console.log("del");
+		window.open("deleteExerciseListForm?exe_part=" + part , "DelExeForm", "width=570, height=350, resizable = no, scrollbars = no");
 	})
 	
 	$(document).on("click", "a[name=exeGet]", function() {
@@ -271,7 +278,6 @@ ul.sub li:hover {
 					운동 프로그램 번호<br><input type="text" name="epd_no" value="5"><br>
 					프로그램 번호<br><input type="text" name="exep_no" value="1"><br>
 					유저 아이디<br><input type="text" name="user_id" value="lee"><br>
-    				전달할 값 : <input type="text" id="pInput">
 				</form>
 			</div>
 		</div>

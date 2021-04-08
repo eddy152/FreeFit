@@ -353,7 +353,7 @@
 				exe_no,
 				epd_set,
 				exer_do_set
-		FROM exe_personal_detail
+		FROM exercise_record
 		WHERE user_id = #{user_id}
 	</select>
 	
@@ -370,14 +370,14 @@
 				exe_no,
 				epd_set,
 				exer_do_set
-		FROM exe_personal_detail
+		FROM exercise_record
 		WHERE exer_no = #{exer_no}
 		AND user_id = #{user_id}
 	</select>
 	
 	<!-- EXERCISE_RECORD insert -->	
 	<insert id="insertExerciseRecord" parameterType="ExerciseRecordVO">
-		INSERT INTO exe_personal_detail
+		INSERT INTO exercise_record
 		(
 			exer_no,
 			user_id,
@@ -409,7 +409,7 @@
 	
 	<!-- EXERCISE_RECORD update -->
 	<update id="updateExerciseRecord" parameterType="ExerciseRecordVO">
-		UPDATE exe_personal_detail
+		UPDATE exercise_record
 		SET exer_count = #{exer_count},
 			exer_date = #{exer_date},
 			exer_end_date = #{exer_end_date},
@@ -425,7 +425,7 @@
 	
 	<!-- EXERCISE_RECORD delete -->
 	<delete id="deleteExerciseRecord" parameterType="ExerciseRecordVO">
-		DELETE FROM exe_personal_detail
+		DELETE FROM exercise_record
 		WHERE exer_no = #{exer_no}
 		AND user_id = #{user_id}
 	</delete>
@@ -434,7 +434,7 @@
 <!-- FF_USER start -->
 	<!-- FF_USER select -->
 	<select id="getSearchFFUser" resultType="FFUserVO" parameterType="FFUserVO">
-		SELECT  user_id,
+		SELECT  id,
 				password,
 				phone_number,
 				name,
@@ -448,7 +448,7 @@
 	
 	<!-- FF_USER select one -->
 	<select id="getFFUserProc"  resultType="FFUserVO" parameterType="FFUserVO">
-		SELECT  user_id,
+		SELECT  id,
 				password,
 				phone_number,
 				name,
@@ -458,7 +458,7 @@
 				gender,
 				mem_reg_id
 		FROM ff_user
-		WHERE user_id = #{user_id}
+		WHERE id = #{id}
 	</select>
 <!-- FF_USER end -->
 
