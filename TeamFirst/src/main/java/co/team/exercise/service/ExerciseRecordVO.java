@@ -1,6 +1,9 @@
 package co.team.exercise.service;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +17,9 @@ public class ExerciseRecordVO {
 	int exer_no;
 	String user_id;
 	int exer_count;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	Date exer_date;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	Date exer_end_date;
 	int exer_weight;
 	int exer_do_count;
@@ -22,4 +27,6 @@ public class ExerciseRecordVO {
 	int exe_no;
 	int epd_set;
 	int exer_do_set;
+	String exe_name;
+	int exe_time;
 }

@@ -240,6 +240,12 @@ public class ExerciseController {
 		model.addAttribute("list", service.getSearchExerciseRecord(vo));
 		return "exercise/getSearchExerciseRecord";
 	}
+	//ajax용 리스트 호출
+	@ResponseBody
+	@GetMapping("/getExerciseRecordList")
+	public List<ExerciseRecordVO> getExerciseRecordList(ExerciseRecordVO vo) {
+		return service.getSearchExerciseRecord(vo);
+	}
 
 	// 단건 조회
 	@ResponseBody

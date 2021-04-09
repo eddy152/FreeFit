@@ -342,19 +342,24 @@
 <!-- EXERCISE_RECORD start -->
 	<!-- EXERCISE_RECORD select -->
 	<select id="getSearchExerciseRecord" resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
-		SELECT  exer_no,
-				user_id,
-				exer_count,
-				exer_date,
-				exer_end_date,
-				exer_weight,
-				exer_do_count,
-				exep_no,
-				exe_no,
-				epd_set,
-				exer_do_set
-		FROM exercise_record
+		SELECT
+		      e.exer_no,
+		      e.user_id,
+		      e.exer_count,
+		      e.exer_date,
+		      e.exer_end_date,
+		      e.exer_weight,
+		      e.exer_do_count,
+		      e.exep_no,
+		      e.exe_no,
+		      e.epd_set,
+		      e.exer_do_set,
+		      l.exe_name,
+		      ROUND((exer_end_date - exer_date)*24*60) AS exe_time
+		FROM exercise_record e, exercise_list l
 		WHERE user_id = #{user_id}
+		AND e.exe_no = l.exe_no
+		ORDER BY e.exer_end_date DESC
 	</select>
 	
 	<!-- EXERCISE_RECORD select one -->
