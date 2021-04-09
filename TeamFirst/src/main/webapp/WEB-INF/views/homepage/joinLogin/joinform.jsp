@@ -105,6 +105,14 @@
 						name="address_detail" placeholder="주소 상세">
 				</div>
 			</div>
+						<div class="row justify-content-center">
+				<div class="col mb-md-2">
+					<label for="address_detail">헬스클럽명</label>
+					<input type="text" class="form-control" id="fitness_name"
+						name="fitness_name" placeholder="헬스클럽명" value="">
+				</div>
+			</div>
+			
 			<div class="row justify-content-center">
 				<div class="col mb-lg-5">
 					<button class="btn btn-primary btn-lg btn-block" type="submit">회원가입</button>

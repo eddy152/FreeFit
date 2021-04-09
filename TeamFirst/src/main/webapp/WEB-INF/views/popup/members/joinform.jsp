@@ -69,14 +69,14 @@
 			<div class="row justify-content-center">
 
 				<!-- novalidate =<form> 태그의 novalidate 속성은 폼 데이터(form data)를 서버로 제출할 때 해당 데이터의 유효성을 검사하지 않음을 명시합니다. -->
-				<form class="needs-validation" method="post" action="#" novalidate>
+				<form class="needs-validation" method="post" action="/spring/members/joinU" novalidate>
 					<!-- action="/members/joinA" -->
 					<div style="min-width: 400px;"></div>
 						<div class="row justify-content-center">
 							<div class="col mb-md-4">
 								<!-- col 의 margin bottom 을 - midium - 2만큼 -->
 								<label for="firstName">이름</label> <input type="text"
-									class="form-control" id="userName" name="userName"
+									class="form-control" id="name" name="name"
 									placeholder="이름" required>
 								<div class="invalid-feedback">이름을 입력해주세요.</div>
 							</div>
@@ -155,14 +155,14 @@
 		<div class="row justify-content-center">
 
 			<!-- novalidate =<form> 태그의 novalidate 속성은 폼 데이터(form data)를 서버로 제출할 때 해당 데이터의 유효성을 검사하지 않음을 명시합니다. -->
-			<form class="needs-validation" method="post" action="#" novalidate>
+			<form class="needs-validation" method="post" action="/spring/members/joinT" novalidate>
 				<!-- action="/members/joinA" -->
 				<div style="min-width: 400px;"></div>
 					<div class="row justify-content-center">
 						<div class="col mb-md-4">
 							<!-- col 의 margin bottom 을 - midium - 2만큼 -->
 							<label for="firstName">이름</label> <input type="text"
-								class="form-control" id="userName" name="userName"
+								class="form-control" id="name" name="name"
 								placeholder="이름" required>
 							<div class="invalid-feedback">이름을 입력해주세요.</div>
 						</div>

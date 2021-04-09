@@ -1,8 +1,5 @@
 package co.team.security.controller;
 
-import java.util.Enumeration;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,26 +41,9 @@ public class MemberController {
 	@Autowired
 	MemberMapper mapper;
 
-	@GetMapping("/loginSuccess")
-
-	public String loginSuccess(HttpServletRequest request) {
-		System.out.println("hello");
-		System.out.println("hellow");
-
-		Enumeration<String> attributes = request.getSession().getAttributeNames();
-		while (attributes.hasMoreElements()) {
-			String attribute = (String) attributes.nextElement();
-			System.out.println(attribute);
-			System.out.println("-----");
-			System.out.println(request.getSession().getAttribute(attribute));
-		}
-
-		return "popup/members/loginSuccess";
-	}
-
 	@GetMapping("/loginform")
 	public String loginform(HttpSession session) {
-		
+
 		return "popup/members/loginform";
 	}
 
@@ -72,22 +52,19 @@ public class MemberController {
 		return "popup/members/loginerror";
 	}
 
-
-
 	@GetMapping("/denied")
 	public String denied() {
 		return "popup/members/denied";
 	}
 
-	@GetMapping("/log") //세션저장
+	@GetMapping("/log") // 아이디, mem_reg_id 세션저장
 	public String log(HttpSession session) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-		System.out.println("username="+ username);
+		System.out.println("username=" + username);
 		if (username.equals("anonymousUser")) {
-			session.invalidate();		
-		}
-		else {
+			session.invalidate();
+		} else {
 			MemberVO vo = mapper.getMemberById(username);
 			session.setAttribute("mem_reg_id", vo.getMem_reg_id());
 			session.setAttribute("id", vo.getId());
@@ -95,7 +72,7 @@ public class MemberController {
 		return "popup/members/loginform";
 	}
 
-	// 회원가입 폼 만들기
+	// 회원가입 폼
 
 	@GetMapping("/joinformH")
 	public String joinformH() {
@@ -110,6 +87,7 @@ public class MemberController {
 	// 오너 가입
 	@PostMapping("/joinO")
 	public String joinOwner(@ModelAttribute AdminVO member) {
+
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		memberService.addOwnerMember(member);
 		return "home";
@@ -117,16 +95,20 @@ public class MemberController {
 
 	// 트레이너 가입
 	@PostMapping("/joinT")
-	public String joinTrainer(@ModelAttribute TrainerVO member) {
-		member.setPassword(passwordEncoder.encode(member.getPassword()));
+	public String joinTrainer(@ModelAttribute TrainerVO member, HttpSession session) {
+		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
+		member.setId(member.getPhone_number());
+		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addTrainerMember(member);
 		return "home";
 	}
 
 	// 유저 가입
 	@PostMapping("/joinU")
-	public String joinUser(@ModelAttribute UserVO member) {
-		member.setPassword(passwordEncoder.encode(member.getPassword()));
+	public String joinUser(@ModelAttribute UserVO member, HttpSession session) {
+		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
+		member.setId(member.getPhone_number());
+		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addUserMember(member);
 		return "home";
 	}

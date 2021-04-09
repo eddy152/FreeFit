@@ -26,19 +26,18 @@
 	</insert>
 	
 		<insert id="addOwnerMember" parameterType="adminVO">
-		insert into ADMIN(id, password, name, phone_number, tel_number, zipcode, 
-							address, address_detail, fitness_name, business_number ) values
+		insert into ADMIN(id, password, name, phone_number, zipcode, 
+							address, address_detail, fitness_name) values
 		(
 		#{id},
 		#{password}, 
 		#{name},
 		#{phone_number},
-		#{tel_number},
 		#{zipcode},
 		#{address},
 		#{address_detail},
-		#{fitness_name},
-		#{business_number}		
+		#{fitness_name}
+	
 		)
 				
 	</insert>

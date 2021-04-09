@@ -8,14 +8,15 @@
 
 	<insert id="addUserMember" parameterType="UserVO">
 		insert into ff_user(
-		id, mem_reg_id, password, phone_number, name, gender ) values
+		id, mem_reg_id, password, phone_number, name, gender, age ) values
 		(
 		#{id},
 		#{mem_reg_id},
 		#{password},
 		#{phone_number},
 		#{name},
-		#{gender}
+		#{gender},
+		#{age}
 		)
 
 	</insert>

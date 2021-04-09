@@ -18,6 +18,6 @@ public class UserVO {
 	private String age;
 	private String height;
 	private String notice;
-	private String gender;
-	private String mem_reg_id;
+	private int gender;
+	private int mem_reg_id;
 }
