@@ -20,7 +20,7 @@
 
 
 <!-- Bootstrap core CSS -->
-<link href="./resources/assets/dist/css/bootstrap.min.css"
+<link href="/spring/resources/assets/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <style>
@@ -39,7 +39,7 @@
 	}
 }
 </style>
-<link href="./resources/assets/dist/css/dashboard.css" rel="stylesheet">
+<link href="/spring/resources/assets/dist/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
 
@@ -63,13 +63,13 @@
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous"></script>
 
-	<script src="./resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
 
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-	<script src="./resources/assets/dist/js/dashboard.js"></script>
+	<script src="/spring/resources/assets/dist/js/dashboard.js"></script>
 </body>
 </html>

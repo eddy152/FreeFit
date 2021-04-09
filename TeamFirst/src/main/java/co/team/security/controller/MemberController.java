@@ -99,12 +99,12 @@ public class MemberController {
 
 	@GetMapping("/joinformH")
 	public String joinformH() {
-		return "popup/members/loginform";
+		return "homepage/joinLogin/joinform";
 	}
 
 	@GetMapping("/joinformP")
 	public String joinformP() {
-		return "popup/members/loginform";
+		return "popup/members/joinform";
 	}
 
 	// 오너 가입

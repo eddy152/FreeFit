@@ -89,7 +89,7 @@ window.onload=function(){
 		action="/spring/authenticate">
 		<img class="mb-4" src="/spring/resources/images/logo.png" alt=""
 			width="172" height="172"> <label for="inputId" class="sr-only">ID</label>
-		<input type="email" id="inputId" class="form-control" placeholder="ID"
+		<input type="text" id="inputId" class="form-control" placeholder="ID"
 			name="userId" required autofocus> <label for="inputPassword"
 			class="sr-only">Password</label> <input type="password"
 			id="inputPassword" class="form-control" placeholder="Password"
