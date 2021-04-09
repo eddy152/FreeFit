@@ -28,10 +28,24 @@
  	
  	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리)-->
  	<select id="getRealFood" resultType="FoodVO" parameterType="FoodVO">
- 		select * from real_diet
+ 		select real_diet_no, user_id, take_date, diet_content, calorie, to_char(sysdate, 'yyyy-MM-w') as week, sysdate from real_diet
  		where user_id = #{id}
     	and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
  	</select>
  	
+	<select id="getDate" resultType="FoodVO" parameterType="FoodVO">
+ 		select real_diet_no, user_id, take_date, diet_content, calorie, to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
+		from real_diet
+		where user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+ 	</select>
  	
+ 	<select id="getBeforeDate" resultType="FoodVO" parameterType="FoodVO">
+ 		select real_diet_no, user_id, take_date, diet_content, calorie, to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
+		from real_diet
+		where user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+ 	</select>
+ 	
+ 
  </mapper>

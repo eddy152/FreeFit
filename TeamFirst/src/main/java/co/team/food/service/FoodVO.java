@@ -33,4 +33,9 @@ public class FoodVO {
 	private String notice;
 	private String gender;
 	private String mem_reg_id;
+	
+	private String dat;
+	private String week;
+	private String sysdate;
+	private String cnt;
 }

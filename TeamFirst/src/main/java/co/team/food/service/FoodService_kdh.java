@@ -15,5 +15,11 @@ public interface FoodService_kdh {
 
 	// 식단 단건 조회(실체섭취량)
 	public List<FoodVO> getRealFood(FoodVO vo);
+
+	// 날짜 조회(+)
+	public List<FoodVO> getDate(FoodVO vo);
 	
+	// 날짜 조회(-)
+	public List<FoodVO> getBeforeDate(FoodVO vo);
+
 }
