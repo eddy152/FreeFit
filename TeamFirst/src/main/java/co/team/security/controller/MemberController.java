@@ -1,8 +1,16 @@
 package co.team.security.controller;
 
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Collection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.admin.service.AdminVO;
 import co.team.security.service.MemberService;
@@ -41,7 +50,7 @@ public class MemberController {
 	@Autowired
 	MemberMapper mapper;
 
-	@GetMapping("/loginform")
+	@GetMapping("/loginform") // 로그인폼으로
 	public String loginform(HttpSession session) {
 
 		return "popup/members/loginform";
@@ -56,10 +65,12 @@ public class MemberController {
 	public String denied() {
 		return "popup/members/denied";
 	}
-
-	@GetMapping("/log") // 아이디, mem_reg_id 세션저장
+ 
+	@RequestMapping("/log") // 아이디, mem_reg_id 세션저장, 삭제
+	@ResponseBody
 	public String log(HttpSession session) {
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 인증정보
+		String username = auth.getName(); // 이름(id)을 가져온다
 
 		System.out.println("username=" + username);
 		if (username.equals("anonymousUser")) {
@@ -69,7 +80,8 @@ public class MemberController {
 			session.setAttribute("mem_reg_id", vo.getMem_reg_id());
 			session.setAttribute("id", vo.getId());
 		}
-		return "popup/members/loginform";
+		return "log";
+
 	}
 
 	// 회원가입 폼
@@ -90,27 +102,39 @@ public class MemberController {
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		memberService.addOwnerMember(member);
-		return "home";
+		return "redirect:/tilesTestProgram";
 	}
 
 	// 트레이너 가입
 	@PostMapping("/joinT")
 	public String joinTrainer(@ModelAttribute TrainerVO member, HttpSession session) {
 		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId(member.getPhone_number());
-		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
+		String[] pn= member.getPhone_number().split("-");
+		member.setId((int) session.getAttribute("mem_reg_id")+"_"+pn[1]+pn[2]);
+		member.setPassword(passwordEncoder.encode(pn[0]+pn[1]+pn[2]));
 		memberService.addTrainerMember(member);
-		return "home";
+		return "redirect:/tilesTestProgram";
 	}
 
 	// 유저 가입
 	@PostMapping("/joinU")
 	public String joinUser(@ModelAttribute UserVO member, HttpSession session) {
 		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId(member.getPhone_number());
-		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
+		String[] pn= member.getPhone_number().split("-");
+		member.setId((int) session.getAttribute("mem_reg_id")+"_"+pn[1]+pn[2]);
+		member.setPassword(passwordEncoder.encode(pn[0]+pn[1]+pn[2]));
 		memberService.addUserMember(member);
-		return "home";
+		return "redirect:/tilesTestProgram";
+	}
+	
+	//아이디 중복체크
+	@ResponseBody
+	@GetMapping("/checkId")
+	public String checkId(String id) {
+		String existedId="0";
+		
+		
+		return memberService.userCheck(id);
 	}
 
 }

@@ -16,6 +16,7 @@ public interface MemberRoleMapper {
 	public void addTrainerRole(String memberId);
 
 	public void addUserRole(String memberId);
+	public void addGuestRole(String memberId);
 //		Map<String, Object> params = Collections.singletonMap("memberId", memberId);
 //		jdbc.update(MemberRoleDaoSqls.INSERT_USER_ROLE, params);
 //	}

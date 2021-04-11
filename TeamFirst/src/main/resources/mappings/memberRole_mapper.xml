@@ -13,26 +13,35 @@
 
 	</select>
 
-
+	<insert id="addGuestRole" parameterType="String">
+		INSERT INTO ROLE VALUES
+		((SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLE_GUEST')
+	</insert>
 
 	<insert id="addOwnerRole" parameterType="String">
-
-		INSERT INTO ROLE VALUES
-		((SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLL_OWNER')
+		insert into role
+		select (SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLE_OWNER'
+		from dual union all
+		select (SELECT NVL(MAX(id)+2, 1) FROM ROLE), #{memberId}, 'ROLE_TRAINER'
+		from dual union all
+		select (SELECT NVL(MAX(id)+3, 1) FROM ROLE), #{memberId}, 'ROLE_USER'
+		from dual
 
 	</insert>
 
 	<insert id="addTrainerRole" parameterType="String">
 
-		INSERT INTO ROLE VALUES
-		((SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLL_TRAINER')
+		INSERT INTO ROLE
+		VALUES
+		((SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId},
+		'ROLL_TRAINER')
 
 	</insert>
 
 	<insert id="addUserRole" parameterType="String">
 
 		INSERT INTO ROLE VALUES
-		((SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLL_USER')
+		((SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLE_USER')
 
 	</insert>
 

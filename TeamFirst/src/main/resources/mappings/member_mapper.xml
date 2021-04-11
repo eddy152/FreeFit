@@ -11,9 +11,6 @@ select * from allid where id =#{id}
 
 	</select>
 	
-	<insert id="addAdminMember"></insert>
-	
-
 	
 
 	

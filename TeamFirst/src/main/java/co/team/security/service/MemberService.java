@@ -14,9 +14,11 @@ public interface MemberService extends UserDbService {
 
 	public List<UserRoleEntity> getUserRoles(String loginUserId);
 
+
 	public void addOwnerMember(AdminVO member);
 
 	public void addTrainerMember(TrainerVO member);
 
 	public void addUserMember(UserVO member);
+	public String userCheck(String loginUserId) throws NullPointerException;
 }

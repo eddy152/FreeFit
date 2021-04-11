@@ -42,43 +42,6 @@
 }
 </style>
 
-<script>
-var session = <%=request.getSession().getAttribute("mem_reg_id")%>;
-
-	if(session!=null){
-		alert("로그인 성공");
-	location.replace("/spring/");
-} 
-
-
-window.onload=function(){
-
-
-	
-	login.onclick=function(){
-		
-		let form=loginForm;
-      
-      fetch(loginForm.action, {
-        method: 'POST',
-        headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams({
-        	userId:loginForm.userId.value,
-        	password:loginForm.password.value})
-    	  })
-        
-		.then(response => response)
-		.catch(error => console.error('Error:', error))
-        .then(function(response){ 
-    	  if (response.url.includes('error')){
-    	  	alert('로그인 실패하였습니다. 아이디와 비밀번호를 확인해주세요.');
-    	  	
-    	  }
-    	  	else {location.replace('log'); }})
-	}
-      
-}      
-      </script>
 
 
 </head>
@@ -87,8 +50,8 @@ window.onload=function(){
 
 	<form class="form-signin" method="post" id="loginForm"
 		action="/spring/authenticate">
-		<img class="mb-4" src="/spring/resources/images/logo.png" alt=""
-			width="172" height="172"> <label for="inputId" class="sr-only">ID</label>
+<a href="/spring/"><img class="mb-4" src="/spring/resources/images/logo.png" alt=""
+			width="172" height="172"></a> <label for="inputId" class="sr-only">ID</label>
 		<input type="text" id="inputId" class="form-control" placeholder="ID"
 			name="userId" required autofocus> <label for="inputPassword"
 			class="sr-only">Password</label> <input type="password"
@@ -96,21 +59,31 @@ window.onload=function(){
 			name="password" required>
 
 		<button class="btn btn-lg btn-primary btn-block" type="button"
-			id="login">로그인</button>
-
-		<p class="mt-5 mb-3 text-muted">&copy; 2021-2021</p>
+			id="formLogin">로그인</button>
 	</form>
 
+
+
+	<!-- Modal -->
+
+
+
+
 </body>
+
+
+
+
+
+<script>
+let isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : "=null;"%>
+      
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+
+<script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/spring/resources/assets/dist/js/loginout.js"></script>
 </html>
-
-
-
-
-
-
-
-
-
-
-

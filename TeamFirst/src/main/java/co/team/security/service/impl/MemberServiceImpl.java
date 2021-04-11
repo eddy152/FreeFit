@@ -68,9 +68,10 @@ public class MemberServiceImpl implements MemberService {
 	public void addOwnerMember(AdminVO member) {
 		adminMapper.addOwnerMember(member);
 		String memberId = adminMapper.getOwnerId(member);
-		memberRoleMapper.addOwnerRole(memberId);
+		memberRoleMapper.addGuestRole(memberId);
 
 	}
+	
 
 	@Override
 	@Transactional(readOnly = false)
@@ -88,6 +89,20 @@ public class MemberServiceImpl implements MemberService {
 		String memberId = userMapper.getUserId(member);
 		memberRoleMapper.addUserRole(memberId);
 
+	}
+	
+	//아이디 중복체크
+	@Transactional
+	public String userCheck(String loginUserId) throws NullPointerException {
+		String memberId="";
+		try {
+		MemberVO member = memberMapper.getMemberById(loginUserId);
+		memberId=member.getId();
+		}
+		catch(NullPointerException e) {
+			
+		}
+		return memberId;
 	}
 
 }

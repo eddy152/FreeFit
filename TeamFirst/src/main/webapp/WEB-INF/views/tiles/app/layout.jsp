@@ -12,7 +12,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.80.0">
-<title>app</title>
+<title>Pyramid Fit</title>
 
 <!-- <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.6/examples/pricing/">
@@ -39,12 +39,13 @@
 	}
 }
 </style>
-<link href="/spring/resources/assets/dist/css/dashboard.css" rel="stylesheet">
+<link href="/spring/resources/assets/dist/css/dashboard.css"
+	rel="stylesheet">
 </head>
 <body>
 
 
-	<tiles:insertAttribute name="header"/>
+	<tiles:insertAttribute name="header" />
 
 	<div class="container-fluid">
 		<div class="row">
@@ -58,18 +59,22 @@
 		</div>
 	</div>
 
-
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-
-	<script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
-
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-	<script src="/spring/resources/assets/dist/js/dashboard.js"></script>
 </body>
+<script>
+	var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : ";"%>
+	
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+
+<script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script
+	src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src="/spring/resources/assets/dist/js/dashboard.js"></script>
+<script src="/spring/resources/assets/dist/js/loginout.js"></script>
 </html>
