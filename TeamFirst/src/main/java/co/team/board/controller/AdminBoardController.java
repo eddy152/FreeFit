@@ -64,7 +64,7 @@ public class AdminBoardController {
 		return "board/getAdminNoticeBoard";
 	}
 	//등록
-	@PostMapping("/insertAdminNoticeBoard")
+	@RequestMapping("/insertAdminNoticeBoard")
 	public String insertAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.insertAdminNoticeBoard(vo);
 		return "redirect:/getAdminNoticeBoardList";	
@@ -81,13 +81,13 @@ public class AdminBoardController {
 	@GetMapping("/updateAdminNoticeBoard")
 	public String updateAdminNoticeBoard(@RequestParam("board_no")int board_no, Model model) {
 		model.addAttribute("board", service.getAdminNoticeBoard(board_no));
-		return "board/updateAdminNoticeBoard";
+		return "board/adminUpdateBoard";
 	}
 
 	@PostMapping("/updateAdminNoticeBoard")
 	public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
 		service.updateAdminNoticeBoard(vo);
-		return "redirect: /updateAdminNoticeBoard?board_no="+ vo.getBoard_no();
+		return "redirect: /getAdminNoticeBoard?board_no="+ vo.getBoard_no();
 	}
 	//삭제
 	@GetMapping("/deleteAdminNoticeBoard")

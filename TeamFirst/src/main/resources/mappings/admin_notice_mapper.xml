@@ -57,7 +57,8 @@
 	<update id="updateAdminNoticeBoard"
 		parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
 		UPDATE ADMIN_NOTICE_BOARD
-		SET CONTENT = #{content}
+		SET TITLE = #{title},
+			CONTENT = #{content}
 		WHERE BOARD_NO = #{board_no}
 	</update>
 	

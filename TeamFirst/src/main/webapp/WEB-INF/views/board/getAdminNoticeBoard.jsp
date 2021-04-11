@@ -24,6 +24,7 @@
 			focus : true,
 			lang : 'ko-KR'
 		});
+		$("#summernote").summernote('code',  '${board.content}');
 });
 </script>
 <script>
@@ -34,6 +35,24 @@
 		}
 	}	
 </script>
+
+<script>
+function goModify(frm) {
+	var title = frm.title.value;
+	var content = frm.content.value;
+	
+	if (title.trim() == ''){
+		alert("제목을 입력해주세요");
+		return false;
+	}
+	if (content.trim() == ''){
+		alert("내용을 입력해주세요");
+		return false;
+	}
+	frm.submit();
+}
+</script>
+
 </head>
 <style>
 h2 {text-align: center;}
@@ -48,12 +67,15 @@ textarea {width: 100%;}
 <h2 style="text-align: center;">상세보기</h2><br><br><br>
 
 <div style="width: 60%; margin: auto;">
-	<form method="post" action="updateAdminNoticeBoard" >
-		<input type="text" name="board_no" value="${board.board_no}">
-		<input type="text" name="title" style="width: 40%;" placeholder="제목" value="${board.title }"/>
+	<form method="post" action="adminUpdateBoard" >
+		<input readonly="readonly" type="text" name="board_no" value="${board.board_no}">
+		<input readonly="readonly" type="text" name="title" style="width: 40%;" placeholder="제목" value="${board.title }"/>
 		<br><br> 
-		<textarea id="summernote" name="content"></textarea>
-		<input id="subBtn" type="button" value="글 수정" style="float: right;" onclick="goModify(this.form)"/>
+		<textarea readonly="readonly" id="summernote" name="content"></textarea>
+		<input id="subBtn" type="button" value="수정하기" style="float: right;" onclick="goModify(this.form)"/>
+		<input type="button" value="삭제" style="float: right;" onclick="del(${board.board_no})">
+		<input type="button" value="목록으로" style="float: right;"
+				onclick="location.href='getAdminNoticeBoardList';">
 	</form>
 </div>
 

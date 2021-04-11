@@ -14,7 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <!-- include summernote-ko-KR -->
 <script src="/resources/js/summernote-ko-KR.js"></script>
-<title>글쓰기</title>
+<title>수정페이지</title>
 
 <script>
 $(document).ready(function() {
@@ -35,11 +35,11 @@ $(document).ready(function() {
 
 <div style="width: 60%; margin: auto;">
 	<form method="post" action="updateAdminNoticeBoard" >
-		<input type="text" name="board_no" value="${board.board_no}">
+		<input type="hidden" name="seq" value="${board.board_no}">
 		<input type="text" name="title" style="width: 40%;" placeholder="제목" value="${board.title }"/>
 		<br><br> 
 		<textarea id="summernote" name="content"></textarea>
-		<input id="subBtn" type="button" value="글 수정" style="float: right;" onclick="goModify(this.form)"/>
+		<input id="subBtn" type="button" value="글수정" style="float: right;" onclick="goModify(this.form)"/>
 	</form>
 </div>
 <script>
@@ -54,6 +54,11 @@ function goModify(frm) {
 	if (content.trim() == ''){
 		alert("내용을 입력해주세요");
 		return false;
+	
+		//if (category.trim() ==''){
+		//alert("카테고리를 입력해주세요");
+		//return false;
+	 //}
 	}
 	frm.submit();
 }
