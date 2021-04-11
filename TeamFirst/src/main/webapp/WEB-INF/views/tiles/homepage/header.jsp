@@ -8,5 +8,10 @@
     <a class="p-2 text-dark" href="#">Support</a>
     <a class="p-2 text-dark" href="#">Pricing</a>
   </nav>
-  <a class="btn btn-outline-primary" href="#">로그인</a>
+  <div class="col-md-2 p-2 d-flex justify-content-end"> <!-- col-md-2정도 , flex 우측에서 -->
+  <a class="btn btn-outline-primary" id="loginBtn">로그인</a><a class="btn btn-outline-primary" id="joinBtn">회원가입</a>
+  </div>
 </div>
+
+
+

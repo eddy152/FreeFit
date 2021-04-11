@@ -62,7 +62,7 @@ Configuration 2.1//EN"
 		<put-attribute name="header"
 			value="/WEB-INF/views/tiles/app/header.jsp" />
 		<put-attribute name="side"
-			value="/WEB-INF/views/tiles/program/side.jsp" />
+			value="/WEB-INF/views/tiles/app/side.jsp" />
 
 	</definition>
 
