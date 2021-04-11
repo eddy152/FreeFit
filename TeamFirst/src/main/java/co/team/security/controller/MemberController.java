@@ -73,8 +73,8 @@ public class MemberController {
 		String username = auth.getName(); // 이름(id)을 가져온다
 
 		System.out.println("username=" + username);
-		if (username.equals("anonymousUser")) {
-			session.invalidate();
+		if (username.equals("anonymousUser")) { //로그인한 상태가 아닐 경우
+			session.invalidate(); //세션을 삭제한다
 		} else {
 			MemberVO vo = mapper.getMemberById(username);
 			session.setAttribute("mem_reg_id", vo.getMem_reg_id());
