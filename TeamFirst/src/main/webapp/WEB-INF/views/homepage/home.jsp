@@ -6,8 +6,8 @@
 <h1>  홈페이지 레이아웃 </h1>
 <p>co.team.home.controller</p>
 <br>
-<p>	@RequestMapping(value = "/", method = RequestMethod.GET)</p>
-<p>	public String home() {</p>
+<p>mem_reg_id 등록된 owner 계정</p>
+<p>id : owner</p>
+<p>pw : 1234 </p>
 <p></p>
-<p>		return "homepage/home";</p>
 <p>	}</p>
