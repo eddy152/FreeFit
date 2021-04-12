@@ -63,7 +63,6 @@
 	<br>
 	<br>
 	<br>
-
 	<div style="width: 60%; margin: auto;">
 		<form method="post" action="insertAdminNoticeBoard">
 		 	 제목 :  <input type="text" name="title" style="width: 40%;" placeholder="제목" /><br>

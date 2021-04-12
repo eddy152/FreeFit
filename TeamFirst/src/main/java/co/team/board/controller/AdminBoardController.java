@@ -37,7 +37,7 @@ public class AdminBoardController {
 	//@ResponseBodya
 	//@GetMapping
 	@RequestMapping("/getAdminNoticeBoardList")
-	public String getAdminNoticeBoardList(AdminNoticeBoardVO vo, Model model) throws Exception {
+	public String getAdminNoticeBgetAdminNoticeBoardListoardList(AdminNoticeBoardVO vo, Model model) throws Exception {
 		model.addAttribute("list", service.getAdminNoticeBoardList(vo));
 		return "board/getAdminNoticeBoardList";
 	}
@@ -56,6 +56,7 @@ public class AdminBoardController {
 //	  
 //	  return "board/getAdminNoticeBoard";
 //	}
+	
 	//단건+조회수증가
 	@GetMapping("/getAdminNoticeBoard")
 	public String getAdminNoticeBoard(Model model, @RequestParam("board_no")int board_no) {
@@ -84,11 +85,13 @@ public class AdminBoardController {
 		return "board/adminUpdateBoard";
 	}
 
-	@PostMapping("/updateAdminNoticeBoard")
-	public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
-		service.updateAdminNoticeBoard(vo);
-		return "redirect: /getAdminNoticeBoard?board_no="+ vo.getBoard_no();
-	}
+	
+	 @PostMapping("/updateAdminNoticeBoard") public String
+	 updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
+	 service.updateAdminNoticeBoard(vo); return
+	 "redirect: /spring/getAdminNoticeBoard?board_no="+ vo.getBoard_no(); }
+	 
+	
 	//삭제
 	@GetMapping("/deleteAdminNoticeBoard")
 	public String deleteAdminNoticeBoard(AdminNoticeBoardVO vo, Model model, @RequestParam("board_no")int board_no) {

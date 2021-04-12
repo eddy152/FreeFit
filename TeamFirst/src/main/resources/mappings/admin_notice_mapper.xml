@@ -18,17 +18,17 @@
 		)
 
 		VALUES(
-		#{board_no}
+		( select nvl(max(board_no), 0) + 1 from admin_notice_board )
 		,#{category}
 		,#{title}
 		,#{content}
-		,#{reg_date}
+		,sysdate
 		,#{hit}
 		)
-	
+		
 	</insert>
 	
-    <insert id="insertSelectkey">
+    <!-- <insert id="insertSelectkey">
     <selectKey keyProperty="reservation_no" order="BEFORE" resultType="int">
 		SELECT RESERVATION_NO.NEXTVAL FROM DUAL
 		
@@ -46,13 +46,11 @@
 		,#{category}
 		,#{title}
 		,#{content}
-		,#{reg_date}
+		,sysdate
 		,#{hit}
 		)
 	</selectKey>
-	
-
-    </insert>
+    </insert> -->
 
 	<!-- 글쓰기 수정 -->
 	<update id="updateAdminNoticeBoard"

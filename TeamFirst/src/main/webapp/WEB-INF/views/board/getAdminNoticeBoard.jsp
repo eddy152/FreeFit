@@ -67,10 +67,10 @@ textarea {width: 100%;}
 <h2 style="text-align: center;">상세보기</h2><br><br><br>
 
 <div style="width: 60%; margin: auto;">
-	<form method="post" action="adminUpdateBoard" >
+	<form method="post" action="updateAdminNoticeBoard" >
 		<input readonly="readonly" type="text" name="board_no" value="${board.board_no}">
 		<input readonly="readonly" type="text" name="title" style="width: 40%;" placeholder="제목" value="${board.title }"/>
-		<br><br> 
+		<br><br>
 		<textarea readonly="readonly" id="summernote" name="content"></textarea>
 		<input id="subBtn" type="button" value="수정하기" style="float: right;" onclick="goModify(this.form)"/>
 		<input type="button" value="삭제" style="float: right;" onclick="del(${board.board_no})">
@@ -78,6 +78,5 @@ textarea {width: 100%;}
 				onclick="location.href='getAdminNoticeBoardList';">
 	</form>
 </div>
-
 </body>
 </html>
