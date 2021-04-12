@@ -38,4 +38,9 @@ public class FoodVO {
 	private String week;
 	private String sysdate;
 	private String cnt;
+	
+	private String food_name;
+	private String food_no;
+	private String category;
+	private String gram;
 }
