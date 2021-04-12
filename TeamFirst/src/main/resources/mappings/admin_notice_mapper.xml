@@ -25,6 +25,7 @@
 		,#{reg_date}
 		,#{hit}
 		)
+	
 	</insert>
 	
     <insert id="insertSelectkey">
@@ -105,6 +106,7 @@
 		,REG_DATE
 		,HIT
 		FROM ADMIN_NOTICE_BOARD
+	
 	</select>
 	
 	

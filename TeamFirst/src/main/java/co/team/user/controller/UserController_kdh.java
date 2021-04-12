@@ -24,9 +24,9 @@ public class UserController_kdh {
 	
 	// 유저 단건 조회
 	@GetMapping("/getUser")
-	public String getUser(UserVO vo) {
-		service.getUser(vo);
-		return "redirect:/getUser"; 
+	@ResponseBody
+	public UserVO getUser(UserVO vo) {
+		return service.getUser(vo);
 	}
 	
 }

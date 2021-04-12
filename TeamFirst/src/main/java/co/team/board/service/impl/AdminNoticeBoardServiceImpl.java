@@ -45,6 +45,10 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 	public boolean adminNoticeBoardHit(int board_no) {
 		return dao.adminNoticeBoardHit(board_no);
 	}
+	@Override
+	public Object insertSelectKey(AdminNoticeBoardVO vo) {
+		return dao.insertSelectKey(vo);
+	}
 
 }
 

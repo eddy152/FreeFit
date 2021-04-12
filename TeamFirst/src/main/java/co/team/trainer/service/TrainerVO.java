@@ -1,5 +1,6 @@
 package co.team.trainer.service;
 
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TrainerVO {
-	private String trainer_id;
-	private String mem_reg_id;
+	private String id;
+	private int mem_reg_id;
 	private String password;
 	private String phone_number;
 	private String name;
-	private String gender;
+	private int gender;
 	private String awards;
 	private String career;
-	private String hire_date;
+	private Date hire_date; //기본값 sysdate
 }

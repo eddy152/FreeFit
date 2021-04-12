@@ -12,7 +12,7 @@ public interface AdminNoticeBoardMapper {
 	//public AdminNoticeBoardVO getAdminNoticeBaord(AdminNoticeBoardVO vo);
 
 	//
-	public void insertSelectKey(AdminNoticeBoardVO board);
+	public Object insertSelectKey(AdminNoticeBoardVO board);
 	
 	// 전체조회
 	public List<AdminNoticeBoardVO> getAdminNoticeBoardList(AdminNoticeBoardVO vo);

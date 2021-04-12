@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- users_mapper.xml -->
+<mapper namespace="co.team.trainer.service.impl.TrainerMapper">
+
+	
+	<select id="getTrainerList" resultType="TrainerVO"
+		    parameterType="TrainerVO">
+	
+			SELECT ID
+			,MEM_REG_ID
+			,PASSWORD
+			,PHONE_NUMBER
+			,NAME
+			,GENDER
+			,AWARDS
+			,CAREER
+			,HIRE_DATE
+			FROM TRAINER
+	
+	</select>
+		    
+	
+	
+	
+	<insert id="addTrainerMember" parameterType="TrainerVO">
+		
+		INSERT INTO TRAINER(
+		id
+		,MEM_REG_ID
+		,PASSWORD
+		,PHONE_NUMBER
+		,NAME,GENDER 
+		) 
+		
+		VALUES
+		(
+		#{id},
+		#{mem_reg_id},
+		#{password},
+		#{phone_number},
+		#{name},
+		#{gender}
+		)
+
+	</insert>
+
+	<select id="getTrainerId" resultType="string"
+			parameterType="TrainerVO">
+		
+		SELECT ID FROM TRAINER WHERE ID = #{id}
+	
+	</select>
+
+</mapper>

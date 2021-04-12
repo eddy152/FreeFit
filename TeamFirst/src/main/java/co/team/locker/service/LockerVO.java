@@ -21,4 +21,7 @@ public class LockerVO {
 	private String lock_sum;
 	private String each_lock_no;
 	private String lock_width;
+	private String name;
+	private String phone_number;
+	private String age;
 }
