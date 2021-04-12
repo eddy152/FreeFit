@@ -72,6 +72,9 @@
 				dataType: 'json',
 				success: function(data) {
 					alert('성공!!');
+					opener.parent.location.reload();
+					window.close();
+					
 				},
 				error: function() {
 					alert('에러!!');

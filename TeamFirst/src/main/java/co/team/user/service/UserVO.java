@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserVO {
 	
-	private String user_id;
+	private String id;
 	private String password;
 	private String phone_number;
 	private String name;
 	private String age;
 	private String height;
 	private String notice;
-	private String gender;
-	private String mem_reg_id;
+	private int gender;
+	private int mem_reg_id;
 }
