@@ -1,0 +1,70 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color:#74d2ff;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.btn-primary{color:#e8f2a7;background-color:#74d2ff;border-color:#d2ebb8}
+.btn-primary:hover{color:#74d2ff;background-color:#f4ffaf;border-color:#74d2ff}
+
+.btn-primary:focus,.btn-primary.focus{box-shadow:0 0 0 .2rem #cceca9;color:#e8f2a7;background-color:#74d2ff;border-color:#d2ebb8}
+.btn-primary.disabled,
+.btn-primary:disabled{color:#e8f2a7;background-color:#74d2ff;border-color:#d2ebb8}
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show>.btn-primary.dropdown-toggle{color:#e8f2a7;background-color:#74d2ff;border-color:#d2ebb8}
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem #cceca9}
+
+.btn-outline-primary{color:#74d2ff;background-color:transparent;background-image:none;border-color:#74d2ff}
+.btn-outline-primary:hover{color:#e8f2a7;background-color:#74d2ff;border-color:#d2ebb8}
+.btn-outline-primary:focus,
+.btn-outline-primary.focus{box-shadow:0 0 0 .2rem #cceca9}
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled{color:#74d2ff;background-color:transparent}
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show>.btn-outline-primary.dropdown-toggle{color:#e8f2a7;background-color:#009a9a;border-color:#74d2ff}
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem #cceca9}

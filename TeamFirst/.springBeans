@@ -10,6 +10,8 @@
 		<config>src/main/resources/mybatis-config.xml</config>
 		<config>src/main/resources/mappings/member_mapper.xml</config>
 		<config>src/main/resources/mappings/memberRole_mapper.xml</config>
+		<config>src/main/resources/mappings/trainer_mapper.xml</config>
+		<config>src/main/resources/mappings/user_mapper_hy.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/resources/config/transaction-context.xml</config>
