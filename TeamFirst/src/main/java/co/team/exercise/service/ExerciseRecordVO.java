@@ -28,5 +28,7 @@ public class ExerciseRecordVO {
 	int epd_set;
 	int exer_do_set;
 	String exe_name;
+	String exe_part;
+	int exe_part_count;
 	int exe_time;
 }

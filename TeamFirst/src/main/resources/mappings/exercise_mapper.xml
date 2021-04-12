@@ -355,11 +355,24 @@
 		      e.epd_set,
 		      e.exer_do_set,
 		      l.exe_name,
+              l.exe_part,
 		      ROUND((exer_end_date - exer_date)*24*60) AS exe_time
 		FROM exercise_record e, exercise_list l
 		WHERE user_id = #{user_id}
 		AND e.exe_no = l.exe_no
 		ORDER BY e.exer_end_date DESC
+	</select>
+	
+	<!-- EXERCISE_RECORD part count -->
+	<select id="getExerciseRecordPartCount"  resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
+		SELECT
+			  l.exe_part,
+			  COUNT(l.exe_part) AS exe_part_count
+		FROM exercise_record e, exercise_list l
+		WHERE user_id = #{user_id}
+		AND e.exe_no = l.exe_no
+		AND to_char(e.exer_date, 'yyyymm') = to_char(sysdate, 'yyyymm')
+		GROUP BY l.exe_part
 	</select>
 	
 	<!-- EXERCISE_RECORD select one -->

@@ -246,6 +246,13 @@ public class ExerciseController {
 	public List<ExerciseRecordVO> getExerciseRecordList(ExerciseRecordVO vo) {
 		return service.getSearchExerciseRecord(vo);
 	}
+	
+	//PartCount 조회
+	@ResponseBody
+	@GetMapping("/getExerciseRecordPartCount")
+	public List<ExerciseRecordVO> getExerciseRecordPartCount(ExerciseRecordVO vo) {
+		return service.getExerciseRecordPartCount(vo);
+	}
 
 	// 단건 조회
 	@ResponseBody

@@ -44,6 +44,7 @@ public interface ExerciseMapper {
 	public int deleteExercisePersonalDetail(ExePersonalDetailVO vo);
 	
 	public List<ExerciseRecordVO> getSearchExerciseRecord(ExerciseRecordVO vo);
+	public List<ExerciseRecordVO> getExerciseRecordPartCount(ExerciseRecordVO vo);
 	public ExerciseRecordVO getExerciseRecordProc(ExerciseRecordVO vo);
 	public int insertExerciseRecord(ExerciseRecordVO vo);
 	public int updateExerciseRecord(ExerciseRecordVO vo);
