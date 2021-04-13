@@ -51,8 +51,8 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 추천별 식단 리스트
-	public List<FoodVO> getAppFood(FoodVO vo) {
-		return dao.getAppFood(vo);
+	public List<FoodVO> getAppFoodList(FoodVO vo) {
+		return dao.getAppFoodList(vo);
 	}
 
 	@Override
@@ -65,6 +65,18 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	// 추천별 식단 등록
 	public void insertFood(FoodVO vo) {
 		dao.insertFood(vo);
+	}
+
+	@Override
+	// 추천별 식단 단건 조회
+	public FoodVO getAppFood(String diet_no) {
+		return dao.getAppFood(diet_no);
+	}
+
+	@Override
+	// 추천별 식단 수정
+	public void updateFood(FoodVO vo) {
+		dao.updateFood(vo);
 	}
 	
 	

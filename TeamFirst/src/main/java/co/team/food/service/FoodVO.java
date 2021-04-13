@@ -43,4 +43,6 @@ public class FoodVO {
 	private String food_no;
 	private String category;
 	private String gram;
+	
+	private String total_calorie;
 }

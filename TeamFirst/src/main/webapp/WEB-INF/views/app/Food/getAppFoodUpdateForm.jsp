@@ -4,9 +4,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-	
-	
-	// 해당 음식과 갯수로 인한 칼로리 계산
+//해당 음식과 갯수로 인한 칼로리 계산
 	function TotalCalorie(a, b) {
 		// 해당 음식의 1. 칼로리, 2. 갯수
 		var food_calorie = a;
@@ -112,17 +110,17 @@
 			$('input:text[name="total_calorie1"]').val(total_foods);
 		}
 	}
-	
+
 </script>
 <div>
 
 	<h1>식단 추가하기</h1>
-	제목 : <input type="text" id="diet_title1"><br>
-	작성자 : <input type="text" id="trainer_id1"><br>
+	제목 : <input type="text" id="diet_title1" value="${vo.diet_title}"><br>
+	작성자 : <input type="text" id="trainer_id1" value="${vo.trainer_id}"><br>
 	음식 : <div class="addFoodInput">
 			<select id="foods">
 				<option value="">선택</option>
-				<c:forEach var="food" items="${foodList }">
+				<c:forEach var="food" items="${list }">
 					<option value="${food.calorie}">${food.food_name }</option>
 				</c:forEach>
 			</select>
@@ -131,16 +129,22 @@
 		<button type="button" class="addFood">+</button>
 	<hr>
 	<div class="frm1">
-	음식명 : 
+	음식명 :
+	<div>
+		
+			<%-- <input type="text" name="food_name" value="${food.calorie }"> --%>
+			<input type="text" name="food_calorie" value="${vo.diet_content }">
+			<button type="button" class="deleteFood">-</button>
+	</div> 
 		</div>
-		총 칼로리 : <input type="text" name="total_calorie1">
+		총 칼로리 : <input type="text" name="total_calorie1" value="${vo.total_calorie}">
 		<br>
 		<button type="button" onclick="Click()">등록</button>
 		
-		<form action="insertFood" method="post" class="frm">
-			<input type="text" hidden="hidden" name="diet_title"><br>
-			<input type="text" hidden="hidden" name="trainer_id"><br>
-			<input type="text" hidden="hidden" name="total_calorie">
+		<form action="updateFood" method="post" class="frm">
+			<input type="text" name="diet_title" value=""><br>
+			<input type="text" name="trainer_id" value=""><br>
+			<input type="text" name="total_calorie" value="">
 		</form>
 	<div>
 		<button type="button" onclick="location.href='getAppFoodList'">뒤로가기</button>
