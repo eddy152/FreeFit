@@ -1,55 +1,63 @@
-//package co.team.board.controller;
-//
-//import java.util.List;
-//
-//import javax.servlet.http.HttpServletRequest;
-//
-//import org.springframework.ui.ModelMap;
-//import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//
-//import co.team.board.service.AdminNoticeBoardService;
-//import co.team.board.service.AdminNoticeBoardVO;
-//import co.team.board.service.BoardSearchVO;
-//
-//public class BoardController {
-//
-//	@RequestMapping("/board/getAdminNoticeBoardList") 
-//    public String boardList(HttpServletRequest req, ModelMap modelMap, @ModelAttribute("boardSearchVO") BoardSearchVO boardSearchVO) {
-//    String jspPath = req.getRequestURI();
-//        
-//     
-//    int pageSize = boardSearchVO.getPageSize();// 한페이지에 나오는 게시물 개수
-//    int pageIndex = boardSearchVO.getPageIndex(); //현재 선택한 페이지 number
-//    int pageGroupSize = boardSearchVO.getPageGroupSize(); // 페이지 번호가 몇개 나오느냐 개수
-//    int startRow = (pageIndex - 1) * pageSize + 1;// 한 페이지의 시작글 번호
-//    int endRow = pageIndex * pageSize;// 한 페이지의 마지막 글번호
-// 
-//    boardSearchVO.setStartRow(startRow);
-//    boardSearchVO.setEndRow(endRow);
-//    int count = AdminNoticeBoardService.boardCount(boardSearchVO); //게시물 총 개수
-// 
-//    int pageGroupCount = count / (pageSize * pageGroupSize) + (count % (pageSize * pageGroupSize) == 0 ? 0 : 1);
-//    int nowPageGroup = (int) Math.ceil((double) pageIndex / pageGroupSize);
-//     
-//    List<AdminNoticeBoardVO> getAdminNoticeBoardList = AdminNoticeBoardService.getAdminNoticeBoardList(boardSearchVO);
-//     
-//    modelMap.put("pageIndex", pageIndex);
-//    modelMap.put("pageSize", pageSize);
-//    modelMap.put("count", count);
-//    modelMap.put("pageGroupSize", pageGroupSize);
-//    modelMap.put("nowPageGroup", nowPageGroup);
-//    modelMap.put("pageGroupCount", pageGroupCount);
-//    modelMap.put("articleList", getAdminNoticeBoardList);
-//    modelMap.put("", boardSearchVO);
-//     
-//       return jspPath;
-//    }
-//}
-//
-//
-//
-//
+package co.team.board.controller;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import co.team.board.service.AdminNoticeBoardService;
+import co.team.board.service.AdminNoticeBoardVO;
+import co.team.board.service.Pagination;
+
+@Controller
+public class BoardController {
+ 
+    @Autowired
+    private AdminNoticeBoardService service;
+    
+    /**
+     * 게시판 조회
+     * @param boardVO
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping()
+   // @NoLoginCheck
+    public String getAdminNoticeBoardList(@ModelAttribute("get") AdminNoticeBoardVO vo,
+            @RequestParam(defaultValue="1") int curPage,
+            HttpServletRequest request,
+            Model model) throws Exception{
+        
+        HttpSession session = request.getSession();
+        //LoginVO loginVO = (LoginVO)session.getAttribute("loginVO");
+ 
+        // 전체리스트 개수
+        List<AdminNoticeBoardVO> listCnt = service.getAdminNoticeBoardList(vo);
+        
+        Pagination pagination = new Pagination();
+        
+        AdminNoticeBoardVO.setStartIndex(pagination.getStartIndex());
+        AdminNoticeBoardVO.setCntPerPage(pagination.getPageSize());
+        // 전체리스트 출력
+        List<AdminNoticeBoardVO> list = service.getAdminNoticeBoardList(vo);
+                
+        model.addAttribute("list", list);
+        model.addAttribute("listCnt", listCnt);
+        model.addAttribute("pagination", pagination);
+        
+        return "board/getAdminNoticeBoardList";
+    }
+    
+
+}
+
 //
 //
 //

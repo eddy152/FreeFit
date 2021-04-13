@@ -9,6 +9,7 @@ public interface AdminNoticeBoardService {
 	//public AdminNoticeBoardVO getAdminNoticeBoard(AdminNoticeBoardVO vo);
 	public AdminNoticeBoardVO getAdminNoticeBoard(int board_no);
 
+	
 	public Object insertSelectKey(AdminNoticeBoardVO board);
 	
 	//전체조회

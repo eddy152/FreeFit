@@ -14,7 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <!-- include summernote-ko-KR -->
 <script src="/resources/js/summernote-ko-KR.js"></script>
-<title>수정페이지</title>
+<title> 수정 페이지</title>
 
 <script>
 $(document).ready(function() {
@@ -31,15 +31,19 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<h2 style="text-align: center;">글 수정</h2><br><br><br>
+<h2 style="text-align: center;">수정 페이지</h2><br><br><br>
 <div style="width: 60%; margin: auto;">
 	<form method="post" action="updateAdminNoticeBoard" >
-		<input type="hidden" name="board_no" value="${board.board_no}">
-		<input type="text" name="title" style="width: 40%;" placeholder="제목" value="${board.title}"/>
+		<label for="category">카테고리 : </label>
+			<select id="category" name="category">
+				<option value="공지">공지</option>
+				<option value="이벤트">이벤트</option></select><br>
+		게시물번호 : <input readonly="readonly" type="text" name="board_no" value="${board.board_no}"><br>
+		제목 : <input type="text" name="title" style="width: 30%;" placeholder="제목" value="${board.title}"/>
 		<br><br> 
 		<textarea id="summernote" name="content"></textarea>
 		<input id="subBtn" type="button" value="글수정" style="float: right;" onclick="goModify(this.form)"/>
-	</form>
+	</form>																		
 </div>
 <script>
 function goModify(frm) {

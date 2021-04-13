@@ -56,7 +56,7 @@
 				//}
 				frm.submit();
 			}
-		</script>
+</script>
 </head>
 <body>
 	<h2 style="text-align: center;">글 작성</h2>
@@ -69,7 +69,7 @@
 			<label for="category">카테고리 : </label>
 			<select id="category" name="category">
 				<option value="공지">공지</option>
-				<option value="아벤트">이벤트</option>
+				<option value="이벤트">이벤트</option>
 			</select>
 			<br>
 			<textarea id="summernote" name="content"></textarea>

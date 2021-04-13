@@ -21,5 +21,12 @@ public class AdminNoticeBoardVO {
 	private String content;
 	private Date reg_date;
 	private int hit;
+	
+	public static void setStartIndex(int startIndex) {
+		
+	}
+	public static void setCntPerPage(int pageSize) {
+		
+	}
 
 }

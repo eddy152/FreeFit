@@ -14,10 +14,16 @@ public class TrainerController {
 	@Autowired
 	TrainerService service;
 	
-	//전체리스트
-	@RequestMapping("/TrainerList")
+	//트레이너 전체 리스트
+	@RequestMapping("/trainerList")
 	public String trainerList(TrainerVO vo, Model model) throws Exception {
 		model.addAttribute("list", service.getTrainerList(vo));
 		return "trainer/trainerList";
+	}
+	//트레이너 추가
+	@RequestMapping("/insertTrainer")
+	public String insertTrainer(TrainerVO vo) {
+		service.addTrainerMember(vo);
+		return "redirect:/trainerList";
 	}
 }

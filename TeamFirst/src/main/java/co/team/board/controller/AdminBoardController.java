@@ -41,6 +41,21 @@ public class AdminBoardController {
 		model.addAttribute("list", service.getAdminNoticeBoardList(vo));
 		return "board/getAdminNoticeBoardList";
 	}
+	//등록
+	@RequestMapping("/insertAdminNoticeBoard")
+	public String insertAdminNoticeBoard(AdminNoticeBoardVO vo) {
+		service.insertAdminNoticeBoard(vo);
+		return "redirect:/getAdminNoticeBoardList";	
+		//return "redirect:/getaAdminNoticeBoard?board_no="+vo.getBoard_no();
+		
+	}
+	//단건+조회수증가
+	@GetMapping("/getAdminNoticeBoard")
+	public String getAdminNoticeBoard(Model model, @RequestParam("board_no")int board_no) {
+		model.addAttribute("board", service.getAdminNoticeBoard(board_no));
+		service.adminNoticeBoardHit(board_no);
+		return "board/getAdminNoticeBoard";
+	}
 	//단건조회
 //	@ResponseBody
 //	@GetMapping("/getAdminNoticeBoard")
@@ -56,29 +71,8 @@ public class AdminBoardController {
 //	  
 //	  return "board/getAdminNoticeBoard";
 //	}
-	
-	//단건+조회수증가
-	@GetMapping("/getAdminNoticeBoard")
-	public String getAdminNoticeBoard(Model model, @RequestParam("board_no")int board_no) {
-		model.addAttribute("board", service.getAdminNoticeBoard(board_no));
-		service.adminNoticeBoardHit(board_no);
-		return "board/getAdminNoticeBoard";
-	}
-	//등록
-	@RequestMapping("/insertAdminNoticeBoard")
-	public String insertAdminNoticeBoard(AdminNoticeBoardVO vo) {
-		service.insertAdminNoticeBoard(vo);
-		return "redirect:/getAdminNoticeBoardList";	
-		//return "redirect:/getaAdminNoticeBoard?board_no="+vo.getBoard_no();
-	
-	}
-	
+
 	//수정
-//	@PostMapping("updateAdminNoticeBoard")
-//	public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
-//		service.updateAdminNoticeBoard(vo);
-//		return "redirect:/getAdminNoticeBoardList";
-//	}	
 	@GetMapping("/updateAdminNoticeBoard")
 	public String updateAdminNoticeBoard(@RequestParam("board_no")int board_no, Model model) {
 		model.addAttribute("board", service.getAdminNoticeBoard(board_no));
@@ -86,11 +80,18 @@ public class AdminBoardController {
 	}
 
 	
-	 @PostMapping("/updateAdminNoticeBoard") public String
-	 updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
-	 service.updateAdminNoticeBoard(vo); return
-	 "redirect: /spring/getAdminNoticeBoard?board_no="+ vo.getBoard_no(); }
+	 @PostMapping("/updateAdminNoticeBoard")
+		public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
+		 service.updateAdminNoticeBoard(vo); 
+		 //return "redirect:/getAdminNoticeBoardList";
+		 return "redirect:/getAdminNoticeBoard?board_no=" + vo.getBoard_no();
+	 }
 	 
+//		@GetMapping("updateAdminNoticeBoard")
+//		public String updateAdminNoticeBoard(AdminNoticeBoardVO vo) {
+//			service.updateAdminNoticeBoard(vo);
+//			return "board/adminUpdateBoard";
+//		}
 	
 	//삭제
 	@GetMapping("/deleteAdminNoticeBoard")

@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="button" value="트레이너추가" style="float: right;"
-							onclick="location.href='';">
+							onclick="location.href='insertTrainer';">
 					</div>
 				</div>
 				<div class="panel panel-default">
