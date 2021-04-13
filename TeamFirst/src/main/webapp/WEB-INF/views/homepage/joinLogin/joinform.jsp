@@ -44,7 +44,7 @@
                         <div class="row justify-content-center">
                             <div class="col mb-md-2">
                                 <label for="userId">ID</label> <input type="text" class="form-control" id="id"
-                                    name="id" placeholder="ID" required>
+                                    name="id" placeholder="ID" minlength="5" required>
                                 <div class="invalid-feedback" style="width: 100%;">아이디를 입력해주세요.</div>
                             </div>
 
