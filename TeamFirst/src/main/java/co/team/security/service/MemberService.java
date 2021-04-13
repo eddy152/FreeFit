@@ -22,5 +22,6 @@ public interface MemberService extends UserDbService {
 	public void addUserMember(UserVO member);
 	public String userCheck(String loginUserId) throws NullPointerException;
 	public String rememberId(MemberVO member) throws NullPointerException;
-	public String getEmail(MemberVO vo) throws NullPointerException;
+	public MemberVO getEmailById(MemberVO vo) throws NullPointerException;
+	public int setPassword(MemberVO vo);
 }

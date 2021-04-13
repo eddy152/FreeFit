@@ -10,6 +10,7 @@ public interface MemberMapper {
 	public MemberVO getMemberById(String id);
 
 	public MemberVO rememberId(MemberVO vo);
-	public MemberVO getEmail(MemberVO vo);
+	public MemberVO getEmailById(MemberVO vo);
 	public int getMax();
+	public int setPassword(MemberVO vo);
 }

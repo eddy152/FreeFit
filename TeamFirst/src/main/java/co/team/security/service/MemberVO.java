@@ -10,4 +10,5 @@ public class MemberVO {
 	private String phone_number;
 	private String name;
 	private String email;
+	private String tblName;
 }

@@ -1,5 +1,8 @@
 package co.team.security.controller;
 
+import java.util.Date;
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,38 +162,64 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping("/sendEmail")
 	public String sendEmail(@ModelAttribute MemberVO member) {
-		
-		String email= memberService.getEmail(member);
-		if(email!="") {
-		String addressid=member.getId();
-		MailSend mail= new MailSend();
-		mail.MailSend(email, addressid);
+		Random random = new Random();
+		String rd = random.toString();
+
+		String email = memberService.getEmailById(member).getEmail();
+		if (email != "" & email != null) {
+			String setRawPw = getRandomStr(16);
+			member.setPassword(passwordEncoder.encode(setRawPw));
+			int success = memberService.setPassword(member);
+			if (success == 1) {
+				MailSend mail = new MailSend();
+				mail.MailSend(email, setRawPw);
+				return email;
+			}
 		}
-		return email;
-		
-		//시간(sysdate), id 저장하는 비번용 테이블 생성
-		//address 에 sysdate 값 넣기
-		
-		//changePwForm 에서 요청하면
-		//sysdate 랑 저장된 시간 비교해서 30분 이상 차이나면 delete, 차이나지 않으면 id 주는 프로시저 만들기
-		//id 주면 changePwId 로 세션저장후 return "form"
-		//세션changePwId 없으면 만료되었습니다 뜨고 홈페이지 location.href
-		//세션값 있으면 변경할 비밀번호, 비밀번호 재확인 받기
-		
-		
-		//changePw에서 세션에 저장된 changePwId와 form에서 넘긴 pw 받기
-		//password encoder 로 pw 암호화
-		//id 값으로 위에 만든 비번용 데이터 삭제 
-		//update 로 pw 변경 ->result int 로 받아서 1이면 비번변경 성공, 0이면 실패로 값 보내기
-		//
-		
-		
-		
-		
-		//아니면 그냥 비번 랜덤값으로 update 해서 보내주기.
-		
-		
+
+		return "error";
 	}
+	
+	
+	
+	
+	
+	
+	
+	public static String getRandomStr(int size) {
+		if(size > 0) {
+			char[] tmp = new char[size];
+			for(int i=0; i<tmp.length; i++) {
+				int div = (int) Math.floor( Math.random() * 2 );
+				
+				if(div == 0) { // 0이면 숫자로
+					tmp[i] = (char) (Math.random() * 10 + '0') ;
+				}else { //1이면 알파벳
+					tmp[i] = (char) (Math.random() * 26 + 'A') ;
+				}
+			}
+			return new String(tmp);
+		}
+		return "ERROR : Size is required."; 
+	}
+}
+// 시간(sysdate), id 저장하는 비번용 테이블 생성
+// address 에 sysdate 값 넣기
+
+// changePwForm 에서 요청하면
+// sysdate 랑 저장된 시간 비교해서 30분 이상 차이나면 delete, 차이나지 않으면 id 주는 프로시저 만들기
+// id 주면 changePwId 로 세션저장후 return "form"
+// 세션changePwId 없으면 만료되었습니다 뜨고 홈페이지 location.href
+// 세션값 있으면 변경할 비밀번호, 비밀번호 재확인 받기
+
+// changePw에서 세션에 저장된 changePwId와 form에서 넘긴 pw 받기
+// password encoder 로 pw 암호화
+// id 값으로 위에 만든 비번용 데이터 삭제
+// update 로 pw 변경 ->result int 로 받아서 1이면 비번변경 성공, 0이면 실패로 값 보내기
+//
+
+// 아니면 그냥 비번 랜덤값으로 update 해서 보내주기.
+
 //	
 //	@GetMapping("/changePwForm")
 //	public String changePwForm(String link)
@@ -205,5 +234,3 @@ public class MemberController {
 //		
 //		return "popup/members/changePw";
 //	}
-	
-}

@@ -8,7 +8,7 @@
 	<select id="getMemberById" resultType="memberVO"
 		parameterType="memberVO">
 
-		select id, password, mem_reg_id from allid where id =#{id}
+		select * from allid where id =#{id}
 
 	</select>
 
@@ -23,11 +23,15 @@
 		select id from allid where name =#{name} and phone_number=#{phone_number}
 
 	</select>
-	<select id="getEmail" resultType="memberVO"
+	<select id="getEmailById" resultType="memberVO"
 		parameterType="memberVO">
 
-		select email from allid where id =#{id}
+		select * from allid where id =#{id}
 
 	</select>
+	
+	<update id="setPassword" parameterType="memberVO">
+	update #{tblName} set password=#{password} where id=#{id}
+	</update>
 
 </mapper>
