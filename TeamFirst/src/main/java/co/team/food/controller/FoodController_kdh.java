@@ -1,11 +1,13 @@
 package co.team.food.controller;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -53,7 +55,6 @@ public class FoodController_kdh {
 	@ResponseBody
 	public List<FoodVO> getDate(FoodVO vo, Model model) {
 		return service.getDate(vo);
-
 	}
 
 	// 날짜 조회(-)
@@ -61,7 +62,28 @@ public class FoodController_kdh {
 	@ResponseBody
 	public List<FoodVO> getBeforeDate(FoodVO vo, Model model) {
 		return service.getBeforeDate(vo);
-
+	}
+	
+	// 추천별 식단 리스트(앱)
+	@RequestMapping("/getAppFoodList")
+	public String getAppFoodList(FoodVO vo, Model model) {
+		model.addAttribute("list", service.getAppFood(vo));
+		return "app/Food/getAppFood";
+	}
+	
+	// 추천별 식단 추가 게시판(앱)
+	@GetMapping("/insertFood")
+	public String getAppFoodForm(FoodVO vo, Model model) {
+		model.addAttribute("foodList", service.getFoodList(vo));
+		return "app/Food/getAppFoodForm";
+	}
+	
+	// 추천별 식단 등록(앱)
+	@PostMapping("/insertFood")
+	//@ResponseBody
+	public String getAppFood(FoodVO vo, Model model) {
+		service.insertFood(vo);
+		return "redirect:/getAppFoodList";
 	}
 
 }

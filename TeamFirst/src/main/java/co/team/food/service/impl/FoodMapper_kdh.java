@@ -24,5 +24,14 @@ public interface FoodMapper_kdh {
 
 	// 날짜 조회(-)
 	public List<FoodVO> getBeforeDate(FoodVO vo);
+	
+	// 추천식단 리스트
+	public List<FoodVO> getAppFood(FoodVO vo);
+	
+	// 음식 전체 리스트
+	public List<FoodVO> getFoodList(FoodVO vo);
+	
+	// 추천별 식단 등록
+	public void insertFood(FoodVO vo);
 
 }

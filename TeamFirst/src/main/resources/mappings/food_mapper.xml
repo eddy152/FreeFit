@@ -47,5 +47,20 @@
 		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate+#{cnt}, 'yyyy-MM-w')
  	</select>
  	
+ 	<select id="getAppFood" resultType="FoodVO" parameterType="FoodVO">
+ 		select diet_no, trainer_id, diet_title, diet_content, reg_date, user_id
+		from recommended_diet
+ 	</select>
+ 	
+ 	<!-- food_info 리스트 -->
+ 	<select id="getFoodList" resultType="FoodVO" parameterType="FoodVO">
+ 		select food_no, food_name, calorie, category, gram from food_info
+ 	</select>
+ 	
+ 	<!-- 추천별 식단 추가 -->
+ 	<insert id="insertFood" parameterType="FoodVO">
+ 		insert into recommended_diet (diet_no, trainer_id, diet_title, diet_content)
+		values(food_seq.nextval, #{trainer_id}, #{diet_title}, #{diet_content})
+ 	</insert>
  
  </mapper>

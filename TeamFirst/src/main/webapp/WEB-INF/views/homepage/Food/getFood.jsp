@@ -10,32 +10,30 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-      google.charts.load('current', {'packages':['bar']});
+      google.charts.load('visualization','1', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-    	  // 칼로리 계산 시 필요한 정보 - 1. 체중
     	var weight = $('input:text[name="weight"]').val(); // = 몸무게
     	var result = weight * 12 * 1.5;
     	var arr =[]; 
     	arr.push( ['섭취날짜', '실제섭취량', '권장량']);
 
 	    	<c:forEach var="calorie" items="${calories }"> 	
-		    		arr.push(['${calorie.take_date}', result, parseInt(${calorie.calorie })]);
+		    		arr.push(['${calorie.take_date}', parseInt(${calorie.calorie }), result]);
 			</c:forEach>
     	
         var data = google.visualization.arrayToDataTable(arr);
 
         var options = {
-                chart: { 
-                  title: '이번주 식단',
-                  subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계',
-                }
-              };
+                chart: { title: '이번주 식단',  subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계'},
+                vAxis: { viewWindow: { max: 3000 } },
+                seriesType: 'bars',
+                series: {1: {type: 'line'}} };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+        var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+        chart.draw(data, options);
       }
 
 			var cnt = 0;
@@ -49,7 +47,8 @@
 					dataType: 'json',
 					type: 'get',
 					success: function drawChart(result) {
-						console.log(result.take_date);
+					
+						if(result.length != 0) {
 						
 						var week = result[0].week;
 	    				$('input:text[name=dates]').val(week);
@@ -62,21 +61,26 @@
 	    		    	
 	    		    	for(i=0; i < result.length; i++) {
 	    		    	console.log(result[0].take_date);
-	    				    arr.push([result[i].take_date, count,parseInt(result[i].calorie)]);
+	    				    arr.push([result[i].take_date, parseInt(result[i].calorie), count]);
 	    		    		}
 	    		    	
 	    		        var data = google.visualization.arrayToDataTable(arr);
 	    		        
 	    		        var options = {
-	    		                chart: { 
-	    		                  title: '이번주 식단',
-	    		                  subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계',
-	    		                }
+	    		                chart: { title: '이번주 식단', subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계'}, 
+	    		                vAxis: { viewWindow: { max: 3000 } },
+	    		                seriesType: 'bars',
+	    		                series: {1: {type: 'line'}}	
+	    		          
 	    		              };
 
-	    		        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+	    		        var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
 
-	    		        chart.draw(data, google.charts.Bar.convertOptions(options));
+	    		        chart.draw(data, options);
+						} else {
+							alert('없음!');
+							location.reload();
+						}
 					}
 				})
 			}
@@ -90,13 +94,13 @@
     			dataType: 'json',
     			type: 'get',
     			success:  function drawChart(result) {
-    				console.log(result[0].week);
-    				
-    				/* 	
-    				var week = result[0].week;
-    				$('input:text[name=dates]').val(week); */
-    				
-    				if(result[0].real_diet_no != null) {
+   	 						    		
+    				console.log(result.length);
+    				if(result.length != 0) {
+    					
+   	 				var week = result[0].week;					
+    				$('input:text[name=dates]').val(week);
+    			
     		    	var weight = $('input:text[name="weight"]').val(); // = 몸무게
     		    	var count = weight * 12 * 1.5;
     		    	var arr =[]; 
@@ -105,26 +109,26 @@
     		    	
     		    	for(i=0; i < result.length; i++) {
     		    	console.log(result[0].take_date);
-    				    arr.push([result[i].take_date, count, parseInt(result[i].calorie)]);
+    				    arr.push([result[i].take_date, parseInt(result[i].calorie), count]);
     		    		}
     				
     		    	
     		        var data = google.visualization.arrayToDataTable(arr);
     		        
     		        var options = {
-    		                chart: { 
-    		                  title: '이번주 식단',
-    		                  subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계'
-    		                }
-    		              };
+    		                chart: {  title: '이번주 식단', subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계' },
+    		                vAxis: { viewWindow: { max: 3000 } },
+    		                seriesType: 'bars',
+    		                series: {1: {type: 'line'}} };
 
-    		        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+    		        var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
 
-    		        chart.draw(data, google.charts.Bar.convertOptions(options));
-    		        
+    		        chart.draw(data, options);
     				} else {
-    					alert('아직 에정된 식단은 없습니다.');
+    					alert('없음!');
+    					location.reload();
     				}
+    		       
     		      },
     			error: function() {
     				alert('ERROR!');
@@ -138,16 +142,13 @@
 </head>
 <body>
 
-<button type="button" id="test">test~</button>
 <h1>회원정보</h1>
 
-
 <hr>
-<button type="button" onclick="Click()">클릭</button>
 <input name="id" value="${food.id }" hidden="hidden">
 <table border="1">
 	<tr>
-		<td rowspan="5" style="width:100px;">사진</td>
+		
 		<td>이름</td>
 		<td>${food.name }
 			<input name="name" value="${food.name }" hidden="hidden">			
@@ -180,7 +181,7 @@
 	<br>
 	<button type="button" onclick="before()"><</button>
 	<input type="text" name="dates" value="${calories[0].week}">주째
-	<input type="text" id="date" value="${calories[0].sysdate}">
+	<input type="text" hidden="hidden" id="date" value="${calories[0].sysdate}">
 	<button type="button" onclick="after()">></button>
 	<br>
 	<br>

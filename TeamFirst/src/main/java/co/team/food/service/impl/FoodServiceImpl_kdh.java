@@ -48,6 +48,24 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	public List<FoodVO> getBeforeDate(FoodVO vo) {
 		return dao.getBeforeDate(vo);
 	}
+
+	@Override
+	// 추천별 식단 리스트
+	public List<FoodVO> getAppFood(FoodVO vo) {
+		return dao.getAppFood(vo);
+	}
+
+	@Override
+	// 음식정보 전체 리스트
+	public List<FoodVO> getFoodList(FoodVO vo) {
+		return dao.getFoodList(vo);
+	}
+
+	@Override
+	// 추천별 식단 등록
+	public void insertFood(FoodVO vo) {
+		dao.insertFood(vo);
+	}
 	
 	
 	
