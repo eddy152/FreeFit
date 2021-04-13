@@ -363,6 +363,56 @@
 		ORDER BY e.exer_end_date DESC
 	</select>
 	
+	<!-- 주간 운동 기록 리스트 -->
+	<select id="getSearchExerciseRecordBetween" resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
+		SELECT
+		      e.exer_no,
+		      e.user_id,
+		      e.exer_count,
+		      e.exer_date,
+		      e.exer_end_date,
+		      e.exer_weight,
+		      e.exer_do_count,
+		      e.exep_no,
+		      e.exe_no,
+		      e.epd_set,
+		      e.exer_do_set,
+		      l.exe_name,
+              l.exe_part,
+		      ROUND((exer_end_date - exer_date)*24*60) AS exe_time
+		FROM exercise_record e, exercise_list l
+		WHERE user_id = 'lee'
+		AND e.exe_no = l.exe_no
+        AND e.exer_end_date between to_date(#{selDate}, 'yyyy-mm-dd') and to_date(#{selDate}, 'yyyy-mm-dd') + 7
+		ORDER BY e.exer_end_date
+	</select>
+	
+	<!-- 일간 운동 기록 리스트 -->
+	<select id="getSearchExerciseRecordOneDay" resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
+		SELECT
+		      e.exer_no,
+		      e.user_id,
+		      e.exer_count,
+		      e.exer_date,
+		      e.exer_end_date,
+		      e.exer_weight,
+		      e.exer_do_count,
+		      e.exep_no,
+		      e.exe_no,
+		      e.epd_set,
+		      e.exer_do_set,
+		      l.exe_name,
+              l.exe_part,
+		      ROUND((exer_end_date - exer_date)*24*60) AS exe_time
+		FROM exercise_record e, exercise_list l
+		WHERE user_id = 'lee'
+		AND e.exe_no = l.exe_no
+        AND to_char(e.exer_end_date, 'yyyy-mm-dd') = #{selDate}
+		ORDER BY e.exer_end_date
+	</select>
+	
+	
+	
 	<!-- EXERCISE_RECORD part count -->
 	<select id="getExerciseRecordPartCount"  resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
 		SELECT

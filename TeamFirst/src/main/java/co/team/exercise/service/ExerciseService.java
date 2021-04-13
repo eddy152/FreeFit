@@ -36,6 +36,8 @@ public interface ExerciseService {
 	
 	public List<ExerciseRecordVO> getSearchExerciseRecord(ExerciseRecordVO vo);
 	public List<ExerciseRecordVO> getExerciseRecordPartCount(ExerciseRecordVO vo);
+	public List<ExerciseRecordVO> getSearchExerciseRecordBetween(ExerciseRecordVO vo);
+	public List<ExerciseRecordVO> getSearchExerciseRecordOneDay(ExerciseRecordVO vo);
 	public ExerciseRecordVO getExerciseRecordProc(ExerciseRecordVO vo);
 	public int insertExerciseRecord(ExerciseRecordVO vo);
 	public int updateExerciseRecord(ExerciseRecordVO vo);

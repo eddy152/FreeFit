@@ -33,21 +33,21 @@ public class ExerciseController {
 		model.addAttribute("list", service.getSearchExerciseList(vo));
 		return "exercise/getSearchExerciseList";
 	}
-	
+
 	// ListALL
 	@GetMapping("/getSearchExerciseListAll")
 	public String getSearchExerciseListAll(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
 		return "exercise/getSearchExerciseListAll";
 	}
-	
+
 	// ListALLDel
-		@GetMapping("/deleteExerciseListForm")
-		public String deleteExerciseListForm(ExerciseListVO vo, Model model) {
-			model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
-			return "exercise/deleteExerciseListForm";
-		}
-	
+	@GetMapping("/deleteExerciseListForm")
+	public String deleteExerciseListForm(ExerciseListVO vo, Model model) {
+		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
+		return "exercise/deleteExerciseListForm";
+	}
+
 	// 단건 조회
 	@GetMapping("/getExerciseListProc")
 	public String getExerciseListProc(ExerciseListVO vo, Model model) {
@@ -61,11 +61,13 @@ public class ExerciseController {
 		service.insertExerciseList(vo);
 		return "redirect:/getSearchExerciseList";
 	}
-	//등록 폼
+
+	// 등록 폼
 	@GetMapping("/insertExerciseListForm")
 	public String insertExerciseListForm() {
 		return "exercise/insertExerciseListForm";
 	}
+
 	// 단건 수정
 	@GetMapping("/updateExerciseList")
 	public String updateExerciseList(ExerciseListVO vo) {
@@ -84,10 +86,8 @@ public class ExerciseController {
 	// EXERCISE_PROGRAM_BASIC start
 	// 리스트 조회
 	@GetMapping("/getSearchExerciseProgramBasic")
-	public String getSearchExerciseProgramBasic(ExerciseProgramBasicVO vo, 
-												ExeBasicDetailVO vo1,
-												ExerciseProgramBasicVO vo2,
-												Model model) {
+	public String getSearchExerciseProgramBasic(ExerciseProgramBasicVO vo, ExeBasicDetailVO vo1,
+			ExerciseProgramBasicVO vo2, Model model) {
 		model.addAttribute("exeList", service.getSearchExerciseProgramBasic(vo));
 		model.addAttribute("exeBasicDetail", service.getSearchExerciseBasicDetail(vo1));
 		model.addAttribute("exeProgramBasic", service.getSearchExerciseProgramBasic(vo2));
@@ -240,18 +240,33 @@ public class ExerciseController {
 		model.addAttribute("list", service.getSearchExerciseRecord(vo));
 		return "exercise/getSearchExerciseRecord";
 	}
-	//ajax용 리스트 호출
+
+	// ajax용 리스트 호출
 	@ResponseBody
 	@GetMapping("/getExerciseRecordList")
 	public List<ExerciseRecordVO> getExerciseRecordList(ExerciseRecordVO vo) {
 		return service.getSearchExerciseRecord(vo);
 	}
-	
-	//PartCount 조회
+
+	// PartCount 조회
 	@ResponseBody
 	@GetMapping("/getExerciseRecordPartCount")
 	public List<ExerciseRecordVO> getExerciseRecordPartCount(ExerciseRecordVO vo) {
 		return service.getExerciseRecordPartCount(vo);
+	}
+
+	// 주간 운동기록 조회
+	@ResponseBody
+	@GetMapping("/getSearchExerciseRecordBetween")
+	public List<ExerciseRecordVO> getSearchExerciseRecordBetween(ExerciseRecordVO vo) {
+		return service.getSearchExerciseRecordBetween(vo);
+	}
+
+	// 일간 운동기록 조회
+	@ResponseBody
+	@GetMapping("/getSearchExerciseRecordOneDay")
+	public List<ExerciseRecordVO> getSearchExerciseRecordOneDay(ExerciseRecordVO vo) {
+		return service.getSearchExerciseRecordOneDay(vo);
 	}
 
 	// 단건 조회

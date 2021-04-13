@@ -31,4 +31,5 @@ public class ExerciseRecordVO {
 	String exe_part;
 	int exe_part_count;
 	int exe_time;
+	String selDate;
 }

@@ -176,6 +176,16 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 	
 	@Override
+	public List<ExerciseRecordVO> getSearchExerciseRecordBetween(ExerciseRecordVO vo) {
+		return dao.getSearchExerciseRecordBetween(vo);
+	}
+	
+	@Override
+	public List<ExerciseRecordVO> getSearchExerciseRecordOneDay(ExerciseRecordVO vo) {
+		return dao.getSearchExerciseRecordOneDay(vo);
+	}
+	
+	@Override
 	public ExerciseRecordVO getExerciseRecordProc(ExerciseRecordVO vo) {
 		return dao.getExerciseRecordProc(vo);
 	}
