@@ -167,11 +167,13 @@ public class MemberController {
 
 		String email = memberService.getEmailById(member).getEmail();
 		if (email != "" & email != null) {
+			//16자리 비번만들어줌
 			String setRawPw = getRandomStr(16);
 			member.setPassword(passwordEncoder.encode(setRawPw));
 			int success = memberService.setPassword(member);
 			if (success == 1) {
 				MailSend mail = new MailSend();
+				//메일로 보내줌
 				mail.MailSend(email, setRawPw);
 				return email;
 			}

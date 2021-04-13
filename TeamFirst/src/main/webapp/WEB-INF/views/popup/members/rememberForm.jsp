@@ -118,13 +118,37 @@
 				alt="" width="100" height="100">
 		</div>
 
-		<div class="row justify-content-center">
+		<form class="needs-validation" method="post"
+							action="/spring/members/rememberId" novalidate>
+							<!-- action="/members/joinA" -->
 
-<!-- 버튼 2개 -->
-<!-- 사업자 회원 => 클릭하면 modal form 떠서  -->
-<!-- 트레이너, 유저 회원 => modal.  id 값으로 mem_reg_id 찾아서, 헬스장이름, 헬스장owner 폰번호 불러오기. -->
+							<div class="row justify-content-center">
+								<div class="col mb-md-4">
+									<!-- col 의 margin bottom 을 - midium - 2만큼 -->
+									<label for="firstName">이름</label> <input type="text"
+										class="form-control" id="name" name="name" placeholder="이름" value="관장"
+										required>
+									<div class="invalid-feedback">이름을 입력해주세요.</div>
+								</div>
+							</div>
+							<div class="row justify-content-center">
+								<div class="col mb-md-4">
+									<label for="userId">핸드폰 번호</label> <input type="text"
+										class="form-control" id="phone_number" name="phone_number"
+										placeholder="핸드폰 번호" maxlength="13" value="01084848484" required>
+									<div class="invalid-feedback" style="width: 100%;">핸드폰 번호를 입력해주세요.</div>
+								</div>
 
-		</div>
+							</div>
+
+							<div class="row justify-content-center">
+								<div class="col mb-lg-5">
+									<button 
+									class="btn btn-primary btn-lg btn-block" 
+									type="button" id="rememberId">아이디 찾기</button>
+								</div>
+							</div>
+						</form>
 
 	</div>
 
