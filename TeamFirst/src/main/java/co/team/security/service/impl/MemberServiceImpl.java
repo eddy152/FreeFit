@@ -104,5 +104,29 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return memberId;
 	}
+	
+	@Transactional
+	public String rememberId(MemberVO member) throws NullPointerException {
+		String id="";
+		try {
+		id =memberMapper.rememberId(member).getId();
+		
+		}
+		catch(NullPointerException e) {
+			
+		}
+		return id;
+	}
+	@Transactional
+	public String getEmail(MemberVO vo) throws NullPointerException
+	{
+		String email="";
+		try {
+			email=memberMapper.getEmail(vo).getEmail();
+		}
+		catch(NullPointerException e) {}
+		return email;
+	}
+	
 
 }

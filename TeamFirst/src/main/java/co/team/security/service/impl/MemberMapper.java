@@ -8,5 +8,8 @@ import co.team.security.service.MemberVO;
 @Repository
 public interface MemberMapper {
 	public MemberVO getMemberById(String id);
-	public void addOwnerMember(AdminVO member);
+
+	public MemberVO rememberId(MemberVO vo);
+	public MemberVO getEmail(MemberVO vo);
+	public int getMax();
 }

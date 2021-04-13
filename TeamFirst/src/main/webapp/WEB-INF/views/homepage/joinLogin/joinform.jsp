@@ -26,9 +26,17 @@
                         <div class="row justify-content-center">
                             <div class="col mb-md-2">
                                 <!-- col 의 margin bottom 을 - midium - 2만큼 -->
-                                <label for="firstName">이름</label> <input type="text" class="form-control" id="name"
+                                <label for="name">이름</label> <input type="text" class="form-control" id="name"
                                     name="name" placeholder="이름" required>
                                 <div class="invalid-feedback">이름을 입력해주세요.</div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col mb-md-2">
+                                <!-- col 의 margin bottom 을 - midium - 2만큼 -->
+                                <label for="email">이메일</label> <input type="email" class="form-control" id="email"
+                                    name="email" placeholder="이름" required>
+                                <div class="invalid-feedback">이메일을 입력해주세요.</div>
                             </div>
                         </div>
                         <div class="row justify-content-center">

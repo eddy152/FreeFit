@@ -47,7 +47,7 @@
 </head>
 
 <body class="text-center">
-
+<div class="container">
 	<form class="form-signin" method="post" id="loginForm"
 		action="/spring/authenticate">
 <a href="/spring/"><img class="mb-4" src="/spring/resources/images/logo.png" alt=""
@@ -61,8 +61,11 @@
 		<button class="btn btn-lg btn-primary btn-block" type="button"
 			id="formLogin">로그인</button>
 	</form>
-
-
+	<div class="bd">
+<a href="rememberForm" class="badge badge-primary">ID/비밀번호 찾기</a>
+	</div>
+ 
+</div>
 
 	<!-- Modal -->
 
