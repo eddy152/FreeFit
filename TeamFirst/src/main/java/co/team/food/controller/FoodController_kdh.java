@@ -1,6 +1,7 @@
 package co.team.food.controller;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.food.service.FoodVO;
@@ -67,8 +69,15 @@ public class FoodController_kdh {
 	// 추천별 식단 리스트(앱)
 	@RequestMapping("/getAppFoodList")
 	public String getAppFoodList(FoodVO vo, Model model) {
-		model.addAttribute("list", service.getAppFood(vo));
-		return "app/Food/getAppFood";
+		model.addAttribute("list", service.getAppFoodList(vo));
+		return "app/Food/getAppFoodList";
+	}
+	
+	// 추천별 식단 단건 조회(앱)
+	@RequestMapping("/getAppFood")
+	@ResponseBody
+	public FoodVO getAppFood(@RequestParam String diet_no) {
+		return service.getAppFood(diet_no);
 	}
 	
 	// 추천별 식단 추가 게시판(앱)
@@ -81,8 +90,32 @@ public class FoodController_kdh {
 	// 추천별 식단 등록(앱)
 	@PostMapping("/insertFood")
 	//@ResponseBody
-	public String getAppFood(FoodVO vo, Model model) {
+	public String insertFood(FoodVO vo, Model model) {
 		service.insertFood(vo);
+		return "redirect:/getAppFoodList";
+	}
+	
+	// 추천별 식단 수정(앱)
+	@GetMapping("/updateFood")
+	public String updateFoodForm(@RequestParam String diet_no, Model model) {
+		FoodVO vo = service.getAppFood(diet_no);
+		String[] arr = vo.getDiet_content().split(", ");
+		System.out.println(Arrays.toString(arr));
+		for(int i=0; i<arr.length; i++) {
+			String[] food = arr[i].split("/");
+			
+		}
+		
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("list", service.getFoodList(null));
+		return "app/Food/getAppFoodUpdateForm";
+	}
+	
+	// 추천별 식단 수정(앱)
+	@PostMapping("/updateFood")
+	public String updateFood(FoodVO vo) {
+		service.updateFood(vo);
 		return "redirect:/getAppFoodList";
 	}
 
