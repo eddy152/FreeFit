@@ -45,7 +45,6 @@
 					<div align="center" class="panel-body">
 						<table class="table table-hover">
 							<thead>
-
 								<tr>
 									<th>No</th>
 									<th>카테고리</th>
