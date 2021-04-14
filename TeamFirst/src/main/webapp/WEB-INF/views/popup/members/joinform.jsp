@@ -55,7 +55,7 @@
 
 	<div class="tab-content" id="myTabContent">
 
-		<div class="tab-pane fade show active" id="user" role="tabpanel"
+		<div class="tab-pane show active" id="user" role="tabpanel"
 			aria-labelledby="user-tab">
 
 
@@ -151,7 +151,7 @@
 
 	</div>
 
-	<div class="tab-pane fade" id="trainer" role="tabpanel"
+	<div class="tab-pane " id="trainer" role="tabpanel"
 		aria-labelledby="trainer-tab">
 
 

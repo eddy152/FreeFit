@@ -52,7 +52,7 @@
 		<div class="row justify-content-center">
 			<div class="tab-content" id="myTabContent">
 
-				<div class="tab-pane fade show active" id="getId" role="tabpanel" aria-labelledby="getId-tab">
+				<div class="tab-pane show active" id="getId" role="tabpanel" aria-labelledby="getId-tab">
 
 
 
@@ -99,7 +99,7 @@
 
 				</div>
 
-				<div class="tab-pane fade" id="getPw" role="tabpanel" aria-labelledby="getPw-tab">
+				<div class="tab-pane" id="getPw" role="tabpanel" aria-labelledby="getPw-tab">
 
 
 					<div class="py-3 text-center">
@@ -130,8 +130,13 @@
 						</div>
 
 						<div class="row justify-content-center">
-							<div class="col mb-lg-5">
+							<div class="col mb-sm-1">
 								<button class="btn btn-primary btn-lg btn-block" type="button" id="newPw">비밀번호 찾기</button>
+							</div>
+						</div>
+						<div class="row justify-content-center">
+							<div class="col mb-sm-1"> 
+								<a class="btn btn-primary btn-lg btn-block" href="loginform" id="loginform">로그인</a></button>
 							</div>
 						</div>
 					</form>
@@ -147,6 +152,7 @@
 	<script>
 		let getResult;
 		document.getElementById('rememberId').addEventListener('click', function (event) {
+			loadingModal(); //모달 추가
 			let formGet = event.target.parentNode.parentNode.parentNode;
 			let formElements = formGet.elements;
 			let confirmText = "";
@@ -169,7 +175,8 @@
 
 			let con = confirm(confirmText); //나중에 모달창으로
 			if (con) {
-				loadingModal(); //모달 추가
+				 $('#Loadingmodal').modal('show');
+				
 				fetch(formGet.action, { //fetch. ajax 와 비슷한 기능. loginForm.action 의 url 받아옴 (/spring/authenticate)
 					method: 'POST',
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -179,33 +186,37 @@
 					})
 				})
 
-					.then(response => {
-						$('#Loadingmodal').modal('hide');
-						let promise = response.text();
-						promise.then((value) => getResult = value)
-						.then(function(v){
-							document.querySelector("#id").value=getResult;
-							document.querySelector("#phone_number2").value=document.querySelector("#phone_number").value;
-							alert("아이디는 "+getResult +"입니다.");
-							
-						}).catch(error => console.error('Error:', error));
+					.then(response => response.text())
+										
+					.then(result => {
 						
-
-					})
+						getResult=result;
+						document.querySelector("#id").value=getResult;
+						document.querySelector("#phone_number2").value=document.querySelector("#phone_number").value;
+						
+					}
+					).then(function(){
+					$('#Loadingmodal').modal('hide');
+					$('#getPw-tab').tab('show');
+					alert('ID는 '+getResult+' 입니다.');
+					
+					
+					})										
 					.catch(error => console.error('Error:', error));
-
+				
 
 			}
 		});
 
 
 		document.getElementById('newPw').addEventListener('click', function (event) {
+				loadingModal(); //모달 추가
 			let formGet = event.target.parentNode.parentNode.parentNode;
 			console.log(formGet);
 
-			let con = confirm("확인을 누르시면 이메일로 비밀번호가 전송됩니다."); //나중에 모달창으로
+ 			let con = confirm("확인을 누르시면 이메일로 비밀번호가 전송됩니다."); //나중에 모달창으로
 			if (con) {
-				loadingModal(); //모달 추가
+				$('#Loadingmodal').modal('show');
 				fetch(formGet.action, { //fetch. ajax 와 비슷한 기능. loginForm.action 의 url 받아옴 (/spring/authenticate)
 					method: 'POST',
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -215,17 +226,17 @@
 					})
 				})
 
-					.then(response => {
+					.then(response => response.text())
+					.then(result=>{
 						$('#Loadingmodal').modal('hide');
-						let promise = response.text();
-						promise.then((value) => console.log(value)).catch(error => console.error('Error:', error));
+						alert(result+' 에서 비밀번호를 확인해주세요.');
+					
 						
-
 					})
 					.catch(error => console.error('Error:', error));
 
 
-			}
+			} 
 		});
 
 	</script>
