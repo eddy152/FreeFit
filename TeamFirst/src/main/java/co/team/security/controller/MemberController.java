@@ -160,21 +160,23 @@ public class MemberController {
 	}
 
 	@ResponseBody
-	@GetMapping("/sendEmail")
+	@PostMapping("/newPassword")
 	public String sendEmail(@ModelAttribute MemberVO member) {
 		Random random = new Random();
 		String rd = random.toString();
+		member =memberService.getAllBy(member);
 
-		String email = memberService.getEmailById(member).getEmail();
+		String email = member.getEmail();
 		if (email != "" & email != null) {
 			//16자리 비번만들어줌
 			String setRawPw = getRandomStr(16);
+			member.setPhone_number(phoneReplace(member.getPhone_number()));
 			member.setPassword(passwordEncoder.encode(setRawPw));
 			int success = memberService.setPassword(member);
 			if (success == 1) {
 				MailSend mail = new MailSend();
 				//메일로 보내줌
-				mail.MailSend(email, setRawPw);
+				mail.MailSend(email, setRawPw, member.getId());
 				return email;
 			}
 		}

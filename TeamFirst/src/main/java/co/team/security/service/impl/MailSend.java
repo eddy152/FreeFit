@@ -18,10 +18,8 @@ import co.team.security.service.MailAuth;
 public class MailSend {
 	public void MailSend() {}
     
-    public void MailSend(String mail, String address) {
-    	String mailtext ="비밀번호를 변경하시려면 링크를 클릭해주세요.\n <a href='http://localhost/spring/members/changePwForm?link=";
-    	mailtext+=address;
-    	mailtext+="'>비밀번호 변경</a>";
+    public void MailSend(String email, String setRawPw, String id) {
+    	String mailtext ="<p>아이디: "+id+"</p><br><p>비밀번호 : "+setRawPw+"<p>";
         Properties prop = System.getProperties();
         prop.put("mail.smtp.host", "smtp.gmail.com"); 
         prop.put("mail.smtp.port", 465); 
@@ -40,7 +38,7 @@ public class MailSend {
             msg.setSentDate(new Date());
             
             msg.setFrom(new InternetAddress("freefitteam@gmail.com", "PYRAMID FIT"));
-            InternetAddress to = new InternetAddress(mail);         
+            InternetAddress to = new InternetAddress(email);         
             msg.setRecipient(Message.RecipientType.TO, to);            
             msg.setSubject("비밀번호 변경 메일", "UTF-8");            
             msg.setText(mailtext, "UTF-8", "html");            

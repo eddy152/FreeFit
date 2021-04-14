@@ -120,10 +120,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	@Transactional
-	public MemberVO getEmailById(MemberVO vo) throws NullPointerException
+	public MemberVO getAllBy(MemberVO vo) throws NullPointerException
 	{
 		
-		vo= memberMapper.getEmailById(vo);
+		vo= memberMapper.getAllBy(vo);
 
 		return vo;
 	}
@@ -133,7 +133,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int setPassword(MemberVO vo) {
 		
-		return memberMapper.setPassword(vo);	
+		return memberMapper.setPassword(vo);
 	}
 	
 
