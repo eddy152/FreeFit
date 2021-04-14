@@ -33,6 +33,27 @@
 		location.href='updateFood?diet_no=' + no;
 	}
 	
+	function deleteFood() {
+		if(window.confirm('정말로 삭제하시겠습니까?')) {
+			$.ajax({
+				url: 'deleteFood',
+				type: 'post',
+				data: { diet_no : $('#diet_no').text() },
+				dataType: 'json',
+				success: function() {
+					alert('삭제완료!');
+					$('#exampleModal').modal('hide');
+					location.reload();
+				},
+				error: function() {
+					alert('ERROR!');
+				}
+			});
+		} else {
+			alert('취소');
+		}
+	}
+	
 </script>
 
 <div>
@@ -93,8 +114,9 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="insertFoodForm()">수정하기</button>
+        <button type="button" class="btn btn-danger" onclick="deleteFood()">삭제하기</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

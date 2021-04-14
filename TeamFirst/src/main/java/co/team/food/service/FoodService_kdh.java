@@ -36,4 +36,13 @@ public interface FoodService_kdh {
 
 	// 추천별 식단 수정
 	public void updateFood(FoodVO vo);
+
+	// 추천별 식단 삭제
+	public int deleteFood(FoodVO vo);
+
+	// 실제 섭취 식단 리스트
+	public List<FoodVO> getMemberFoodList(FoodVO vo);
+
+	// 실제 섭취 식단 추가
+	public int getMemberFoodInsert(FoodVO vo);
 }

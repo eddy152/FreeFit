@@ -78,5 +78,24 @@
  		update recommended_diet set diet_title=#{diet_title}, diet_content=#{diet_content}, total_calorie=#{total_calorie}
  		where diet_no =#{diet_no}
  	</update>
+ 	
+ 	<!-- 추천별 식단 삭제 -->
+ 	<delete id="deleteFood" parameterType="FoodVO">
+ 		delete from recommended_diet
+ 		where diet_no = #{diet_no}
+ 	</delete>
+ 	
+ 	<!-- 실제 섭취 식단 리스트 -->
+ 	<select id="getMemberFoodList" resultType="FoodVO" parameterType="FoodVO">
+ 		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie
+		from real_diet
+		order by take_date
+ 	</select>
+ 	
+ 	<!-- 실제 섭취 식단 추가 -->
+ 	<insert id="getMemberFoodInsert" parameterType="FoodVO">
+ 		insert into real_diet (real_diet_no, user_id, take_date, diet_content, calorie)
+		values (REAL_FOOD.nextval, #{user_id}, #{take_date}, #{diet_content}, #{calorie})
+ 	</insert>
  
  </mapper>

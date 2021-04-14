@@ -1,7 +1,7 @@
 package co.team.food.controller;
 
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,23 +100,49 @@ public class FoodController_kdh {
 	public String updateFoodForm(@RequestParam String diet_no, Model model) {
 		FoodVO vo = service.getAppFood(diet_no);
 		String[] arr = vo.getDiet_content().split(", ");
-		System.out.println(Arrays.toString(arr));
+		ArrayList<FoodVO> list = new ArrayList<>();
 		for(int i=0; i<arr.length; i++) {
-			String[] food = arr[i].split("/");
+			FoodVO fvo = new FoodVO();
+			String[] arr2 = arr[i].split("/");
 			
+			fvo.setFood_name(arr2[0]);
+			fvo.setFood_cnt(arr2[1]);
+			
+			list.add(fvo);
 		}
 		
-		
+		model.addAttribute("arr", list);
 		model.addAttribute("vo", vo);
 		model.addAttribute("list", service.getFoodList(null));
 		return "app/Food/getAppFoodUpdateForm";
-	}
-	
+		}
+
 	// 추천별 식단 수정(앱)
 	@PostMapping("/updateFood")
 	public String updateFood(FoodVO vo) {
 		service.updateFood(vo);
 		return "redirect:/getAppFoodList";
+	}
+	
+	// 추천별 식단 삭제(앱)
+	@PostMapping("/deleteFood")
+	@ResponseBody
+	public int deleteFood(FoodVO vo) {
+		return service.deleteFood(vo);
+	}
+	
+	// 실제 섭취 식단 리스트(앱)
+	@RequestMapping("/getMemberFoodList")
+	public String getMemberFoodList(Model model) {
+		model.addAttribute("list", service.getMemberFoodList(null));
+		return "app/Food/getMemberFoodList";
+	}
+	
+	// 실제 섭취 식단 추가(앱)
+	@RequestMapping("/getMemberFoodInsert")
+	@ResponseBody
+	public int getMemberFoodInsert(FoodVO vo) {
+		return service.getMemberFoodInsert(vo);
 	}
 
 }

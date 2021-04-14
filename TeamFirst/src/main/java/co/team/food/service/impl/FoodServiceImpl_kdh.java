@@ -78,6 +78,26 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	public void updateFood(FoodVO vo) {
 		dao.updateFood(vo);
 	}
+
+	@Override
+	// 추천별 식단 삭제
+	public int deleteFood(FoodVO vo) {
+		return dao.deleteFood(vo);
+	}
+
+	@Override
+	// 실제 섭취 식단 리스트
+	public List<FoodVO> getMemberFoodList(FoodVO vo) {
+		return dao.getMemberFoodList(vo);
+	}
+
+	@Override
+	// 실제 섭취 식단 추가
+	public int getMemberFoodInsert(FoodVO vo) {
+		return dao.getMemberFoodInsert(vo);
+	}
+	
+	
 	
 	
 	
