@@ -36,7 +36,6 @@
 		}
 	}	
 </script>
-
 <!-- <script>
 function goModify(frm) {
 	var title = frm.title.value;
@@ -53,7 +52,6 @@ function goModify(frm) {
 	frm.submit();
 }
 </script> -->
-
 </head>
 <style>
 h2 {text-align: center;}
@@ -72,8 +70,9 @@ textarea {width: 100%;}
 		카테고리 : <input readonly="readonly" type="text" name="category" value="${board.category}"><br>
 		게시물번호 : <input readonly="readonly" type="text" name="board_no" value="${board.board_no}"><br>
 		제목 : <input readonly="readonly" type="text" name="title" style="width: 30%;" placeholder="제목" value="${board.title}"/>
-	
+		
 		<textarea readonly="readonly" id="summernote" name="content"></textarea>
+		
 		<input id="subBtn" type="button" value="수정하기" style="float: right;" 
 			   onclick="location.href='updateAdminNoticeBoard?board_no=${board.board_no}';"/><!--"goModify(this.form)"  -->
 		<input type="button" value="삭제" style="float: right;" onclick="del(${board.board_no})">

@@ -21,7 +21,7 @@ public class Pagination {
 	private int listCnt;
 	
 	//총 페이지 수
-	private int pageCnt;
+	private int pageCnt = 1;
 	
 	//총 블럭 수
 	private int rangeCnt;
@@ -40,5 +40,4 @@ public class Pagination {
 	
 	//다음 페이지
 	private int nextPage;
-	
-}
+  }

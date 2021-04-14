@@ -106,10 +106,56 @@
 		FROM ADMIN_NOTICE_BOARD
 	
 	</select>
-	
-	
-	
-	
+		<select id="searchAdminNoticeBoardList"
+		parameterType="AdminNoticeBoardListSearch" resultType="AdminNoticeBoardVO">
+		select
+		BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		from (
+		select * from (
+		SELECT
+		rownum as seq,
+		BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		FROM (
+		SELECT *
+		FROM ADMIN_NOTICE_BOARD
+		where 1=1
+		<choose>
+			<when test="search != null">
+		and title like #{search}
+			</when>
+		</choose>
+		order by board_no desc
+		)
+		<![CDATA[
+		) where seq >= #{start}
+		)
+		where ROWNUM <= 10
+		]]>
+	</select>
+
+	<select id="countAdminNoticeBoardList"
+		parameterType="AdminNoticeBoardListSearch" resultType="Integer">
+
+		SELECT COUNT(1)
+		FROM ADMIN_NOTICE_BOARD
+		where 1=1
+		<choose>
+			<when test = "search != null">
+				and title like #{search}
+			</when>
+		</choose>
+
+	</select>
 </mapper>	
 	<!--  카운트 쿼리 
 	<select id="boardCount"
@@ -118,13 +164,11 @@
 		count(*)
 		FROM ADMIN_NOTICE_BOARD
 	</select> -->
-	
+
 	<!--  총게시물 가져오는 쿼리 
 	<select id="boardList" 
 			parameterType="co.team.board.service.BoardSearchVO" 
 			resultType="co.team.board.service.AdminNoticeBoardVO"> 
-			
-			
 	</select>-->
 
 

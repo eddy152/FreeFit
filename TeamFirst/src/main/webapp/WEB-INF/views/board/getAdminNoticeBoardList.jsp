@@ -20,6 +20,12 @@
 			location = "getAdminNoticeBoard?board_no="+no;
 		})
 	});
+	function fn_paging(page){
+			location = "getAdminNoticeBoardList?page="+page+"&search="+$("#search_text").val();
+	}
+	function search(){
+			location = "getAdminNoticeBoardList?search="+$("#search_text").val();
+	}
 </script>
 </head>
 <body>
@@ -32,12 +38,18 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
+						<input type="text" id="search_text" style="width: 300px;" value="${search}"/>
+						<input type="button" value="검색"
+							   onclick="search()">
+					</div> 
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
 						<!--<button type="button"
 							  -class="btn btn-outline btn-primary pull-right">
 							<i class="fa fa-edit fa-fw"></i> 공지사항 작성-->
 						<input type="button" value="작성하기" style="float: right;"
 							onclick="location.href='adminBoard';">
-						<!--  </button>-->
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -104,7 +116,6 @@
 			<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
 		</c:if>
 	</div>
-	
 	<div>총 게시글 수 : ${pagination.listCnt } 
 		/ 총 페이지 수 :${pagination.pageCnt } 
 		/ 현재 페이지 : ${pagination.curPage } 
