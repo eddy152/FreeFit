@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="button" value="트레이너추가" style="float: right;"
-							onclick="location.href='insertTrainer';">
+							onclick="location.href='insertTrainer'">
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -39,9 +39,10 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
+									<th>멤버쉽</th>
 									<th>ID</th>
-									<th>연락처</th>
 									<th>이름</th>
+									<th>연락처</th>
 									<th>성별</th>
 									<th>수상</th>
 									<th>경력</th>
@@ -51,9 +52,10 @@
 							<tbody>
 								<c:forEach items="${list}" var="list">
 									<tr class="dataRow">
+										<td>${list.mem_reg_id}</td>
 										<td>${list.id}</td>
-										<td>${list.phone_number}</td>
 										<td>${list.name}</td>
+										<td>${list.phone_number}</td>
 										<td>${list.gender}</td>
 										<td>${list.awards}</td>
 										<td>${list.career}</td>

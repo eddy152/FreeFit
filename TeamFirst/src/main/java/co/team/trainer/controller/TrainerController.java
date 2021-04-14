@@ -24,6 +24,6 @@ public class TrainerController {
 	@RequestMapping("/insertTrainer")
 	public String insertTrainer(TrainerVO vo) {
 		service.addTrainerMember(vo);
-		return "redirect:/trainerList";
+		return "trainer/trainerList";
 	}
 }

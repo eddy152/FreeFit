@@ -27,21 +27,21 @@
 	<insert id="addTrainerMember" parameterType="TrainerVO">
 		
 		INSERT INTO TRAINER(
-		id
+		 id
 		,MEM_REG_ID
 		,PASSWORD
 		,PHONE_NUMBER
-		,NAME,GENDER 
+		,NAME
+		,GENDER 
 		) 
 		
-		VALUES
-		(
-		#{id},
-		#{mem_reg_id},
-		#{password},
-		#{phone_number},
-		#{name},
-		#{gender}
+		VALUES (
+		 #{id}
+		,#{mem_reg_id}
+		,#{password}
+		,#{phone_number}
+		,#{name}
+		,#{gender}
 		)
 
 	</insert>

@@ -27,7 +27,7 @@ public class AdminBoardController {
 	
 	//어드민 공지 이벤트 리스트 시작
 	
-	//섬머노트 test
+	//섬머노트 작성
 	@GetMapping("/adminBoard")
 	public String boardWrite() {
 	  return "board/adminBoard";

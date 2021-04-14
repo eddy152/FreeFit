@@ -1,59 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Æ®·¹ÀÌ³Ê Ãß°¡</title>
-<!-- <script>
+<title>íŠ¸ë ˆì´ë„ˆ ì¶”ê°€</title>
+<script>
  		function goAdd(frm) {
-			var phone_number = frm.phone_number.value;
+			var id = frm.id.value;
 			var name = frm.name.value;
-			var gender = frm.gender.value;
-			
+			var phone_number = frm.phone_number.value;
+			var hire_date = frm.hire_date.value;
 			//var category = frm.category.value;
 				
-			if (phone_number.trim() == '') {
-					alert("Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			if (id.trim() == '') {
+					alert("IDë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 				return false;
 			}
 			if (name.trim() == '') {
-				alert("ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+				alert("ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 				return false;
 			}
-			var (gender.trim() =='') {
-				alert("¼ºº°À» ¼±ÅÃÇØÁÖ¼¼¿ä")
+			var (phone_number.trim() =='') {
+				alert("ì—°ë½ì²˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”")
+			}
+			var (hire_date.trim() =='') {
+				alert("ì…ì‚¬ë‚ ì§œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”")
 			}
 			
 			//if (category.trim() == '') {
-			//	alert("Ä«Å×°í¸®¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä");
+			//	alert("ì¹´í…Œê³ ë¦¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”");
 			//	return false;
 			//}
 			frm.submit();
 			}
-		</script>  -->
+		</script> 
 </head>
 <body>
-	<h2 style="text-align: center;">Æ®·¹ÀÌ³Ê Ãß°¡</h2>
+	<h2 style="text-align: center;">íŠ¸ë ˆì´ë„ˆ ë“±ë¡</h2>
 	<br>
 	<br>
 	<br>
-	<div style="width: 60%; margin: auto;">
-		<form method="post" action="insertAdminNoticeBoard">
-		 	 ¾ÆÀÌµğ :  <input type="text" name="id" style="width: 40%;" placeholder="¾ÆÀÌµğ" /><br>
-			<label for="category">Ä«Å×°í¸® : </label>
-			<select id="category" name="category">
-				<option value="0">0</option>
-				<option value="1">1</option>
-			
-			
-			</select>
-	
-		<input id="subBtn" type="button" value="Æ®·¹ÀÌ³ÊÃß°¡" style="float: right;"> 
-							<!-- onclick="goAdd(this.form)" -->
-		<!-- ¸ñ·ÏÀ¸·Î -->
-      	<input type="button" value="¸ñ·ÏÀ¸·Î" style="float: right;"
-			   onclick="location.href='trainerList';">
+	<div align="center">
+		<font size=5> íŠ¸ë ˆì´ë„ˆ ë“±ë¡í•˜ê¸° </font>
+	</div>
+	<br>
+	<div align="center">
+		<br> <br>
+		<form action="addTrainerMember">
+			<table border=1 width=600>
+				<tr>
+					<td align=center>ë©¤ë²•ì‰½ë“±ë¡ID</td>
+					<td><input type=text name=memregid size=10></td>
+				</tr>
+				<tr>
+					<td align=center>ID</td>
+					<td><input type=text name=id size=20></td>
+				</tr>
+				<tr>
+					<td align=center>ì´ë¦„</td>
+					<td><input type=text name=name size=40></td>
+				</tr>
+				<tr>
+					<td align=center>ì—°ë½ì²˜</td>
+					<td><input type=text name=phone size=10></td>
+				</tr>
+				<tr>
+					<td align=center>ì„±ë³„<br>[1:ë‚¨ì,0:ì—¬ì]</td>
+					<td><input type=text name=gender size=10></td>
+				</tr>
+				<tr>
+					<td align=center>ìˆ˜ìƒ</td>
+					<td><input type=text name=awards size=10></td>
+				</tr>
+				<tr>
+					<td align=center>ê²½ë ¥</td>
+					<td><input type=text name=career size=10></td>
+				</tr>
+				<tr>
+					<td align=center>ì…ì‚¬ì¼</td>
+					<td><input type=text name=hiredate size=10></td>
+				</tr>
+				<tr>
+					<td colspan=2 align=center>
+						<input id="subBtn" type="button" value="ë“±ë¡í•˜ê¸°"
+							   onclick="goAdd(this.form)">
+						&emsp; 
+						<input type=button value="ëª©ë¡ìœ¼ë¡œ" 
+						onclick="location.href='trainerList';"></td>
+				</tr>
+			</table>
 		</form>
 	</div>
 </body>
