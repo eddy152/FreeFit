@@ -381,7 +381,7 @@
               l.exe_part,
 		      ROUND((exer_end_date - exer_date)*24*60) AS exe_time
 		FROM exercise_record e, exercise_list l
-		WHERE user_id = 'lee'
+		WHERE user_id = #{user_id}
 		AND e.exe_no = l.exe_no
         AND e.exer_end_date between to_date(#{selDate}, 'yyyy-mm-dd') and to_date(#{selDate}, 'yyyy-mm-dd') + 7
 		ORDER BY e.exer_end_date
@@ -405,7 +405,7 @@
               l.exe_part,
 		      ROUND((exer_end_date - exer_date)*24*60) AS exe_time
 		FROM exercise_record e, exercise_list l
-		WHERE user_id = 'lee'
+		WHERE user_id = #{user_id}
 		AND e.exe_no = l.exe_no
         AND to_char(e.exer_end_date, 'yyyy-mm-dd') = #{selDate}
 		ORDER BY e.exer_end_date
@@ -421,7 +421,7 @@
 		FROM exercise_record e, exercise_list l
 		WHERE user_id = #{user_id}
 		AND e.exe_no = l.exe_no
-		AND to_char(e.exer_date, 'yyyymm') = to_char(sysdate, 'yyyymm')
+		AND e.exer_end_date between to_date(#{selDate}, 'yyyy-mm-dd') and to_date(#{selDate}, 'yyyy-mm-dd') + 30
 		GROUP BY l.exe_part
 	</select>
 	
