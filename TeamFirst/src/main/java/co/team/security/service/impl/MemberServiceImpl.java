@@ -92,6 +92,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	//아이디 중복체크
+	@Override
 	@Transactional
 	public String userCheck(String loginUserId) throws NullPointerException {
 		String memberId="";
@@ -104,5 +105,36 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return memberId;
 	}
+	@Override
+	@Transactional
+	public String rememberId(MemberVO member) throws NullPointerException {
+		String id="";
+		try {
+		id =memberMapper.rememberId(member).getId();
+		
+		}
+		catch(NullPointerException e) {
+			
+		}
+		return id;
+	}
+	@Override
+	@Transactional
+	public MemberVO getAllBy(MemberVO vo) throws NullPointerException
+	{
+		
+		vo= memberMapper.getAllBy(vo);
+
+		return vo;
+	}
+
+	
+	
+	@Override
+	public int setPassword(MemberVO vo) {
+		
+		return memberMapper.setPassword(vo);
+	}
+	
 
 }
