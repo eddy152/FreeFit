@@ -52,6 +52,13 @@ public class MemberController {
 	PasswordEncoder passwordEncoder;
 	@Autowired
 	MemberMapper mapper;
+	
+	
+	//마이페이지(프로필폼)
+	@GetMapping("/profile")
+	public String profile() {
+		return "homepage/membership/profile";
+	}
 
 	@GetMapping("/loginform") // 로그인폼으로
 	public String loginform(HttpSession session) {
