@@ -20,9 +20,6 @@
 			FROM TRAINER
 	
 	</select>
-		    
-	
-	
 	
 	<insert id="addTrainerMember" parameterType="TrainerVO">
 		
@@ -33,8 +30,7 @@
 		,PHONE_NUMBER
 		,NAME
 		,GENDER 
-		,CAREER
-		,HIRE_DATE
+
 		) 
 		
 		VALUES (
@@ -44,8 +40,7 @@
 		,#{phone_number}
 		,#{name}
 		,#{gender}
-		,#{career}
-		,#{hire_date}
+
 		)
 
 	</insert>
