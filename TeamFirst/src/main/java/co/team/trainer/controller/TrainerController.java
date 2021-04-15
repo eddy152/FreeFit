@@ -25,10 +25,5 @@ public class TrainerController {
 		model.addAttribute("list", service.getTrainerList(vo));
 		return "trainer/trainerList";
 	}
-	//단건조회
-	@GetMapping("/getTrainer")
-	public String getTrainer(TrainerVO vo, Model model)  {
-		model.addAttribute("emp", service.getTrainerId(vo));
-		return "trainer/getTrainer";
-	}
+
 }

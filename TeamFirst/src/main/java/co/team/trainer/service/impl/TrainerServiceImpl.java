@@ -12,7 +12,6 @@ import co.team.trainer.service.TrainerVO;
 public class TrainerServiceImpl implements TrainerService {
 	
 	@Autowired	TrainerMapper dao;
-
 	@Override
 	public List<TrainerVO> getTrainerList(TrainerVO member) {
 		return dao.getTrainerList(member);
@@ -20,6 +19,14 @@ public class TrainerServiceImpl implements TrainerService {
 	@Override
 	public String getTrainerId(TrainerVO member) {
 		return dao.getTrainerId(member);
+	}
+	@Override
+	public void updateTrainer(TrainerVO member) {
+		dao.updateTrainer(member);
+	}
+	@Override
+	public void deleteTrainer(String id) {
+		dao.deleteTrainer(id);
 	}
 
 }
