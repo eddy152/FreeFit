@@ -46,4 +46,6 @@ public class FoodVO {
 	
 	private String total_calorie;
 	private String user_id;
+	private String diet_comment;
+	private String comment_no;
 }

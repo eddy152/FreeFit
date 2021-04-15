@@ -1,101 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
- <mapper namespace="co.team.food.service.impl.FoodMapper_kdh">
- 
- <!-- Food 전체 리스트 -->
- 	<select id="getSearchFood" resultType="FoodVO" parameterType="FoodVO">
- 		select *
+
+<mapper namespace="co.team.food.service.impl.FoodMapper_kdh">
+
+	<!-- Food 전체 리스트 -->
+	<select id="getSearchFood" resultType="FoodVO"
+		parameterType="FoodVO">
+		select *
 		from ff_user
- 	</select>
- 
-  <!-- 회원 단건 조회 -->
- 	<select id="getFood" resultType="FoodVO" parameterType="FoodVO">
- 		select u.*, w.*
+	</select>
+
+	<!-- 회원 단건 조회 -->
+	<select id="getFood" resultType="FoodVO" parameterType="FoodVO">
+		select u.*, w.*
+		from ff_user u, user_weight w
+		where u.id = w.user_id
+		and u.id =
+		#{id}
+	</select>
+
+	<!-- Food 식단 권장량 조회(= 각 회원 기준 권장 칼로리) -->
+	<select id="getRecommendFood" resultType="FoodVO"
+		parameterType="FoodVO">
+		select u.id, u.name, u.age, u.height, w.weight
 		from ff_user u, user_weight w
 		where u.id = w.user_id
 		and u.id = #{id}
- 	</select>
- 	
- 	<!-- Food 식단 권장량 조회(= 각 회원 기준 권장 칼로리)-->
- 	<select id="getRecommendFood" resultType="FoodVO" parameterType="FoodVO">
- 		select u.id, u.name, u.age, u.height, w.weight
-		from ff_user u, user_weight w
-		where u.id = w.user_id
-		and u.id = #{id}
- 	</select>
- 	
- 	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리)-->
- 	<select id="getRealFood" resultType="FoodVO" parameterType="FoodVO">
- 		select real_diet_no, user_id, take_date, diet_content, calorie, to_char(sysdate, 'yyyy-MM-w') as week, sysdate from real_diet
- 		where user_id = #{id}
-    	and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
- 	</select>
- 	
+	</select>
+
+	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리) -->
+	<select id="getRealFood" resultType="FoodVO"
+		parameterType="FoodVO">
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content,
+		calorie, to_char(sysdate, 'yyyy-MM-dd') as "sysdate", to_char(sysdate, 'yyyy-MM-w') as week from real_diet
+		where user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
+
+	</select>
+
 	<select id="getDate" resultType="FoodVO" parameterType="FoodVO">
- 		select real_diet_no, user_id, take_date, diet_content, calorie, to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
+		select real_diet_no, user_id, take_date, diet_content, calorie,
+		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		from real_diet
-		where user_id = #{id}
-		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate+#{cnt}, 'yyyy-MM-w')
- 	</select>
- 	
- 	<select id="getBeforeDate" resultType="FoodVO" parameterType="FoodVO">
- 		select real_diet_no, user_id, take_date, diet_content, calorie, to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
+		where
+		user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-w') =
+		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+	</select>
+
+	<select id="getBeforeDate" resultType="FoodVO"
+		parameterType="FoodVO">
+		select real_diet_no, user_id, take_date, diet_content, calorie,
+		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		from real_diet
-		where user_id = #{id}
-		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate+#{cnt}, 'yyyy-MM-w')
- 	</select>
- 	
- 	<!-- 추천별 식단 전체 리스트 -->
- 	<select id="getAppFoodList" resultType="FoodVO" parameterType="FoodVO">
- 		select diet_no, trainer_id, diet_title, diet_content, reg_date, user_id, total_calorie
+		where
+		user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-w') =
+		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+	</select>
+
+	<!-- 추천별 식단 전체 리스트 -->
+	<select id="getAppFoodList" resultType="FoodVO"
+		parameterType="FoodVO">
+		select diet_no, trainer_id, diet_title, diet_content, reg_date, user_id,
+		total_calorie
 		from recommended_diet
 		order by diet_no
- 	</select>
- 	
- 	<!-- 추천별 식단 단건 조회 -->
- 	<select id="getAppFood" resultType="FoodVO" parameterType="FoodVO">
- 		select diet_no, trainer_id, diet_title, diet_content, reg_date, user_id, total_calorie
- 		from recommended_diet
- 		where diet_no = #{diet_no}
- 	</select>
- 	
- 	<!-- food_info 리스트 -->
- 	<select id="getFoodList" resultType="FoodVO" parameterType="FoodVO">
- 		select food_no, food_name, calorie, category, gram from food_info
- 		order by food_no
- 	</select>
- 	
- 	<!-- 추천별 식단 추가 -->
- 	<insert id="insertFood" parameterType="FoodVO">
- 		insert into recommended_diet (diet_no, trainer_id, diet_title, diet_content, total_calorie)
-		values(food_seq.nextval, #{trainer_id}, #{diet_title}, #{diet_content}, #{total_calorie})
- 	</insert>
- 	
- 	<!-- 추천별 식단 수정 -->
- 	<update id="updateFood" parameterType="FoodVO">
- 		update recommended_diet set diet_title=#{diet_title}, diet_content=#{diet_content}, total_calorie=#{total_calorie}
- 		where diet_no =#{diet_no}
- 	</update>
- 	
- 	<!-- 추천별 식단 삭제 -->
- 	<delete id="deleteFood" parameterType="FoodVO">
- 		delete from recommended_diet
- 		where diet_no = #{diet_no}
- 	</delete>
- 	
- 	<!-- 실제 섭취 식단 리스트 -->
- 	<select id="getMemberFoodList" resultType="FoodVO" parameterType="FoodVO">
- 		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie
+	</select>
+
+	<!-- 추천별 식단 단건 조회 -->
+	<select id="getAppFood" resultType="FoodVO"
+		parameterType="FoodVO">
+		select diet_no, trainer_id, diet_title, diet_content, reg_date, user_id,
+		total_calorie
+		from recommended_diet
+		where diet_no = #{diet_no}
+	</select>
+
+	<!-- food_info 리스트 -->
+	<select id="getFoodList" resultType="FoodVO"
+		parameterType="FoodVO">
+		select food_no, food_name, calorie, category, gram from food_info
+		order by food_no
+	</select>
+
+	<!-- 추천별 식단 추가 -->
+	<insert id="insertFood" parameterType="FoodVO">
+		insert into recommended_diet (diet_no, trainer_id, diet_title, diet_content,
+		total_calorie)
+		values(food_seq.nextval, #{trainer_id}, #{diet_title},
+		#{diet_content}, #{total_calorie})
+	</insert>
+
+	<!-- 추천별 식단 수정 -->
+	<update id="updateFood" parameterType="FoodVO">
+		update recommended_diet set diet_title=#{diet_title},
+		diet_content=#{diet_content}, total_calorie=#{total_calorie}
+		where diet_no =#{diet_no}
+	</update>
+
+	<!-- 추천별 식단 삭제 -->
+	<delete id="deleteFood" parameterType="FoodVO">
+		delete from recommended_diet
+		where diet_no = #{diet_no}
+	</delete>
+
+	<!-- 실제 섭취 식단 리스트 -->
+	<select id="getMemberFoodList" resultType="FoodVO" parameterType="FoodVO">
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date,
+		diet_content, calorie
 		from real_diet
 		order by take_date
- 	</select>
- 	
- 	<!-- 실제 섭취 식단 추가 -->
- 	<insert id="getMemberFoodInsert" parameterType="FoodVO">
- 		insert into real_diet (real_diet_no, user_id, take_date, diet_content, calorie)
-		values (REAL_FOOD.nextval, #{user_id}, #{take_date}, #{diet_content}, #{calorie})
- 	</insert>
- 
- </mapper>
+	</select>
+
+	<!-- 실제 섭취 식단 추가 -->
+	<update id="getMemberFoodInsert" parameterType="FoodVO">
+		update real_diet set diet_content = #{diet_content}
+		where user_id = #{id}
+	</update>
+
+	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리)-앱 -->
+	<select id="getRealFoodMember" resultType="FoodVO" parameterType="FoodVO">
+		select real_diet_no, user_id, take_date, diet_content, calorie, sysdate from real_diet
+		where user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
+	</select>
+	
+	<!-- 댓글 조회 -->
+	<select id="getComment" resultType="FoodVO" parameterType="FoodVO">
+		select r.*, c.comment_no, c.DIET_COMMENT
+		from real_diet r, comments c
+		where r.REAL_DIET_NO = c.REAL_DIET_NO
+		and r.real_diet_no = #{real_diet_no}
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="addComment" parameterType="FoodVO">
+		insert into comments
+		values(com_seq.nextval, #{real_diet_no}, #{diet_comment})
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComment" parameterType="FoodVO">
+		update comments set diet_comment = #{diet_comment}
+		where comment_no = #{comment_no}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComment" parameterType="FoodVO">
+		delete from comments
+		where comment_no = #{comment_no}
+	</delete>
+	
+	<!-- 이미지 경로명 diet_content에 추가 -->
+	<update id="insertImg" parameterType="FoodVO">
+		update real_diet set diet_content = #{diet_content}
+		where real_diet_no = #{real_diet_no}
+	</update>
+	
+</mapper>

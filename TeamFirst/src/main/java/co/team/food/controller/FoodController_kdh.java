@@ -131,18 +131,68 @@ public class FoodController_kdh {
 		return service.deleteFood(vo);
 	}
 	
-	// 실제 섭취 식단 리스트(앱)
+	@RequestMapping("/Test")
+	// @ResponseBody
+	public String Test(FoodVO vo, Model model) {
+		model.addAttribute("list", service.getSearchFood(vo));
+		return "app/Food/Test";
+	}
+	
+	// 해당 회원의 실제 섭취 식단 통계 (앱)
 	@RequestMapping("/getMemberFoodList")
-	public String getMemberFoodList(Model model) {
-		model.addAttribute("list", service.getMemberFoodList(null));
+	public String getMemberFoodList(FoodVO vo, Model model) {
+		model.addAttribute("list", service.getRealFood(vo));
+		model.addAttribute("food", service.getFood(vo));
 		return "app/Food/getMemberFoodList";
 	}
 	
+	// 해당 회원의 실제 섭취 식단 상세 및 작성 폼(앱)
+	@GetMapping("/getMemberFoodInsert")
+	public String getMemberFoodInsertForm(FoodVO vo, Model model) {
+		model.addAttribute("food", service.getRealFoodMember(vo)); // 실제 섭취 식단 단건 조회
+		model.addAttribute("user", service.getFood(vo)); // 회원 단건 조회
+		model.addAttribute("comment", service.getComment(vo)); // 댓글 조회
+		return "app/Food/getMemberFoodInsert";
+	}
+	
 	// 실제 섭취 식단 추가(앱)
-	@RequestMapping("/getMemberFoodInsert")
+	@PostMapping("/getMemberFoodInsert")
 	@ResponseBody
 	public int getMemberFoodInsert(FoodVO vo) {
 		return service.getMemberFoodInsert(vo);
 	}
-
+	
+	// 댓글 추가
+	@RequestMapping("/addComment")
+	@ResponseBody
+	public FoodVO addComment(FoodVO vo) {
+		 service.addComment(vo);
+		 return vo;
+	}
+	
+	// 댓글 수정
+	@RequestMapping("/updateComment")
+	@ResponseBody
+	public FoodVO updateComment(FoodVO vo) {
+		service.updateComment(vo);
+		return vo;
+	}
+	
+	// 댓글 삭제
+	@RequestMapping("/deleteComment")
+	@ResponseBody
+	public FoodVO deleteComment(FoodVO vo) {
+		service.deleteComment(vo);
+		return vo;
+	}
+	
+	// 이미지 업로드
+	@RequestMapping("/insertImg")
+	@ResponseBody
+	public FoodVO insertImg(FoodVO vo) {
+		service.insertImg(vo);
+		System.out.println(vo + "vo-----------------------------------");
+		return vo;
+	}
+	
 }
