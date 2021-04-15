@@ -10,9 +10,12 @@
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
 <script>
+var arr = {};
+
 $(function() {
 	var part = '가슴';
 	var exeName = '';
+	
 	//상단 메뉴바 클릭
 	$(".menuLink").on("click", function() {
 						part = $(this)[0].id;
@@ -45,29 +48,30 @@ $(function() {
 	
 	$(document).on("click", "button[name=exeName]", function() {
 		var exeName = $(this)[0].innerText;
-		var exeNameTd = document.getElementsByName("exeNameTd");
-		;
+		var exeNo = $(this)[0].id;
+		var exeNameTr = document.getElementsByName("exeNameTr");
 		var findExeName = false;
-			for (var i = 0; i < exeNameTd.length; i++) {
-				if (exeNameTd[i].innerText == exeName) {
+			for (var i = 0; i < exeNameTr.length; i++) {
+				if (exeNameTr[i].firstChild.innerText == exeName) {
 					alert("중복된 값이 존재 합니다..");
 					findExeName = true;
 					return ;
 				} 
 			}
 			if(findExeName != true) {
-				$("#exeNameTbl").append('<tr><td name="exeNameTd" id=' + $(this)[0].id + '>' + exeName + '</td></tr>');
+				$("#exeNameTbl").append('<tr name="exeNameTr"><td id=' + exeNo + '>' + exeName + '</td><td id=' + exeName + 'set></td></tr>');
 			}
 		}); // End of exeName
 	
 	// 하단 우측 세트 수
-	$(document).on("click", "td[name=exeNameTd]", function() {
-		exeName = $(this)[0].innerText;
+	$(document).on("click", "tr[name=exeNameTr]", function() {
+		exeName = $(this)[0].firstChild.innerText;
+		exeNo = $(this)[0].firstChild.id
 		$("#exeSet").children().remove();
 		$("#divThird button").remove();
 		$("#divThird p").remove();
 		
-		$("#exeSet").append('<tr><th colspan="2"><input type="text" readonly="readonly" id=' + exeName + ' value=' + exeName + '></th>'
+		$("#exeSet").append('<tr><th colspan="2"><input type="text" readonly="readonly" id="exeName" value=' + exeName + '></th>'
 		+ '<tr><td name="sets">세트수</td>'
 		+ '<td><input type="number" name=epd_set></td></tr>'
 		+ '<tr><td name="count">횟수</td>'
@@ -75,9 +79,9 @@ $(function() {
 		+ '<tr><td name="weight">무게</td>'
 		+ '<td><input type="number" name="epd_weight" value="0"></tr>')
 		
-		$("#exeSet").append('<input type="hidden" name=exe_no value=' + $(this)[0].id + '>');
-		$("#insertExercisePersonalDetail").append('<button type="button" name="setDel">삭제하기</button>'
-												+ '<button type="submit" name="setSub">저장하기</button>');
+		$("#exeSet").append('<input type="hidden" name=exe_no value=' + exeNo + '>');
+		$("#exeSetCount").append('<button type="button" name="setDel">삭제하기</button>'
+												+ '<button type="button" name="setSub">추가하기</button>');
 	})// End of set
 	
 	//버튼 클릭 이벤트(운동 목록 삭제)
@@ -86,16 +90,36 @@ $(function() {
 		if(jbResult) {
 			var enTr = $("#exeNameTbl tr");
 			for(var i = 0; i < enTr.length; i++) {
-				if(enTr[i].innerText == $("#exeSet th input")[0].value) {
+				if(enTr[i].firstChild.innerText == $("#exeSet th input")[0].value) {
 					enTr[i].remove();
+					delete arr[enTr[i].firstChild.innerText];
 				}
 			}
-			$("#insertExercisePersonalDetail table").children().remove();
+			$("#exeSetCount table").children().remove();
 		}
 	})
 	
+	//버튼 클릭 이벤트(추가하기)
 	$(document).on("click", "button[name=setSub]", function() {
-		alert("운동 저장이 완료되었습니다.");
+		var exeName = $("#exeName")[0].value
+		var epdSet = Number($("input[name=epd_set]")[0].value);
+		var epdCount = Number($("input[name=epd_count]")[0].value);
+		var epdWeight = Number($("input[name=epd_weight]")[0].value);
+		var exeNo = Number($("input[name=exe_no]")[0].value);
+		var epdNo = Number($("input[name=epd_no]")[0].value);
+		var exepNo = Number($("input[name=exep_no]")[0].value);
+		var userId = $("input[name=user_id]")[0].value;
+
+		arr[exeName] = {"epd_set":epdSet , "epd_count":epdCount , "epd_weight":epdWeight, "exe_no":exeNo, "epd_no":epdNo, "exep_no":exepNo, "user_id":userId };
+		$("#" + exeName + "set").html("세트수 : " + epdSet + " / 설정횟수 : " + epdCount + " / 설정무게 : " + epdWeight);
+		
+		document.getElementById("setExePr").style.display = "block";
+	})
+	
+	//버튼 클릭 이벤트(등록하기)
+	$(document).on("click", "#setExePr", function() {
+		var result = JSON.stringify(arr)
+		$('#exeList').val(result);
 	})
 	
 	//버튼 클릭 이벤트(운동 추가 & 삭제 & 불러오기)
@@ -265,16 +289,19 @@ ul.sub li:hover {
 				</table>
 			</div>
 			<div style="border: 1px solid red; float: left; width: 30%; padding: 10px;">
-				<table border="1" id="exeNameTbl">
-					<tr>
-						<td>운동 목록</td>
-					</tr>
-				</table>
+				<form action="insertExercisePersonalDetail" id=insertExercisePersonalDetail>
+					<table border="1" id="exeNameTbl">
+						<tr>
+							<td>운동 목록</td><td>설정 횟수</td>
+						</tr>
+					</table>
+					<input type="text" id="exeList">
+					<button type="button" id="setExePr" style="display: none;">등록하기</button>
+				</form>
 			</div>
 			<div id="divThird" style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
-				<form action="insertExercisePersonalDetail" id="insertExercisePersonalDetail">
-					<table border="1" id="exeSet">
-					</table>
+				<form action="" id="exeSetCount">
+					<table border="1" id="exeSet"></table>
 					운동 프로그램 번호<br><input type="text" name="epd_no" value="5"><br>
 					프로그램 번호<br><input type="text" name="exep_no" value="1"><br>
 					유저 아이디<br><input type="text" name="user_id" value="lee"><br>
