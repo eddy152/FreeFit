@@ -30,7 +30,6 @@
 		,PHONE_NUMBER
 		,NAME
 		,GENDER 
-
 		) 
 		
 		VALUES (
@@ -40,7 +39,6 @@
 		,#{phone_number}
 		,#{name}
 		,#{gender}
-
 		)
 
 	</insert>
@@ -51,5 +49,7 @@
 		SELECT ID FROM TRAINER WHERE ID = #{id}
 	
 	</select>
+
+	
 
 </mapper>

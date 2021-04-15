@@ -17,9 +17,6 @@ public class TrainerServiceImpl implements TrainerService {
 	public List<TrainerVO> getTrainerList(TrainerVO member) {
 		return dao.getTrainerList(member);
 	}
-
-
-
 	@Override
 	public String getTrainerId(TrainerVO member) {
 		return dao.getTrainerId(member);

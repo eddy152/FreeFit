@@ -86,7 +86,8 @@ public class AdminBoardController {
 //	}
 
   //@RequestParam("board_no")int board_no
-  //단건조회
+  
+   //단건조회
 //	@GetMapping("/getAdminNoticeBoard")
 //	public String getAdminNoticeBoard(Model model, AdminNoticeBoardVO vo) {
 //	  model.addAttribute("board", service.getAdminNoticeBoard(vo.getBoard_no()));

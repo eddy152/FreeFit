@@ -9,28 +9,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>trainer List</title>
-<!-- <script type="text/javascript">
- 	$(function(){
- 		$(".dataRow").click(function(){
- 			var no = $(this)[0].children[0].innerText
- 			location = "" + no;
- 		})
- 	});
-
-</script> -->
+<script type="text/javascript">
+	$(function() {
+		$(".dataRow").click(function() {
+			var no = $(this)[0].children[0].innerText
+			location = "getTrainer?id=" + no;
+		})
+	});
+</script>
 </head>
 <body>
 	<div class="page-wrapper">
 		<div class="container-fluid">
 			<div class="col-lg-8">
 				<!--게시판 넓이 -->
-				<div class="col-lg-12">
+				<div class="col-lg-5">
 					<h1 class="page-header">트레이너 리스트</h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="button" value="트레이너추가" style="float: right;"
-							onclick="location.href='insertTrainer'">
+							onclick="location.href='/spring/members/joinformP'">
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -44,8 +43,6 @@
 									<th>이름</th>
 									<th>연락처</th>
 									<th>성별</th>
-									<th>수상</th>
-									<th>경력</th>
 									<th>입사일</th>
 								</tr>
 							</thead>
@@ -57,8 +54,6 @@
 										<td>${list.name}</td>
 										<td>${list.phone_number}</td>
 										<td>${list.gender}</td>
-										<td>${list.awards}</td>
-										<td>${list.career}</td>
 										<td>${list.hire_date}</td>
 									</tr>
 								</c:forEach>

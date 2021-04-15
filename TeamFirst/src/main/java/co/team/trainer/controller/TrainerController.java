@@ -1,9 +1,11 @@
 package co.team.trainer.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.team.trainer.service.TrainerService;
@@ -11,7 +13,7 @@ import co.team.trainer.service.TrainerVO;
 
 @Controller
 public class TrainerController {
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	@Autowired
@@ -23,5 +25,10 @@ public class TrainerController {
 		model.addAttribute("list", service.getTrainerList(vo));
 		return "trainer/trainerList";
 	}
-
+	//단건조회
+	@GetMapping("/getTrainer")
+	public String getTrainer(TrainerVO vo, Model model)  {
+		model.addAttribute("emp", service.getTrainerId(vo));
+		return "trainer/getTrainer";
+	}
 }
