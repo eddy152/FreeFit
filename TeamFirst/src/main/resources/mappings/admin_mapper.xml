@@ -27,7 +27,7 @@
 	
 		<insert id="addOwnerMember" parameterType="adminVO">
 		insert into ADMIN(id, password, name, phone_number, zipcode, 
-							address, address_detail, fitness_name) values
+							address, address_detail, fitness_name, email) values
 		(
 		#{id},
 		#{password}, 
@@ -36,7 +36,8 @@
 		#{zipcode},
 		#{address},
 		#{address_detail},
-		#{fitness_name}
+		#{fitness_name},
+		#{email}
 	
 		)
 				

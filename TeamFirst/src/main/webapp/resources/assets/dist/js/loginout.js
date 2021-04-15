@@ -49,8 +49,11 @@
 
     //로그인폼 login 버튼 클릭 이벤트
     if (typeof formLogin !== "undefined") {
-		loadingModal(); //모달 추가
+		
         formLogin.onclick = function () {
+        if(document.querySelector("#inputId").value.length>=4 && document.querySelector("#inputPassword").value.length>=4)
+        {
+        loadingModal(); //모달 추가
             
             $('#Loadingmodal').modal('show'); //부트스트랩 modal 보이기 (로딩)
 
@@ -63,25 +66,32 @@
                 })
             })
 
-                .then(response => {
+                .then(response => response.url)
+                .then(response =>{
+                
                 console.log(response);
+                    
+                    if (response.includes('error')) {
                     $('#Loadingmodal').modal('hide');
-                    /*  (modal fade 인 경우 애니메이션 때문에 hide가 씹힐 수 있음) */
-                    if (response.url.includes('error')) {
                         console.log(response.url);
                         alert('로그인 실패하였습니다. 아이디와 비밀번호를 확인해주세요.');
                     }
                     else {
-                        fetch('log').then(function () {
-                            history.go(-1);
+                        fetch('log').then(result=>result.text()).then(function(result) {
+                        if(result.includes('setSession')){
+                            history.go(-1);}
                         })
-                        alert('로그인 성공');
+                        
 
                     }
                 })
                 .catch(error => console.error('Error:', error))
 
         }
+        
+        else {document.querySelector("#loginForm").className+= ' was-validated';
+        }
+    }
     }
 
 
@@ -107,12 +117,24 @@ $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}
 
 //부트스트랩 로딩모달 html
 function loadingModal() {
-    document.body.innerHTML += '<div class="modal" id="Loadingmodal" tabindex="-1"'
-        + 'aria-labelledby="LoadingmodalLabel" aria-hidden="true" role="dialog">'
-        + '<div class="modal-dialog modal-dialog-centered">'
-        + '<div class=" col align-self-center ">'
-        + '<div class="spinner-border" role="status">'
-        + '<span class="sr-only">Loading...</span></div></div></div></div>';
+
+if(!document.getElementById('Loadingmodal')){
+let modalNode=document.createElement("div");
+modalNode.setAttribute("class", "modal");
+modalNode.setAttribute("id","Loadingmodal");
+modalNode.setAttribute("tabindex","-1");
+modalNode.setAttribute("aria-labelledby","LoadingmodalLabel");
+modalNode.setAttribute("aria-hidden","true");
+modalNode.setAttribute("style","display:none;");
+
+modalNode.innerHTML = `
+<div class="modal-dialog modal-dialog-centered">
+<div class="mx-auto my-auto">
+<div class="spinner-border" role="status">
+<span class="sr-only">Loading...</span></div></div></div>
+`;
+document.body.prepend(modalNode);
+}
 }
 
 // $('#Loadingmodal').modal('show'); // 로딩모달 보이기
@@ -132,8 +154,8 @@ if (typeof id !== "undefined") {
             .then(function (text) {
 
                 if (text == document.querySelector("#id").value) {
-                    alert("이미 존재하는 아이디입니다");
                     document.getElementById('id').value = "";
+                    alert("이미 존재하는 아이디입니다");
                 }
 
             }))
@@ -147,8 +169,8 @@ if (typeof pwConfirm !== "undefined") {
     pwConfirm.addEventListener('focusout', (event) => {
 
                 if (event.target.value !== document.getElementById('password').value) {
-                    alert("비밀번호와 다릅니다.");
                     document.getElementById('pwConfirm').value = "";
+                    alert("비밀번호와 다릅니다.");
                 }
 
           

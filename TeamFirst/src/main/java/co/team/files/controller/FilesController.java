@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,9 +34,9 @@ public class FilesController {
 		return "app/test/home";
 	}
 
-
+	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public ModelAndView uploadForm(MultipartFile file, ModelAndView mv, HttpSession session) throws IOException {
+	public String uploadForm(MultipartFile file, ModelAndView mv, HttpSession session) throws IOException {
 		FilesVO vo = new FilesVO();
 		
 		String uploader = (String) session.getAttribute("id");
@@ -64,18 +65,15 @@ public class FilesController {
 			FileCopyUtils.copy(file.getBytes(), target); // 임시 디렉토리 저장된 파일을 지정 디렉토리로 복사
 															// (파일바이트배열 , (업로드경로,파일이름))
 
-			mv.addObject("file", vo.getPathName());
+			return vo.getPathName();
 			// 모델앤뷰에 file 로 file 추가. ${file.originalFilename},${file.contentType} 등으로 꺼내씀
 
 		} catch (Exception e) {
 			// 오류처리
 			e.printStackTrace();
-			mv.addObject("file", "error");
+			return "error";
 		}
 
-		// View 위치 설정
-		mv.setViewName("app/test/home");
-		return mv;
 	}
 
 }

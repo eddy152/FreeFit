@@ -55,7 +55,7 @@
 
 	<div class="tab-content" id="myTabContent">
 
-		<div class="tab-pane fade show active" id="user" role="tabpanel"
+		<div class="tab-pane show active" id="user" role="tabpanel"
 			aria-labelledby="user-tab">
 
 
@@ -69,23 +69,32 @@
 			<div class="row justify-content-center">
 
 				<!-- novalidate =<form> 태그의 novalidate 속성은 폼 데이터(form data)를 서버로 제출할 때 해당 데이터의 유효성을 검사하지 않음을 명시합니다. -->
-				<form class="needs-validation" method="post" action="/spring/members/joinU" novalidate>
+				<form class="needs-validation was-validated col-8" method="post" action="/spring/members/joinU" novalidate>
 					<!-- action="/members/joinA" -->
-					<div style="min-width: 400px;"></div>
+					
+						<div class="row justify-content-lg-center">
+							<div class="col mb-md-4">
+								<!-- col 의 margin bottom 을 - midium - 2만큼 -->
+								<label for="name">이름</label> <input type="text"
+									class="form-control" id="name" name="name"
+									placeholder="이름" value="테스트" required>
+								<div class="invalid-feedback">이름을 입력해주세요.</div>
+							</div>
+						</div>
 						<div class="row justify-content-center">
 							<div class="col mb-md-4">
 								<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-								<label for="firstName">이름</label> <input type="text"
-									class="form-control" id="name" name="name"
-									placeholder="이름" required>
-								<div class="invalid-feedback">이름을 입력해주세요.</div>
+								<label for="email">이름</label> <input type="email"
+									class="form-control" id="email" name="email"
+									placeholder="이메일" value="test@gmail.com" required>
+								<div class="invalid-feedback">이메일을 입력해주세요.</div>
 							</div>
 						</div>
 						<div class="row justify-content-center">
 							<div class="col mb-md-4">
 								<label for="userId">핸드폰 번호</label> <input type="text"
 									class="form-control" id="phone_number" name="phone_number"
-									placeholder="핸드폰 번호" maxlength="13" required>
+									placeholder="핸드폰 번호" maxlength="13" value="010-1111-4444" required>
 								<div class="invalid-feedback" style="width: 100%;">핸드폰 번호를
 									입력해주세요.</div>
 							</div>
@@ -103,10 +112,10 @@
 								<div class="btn-group btn-group-toggle btn-block"
 									data-toggle="buttons" id="toggle">
 									<label class="btn btn-secondary active"> <input
-										type="radio" name="options" id="option1" value="1" checked>
+										type="radio" name="options" id="option1" placeholder="성별"  value="1" checked>
 										남자
 									</label> <label class="btn btn-secondary"> <input type="radio"
-										name="options" id="option2" value="2"> 여자
+										name="options" id="option2" placeholder="성별" value="2"> 여자
 									</label>
 
 								</div>
@@ -119,7 +128,7 @@
 								<div class="input-group">
 
 									<input type="number" class="form-control" id="age" name="age"
-										placeholder="나이" required>
+										placeholder="나이" value="20" required>
 									<div class="invalid-feedback" style="width: 100%;">나이를
 										입력해주세요.</div>
 								</div>
@@ -129,7 +138,7 @@
 
 						<div class="row justify-content-center">
 							<div class="col mb-lg-5">
-								<button class="btn btn-primary btn-lg btn-block" type="submit">회원 등록</button>
+								<input class="btn btn-primary btn-lg btn-block" name="JoinBtn" type="button" value="회원 등록">
 							</div>
 						</div>
 				</form>
@@ -142,7 +151,7 @@
 
 	</div>
 
-	<div class="tab-pane fade" id="trainer" role="tabpanel"
+	<div class="tab-pane " id="trainer" role="tabpanel"
 		aria-labelledby="trainer-tab">
 
 
@@ -155,28 +164,38 @@
 		<div class="row justify-content-center">
 
 			<!-- novalidate =<form> 태그의 novalidate 속성은 폼 데이터(form data)를 서버로 제출할 때 해당 데이터의 유효성을 검사하지 않음을 명시합니다. -->
-			<form class="needs-validation" method="post" action="/spring/members/joinT" novalidate>
+			<form class="needs-validation was-validated col-8" method="post" action="/spring/members/joinT" novalidate>
 				<!-- action="/members/joinA" -->
-				<div style="min-width: 400px;"></div>
+				
+					<div class="row justify-content-center">
+							<div class="col mb-md-4">
+								<!-- col 의 margin bottom 을 - midium - 2만큼 -->
+								<label for="name">이름</label> <input type="text"
+									class="form-control" id="name" name="name" value="테스트"
+									placeholder="이름" required>
+								<div class="invalid-feedback">이름을 입력해주세요.</div>
+							</div>
+						</div>
 					<div class="row justify-content-center">
 						<div class="col mb-md-4">
 							<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-							<label for="firstName">이름</label> <input type="text"
-								class="form-control" id="name" name="name"
-								placeholder="이름" required>
-							<div class="invalid-feedback">이름을 입력해주세요.</div>
+							<label for="email">이름</label> <input type="email"
+								class="form-control" id="email" name="email"
+								placeholder="이메일" value="test@gmail.com" required>
+							<div class="invalid-feedback">이메일을 입력해주세요.</div>
 						</div>
 					</div>
 					<div class="row justify-content-center">
 						<div class="col mb-md-4">
 							<label for="userId">핸드폰 번호</label> <input type="text"
 								class="form-control" id="phone_number" name="phone_number" placeholder="핸드폰 번호" maxlength="13"
-								required>
+								value="010-1111-2222" required>
 							<div class="invalid-feedback" style="width: 100%;">핸드폰 번호를
 								입력해주세요.</div>
 						</div>
 
 					</div>
+					
 					<div class="row justify-content-center">
 
 						<div class="col mb-md-2">
@@ -189,20 +208,21 @@
 							<div class="btn-group btn-group-toggle btn-block"
 								data-toggle="buttons" id="toggle">
 								<label class="btn btn-secondary active"> <input
-									type="radio" name="options" id="option1" value="1" checked>
+									type="radio" name="options" id="option1" value="1" placeholder="성별" checked>
 									남자
 								</label> <label class="btn btn-secondary"> <input type="radio"
-									name="options" id="option2" value="2"> 여자
+									name="options" id="option2" placeholder="성별" value="2"> 여자
 								</label>
 
 							</div>
 						</div>
 
 					</div>
+					<br>
 					
 					<div class="row justify-content-center">
 						<div class="col mb-lg-5 my-lg-1">
-							<button class="btn btn-primary btn-lg btn-block" type="submit">트레이너 등록</button>
+							<input class="btn btn-primary btn-lg btn-block" name="JoinBtn" type="button" value="트레이너 등록">
 						</div>
 					</div>
 			</form>
@@ -222,7 +242,39 @@
 
 
 
+<script>
 
+const buttons = document.querySelectorAll("input[name='JoinBtn']");
+for (const button of buttons) {
+  button.addEventListener('click', function(event) {
+	  let formGet=event.target.parentNode.parentNode.parentNode;
+	  let formElements = formGet.elements;
+	  let confirmText= "";
+	  for(var i=0; i<formElements.length;i++){
+		  if(formElements[i].type!="radio" || formElements[i].checked){
+			  
+		  
+		  confirmText+=formElements[i].placeholder;
+		  if(formElements[i].placeholder=="성별"){
+			  if(formElements[i].value=="1"){
+				  confirmText+="남자";
+			  }else confirmText+="여자";
+		  }
+		  else confirmText+=formElements[i].value;
+		  
+		  
+		  confirmText+="  ";
+		  }
+	  }
+		  
+    let con=confirm(confirmText); //나중에 모달창으로
+    if(con){formGet.submit();}
+  })
+}
+
+//buttonElement.addEventListener('click', function () {}
+
+</script>
 
 
 
