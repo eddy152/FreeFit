@@ -15,7 +15,7 @@ public interface TrainerMapper {
 	//트레이너 상세조회
 	public String getTrainerId(TrainerVO member);
 
-	//지우니깐 에러뜸..
+	//지우니깐 에러뜸ㅠ
 	public void addTrainerMember(TrainerVO member);
 	
 	//수정

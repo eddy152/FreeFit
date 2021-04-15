@@ -28,5 +28,4 @@ public class TrainerServiceImpl implements TrainerService {
 	public void deleteTrainer(String id) {
 		dao.deleteTrainer(id);
 	}
-
 }
