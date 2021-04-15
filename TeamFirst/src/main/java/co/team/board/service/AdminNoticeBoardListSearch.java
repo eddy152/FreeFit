@@ -23,7 +23,7 @@ public class AdminNoticeBoardListSearch {
 
 	public void setPage(int page) {
 		this.page = page;
-		this.start = page*10;
+		this.start = page*10 + 1;
 	}
 
 	public String getSearch() {
