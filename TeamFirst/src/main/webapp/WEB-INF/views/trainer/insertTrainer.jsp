@@ -13,8 +13,7 @@
 			var name = frm.name.value;
 			var phone_number = frm.phone_number.value;
 			var hire_date = frm.hire_date.value;
-			//var category = frm.category.value;
-				
+			
 			if (id.trim() == '') {
 					alert("ID를 입력해주세요");
 				return false;
@@ -29,11 +28,7 @@
 			var (hire_date.trim() =='') {
 				alert("입사날짜를 입력해주세요")
 			}
-			
-			//if (category.trim() == '') {
-			//	alert("카테고리를 선택해주세요");
-			//	return false;
-			//}
+		
 			frm.submit();
 			}
 		</script> 
