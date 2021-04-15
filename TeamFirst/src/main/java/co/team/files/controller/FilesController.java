@@ -41,9 +41,9 @@ public class FilesController {
 		
 		String uploader = (String) session.getAttribute("id");
 		String fileName = file.getOriginalFilename(); // 파일 이름 받아온다
-		
 
-		String newFileName = uploader + Integer.toString((new Date()).hashCode());
+
+		String newFileName = uploader + Integer.toString((new Date()).hashCode())+fileName;
 		vo.setFileName(newFileName);
 		vo.setPathName("/spring/resources/img/"+newFileName);
 		vo.setUploader(uploader);
@@ -74,6 +74,10 @@ public class FilesController {
 			return "error";
 		}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/KDH
 	}
 
 }

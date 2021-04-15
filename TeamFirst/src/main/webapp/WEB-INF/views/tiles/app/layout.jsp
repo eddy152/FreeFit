@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -64,7 +66,6 @@
 	var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : ";"%>
 	
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
 

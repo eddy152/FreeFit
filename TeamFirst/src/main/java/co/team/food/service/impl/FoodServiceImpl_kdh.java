@@ -96,7 +96,45 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	public int getMemberFoodInsert(FoodVO vo) {
 		return dao.getMemberFoodInsert(vo);
 	}
+
+	@Override
+	// 실제 섭취 식단 폼(오늘)
+	public FoodVO getRealFoodMember(FoodVO vo) {
+		return dao.getRealFoodMember(vo);
+	}
+
+	@Override
+	// 댓글 추가
+	public void addComment(FoodVO vo) {
+		 dao.addComment(vo);
+	}
+
+	@Override
+	// 댓글 조회
+	public List<FoodVO> getComment(FoodVO vo) {
+		return dao.getComment(vo);
+	}
 	
+	@Override
+	// 댓글 수정
+	public void updateComment(FoodVO vo) {
+		dao.updateComment(vo);
+	}
+	
+	@Override
+	// 댓글 삭제
+	public void deleteComment(FoodVO vo) {
+		dao.deleteComment(vo);
+	}
+
+	@Override
+	// 이미지 업로드
+	public FoodVO insertImg(FoodVO vo) {
+		return dao.insertImg(vo);
+	}
+
+
+
 	
 	
 	

@@ -48,5 +48,23 @@ public interface FoodMapper_kdh {
 	
 	// 실제 섭취 식단 추가
 	public int getMemberFoodInsert(FoodVO vo);
-
+	
+	// 실제 섭취 식단(오늘)
+	public FoodVO getRealFoodMember(FoodVO vo);
+	
+	// 댓글 조회
+	public List<FoodVO> getComment(FoodVO vo);
+	
+	// 댓글 추가
+	public void addComment(FoodVO vo);
+	
+	// 댓글 수정
+	public void updateComment(FoodVO vo);
+	
+	// 댓글 삭제
+	public void deleteComment(FoodVO vo);
+	
+	// 이미지 업로드
+	public FoodVO insertImg(FoodVO vo);
+	
 }
