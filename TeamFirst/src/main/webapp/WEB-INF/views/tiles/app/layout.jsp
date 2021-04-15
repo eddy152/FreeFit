@@ -64,9 +64,7 @@
 	var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : ";"%>
 	
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
 

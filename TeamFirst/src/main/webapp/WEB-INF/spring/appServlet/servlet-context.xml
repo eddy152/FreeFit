@@ -24,6 +24,7 @@
 		base-package="co.team" />
 
 	<mvc:annotation-driven />
+<!-- 일반 파일 업로드 경로 -->
 
 <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 	<!-- TransactionManager bean 등록 -->
@@ -73,6 +74,5 @@
 		<beans:property name="order" value="2" />
 	</beans:bean>
      
-     
-     
+
 </beans:beans>

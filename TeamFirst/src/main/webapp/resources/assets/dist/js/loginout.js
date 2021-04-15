@@ -122,6 +122,8 @@ function loadingModal() {
 //아이디 중복체크    
 if (typeof id !== "undefined") {
     id.addEventListener('focusout', (event) => {
+    
+    if(event.target.value.length>5){
         console.log(event.target.value);
         let url = "/spring/members/checkId?";
         url += event.target.name + "=" + event.target.value;
@@ -135,6 +137,8 @@ if (typeof id !== "undefined") {
                 }
 
             }))
+   }
+   
     });
 }
 
