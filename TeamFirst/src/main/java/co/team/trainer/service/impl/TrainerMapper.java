@@ -9,20 +9,24 @@ import co.team.trainer.service.TrainerVO;
 @Repository
 public interface TrainerMapper {
 	
-	//트레이너 전체리스트
+	//전체조회
 	public List<TrainerVO> getTrainerList(TrainerVO member);
 	
-	//트레이너 상세조회
+	//ID
 	public String getTrainerId(TrainerVO member);
 
-	//지우니깐 에러뜸ㅠ
+	//상세조회
+	public TrainerVO getTrainer(String trainerId);
+
+	//이거지우면 등록오류..ㅠ
 	public void addTrainerMember(TrainerVO member);
-	
+
 	//수정
 	public void updateTrainer(TrainerVO member);
 	
-	//삭제 
+	//삭제
 	public void deleteTrainer(String id);
+	
 }
 	
 

@@ -12,8 +12,8 @@
 <script type="text/javascript">
 	$(function() {
 		$(".dataRow").click(function() {
-			var no = $(this)[0].children[0].innerText
-			location = "getTrainer?id=" + no;
+			var id = $(this)[0].children[0].innerText
+			location = "getTrainer?id=" + id;
 		})
 	});
 </script>

@@ -4,7 +4,6 @@
 <!-- users_mapper.xml -->
 <mapper namespace="co.team.trainer.service.impl.TrainerMapper">
 
-	<!-- 트레이너 전체 리스트 -->
 	<select id="getTrainerList" resultType="TrainerVO"
 		    parameterType="TrainerVO">
 	
@@ -18,10 +17,9 @@
 			,CAREER
 			,HIRE_DATE
 			FROM TRAINER
-	
+
 	</select>
 	
-	<!-- 트레이너 추가 -->
 	<insert id="addTrainerMember" parameterType="TrainerVO">
 		
 		INSERT INTO TRAINER(
@@ -44,7 +42,6 @@
 
 	</insert>
 
-	<!-- 트레이너 상세조회 -->
 	<select id="getTrainerId" resultType="string"
 			parameterType="TrainerVO">
 		
@@ -52,11 +49,35 @@
 	
 	</select>
 
-	<!-- 트레이너 수정 -->
-	<update id="updateTrainer" parameterType="TrainerVO">
-	
-	
-	</update>	
+	<select id="getTrainer" resultType="TrainerVO"
+		parameterType="string">
 
-	<!-- 트레이너 삭제 -->
+			SELECT ID
+			,MEM_REG_ID
+			,PASSWORD
+			,PHONE_NUMBER
+			,NAME
+			,GENDER
+			,AWARDS
+			,CAREER
+			,HIRE_DATE
+			FROM TRAINER WHERE ID = #{id}
+
+	</select>
+
+	<update id="updateTrainer" parameterType="TrainerVO">
+ 		
+ 		UPDATE TRAINER SET NAME = #{name}
+ 		, gender=#{gender}
+ 		, phone_number=#{phone_number}
+		WHERE ID = #{id}
+ 	
+ 	</update>
+	
+	<update id="deleteTrainer" parameterType="TrainerVO">
+ 		
+ 		DELETE FROM TRAINER
+		WHERE ID = #{id}
+ 	
+ 	</update>
 </mapper>
