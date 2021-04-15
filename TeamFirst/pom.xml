@@ -37,6 +37,12 @@
 
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail 자바메일 api-->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
 
 		<!-- 파일업로드/다운로드 -->
 		<dependency>

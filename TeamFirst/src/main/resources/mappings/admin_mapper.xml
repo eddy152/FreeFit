@@ -11,14 +11,36 @@
 
 	</select>
 	
-	
-<!-- ADMIN insert -->	
+<!-- 회원가입 -->	
 	<insert id="insertAdmin" parameterType="adminVO">
-		insert into ADMIN("admin_id", "password") values
+		insert into ADMIN(id, password) values
 		(
-		#{admin_id},
+		#{id},
 		#{password}
 		)
 				
 	</insert>
+	
+		<insert id="addOwnerMember" parameterType="adminVO">
+		insert into ADMIN(id, password, name, phone_number, zipcode, 
+							address, address_detail, fitness_name, email) values
+		(
+		#{id},
+		#{password}, 
+		#{name},
+		#{phone_number},
+		#{zipcode},
+		#{address},
+		#{address_detail},
+		#{fitness_name},
+		#{email}
+	
+		)
+				
+	</insert>
+	
+	<select id="getOwnerId" resultType="string" parameterType="adminVO">
+	select * from admin where id=#{id}
+	</select>
+	
 </mapper>

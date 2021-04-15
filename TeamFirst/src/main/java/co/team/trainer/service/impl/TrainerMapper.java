@@ -11,7 +11,7 @@ public interface TrainerMapper {
 	
 	public List<TrainerVO> getTrainerList(TrainerVO member);
 	
-	public String addTrainerMember(TrainerVO member);
+	public void addTrainerMember(TrainerVO member);
 	
 	public String getTrainerId(TrainerVO member);
 	}
