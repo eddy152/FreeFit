@@ -4,7 +4,7 @@
   <h5 class="my-0 mr-md-auto font-weight-normal">FreeFit</h5> <!-- 로고 만들어넣기 -->
   <nav class="my-2 my-md-0 mr-md-3">
     <a class="p-2 text-dark" href="#">Features</a>
-    <a class="p-2 text-dark" href="#">Enterprise</a>
+    <a class="p-2 text-dark" href="/spring/getAdminNoticeBoardList">게시판</a>
     <a class="p-2 text-dark" href="#">Support</a>
     <a class="p-2 text-dark" href="#">Pricing</a>
   </nav>

@@ -17,13 +17,13 @@ Configuration 2.1//EN"
 
 	<!-- 홈페이지 : 헤더 컨텐츠 푸터 -->
 	<definition name="homepage"
-		template="/WEB-INF/views/tiles/homepage/layout.jsp">
+		template="/WEB-INF/views/tiles/homepage/layoutH.jsp">
 		<put-attribute name="content"
 			value="/WEB-INF/views/home.jsp" />
 		<put-attribute name="header"
-			value="/WEB-INF/views/tiles/homepage/header.jsp" />
+			value="/WEB-INF/views/tiles/homepage/headerH.jsp" />
 		<put-attribute name="footer"
-			value="/WEB-INF/views/tiles/homepage/footer.jsp" />
+			value="/WEB-INF/views/tiles/homepage/footerH.jsp" />
 	</definition>
 
 	<definition name="homepage/*/*" extends="homepage">
@@ -38,13 +38,13 @@ Configuration 2.1//EN"
 
 	<!-- 프로그램 : 헤더 사이드바 컨텐츠 -->
 	<definition name="program"
-		template="/WEB-INF/views/tiles/program/layout.jsp">
+		template="/WEB-INF/views/tiles/program/layoutP.jsp">
 		<put-attribute name="content"
 			value="/WEB-INF/views/home.jsp" />
 		<put-attribute name="header"
-			value="/WEB-INF/views/tiles/program/header.jsp" />
+			value="/WEB-INF/views/tiles/program/headerP.jsp" />
 		<put-attribute name="side"
-			value="/WEB-INF/views/tiles/program/side.jsp" />
+			value="/WEB-INF/views/tiles/program/sideP.jsp" />
 	</definition>
 
 	<definition name="program/*/*" extends="program">
@@ -56,13 +56,13 @@ Configuration 2.1//EN"
 	<!-- 앱 : 헤더 사이드바 컨텐츠 -->
 
 	<definition name="app"
-		template="/WEB-INF/views/tiles/app/layout.jsp">
+		template="/WEB-INF/views/tiles/app/layoutA.jsp">
 		<put-attribute name="content"
 			value="/WEB-INF/views/home.jsp" />
 		<put-attribute name="header"
-			value="/WEB-INF/views/tiles/app/header.jsp" />
+			value="/WEB-INF/views/tiles/app/headerA.jsp" />
 		<put-attribute name="side"
-			value="/WEB-INF/views/tiles/app/side.jsp" />
+			value="/WEB-INF/views/tiles/app/sideA.jsp" />
 
 	</definition>
 

@@ -2,10 +2,14 @@ package co.team.security.service.security;
 
 import java.util.List;
 
+import co.team.admin.service.AdminVO;
+
 public interface UserDbService {
     public UserEntity getUser(String loginUserId);
 
     public List<UserRoleEntity> getUserRoles(String loginUserId);
+
+
 }
 
 //UserDbService인터페이스를 작성합니다. 로그인한 사용자 id를 파라미터로 받아들여서

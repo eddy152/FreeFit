@@ -7,17 +7,17 @@
 			<li class="nav-item"><a class="nav-link active" href="#"> <span
 					data-feather="home"></span> Dashboard <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <span
-					data-feather="file"></span> Orders
+			<li class="nav-item"><a class="nav-link" href="getSearchFood"> <span
+					data-feather="file"></span> 회원 식단관리
+			</a></li>
+			<li class="nav-item"><a class="nav-link" href="getSearchLocker"> <span
+					data-feather="shopping-cart"></span> 락커관리
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
-					data-feather="shopping-cart"></span> Products
+					data-feather="users"></span> 시설관리
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <span
-					data-feather="users"></span> Customers
-			</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> <span
-					data-feather="bar-chart-2"></span> Reports
+			<li class="nav-item"><a class="nav-link" href="calendar"> <span
+					data-feather="bar-chart-2"></span> 일정관리
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#"> <span
 					data-feather="layers"></span> Integrations

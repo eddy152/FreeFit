@@ -24,4 +24,5 @@ public interface MemberService extends UserDbService {
 	public String rememberId(MemberVO member) throws NullPointerException;
 	public MemberVO getAllBy(MemberVO vo) throws NullPointerException;
 	public int setPassword(MemberVO vo);
+	public AdminVO getProfileInfo(String id);
 }

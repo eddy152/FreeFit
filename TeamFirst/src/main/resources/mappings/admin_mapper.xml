@@ -12,18 +12,20 @@
 	</select>
 	
 	
+<!-- 프로필 정보 단건조회 -->
+<select id="getProfileInfo" resultType="adminVO" parameterType="String">
+		select * 
+			from profile_info 
+			where	rownum=1 
+					and id=#{id}
 
+	</select>
 	
+<select id="getOwnerId" resultType="string" parameterType="adminVO">
+	select id from admin where id=#{id}
+	</select>
 	
 <!-- 회원가입 -->	
-	<insert id="insertAdmin" parameterType="adminVO">
-		insert into ADMIN(id, password) values
-		(
-		#{id},
-		#{password}
-		)
-				
-	</insert>
 	
 		<insert id="addOwnerMember" parameterType="adminVO">
 		insert into ADMIN(id, password, name, phone_number, zipcode, 
@@ -43,8 +45,6 @@
 				
 	</insert>
 	
-	<select id="getOwnerId" resultType="string" parameterType="adminVO">
-	select * from admin where id=#{id}
-	</select>
+	
 	
 </mapper>

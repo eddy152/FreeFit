@@ -1,6 +1,5 @@
 package co.team.security.controller;
 
-import java.util.Date;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +56,12 @@ public class MemberController {
 	
 	//마이페이지(프로필폼)
 	@GetMapping("/profile")
-	public String profile() {
+	public String profile(HttpSession session, Model model) {
+		String id=(String) session.getAttribute("id");
+		
+		AdminVO vo = memberService.getProfileInfo(id);
+		model.addAttribute("vo",vo);
+	
 		return "homepage/membership/profile";
 	}
 
@@ -94,6 +99,23 @@ public class MemberController {
 		}
 
 	}
+	
+	@RequestMapping("/noAuth")
+	public String dellog(HttpSession session) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 인증정보
+		String username = auth.getName(); // 이름(id)을 가져온다
+		
+		if (username.equals("anonymousUser")) { // 로그인한 상태가 아닐 경우
+			session.invalidate(); // 세션을 삭제한다
+			return "redirect:/loginform";
+		}
+		else {
+			return "redirect:/loginform";
+			
+		}
+		
+	}
+	
 
 	// 회원가입 폼
 
