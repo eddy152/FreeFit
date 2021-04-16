@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+	<!-- user notice 유저공지  -->
+	<mapper namespace="co.team.board.service.impl.UserNoticeBoardMapper">
+	
+	<insert id="insertUserNoticeBoard"
+			parameterType="UserNoticeBoardVO">
+		
+		INSERT INTO USER_NOTICE_BOARD( 
+		BOARD_NO
+		,MEM_BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		,MEM_REG_ID
+		)
+		
+		VALUES( 
+		#{board_no}
+		,#{mem_board_no}
+		,#{category}
+		,#{title}
+		,#{content}
+		,#{reg_date}
+		,#{hit}
+		,#{mem_reg_id}
+		
+		)
+	</insert>
+
+	<update id="updateUserNoticeBoard" 
+			parameterType="co.team.board.service.impl.UserNoticeBoardMapper">
+			
+			UPDATE USER_NOTICE_BOARD
+			SET CONTENT = #{content}
+			WHERE BOARD_NO = #{board_no} 
+	</update>
+	
+	
+	<delete id="deleteUserNoticeBoard" 
+			parameterType="UserNoticeBoardVO">
+		
+		DELETE FROM USER_NOTICE_BOARD
+		
+		WHERE BOARD_NO = #{board_no}
+
+	</delete>
+	
+	<select id="getUserNoticeBoard" 
+			resultType="UserNoticeBoardVO"
+			parameterType="UserNoticeBoardVO">
+			
+			SELECT BOARD_NO
+				,MEM_BOARD_NO
+				,CATEGORY
+				,TITLE
+				,CONTENT
+				,REG_DATE
+				,HIT
+				,MEM_REG_ID
+			FROM USER_NOTICE_BOARD
+			WHERE BOARD_NO = #{board_no}
+			
+	</select>
+	
+	<select id="getUserNoticeBoardList" 
+			parameterType="UserNoticeBoardVO"
+			resultType="UserNoticeBoardVO">
+			
+		 	
+			 SELECT BOARD_NO
+				,MEM_BOARD_NO
+				,CATEGORY
+				,TITLE
+				,CONTENT
+				,REG_DATE
+				,HIT
+				,MEM_REG_ID
+			FROM USER_NOTICE_BOARD	  
+	</select>
+</mapper>
+

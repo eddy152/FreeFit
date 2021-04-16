@@ -34,7 +34,7 @@
 		INSERT INTO ROLE
 		select (SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLE_TRAINER'
 		from dual union all
-		select (SELECT NVL(MAX(id)+1, 1) FROM ROLE), #{memberId}, 'ROLE_USER'
+		select (SELECT NVL(MAX(id)+2, 1) FROM ROLE), #{memberId}, 'ROLE_USER'
 		from dual
 
 	</insert>

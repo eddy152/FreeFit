@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- admin notice 어드민공지 -->
+<mapper namespace="co.team.board.service.impl.AdminNoticeBoardMapper">
+	<insert id="insertAdminNoticeBoard"
+		parameterType="AdminNoticeBoardVO">
+
+		INSERT INTO ADMIN_NOTICE_BOARD(
+		BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		)
+
+		VALUES(
+		( select nvl(max(board_no), 0) + 1 from admin_notice_board )
+		,#{category}
+		,#{title}
+		,#{content}
+		,sysdate
+		,#{hit}
+		)
+		
+	</insert>
+	
+    <!-- <insert id="insertSelectkey">
+    <selectKey keyProperty="reservation_no" order="BEFORE" resultType="int">
+		SELECT RESERVATION_NO.NEXTVAL FROM DUAL
+		
+		INSERT INTO ADMIN_NOTICE_BOARD(
+		BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		)
+
+		VALUES(
+		#{board_no}
+		,#{category}
+		,#{title}
+		,#{content}
+		,sysdate
+		,#{hit}
+		)
+	</selectKey>
+    </insert> -->
+
+	<!-- 글쓰기 수정 -->
+	<update id="updateAdminNoticeBoard"
+		parameterType="co.team.board.service.impl.AdminNoticeBoardMapper">
+		UPDATE ADMIN_NOTICE_BOARD
+		SET TITLE = #{title},
+			CONTENT = #{content}
+		WHERE BOARD_NO = #{board_no}
+	</update>
+	
+	<!-- 글쓰기 삭제 -->
+	<delete id="deleteAdminNoticeBoard" parameterType="int">
+	DELETE FROM ADMIN_NOTICE_BOARD 
+	WHERE BOARD_NO = #{board_no}
+	</delete>
+	
+	<!--  <delete id="deleteAdminNoticeBoard"
+		parameterType="AdminNoticeBoardVO">
+		DELETE FROM ADMIN_NOTICE_BOARD
+		WHERE BOARD_NO = #{board_no}-->
+	
+	<!-- 글 상세조회 -->
+	<select id="getAdminNoticeBoard" resultType="AdminNoticeBoardVO"
+		parameterType="int">
+		
+		SELECT * FROM ADMIN_NOTICE_BOARD WHERE BOARD_NO = #{board_no}
+	
+	<!--SELECT BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		FROM ADMIN_NOTICE_BOARD
+		WHERE BOARD_NO = #{board_no}  -->	
+	</select>
+	<!-- 조회수 +1 -->
+		<update id="adminNoticeBoardHit" parameterType="int">
+ 		 UPDATE ADMIN_NOTICE_BOARD SET HIT = HIT + 1 WHERE BOARD_NO = #{board_no}
+		 
+		</update>
+
+
+	<select id="getAdminNoticeBoardList"
+		parameterType="AdminNoticeBoardVO" resultType="AdminNoticeBoardVO">
+
+		SELECT BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		FROM ADMIN_NOTICE_BOARD
+	
+	</select>
+		<select id="searchAdminNoticeBoardList"
+		parameterType="AdminNoticeBoardListSearch" resultType="AdminNoticeBoardVO">
+		select
+		BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		from (
+		select * from (
+		SELECT
+		rownum as seq,
+		BOARD_NO
+		,CATEGORY
+		,TITLE
+		,CONTENT
+		,REG_DATE
+		,HIT
+		FROM (
+		SELECT *
+		FROM ADMIN_NOTICE_BOARD
+		where 1=1
+		<choose>
+			<when test="search != null">
+		and title like #{search}
+			</when>
+		</choose>
+		order by board_no desc
+		)
+		<![CDATA[
+		) where seq >= #{start}
+		)
+		where ROWNUM <= 10
+		]]>
+	</select>
+
+	<select id="countAdminNoticeBoardList"
+		parameterType="AdminNoticeBoardListSearch" resultType="Integer">
+
+		SELECT COUNT(1)
+		FROM ADMIN_NOTICE_BOARD
+		where 1=1
+		<choose>
+			<when test = "search != null">
+				and title like #{search}
+			</when>
+		</choose>
+
+	</select>
+</mapper>	
+	<!--  카운트 쿼리 
+	<select id="boardCount"
+		parameterType="co.team.board.service.BoardSearchVO" resultType="int">
+		SELECT
+		count(*)
+		FROM ADMIN_NOTICE_BOARD
+	</select> -->
+
+	<!--  총게시물 가져오는 쿼리 
+	<select id="boardList" 
+			parameterType="co.team.board.service.BoardSearchVO" 
+			resultType="co.team.board.service.AdminNoticeBoardVO"> 
+	</select>-->
+
+

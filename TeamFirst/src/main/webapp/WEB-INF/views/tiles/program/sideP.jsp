@@ -11,6 +11,9 @@
 			<li class="nav-item"><a class="nav-link" href="/spring/calendar">
 					<span data-feather="bar-chart-2"></span> 일정관리
 			</a></li>
+			<li class="nav-item"><a class="nav-link" href="/spring/trainerList">
+					<span data-feather="bar-chart-2"></span> 트레이너 리스트
+			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/getSearchFood"> <span data-feather="file"></span>
 					회원식단관리

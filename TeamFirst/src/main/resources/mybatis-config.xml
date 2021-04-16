@@ -2,6 +2,11 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
  <settings>
+ 
+ <!-- 김정모 추가 -->
+ <setting name="jdbcTypeForNull" value="NULL"/>
+
+
  <setting name="cacheEnabled" value="true"/>
  <setting name="lazyLoadingEnabled" value="false"/>
  <setting name="multipleResultSetsEnabled" value="true"/>
