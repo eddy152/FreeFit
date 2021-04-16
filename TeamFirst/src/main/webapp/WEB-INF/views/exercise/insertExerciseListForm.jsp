@@ -18,13 +18,13 @@
 		<form action="insertExerciseList" id="exeAddForm">
 			<table border="1">
 				<tr>
-					<th>운동 번호</th>
+					<!-- <th>운동 번호</th> -->
 					<th>운동 종류</th>
 					<th>운동 부위</th>
 					<th>운동 이름</th>
 				</tr>
 				<tr>
-					<td><input type="text" name=exe_no></td>
+					<!-- <td><input type="text" name=exe_no></td> -->
 					<td>
 						<select name="exe_kinds" size="1">
 							<option value="기구">기구운동</option>

@@ -13,8 +13,21 @@
 	$(function() {
 		$("tr").on("click", function() {
 			var id = $(this)[0].firstElementChild.innerText;
-			var url = "getFFUserProc?id=";
-			$(location).attr('href', url + id);
+			var form = document.createElement('form');
+			var objs;
+			
+			objs = document.createElement('input');
+			objs.setAttribute('type', 'hidden');
+			objs.setAttribute('name', 'id');
+			objs.setAttribute('value', id);
+			
+			form.appendChild(objs);
+			form.setAttribute('method', 'post');
+			form.setAttribute('action', "getFFUserProc");
+			
+			document.body.appendChild(form);
+			
+			form.submit();
 		})
 	})
 </script>
@@ -25,9 +38,9 @@
 			<tr>
 				<th>ID</th>
 				<th>NAME</th>
+				<th>PHONE_NUMBER</th>
 				<th>AGE</th>
 				<th>GENDER</th>
-				<th>PHONE_NUMBER</th>
 			</tr>
 			<c:forEach items="${list}" var="list">
 				<tr>

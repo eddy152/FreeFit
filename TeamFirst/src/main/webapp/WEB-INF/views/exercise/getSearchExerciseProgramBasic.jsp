@@ -6,9 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 var arr = {};
 
@@ -46,6 +44,8 @@ $(function() {
 		}
 	})  // End of exeKinds
 	
+	
+	//운동 목록 추가하기
 	$(document).on("click", "button[name=exeName]", function() {
 		var exeName = $(this)[0].innerText;
 		var exeNo = $(this)[0].id;
@@ -119,7 +119,18 @@ $(function() {
 	//버튼 클릭 이벤트(등록하기)
 	$(document).on("click", "#setExePr", function() {
 		var result = JSON.stringify(arr)
-		$('#exeList').val(result);
+		$.ajax({
+			url: "insertExercisePersonalDetail",  // 서버 url
+			type: 'post',
+			data: result,
+			header:{
+				"Content-Type":"application/json",	//Content-Type 설정
+				"X-HTTP-Method-Override":"POST"},
+			success: function(result) {
+				alert("성공");
+				$('#exeList').val(result);
+			}
+		})  // End of ajax
 	})
 	
 	//버튼 클릭 이벤트(운동 추가 & 삭제 & 불러오기)
@@ -304,7 +315,7 @@ ul.sub li:hover {
 					<table border="1" id="exeSet"></table>
 					운동 프로그램 번호<br><input type="text" name="epd_no" value="5"><br>
 					프로그램 번호<br><input type="text" name="exep_no" value="1"><br>
-					유저 아이디<br><input type="text" name="user_id" value="lee"><br>
+					유저 아이디<br><input type="text" name="user_id" value="${ffUser.id }"><br>
 				</form>
 			</div>
 		</div>

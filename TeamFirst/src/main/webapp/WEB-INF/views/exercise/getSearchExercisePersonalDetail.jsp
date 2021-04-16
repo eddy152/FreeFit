@@ -15,14 +15,14 @@
 		var inputExeNo = $("input[name=exe_no]");
 		
 		opener.$("#exeNameTbl tr").remove();
-		opener.$("#exeNameTbl").append('<tr><td>운동 목록</td></tr>');
+		opener.$("#exeNameTbl").append('<tr><td>운동 목록</td><td>설정 횟수</td></tr>');
 		for(var i = 0; i < inputExeNo.length; i++) {
 			
         	for(var j = 0; j < inputExeNo.length; j++) {
         		if($("input[name=exep_no" + i +"]")[j] != null) {
         			var exeName = $("input[name=exep_no" + i +"]")[j].value;
         			exeNo = inputExeNo[j].value;
-        			opener.$("#exeNameTbl").append('<tr><td name="exeNameTd" id=' + exeNo + '>' + exeName + '</td></tr>');
+        			opener.$("#exeNameTbl").append('<tr name="exeNameTr"><td id=' + exeNo + '>' + exeName + '</td><td id=' + exeName + 'set></td></tr>');
         		}
         	}
     	}

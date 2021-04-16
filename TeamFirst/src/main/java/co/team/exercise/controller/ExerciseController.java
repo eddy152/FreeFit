@@ -2,11 +2,16 @@ package co.team.exercise.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.exercise.service.ExeBasicDetailVO;
@@ -59,7 +64,7 @@ public class ExerciseController {
 	@GetMapping("/insertExerciseList")
 	public String insertExerciseList(ExerciseListVO vo) {
 		service.insertExerciseList(vo);
-		return "redirect:/getSearchExerciseList";
+		return "exercise/insertExerciseListForm";
 	}
 
 	// 등록 폼
@@ -79,18 +84,15 @@ public class ExerciseController {
 	@GetMapping("/deleteExerciseList")
 	public String deleteExerciseList(ExerciseListVO vo) {
 		service.deleteExerciseList(vo);
-		return "redirect:/getSearchExerciseList";
+		return "exercise/deleteExerciseListForm";
 	}
 	// EXERCISE_LIST end
 
 	// EXERCISE_PROGRAM_BASIC start
 	// 리스트 조회
-	@GetMapping("/getSearchExerciseProgramBasic")
-	public String getSearchExerciseProgramBasic(ExerciseProgramBasicVO vo, ExeBasicDetailVO vo1,
-			ExerciseProgramBasicVO vo2, Model model) {
-		model.addAttribute("exeList", service.getSearchExerciseProgramBasic(vo));
-		model.addAttribute("exeBasicDetail", service.getSearchExerciseBasicDetail(vo1));
-		model.addAttribute("exeProgramBasic", service.getSearchExerciseProgramBasic(vo2));
+	@PostMapping("/getSearchExerciseProgramBasic")
+	public String getSearchExerciseProgramBasic(FFUserVO vo3, Model model) {
+		model.addAttribute("ffUser", service.getFFUserProc(vo3));
 		return "exercise/getSearchExerciseProgramBasic";
 	}
 
@@ -212,10 +214,15 @@ public class ExerciseController {
 	}
 
 	// 단건 등록
-	@GetMapping("/insertExercisePersonalDetail")
-	public String insertExercisePersonalDetail(ExePersonalDetailVO vo) {
-		service.insertExercisePersonalDetail(vo);
-		return "redirect:/getSearchExercisePersonalDetail";
+	/*
+	 * @GetMapping("/insertExercisePersonalDetail") public String
+	 * insertExercisePersonalDetail(ExePersonalDetailVO vo) {
+	 * service.insertExercisePersonalDetail(vo); return
+	 * "redirect:/getSearchExercisePersonalDetail";
+	 }*/	
+	@RequestMapping(value = "/insertExercisePersonalDetail", method = { RequestMethod.GET, RequestMethod.POST})
+	public void test(@RequestBody Map<String, Object> params) throws Exception {
+	 System.out.println(params);
 	}
 
 	// 단건 수정
@@ -235,7 +242,7 @@ public class ExerciseController {
 
 	// EXERCISE_RECORD start
 	// 리스트 조회
-	@GetMapping("/getSearchExerciseRecord")
+	@PostMapping("/getSearchExerciseRecord")
 	public String getSearchExerciseRecord(ExerciseRecordVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExerciseRecord(vo));
 		return "exercise/getSearchExerciseRecord";
@@ -307,7 +314,7 @@ public class ExerciseController {
 	}
 
 	// 단건 조회
-	@GetMapping("/getFFUserProc")
+	@PostMapping("/getFFUserProc")
 	public String getFFUserProc(FFUserVO vo, Model model) {
 		model.addAttribute("list", service.getFFUserProc(vo));
 		return "exercise/getFFUserProc";

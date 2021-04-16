@@ -8,20 +8,18 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
-	$(document).on("click", "#exeDel", function() {
-		var exeNo = $("#exeDel").closest('tr')[0].children[0].children[0].value;
+	$(document).on("click", "[name=exeDel]", function() {
+		var exeNo = $(this).closest('tr')[0].children[0].children[0].value;
+		console.log(exeNo);
 		var jbResult = confirm( '운동을 삭제하시겠습니까?' );
 		if(jbResult) {
-			console.log($(this))
-			$("#exeDelForm").attr("action", "deleteExerciseList?exe_no=" + exeNo)
-			$("#exeDelForm").submit();
+			location.href = "deleteExerciseList?exe_no=" + exeNo;
 		}
 	})
 </script>
 </head>
 <body>
 	<div align="center">
-		<form action="" id=exeDelForm>
 			<table>
 				<tr>
 					<th>운동번호</th>
@@ -36,12 +34,11 @@
 						<td>${listAll.exe_kinds }</td>
 						<td>${listAll.exe_part }</td>
 						<td>${listAll.exe_name }</td>
-						<td><input type="button" value="삭제하기" id="exeDel"></td>
+						<td><input type="button" value="삭제하기" name="exeDel"></td>
 					</tr>
 				</c:forEach>
 			</table><br>
 		    <input type="button" value="창닫기" onclick="window.close()">
-		</form>
 	</div>
 </body>
 </html>

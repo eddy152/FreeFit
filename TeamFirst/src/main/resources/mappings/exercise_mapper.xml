@@ -48,7 +48,7 @@
 		)
 		VALUES
 		(
-			#{exe_no},
+			exe_no_seq.nextval,
 			#{exe_kinds},
 			#{exe_part},
 			#{exe_name}
