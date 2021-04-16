@@ -17,7 +17,7 @@
 	
 	  	<c:forEach var="calorie" items="${list }"> 	
 		    		arr.push(['${calorie.take_date}', parseInt(${calorie.calorie }), result]);
-			</c:forEach>
+		 	</c:forEach>
 		
 	  var data = google.visualization.arrayToDataTable(arr);
 	
