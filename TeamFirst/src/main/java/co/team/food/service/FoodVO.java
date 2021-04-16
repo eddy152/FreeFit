@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public class FoodVO {
 	private String real_diet_no;
 	private String take_date;
-	private String real_diet_content;
 	private String calorie;
 	
 	private String diet_no;
@@ -40,9 +39,13 @@ public class FoodVO {
 	private String cnt;
 	
 	private String food_name;
+	private String food_cnt;
 	private String food_no;
 	private String category;
 	private String gram;
 	
 	private String total_calorie;
+	private String user_id;
+	private String diet_comment;
+	private String comment_no;
 }

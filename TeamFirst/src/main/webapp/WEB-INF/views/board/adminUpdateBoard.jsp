@@ -28,6 +28,21 @@ $(document).ready(function() {
 	  // Summernote에 글 내용 추가하는 코드
 	  $("#summernote").summernote('code',  '${board.content}');
 	});
+
+function goModify(frm) {
+	var title = frm.title.value;
+	var content = frm.content.value;
+	
+	if (title.trim() == ''){
+		alert("제목을 입력해주세요");
+		return false;
+	}
+	if (content.trim() == ''){
+		alert("내용을 입력해주세요");
+		return false;
+	}
+	frm.submit();
+}
 </script>
 </head>
 <body>
@@ -43,28 +58,9 @@ $(document).ready(function() {
 		<br><br> 
 		<textarea id="summernote" name="content"></textarea>
 		<input id="subBtn" type="button" value="글수정" style="float: right;" onclick="goModify(this.form)"/>
+		<input type="button" value="목록으로" style="float: right;"
+			   onclick="location.href='getAdminNoticeBoardList';">
 	</form>																		
 </div>
-<script>
-function goModify(frm) {
-	var title = frm.title.value;
-	var content = frm.content.value;
-	
-	if (title.trim() == ''){
-		alert("제목을 입력해주세요");
-		return false;
-	}
-	if (content.trim() == ''){
-		alert("내용을 입력해주세요");
-		return false;
-	
-		//if (category.trim() ==''){
-		//alert("카테고리를 입력해주세요");
-		//return false;
-	 //}
-	}
-	frm.submit();
-}
-</script>
 </body>
 </html>

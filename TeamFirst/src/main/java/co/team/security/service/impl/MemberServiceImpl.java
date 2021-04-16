@@ -71,7 +71,6 @@ public class MemberServiceImpl implements MemberService {
 		memberRoleMapper.addGuestRole(memberId);
 
 	}
-	
 
 	@Override
 	@Transactional(readOnly = false)
@@ -90,51 +89,52 @@ public class MemberServiceImpl implements MemberService {
 		memberRoleMapper.addUserRole(memberId);
 
 	}
-	
-	//아이디 중복체크
+
+	// 아이디 중복체크
 	@Override
 	@Transactional
 	public String userCheck(String loginUserId) throws NullPointerException {
-		String memberId="";
+		String memberId = "";
 		try {
-		MemberVO member = memberMapper.getMemberById(loginUserId);
-		memberId=member.getId();
-		}
-		catch(NullPointerException e) {
-			
+			MemberVO member = memberMapper.getMemberById(loginUserId);
+			memberId = member.getId();
+		} catch (NullPointerException e) {
+
 		}
 		return memberId;
 	}
+
 	@Override
 	@Transactional
 	public String rememberId(MemberVO member) throws NullPointerException {
-		String id="";
+		String id = "";
 		try {
-		id =memberMapper.rememberId(member).getId();
-		
-		}
-		catch(NullPointerException e) {
-			
+			id = memberMapper.rememberId(member).getId();
+
+		} catch (NullPointerException e) {
+
 		}
 		return id;
 	}
+
 	@Override
 	@Transactional
-	public MemberVO getAllBy(MemberVO vo) throws NullPointerException
-	{
-		
-		vo= memberMapper.getAllBy(vo);
+	public MemberVO getAllBy(MemberVO vo) throws NullPointerException {
+
+		vo = memberMapper.getAllBy(vo);
 
 		return vo;
 	}
 
-	
-	
 	@Override
 	public int setPassword(MemberVO vo) {
-		
+
 		return memberMapper.setPassword(vo);
 	}
-	
+
+	@Override
+	public AdminVO getProfileInfo(String id) {
+		return adminMapper.getProfileInfo(id);
+	}
 
 }

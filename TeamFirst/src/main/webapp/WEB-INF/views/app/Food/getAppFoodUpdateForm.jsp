@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
@@ -95,6 +96,7 @@
 			$('input:text[name="diet_title"]').val($('#diet_title1').val());
 			$('input:text[name="trainer_id"]').val($('#trainer_id1').val());
 			$('input:text[name="total_calorie"]').val($('input:text[name="total_calorie1"]').val());
+			$('input:text[name="diet_no"]').val($('#diet_no1').val());
 			
 			$('.frm').submit();
 	}
@@ -114,7 +116,8 @@
 </script>
 <div>
 
-	<h1>식단 추가하기</h1>
+	<h1>식단 수정하기</h1> 
+	식단 번호 : <input type="text" id="diet_no1" value="${vo.diet_no}">
 	제목 : <input type="text" id="diet_title1" value="${vo.diet_title}"><br>
 	작성자 : <input type="text" id="trainer_id1" value="${vo.trainer_id}"><br>
 	음식 : <div class="addFoodInput">
@@ -129,22 +132,29 @@
 		<button type="button" class="addFood">+</button>
 	<hr>
 	<div class="frm1">
-	음식명 :
-	<div>
-		
-			<%-- <input type="text" name="food_name" value="${food.calorie }"> --%>
-			<input type="text" name="food_calorie" value="${vo.diet_content }">
-			<button type="button" class="deleteFood">-</button>
-	</div> 
-		</div>
+	음식명 : 
+		<c:forEach var="content" items="${arr}">
+			<div>
+				<input type="text" value="${content.food_name }" name="food_name">
+				<input type="text" value="${content.food_cnt }" name="count" onchange="change(this)">개
+					<c:forEach var="food" items="${list }">
+					<c:if test="${food.food_name eq content.food_name}">
+						<input type="text" value="${food.calorie }" name="food_calorie">
+					</c:if>
+					</c:forEach>
+				<button type="button" class="deleteFood">-</button>
+			</div>
+		</c:forEach>
+	</div>
 		총 칼로리 : <input type="text" name="total_calorie1" value="${vo.total_calorie}">
 		<br>
 		<button type="button" onclick="Click()">등록</button>
 		
 		<form action="updateFood" method="post" class="frm">
-			<input type="text" name="diet_title" value=""><br>
-			<input type="text" name="trainer_id" value=""><br>
-			<input type="text" name="total_calorie" value="">
+			<input type="text" name="diet_title"><br>
+			<input type="text" name="trainer_id"><br>
+			<input type="text" name="total_calorie"><br>
+			<input type="text" name="diet_no">
 		</form>
 	<div>
 		<button type="button" onclick="location.href='getAppFoodList'">뒤로가기</button>
