@@ -4,25 +4,80 @@
 <!-- users_mapper.xml -->
 <mapper namespace="co.team.trainer.service.impl.TrainerMapper">
 
+	<select id="getTrainerList" resultType="TrainerVO"
+		    parameterType="TrainerVO">
+	
+			SELECT ID
+			,MEM_REG_ID
+			,PASSWORD
+			,PHONE_NUMBER
+			,NAME
+			,GENDER
+			,AWARDS
+			,CAREER
+			,HIRE_DATE
+			FROM TRAINER
 
-
+	</select>
+	
 	<insert id="addTrainerMember" parameterType="TrainerVO">
-		insert into trainer(
-		id, mem_reg_id, password, phone_number, name, gender ) values
-		(
-		#{id},
-		#{mem_reg_id},
-		#{password},
-		#{phone_number},
-		#{name},
-		#{gender}
+		
+		INSERT INTO TRAINER(
+		 ID
+		,MEM_REG_ID
+		,PASSWORD
+		,PHONE_NUMBER
+		,NAME
+		,GENDER 
+		) 
+		
+		VALUES (
+		 #{id}
+		,#{mem_reg_id}
+		,#{password}
+		,#{phone_number}
+		,#{name}
+		,#{gender}
 		)
 
 	</insert>
 
 	<select id="getTrainerId" resultType="string"
-		parameterType="TrainerVO">
-		select id from trainer where id=#{id}
+			parameterType="TrainerVO">
+		
+		SELECT ID FROM TRAINER WHERE ID = #{id}
+	
 	</select>
 
+	<select id="getTrainer" resultType="TrainerVO"
+		parameterType="string">
+
+			SELECT ID
+			,MEM_REG_ID
+			,PASSWORD
+			,PHONE_NUMBER
+			,NAME
+			,GENDER
+			,AWARDS
+			,CAREER
+			,HIRE_DATE
+			FROM TRAINER WHERE ID = #{id}
+
+	</select>
+
+	<update id="updateTrainer" parameterType="TrainerVO">
+ 		
+ 		UPDATE TRAINER SET NAME = #{name}
+ 		, gender=#{gender}
+ 		, phone_number=#{phone_number}
+		WHERE ID = #{id}
+ 	
+ 	</update>
+	
+	<update id="deleteTrainer" parameterType="TrainerVO">
+ 		
+ 		DELETE FROM TRAINER
+		WHERE ID = #{id}
+ 	
+ 	</update>
 </mapper>

@@ -11,6 +11,7 @@
 
 	</select>
 	
+
 	
 <!-- 프로필 정보 단건조회 -->
 <select id="getProfileInfo" resultType="adminVO" parameterType="String">
@@ -25,6 +26,7 @@
 	select id from admin where id=#{id}
 	</select>
 	
+
 <!-- 회원가입 -->	
 	
 		<insert id="addOwnerMember" parameterType="adminVO">

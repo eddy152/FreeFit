@@ -84,7 +84,7 @@
 						<div class="row justify-content-center">
 							<div class="col mb-md-4">
 								<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-								<label for="email">이름</label> <input type="email"
+								<label for="email">이메일</label> <input type="email"
 									class="form-control" id="email" name="email"
 									placeholder="이메일" value="test@gmail.com" required>
 								<div class="invalid-feedback">이메일을 입력해주세요.</div>
@@ -179,10 +179,10 @@
 					<div class="row justify-content-center">
 						<div class="col mb-md-4">
 							<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-							<label for="email">이름</label> <input type="email"
+							<label for="email">이메일</label> <input type="email"
 								class="form-control" id="email" name="email"
 								placeholder="이메일" value="test@gmail.com" required>
-							<div class="invalid-feedback">이메일을 입력해주세요.</div>
+							<div class="invalid-feedback">이메일 입력해주세요.</div>
 						</div>
 					</div>
 					<div class="row justify-content-center">

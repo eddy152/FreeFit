@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<!-- user notice 유저공지  -->
+	<mapper namespace="co.team.board.service.impl.UserQnaBoardMapper">
+	
+	<insert id="insertUserQnaBoard"
+			parameterType="UserQnaBoardVO">
+		
+		INSERT INTO USER_QNA( 
+		QNA_NO
+		,TITLE
+		,QUESTION
+		,ANSWER
+		,REG_DATE
+		,USER_ID
+		,MEM_REG_ID
+		)
+		
+		VALUES( 
+		#{qna_no}
+		,#{title}
+		,#{question}
+		,#{answer}
+		,#{reg_date}
+		,#{user_id}
+		,#{mem_reg_id}
+		)
+	</insert>
+
+	<update id="updateUserQnaBoard" 
+			parameterType="co.team.board.service.impl.UserQnaBoardMapper">
+			
+			UPDATE USER_QNA
+			SET CONTENT = #{answer}
+			WHERE QNA_NO = #{qna_no} 
+	</update>
+	
+	<delete id="deleteUserQnaBoard" 
+			parameterType="UserQnaBoardVO">
+		
+		DELETE FROM USER_QNA
+		WHERE QNA_NO = #{qna_no}
+
+	</delete>
+	
+	<select id="getUserQnaBoard" 
+			resultType="UserQnaBoardVO"
+			parameterType="UserQnaBoardVO">
+			
+			SELECT QNA_NO
+				,TITLE
+				,QUESTION
+				,ANSWER
+				,REG_DATE
+				,USER_ID
+				,MEM_REG_ID
+			FROM USER_QNA
+			WHERE QNA_NO = #{qna_no}
+			
+	</select>
+	
+	<select id="getUserQnaBoardList" 
+			parameterType="UserQnaBoardVO"
+			resultType="UserQnaBoardVO">
+		 	
+			 SELECT QNA_NO
+				,TITLE
+				,QUESTION
+				,ANSWER
+				,REG_DATE
+				,USER_ID
+				,MEM_REG_ID
+			FROM USER_QNA  
+	</select>
+</mapper>
+
