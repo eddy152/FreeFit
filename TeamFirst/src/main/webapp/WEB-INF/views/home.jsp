@@ -7,6 +7,20 @@
 	<title>Home</title>
 </head>
 <body>
+<h1>
+	Hello world!  
+</h1>
+
+<P>  The time on the server is ${serverTime}. </P>
+<a href="getTest"> getTest</a>
+<a href="getSearchExerciseList">getSearchExerciseList</a>
+<a href="getSearchExerciseProgramBasic">getSearchExerciseProgramBasic</a>
+<a href="getExerciseListProc">getExerciseListProc</a>
+<a href="getExerciseProgramBasicProc">getExerciseProgramBasicProc</a>
+<a href="getSearchFFUser">getSearchFFUser</a>
+<a href="getSearchExerciseProgramBasic">getSearchExerciseProgramBasic</a>
+
+
 <P>  views/home.jsp </P>
 </body>
 </html>
