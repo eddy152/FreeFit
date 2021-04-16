@@ -2,6 +2,7 @@ package co.team.files.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -41,9 +42,9 @@ public class FilesController {
 		
 		String uploader = (String) session.getAttribute("id");
 		String fileName = file.getOriginalFilename(); // 파일 이름 받아온다
+		String word = fileName.split("\\.")[fileName.split("\\.").length -1];
 
-
-		String newFileName = uploader + Integer.toString((new Date()).hashCode())+fileName;
+		String newFileName = uploader + Integer.toString((new Date()).hashCode())+"."+word;
 		vo.setFileName(newFileName);
 		vo.setPathName("/spring/resources/img/"+newFileName);
 		vo.setUploader(uploader);
@@ -64,8 +65,11 @@ public class FilesController {
 			service.uploadImage(vo);
 			FileCopyUtils.copy(file.getBytes(), target); // 임시 디렉토리 저장된 파일을 지정 디렉토리로 복사
 															// (파일바이트배열 , (업로드경로,파일이름))
-
-			return vo.getPathName();
+			System.out.println("=============================" + 
+								"/spring/resources/img/" + vo.getFileName());
+			String result = URLEncoder.encode(vo.getFileName(), "UTF-8");
+			System.out.println("/spring/resources/img/" + result);
+			return "/spring/resources/img/" + result;
 			// 모델앤뷰에 file 로 file 추가. ${file.originalFilename},${file.contentType} 등으로 꺼내씀
 
 		} catch (Exception e) {
@@ -73,11 +77,9 @@ public class FilesController {
 			e.printStackTrace();
 			return "error";
 		}
-
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/heads/KDH
 	}
 
+	
+
+	
 }

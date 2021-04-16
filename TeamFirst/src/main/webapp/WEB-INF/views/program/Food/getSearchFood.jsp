@@ -1,17 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
-<html>
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap CSS -->
 
-<title>Hello, world!</title>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 
@@ -24,10 +14,10 @@
    	
 </script>
 
-</head>
-<body>
+
 
 	<br>
+	<div>
 	<table border="1">
 		<tr>
 			<td>아이디</td>
@@ -48,6 +38,4 @@
 		</tr>
 		</c:forEach>
 	</table><br>
-
-  </body>
-</html>
+	</div>

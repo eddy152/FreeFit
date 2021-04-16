@@ -22,7 +22,7 @@
 	  var data = google.visualization.arrayToDataTable(arr);
 	
 	  var options = {
-	          chart: { title: '이번주 식단',  subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계'},
+			  width : '1000',
 	          vAxis: { viewWindow: { max: 3000 } },
 	          seriesType: 'bars',
 	          series: {1: {type: 'line'}} };
@@ -137,7 +137,8 @@
 <div>
 	<div>
 		<h1>회원 식단</h1>
-		<input type="text" name="id" value="${food.id }" hidden="hidden">
+		<input type="text" name="id" value="${food.id }">
+		<button type="button" onclick="location.href='getMemberFoodInsert?id=${food.id}'">상세보기</button>
 		<table border="1">
 			<tr>
 
@@ -169,6 +170,7 @@
 		</table>
 		
 		
+		
 	</div><br>
 	<div>
 		<button type="button" onclick="before()"><</button>
@@ -177,13 +179,5 @@
 		<button type="button" onclick="after()">></button>
 	</div>
 	<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-		<c:forEach var="current" items="${list }">
-			<c:if test="${current.sysdate eq current.take_date }">
-				<div>
-					<button type="button" onclick="location.href='getMemberFoodInsert?id=${food.id}&real_diet_no=${current.real_diet_no}'">상세보기</button>
-				</div>
-				<input type="text" value="${current.real_diet_no}" hidden="hidden">
-			</c:if>
-		</c:forEach>
 
 </div>

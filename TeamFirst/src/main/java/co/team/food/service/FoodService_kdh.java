@@ -61,6 +61,12 @@ public interface FoodService_kdh {
 	// 댓글 삭제
 	public void deleteComment(FoodVO vo);
 
+	// 식단 내용 등록
+	public void insertImg(FoodVO vo);
+
 	// 이미지 업로드
-	public FoodVO insertImg(FoodVO vo);
+	public void updateImg(FoodVO vo);
+
+	// 총칼로리 저장
+	public void updateCalorie(FoodVO vo);
 }

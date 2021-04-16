@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Food/getFood.jsp</title>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -26,7 +23,7 @@
         var data = google.visualization.arrayToDataTable(arr);
 
         var options = {
-                chart: { title: '이번주 식단',  subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계'},
+        		width : '1000',
                 vAxis: { viewWindow: { max: 3000 } },
                 seriesType: 'bars',
                 series: {1: {type: 'line'}} };
@@ -67,7 +64,7 @@
 	    		        var data = google.visualization.arrayToDataTable(arr);
 	    		        
 	    		        var options = {
-	    		                chart: { title: '이번주 식단', subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계'}, 
+	    		        		width : '1000',
 	    		                vAxis: { viewWindow: { max: 3000 } },
 	    		                seriesType: 'bars',
 	    		                series: {1: {type: 'line'}}	
@@ -116,7 +113,7 @@
     		        var data = google.visualization.arrayToDataTable(arr);
     		        
     		        var options = {
-    		                chart: {  title: '이번주 식단', subtitle: $('input:text[name="name"]').val() + ' 회원님의 식단 통계' },
+    		        		width : '1000',
     		                vAxis: { viewWindow: { max: 3000 } },
     		                seriesType: 'bars',
     		                series: {1: {type: 'line'}} };
@@ -139,8 +136,7 @@
     	
     </script>
   </head>
-</head>
-<body>
+<div>
 
 <h1>회원정보</h1>
 
@@ -186,5 +182,4 @@
 	<br>
 	<br>
 	<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-</body>
-</html>
+</div>

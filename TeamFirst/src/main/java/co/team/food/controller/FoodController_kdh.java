@@ -25,7 +25,7 @@ public class FoodController_kdh {
 	@RequestMapping("/getSearchFood")
 	public String getSearchFood(Model model, FoodVO vo) {
 		model.addAttribute("list", service.getSearchFood(vo));
-		return "homepage/Food/getSearchFood";
+		return "program/Food/getSearchFood";
 	}
 
 	// 회원 단건 조회
@@ -35,15 +35,16 @@ public class FoodController_kdh {
 		model.addAttribute("food", service.getFood(vo));
 		List<FoodVO> foodList = service.getRealFood(vo);
 		model.addAttribute("calories", foodList);
-		return "homepage/Food/getFood";
+		return "program/Food/getFood";
 	}
 
-	// 식단 권장량 조회(단건)
-	@RequestMapping("/getRecommendFood")
-	public String getRecommendFood(FoodVO vo, Model model) {
-		model.addAttribute("rec", service.getRecommendFood(vo));
-		return "homepage/Food/getFood";
-	}
+	/*
+	 * // 식단 권장량 조회(단건)
+	 * 
+	 * @RequestMapping("/getRecommendFood") public String getRecommendFood(FoodVO
+	 * vo, Model model) { model.addAttribute("rec", service.getRecommendFood(vo));
+	 * return "program/Food/getFood"; }
+	 */
 
 	// 식단 통계 조회(단건)
 	@RequestMapping("/getFoodSelect")
@@ -141,7 +142,7 @@ public class FoodController_kdh {
 	// 해당 회원의 실제 섭취 식단 통계 (앱)
 	@RequestMapping("/getMemberFoodList")
 	public String getMemberFoodList(FoodVO vo, Model model) {
-		model.addAttribute("list", service.getRealFood(vo));
+		model.addAttribute("list", service.getRealFood(vo)); // 실제 섭취 식단 단건 조회
 		model.addAttribute("food", service.getFood(vo));
 		return "app/Food/getMemberFoodList";
 	}
@@ -151,7 +152,7 @@ public class FoodController_kdh {
 	public String getMemberFoodInsertForm(FoodVO vo, Model model) {
 		model.addAttribute("food", service.getRealFoodMember(vo)); // 실제 섭취 식단 단건 조회
 		model.addAttribute("user", service.getFood(vo)); // 회원 단건 조회
-		model.addAttribute("comment", service.getComment(vo)); // 댓글 조회
+		model.addAttribute("foodList", service.getFoodList(vo)); // 음식 정보
 		return "app/Food/getMemberFoodInsert";
 	}
 	
@@ -160,6 +161,14 @@ public class FoodController_kdh {
 	@ResponseBody
 	public int getMemberFoodInsert(FoodVO vo) {
 		return service.getMemberFoodInsert(vo);
+	}
+	
+	// 댓글 조회
+	@GetMapping("/getComment")
+	@ResponseBody
+	public FoodVO getComment(FoodVO vo, Model model) {
+		model.addAttribute("comment", service.getComment(vo)); // 댓글 조회
+		return vo;
 	}
 	
 	// 댓글 추가
@@ -191,7 +200,15 @@ public class FoodController_kdh {
 	@ResponseBody
 	public FoodVO insertImg(FoodVO vo) {
 		service.insertImg(vo);
-		System.out.println(vo + "vo-----------------------------------");
+		return vo;
+	}
+	
+	// 총 칼로리 저장
+	@RequestMapping("/updateCalorie")
+	@ResponseBody
+	public FoodVO updateCalorie(FoodVO vo) {
+		service.updateCalorie(vo);
+		System.out.println(vo + "-----------------------------------------");
 		return vo;
 	}
 	

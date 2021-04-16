@@ -1,14 +1,14 @@
 package co.team.security.controller;
 
-<<<<<<< HEAD
+
 import java.util.Date;
 import java.util.Random;
-=======
+
 /*
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;*/
 import java.util.Collection;
->>>>>>> refs/heads/KDH
+
 
 import javax.servlet.http.HttpSession;
 

@@ -129,8 +129,20 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 이미지 업로드
-	public FoodVO insertImg(FoodVO vo) {
-		return dao.insertImg(vo);
+	public void updateImg(FoodVO vo) {
+		dao.updateImg(vo);
+	}
+
+	@Override
+	// 총칼로리 저장
+	public void updateCalorie(FoodVO vo) {
+		dao.updateCalorie(vo);
+	}
+
+	@Override
+	// 식단 내용 등록
+	public void insertImg(FoodVO vo) {
+		dao.insertImg(vo);
 	}
 
 
