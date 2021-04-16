@@ -18,7 +18,7 @@
 	href="https://getbootstrap.com/docs/4.6/examples/pricing/">
  -->
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <!-- Bootstrap core CSS -->
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -64,9 +64,9 @@
 	var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : ";"%>
 	
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+
 
 
 <script

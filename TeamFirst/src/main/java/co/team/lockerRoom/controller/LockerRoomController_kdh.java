@@ -15,12 +15,13 @@ public class LockerRoomController_kdh {
 	
 	@Autowired LockerRoomMapper_kdh service;
 	
-	// 락커룸 전체 조회
-	@RequestMapping("/getSearchRoom")
-	public String getSearchRoom(Model model) {
-		model.addAttribute("list", service.getSearchRoom());
-		return "popup/Locker/lockerRoom";
-	}
+	/*
+	 * // 락커룸 전체 조회
+	 * 
+	 * @RequestMapping("/getSearchRoom") public String getSearchRoom(Model model) {
+	 * model.addAttribute("list", service.getSearchRoom()); return
+	 * "popup/Locker/lockerRoom"; }
+	 */
 	
 	// 락커룸 단건 조회
 	@RequestMapping("/getRoom")
@@ -29,15 +30,16 @@ public class LockerRoomController_kdh {
 		return service.getRoom(vo);
 	}
 	
-	// 락커룸 수정	
-	@PostMapping("/updateRoom")
-	public String updateRoomProc(LockerRoomVO vo) {
-		System.out.println(vo.getLock_width()+" "+vo.getRoom_no());
-		service.updateRoom(vo);
-		service.getRoom(vo);
-		return "redirect:/getSearchRoom";
-		
-	}
+	/*
+	 * // 락커룸 수정
+	 * 
+	 * @PostMapping("/updateRoom") public String updateRoomProc(LockerRoomVO vo) {
+	 * System.out.println(vo.getLock_width()+" "+vo.getRoom_no());
+	 * service.updateRoom(vo); service.getRoom(vo); return
+	 * "redirect:/getSearchRoom";
+	 * 
+	 * }
+	 */
 	
 	// 락커룸 삭제
 	@PostMapping("/deleteRoom")

@@ -40,24 +40,26 @@
 	</select>
 
 	<select id="getDate" resultType="FoodVO" parameterType="FoodVO">
-		select real_diet_no, user_id, take_date, diet_content, calorie,
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie,
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		from real_diet
 		where
 		user_id = #{id}
 		and to_char(take_date, 'yyyy-MM-w') =
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+		order by take_date
 	</select>
 
 	<select id="getBeforeDate" resultType="FoodVO"
 		parameterType="FoodVO">
-		select real_diet_no, user_id, take_date, diet_content, calorie,
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie,
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		from real_diet
 		where
 		user_id = #{id}
 		and to_char(take_date, 'yyyy-MM-w') =
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+		order by take_date
 	</select>
 
 	<!-- 추천별 식단 전체 리스트 -->
@@ -154,8 +156,20 @@
 	</delete>
 	
 	<!-- 이미지 경로명 diet_content에 추가 -->
-	<update id="insertImg" parameterType="FoodVO">
+	<insert id="insertImg" parameterType="FoodVO">
+		insert into real_diet
+		values(REAL_FOOD.nextval, #{id}, sysdate, #{diet_content}, 0)
+	</insert>
+	
+	<!-- 이미지 경로명 diet_content에 수정 -->
+	<update id="updateImg" parameterType="FoodVO">
 		update real_diet set diet_content = #{diet_content}
+		where real_diet_no = #{real_diet_no}
+	</update>
+	
+	<!-- 총칼로리 저장 -->
+	<update id="updateCalorie" parameterType="FoodVO">
+		update real_diet set calorie=#{total_calorie}
 		where real_diet_no = #{real_diet_no}
 	</update>
 	

@@ -29,7 +29,7 @@ public class LockerController_kdh {
 		model.addAttribute("room", mapper.getSearchRoom());
 		model.addAttribute("user", userMapper.getSearchUser(uvo));
 		
-		return "homepage/Locker/getSearchLocker";
+		return "program/Locker/getSearchLocker";
 	}
 	
 	// 락커 단건 조회
@@ -56,8 +56,6 @@ public class LockerController_kdh {
 		service.updateLocker(vo);
 		return service.getLocker(vo);
 	}
-	
-	// 락커 초기화
 	
 	// 락커 삭제
 	@PostMapping("/deleteLocker")
