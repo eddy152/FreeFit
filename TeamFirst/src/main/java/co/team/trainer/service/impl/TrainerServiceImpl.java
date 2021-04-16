@@ -10,7 +10,6 @@ import co.team.trainer.service.TrainerVO;
 public class TrainerServiceImpl implements TrainerService {
 	
 	@Autowired	TrainerMapper dao;
-
 	@Override
 	public List<TrainerVO> getTrainerList(TrainerVO member) {
 		return dao.getTrainerList(member);

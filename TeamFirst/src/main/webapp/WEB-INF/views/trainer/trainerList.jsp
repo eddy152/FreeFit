@@ -9,14 +9,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>trainer List</title>
+
 <script type="text/javascript">
+	
 	$(function() {
 		$(".dataRow").click(function() {
-			var id = $(this)[0].children[0].innerText
+			var id = $(this)[0].children[1].innerText
 			location = "getTrainer?id=" + id;
 		})
 	});
 </script>
+
 </head>
 <body>
 	<div class="page-wrapper">
@@ -29,7 +32,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="button" value="트레이너추가" style="float: right;"
-							onclick="location.href='/spring/members/joinformP'">
+							   onclick="location.href='/spring/members/joinformP'">
 					</div>
 				</div>
 				<div class="panel panel-default">

@@ -18,7 +18,7 @@ public interface TrainerMapper {
 	//상세조회
 	public TrainerVO getTrainer(String trainerId);
 
-	//이거지우면 등록오류..ㅠ
+	//등록
 	public void addTrainerMember(TrainerVO member);
 
 	//수정
