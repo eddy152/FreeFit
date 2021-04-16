@@ -5,8 +5,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>프리핏 이용 헬스장 목록</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>board List</title>
+<script type="text/javascript">
+/* 	$(function() {
+		$(".dataRow").click(function() {
+			var no = $(this)[0].children[0].innerText
+			location = "getAdminNoticeBoard?board_no="+no;
+		})
+	});
+	function fn_paging(page){
+			location = "getAdminNoticeBoardList?page="+page+"&search="+$("#search_text").val();
+	}
+	function search(){
+			location = "getAdminNoticeBoardList?search="+$("#search_text").val();
+	} */
+</script>
 </head>
 <body>
 

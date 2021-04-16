@@ -121,6 +121,5 @@
 		/ 현재 블럭  : ${pagination.curRange} 
 		/ 총 블럭 수 : ${pagination.rangeCnt }
 	</div>
-
 </body>
 </html>
