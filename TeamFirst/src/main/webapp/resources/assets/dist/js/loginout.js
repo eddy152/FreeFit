@@ -15,6 +15,8 @@
    		let profile;
         if (isLogin && isLogin !== '') {
             if (typeof loginBtn !== "undefined") { // loginBtn은 object type.  / typeof 를 사용하면 선언하지 않은 변수라도 오류x.
+                
+                if (homepageLogin){
                 profile=document.createElement("a");
                 profile.setAttribute("class","btn btn-outline-primary");
                 profile.setAttribute("id","profileBtn");
@@ -25,7 +27,7 @@
                 profile.onclick=function(){
                 location.href="/spring/members/profile";
                 
-                };
+                };}
             }
 
         }
