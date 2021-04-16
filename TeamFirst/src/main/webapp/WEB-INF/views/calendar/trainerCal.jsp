@@ -19,15 +19,15 @@
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
 <script>
+
+
 var calendar
 
 /*      날짜or버튼 클릭시 페이지화면 입력기능      
  *   	입력시 빨간글씨로 입력값이 나온다. 새로고침하면 글씨바탕색이 사라진다. 
  */
 function form_ajax(){
-
-	var date = new Date( $('#day').val() +'T15:00:00');
-	 timeZone: 'UTC'
+	var date = new Date( $('#day').val() +'T00:00:00');
 	var content = $('[name=content]').val();
 	var queryString = $("form[name=calForm]").serialize();
 	$.ajax({
@@ -40,17 +40,12 @@ function form_ajax(){
 				title : content, 
 				start : date,
 				allDay : true,
-				color : 'red',
+				color : '#bfff00',
 				textcolor : 'yellow'
-			})
-			
-		}
-	})
-} 
-
-//function form_ajax(){
-	
-//}
+			})// addEvent
+		}// function data
+	})// ajax
+} // form_ajax
 
 
 /*   일정입력  date 포맷      */	
@@ -79,14 +74,13 @@ function date_to_str(format)
       },
       
       locale : 'ko',
-      initialDate: '2021-04-10',
+      initialView:'timeGridWeek',
+      initialDate: '2021-04-02',
       
      navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
 
-      /* */
-      
       /*  삭제 */
       eventClick: function(arg) {
     	  console.log(arg)
@@ -126,6 +120,7 @@ function date_to_str(format)
           id : '${calendar.reservation_no}',
           title: '${calendar.content}' ,
           start: '${calendar.reservation_date}'
+        	  
         },
         
     		  </c:forEach>
@@ -155,8 +150,8 @@ body {
 
 <body>
 <div align="center">
-	<h2>일정관리</h2><br><br>
-	<div id='calendar'></div>
+	<h2>트레이너 스케줄</h2><br><br>
+	<div id='calendar'></div><br><br>
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary" data-toggle="modal"
 		data-target="#exampleModal">클릭하면 일정입력</button>
