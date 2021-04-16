@@ -8,7 +8,7 @@
 	<select id="getMemberById" resultType="memberVO"
 		parameterType="memberVO">
 
-		select * from allid where id =#{id}
+		select * from allid where id =#{id} and rownum=1
 
 	</select>
 

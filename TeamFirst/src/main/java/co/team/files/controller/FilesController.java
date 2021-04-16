@@ -74,10 +74,6 @@ public class FilesController {
 			return "error";
 		}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/heads/KDH
 	}
 
 }

@@ -62,7 +62,7 @@
 
 			<div class="py-3 text-center">
 				<img class="d-block mx-auto"
-					src="https://images.velog.io/images/heyon26/post/86ff3fdb-758f-48c6-b33b-b3cfb9664078/logo_transparent.png"
+					src="/spring/resources/images/logo.png"
 					alt="" width="100" height="100">
 			</div>
 

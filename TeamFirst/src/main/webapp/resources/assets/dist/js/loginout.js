@@ -12,9 +12,20 @@
 
     //로그인 상태에서 로그인 버튼 로그아웃으로 변경
     if (typeof loginBtn !== "undefined") {
+   		let profile;
         if (isLogin && isLogin !== '') {
             if (typeof loginBtn !== "undefined") { // loginBtn은 object type.  / typeof 를 사용하면 선언하지 않은 변수라도 오류x.
+                profile=document.createElement("a");
+                profile.setAttribute("class","btn btn-outline-primary");
+                profile.setAttribute("id","profileBtn");
+                profile.text = "마이페이지";
+                loginBtn.parentNode.prepend(profile);
                 loginBtn.text = "로그아웃";
+                
+                profile.onclick=function(){
+                location.href="/spring/members/profile";
+                
+                };
             }
 
         }
@@ -30,6 +41,8 @@
                 }
             }
         }
+        
+        
 
     }
 

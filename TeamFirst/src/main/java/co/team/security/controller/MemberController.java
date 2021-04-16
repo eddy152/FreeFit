@@ -1,14 +1,6 @@
 package co.team.security.controller;
 
-<<<<<<< HEAD
-import java.util.Date;
 import java.util.Random;
-=======
-/*
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;*/
-import java.util.Collection;
->>>>>>> refs/heads/KDH
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,11 +52,15 @@ public class MemberController {
 	PasswordEncoder passwordEncoder;
 	@Autowired
 	MemberMapper mapper;
-	
-	
-	//마이페이지(프로필폼)
+
+	// 마이페이지(프로필폼)
 	@GetMapping("/profile")
-	public String profile() {
+	public String profile(HttpSession session, Model model) {
+		String id = (String) session.getAttribute("id");
+
+		AdminVO vo = memberService.getProfileInfo(id);
+		model.addAttribute("vo", vo);
+
 		return "homepage/membership/profile";
 	}
 
@@ -98,6 +95,21 @@ public class MemberController {
 			session.setAttribute("mem_reg_id", vo.getMem_reg_id());
 			session.setAttribute("id", vo.getId());
 			return "setSession";
+		}
+
+	}
+
+	@RequestMapping("/noAuth")
+	public String dellog(HttpSession session) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 인증정보
+		String username = auth.getName(); // 이름(id)을 가져온다
+
+		if (username.equals("anonymousUser")) { // 로그인한 상태가 아닐 경우
+			session.invalidate(); // 세션을 삭제한다
+			return "redirect:/loginform";
+		} else {
+			return "redirect:/loginform";
+
 		}
 
 	}
@@ -179,18 +191,18 @@ public class MemberController {
 	public String sendEmail(@ModelAttribute MemberVO member) {
 		Random random = new Random();
 		String rd = random.toString();
-		member =memberService.getAllBy(member);
+		member = memberService.getAllBy(member);
 
 		String email = member.getEmail();
 		if (email != "" & email != null) {
-			//16자리 비번만들어줌
+			// 16자리 비번만들어줌
 			String setRawPw = getRandomStr(16);
 			member.setPhone_number(phoneReplace(member.getPhone_number()));
 			member.setPassword(passwordEncoder.encode(setRawPw));
 			int success = memberService.setPassword(member);
 			if (success == 1) {
 				MailSend mail = new MailSend();
-				//메일로 보내줌
+				// 메일로 보내줌
 				mail.MailSend(email, setRawPw, member.getId());
 				return email;
 			}
@@ -198,28 +210,22 @@ public class MemberController {
 
 		return "error";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	public static String getRandomStr(int size) {
-		if(size > 0) {
+		if (size > 0) {
 			char[] tmp = new char[size];
-			for(int i=0; i<tmp.length; i++) {
-				int div = (int) Math.floor( Math.random() * 2 );
-				
-				if(div == 0) { // 0이면 숫자로
-					tmp[i] = (char) (Math.random() * 10 + '0') ;
-				}else { //1이면 알파벳
-					tmp[i] = (char) (Math.random() * 26 + 'A') ;
+			for (int i = 0; i < tmp.length; i++) {
+				int div = (int) Math.floor(Math.random() * 2);
+
+				if (div == 0) { // 0이면 숫자로
+					tmp[i] = (char) (Math.random() * 10 + '0');
+				} else { // 1이면 알파벳
+					tmp[i] = (char) (Math.random() * 26 + 'A');
 				}
 			}
 			return new String(tmp);
 		}
-		return "ERROR : Size is required."; 
+		return "ERROR : Size is required.";
 	}
 }
 // 시간(sysdate), id 저장하는 비번용 테이블 생성
