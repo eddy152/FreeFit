@@ -47,22 +47,25 @@
 </head>
 
 <body class="text-center">
-
+<div class="container">
 	<form class="form-signin" method="post" id="loginForm"
 		action="/spring/authenticate">
 <a href="/spring/"><img class="mb-4" src="/spring/resources/images/logo.png" alt=""
 			width="172" height="172"></a> <label for="inputId" class="sr-only">ID</label>
 		<input type="text" id="inputId" class="form-control" placeholder="ID"
-			name="userId" required autofocus> <label for="inputPassword"
+			minlength=4 name="userId" required autofocus> <label for="inputPassword"
 			class="sr-only">Password</label> <input type="password"
-			id="inputPassword" class="form-control" placeholder="Password"
+			id="inputPassword" class="form-control" placeholder="Password" minlength=4
 			name="password" required>
 
 		<button class="btn btn-lg btn-primary btn-block" type="button"
 			id="formLogin">로그인</button>
 	</form>
-
-
+	<div class="bd">
+<a href="rememberForm" class="badge badge-primary">ID/비밀번호 찾기</a>
+	</div>
+ 
+</div>
 
 	<!-- Modal -->
 

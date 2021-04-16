@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.team.files.service.impl.FilesMapper">
+
+
+	<insert id="uploadImage" parameterType="FilesVO">
+insert into files(img_id, filename, pathname, uploader) 
+values((select nvl(max(img_id),1)+1 from files), #{fileName}, #{pathName},#{uploader} )
+	</insert>
+	
+
+	
+</mapper>

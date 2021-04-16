@@ -9,5 +9,11 @@
 <p>mem_reg_id 등록된 owner 계정</p>
 <p>id : owner</p>
 <p>pw : 1234 </p>
+<li class="nav-item"><a class="nav-link" href="/spring/tilesTestApp"> <span
+					data-feather="user-check"></span> 앱으로
+			</a></li>
+			<li class="nav-item"><a class="nav-link" href="/spring/tilesTestProgram"> <span
+					data-feather="thumbs-up"></span> 프로그램으로
+			</a></li>
 <p></p>
 <p>	}</p>

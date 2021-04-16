@@ -4,14 +4,45 @@
 <!-- users_mapper.xml -->
 <mapper namespace="co.team.security.service.impl.MemberMapper">
 
-<!-- ADMIN select 리스트 -->
-	<select id="getMemberById" resultType="memberVO" parameterType="memberVO">
-		
-select * from allid where id =#{id}
+	<!-- ADMIN select 리스트 -->
+	<select id="getMemberById" resultType="memberVO"
+		parameterType="memberVO">
+
+		select * from allid where id =#{id} and rownum=1
+
+	</select>
+
+	<select id="getMax" resultType="int" parameterType="memberVO">
+
+		SELECT count(*) FROM allid
+
+	</select>
+	<select id="rememberId" resultType="memberVO"
+		parameterType="memberVO">
+
+		select id from allid where name =#{name} and phone_number=#{phone_number}
+
+	</select>
+	<select id="getAllBy" resultType="memberVO"
+		parameterType="memberVO">
+
+		select * from allid 
+		<where>
+		<if test="name !=null and name !='' and !name.equals('undefined')">
+		and name =#{name}
+		</if>
+		<if test="id !=null and id !='' and !id.equals('undefined')">
+		and id =#{id}
+		</if>
+		<if test="phone_number !=null and phone_number !='' and !phone_number.equals('undefined')">
+		and phone_number =#{phone_number}
+		</if>
+		</where>
 
 	</select>
 	
-	
+	<update id="setPassword" parameterType="memberVO">
+	update ${tblName} set password=#{password} where id=#{id}
+	</update>
 
-	
 </mapper>

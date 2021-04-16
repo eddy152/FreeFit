@@ -121,7 +121,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout()
                     .logoutUrl("/members/logout") //"/logout"요청이 오면 세션에서 로그인 정보를 삭제한 후 "/"로 리다이렉트
-                   .logoutSuccessUrl("/members/log")
+                   .logoutSuccessUrl("/members/noAuth")
                     
                     .and()
                     .exceptionHandling()
