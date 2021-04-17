@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- gym_mapper.xml -->
+<mapper namespace="co.team.gym.service.impl.GymMapper">
+		
+	<select id="getGym" resultType="GymVO" parameterType="String" >
+		
+		SELECT a.id
+		,a.name
+		,a.fitness_name
+		,a.address
+		,a.address_detail
+		,a.email
+		,a.tel_number
+		,a.business_number
+		,mi.membership_name
+		FROM ADMIN a
+		LEFT JOIN membership_reg mr on mr.admin_id = a.id
+		LEFT JOIN membership_info mi on mi.membership_no = mr.membership_no
+		where a.id = #{id}
+	</select>
+	
+</mapper>
