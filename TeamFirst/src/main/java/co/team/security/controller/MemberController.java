@@ -172,17 +172,23 @@ public class MemberController {
 	
 	
 	// 정보 변경
-	@PostMapping("/updateOwner")
+	@ResponseBody
+	@PostMapping(value ="/updateOwner",produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String updateOwner(@ModelAttribute AdminVO member, HttpSession session) {
 		member.setId((String) session.getAttribute("id"));
-		if(member.getNewPW()!= null) {
+		if(member.getNewPW()!= "" & member.getPassword()!="") {
+			
 			//비번비교 후 맞으면 새비번 입력
-			int pwcheck= memberService.comparePw(member);
-			if (pwcheck!=0) {
-				member.setPassword(member.getNewPW());
+			if(passwordEncoder.matches(member.getPassword(), memberService.comparePw(member)))
+			{
+				member.setPassword(passwordEncoder.encode(member.getNewPW()));
 			}
+			else {return "비밀번호가 다릅니다.";}
 		}
+		else {member.setPassword(null);}
+		
 		int update=memberService.updateOwner(member);
+		System.out.println(update+" : 업데이트");
 		if (update==1) {
 			return "수정 성공";
 		}
@@ -190,11 +196,19 @@ public class MemberController {
 		return "수정 실패";
 	}
 	
-	@PostMapping("/updateFitness")
+	@ResponseBody
+	@PostMapping(value = "/updateFitness",produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String updateFitness(@ModelAttribute AdminVO member, HttpSession session) {
+		
+		
 		member.setId((String) session.getAttribute("id"));
 		
-		return "";
+		int update=memberService.updateOwner(member);
+		if (update==1) {
+			return "수정 성공";
+		}
+		
+		return "수정 실패";
 	}
 	
 	

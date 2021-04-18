@@ -18,7 +18,7 @@
 				<div>
 					<img class="mb-2" src="/spring/resources/images/gym.png">
 
-					<div class="mb-4">${vo.id} 님</div>
+					<div class="mb-4">${vo.id}님</div>
 
 
 				</div>
@@ -74,66 +74,65 @@
 
 
 
-						<form method="post"
-							action="/spring/members/updateOwner">
-									<div class="row justify-content-center">
-										<h4 class="ltitle">개인정보</h4>
-									</div>
-							<div class="row no-margin fitness-det justify-content-center align-items-center" style="min-height: 550px;">
+						<form method="post" action="/spring/members/updateOwner">
+							<div class="row justify-content-center">
+								<h4 class="ltitle">개인정보</h4>
+							</div>
+							<div
+								class="row no-margin fitness-det justify-content-center align-items-center"
+								style="min-height: 550px;">
 								<!-- action="/members/joinA" -->
-								
+
 								<div class="col-8 md-8">
-									
+
 									<div class="form-group row justify-content-between ">
-									<label for="name" class="col-form-label text-left">이름</label>
+										<label for="name" class="col-form-label text-left">이름</label>
 										<div class="col-8 mb-md-2">
-											
-											 <input type="text"
-												class="form-control" id="name" name="name" placeholder="이름"
-												value="${vo.name}" disabled="disabled">
+
+											<input type="text" class="form-control" id="name" name="name"
+												placeholder="이름" value="${vo.name}" disabled="disabled">
 											<div class="invalid-feedback">이름을 입력해주세요.</div>
 										</div>
 									</div>
 									<div class="form-group row justify-content-between">
-											<label for="email" class="col-form-label text-left">이메일</label> 
+										<label for="email" class="col-form-label text-left">이메일</label>
 										<div class="col-8 mb-md-2">
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-											<input type="email"
-												class="form-control" id="email" name="email"
-												placeholder="이메일" value="${vo.email}">
+											<input type="email" class="form-control" id="email"
+												name="email" placeholder="이메일" value="${vo.email}">
 											<div class="invalid-feedback">이메일을 입력해주세요.</div>
 										</div>
 									</div>
 									<div class="form-group row justify-content-between">
-											<label for="phone_number" class="col-form-label text-left">핸드폰 번호</label> 
+										<label for="phone_number" class="col-form-label text-left">핸드폰
+											번호</label>
 										<div class="col-8 mb-md-2">
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-											<input type="text"
-												class="form-control" id="phone_number" name="phone_number"
-												placeholder="핸드폰 번호" minlength="13" maxlength="13"
-												value="${vo.phone_number}">
+											<input type="text" class="form-control" id="phone_number"
+												name="phone_number" placeholder="핸드폰 번호" minlength="13"
+												maxlength="13" value="${vo.phone_number}">
 											<div class="invalid-feedback">핸드폰 번호를 입력해주세요.</div>
 										</div>
 									</div>
 									<div class="form-group row justify-content-between">
-											<label for="password" class="col-form-label text-left">현재 비밀번호</label>
+										<label for="password" class="col-form-label text-left">현재
+											비밀번호</label>
 										<div class="col-8 mb-md-2">
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-											 <input type="password"
-												class="form-control" id="password" name="password"
-												placeholder="현재 비밀번호">
+											<input type="password" class="form-control" id="password"
+												name="password" placeholder="현재 비밀번호">
 											<div class="invalid-feedback">현재 비밀번호를 입력해주세요.</div>
 										</div>
 									</div>
 									<div class="form-group row justify-content-between">
-											<label for="newPW" class="col-form-label text-left">새 비밀번호</label>
+										<label for="newPW" class="col-form-label text-left">새
+											비밀번호</label>
 										<div class="col-8 mb-0 pb-0">
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
-											 <input type="password"
-												class="form-control" id="newPW" name="newPW"
-												placeholder="새 비밀번호">
+											<input type="password" class="form-control" id="newPW"
+												name="newPW" placeholder="새 비밀번호">
 											<div class="invalid-feedback">새 비밀번호를 입력해주세요.</div>
-											<input type="pwCon" class="form-control" id="pwCon"
+											<input type="password" class="form-control" id="pwCon"
 												name="pwCon" placeholder="비밀번호 확인">
 											<div class="invalid-feedback">동일한 비밀번호를 입력해주세요.</div>
 										</div>
@@ -141,14 +140,15 @@
 
 
 								</div>
-								
+
 
 
 							</div>
 							<div class="row justify-content-center">
 
 								<div class="col-6 mt-5">
-									<button class="btn btn-primary btn-lg btn-block" type="submit">수정</button>
+									<button class="btn btn-primary btn-lg btn-block postFormBtn"
+										type="button">수정</button>
 								</div>
 							</div>
 						</form>
@@ -158,31 +158,31 @@
 
 					<div class="tab-pane fade exp-cover" id="fitness" role="tabpanel"
 						aria-labelledby="fitness-tab">
-						<form method="post"
-							action="/spring/members/updateFitness">
-									<div class="row justify-content-center">
-										<h4 class="ltitle">피트니스정보</h4>
+						<form method="post" action="/spring/members/updateFitness">
+							<div class="row justify-content-center">
+								<h4 class="ltitle">피트니스정보</h4>
 
-									</div>
-							<div class="row no-margin fitness-det justify-content-center align-items-center"  style="min-height: 550px;">
+							</div>
+							<div
+								class="row no-margin fitness-det justify-content-center align-items-center"
+								style="min-height: 550px;">
 								<div class="col-8">
-									
+
 									<div class="form-group row justify-content-between">
-											<label for="address_detail" class="col-form-label text-left">피트니스명</label>
+										<label for="address_detail" class="col-form-label text-left">피트니스명</label>
 										<div class="col-8 mb-md-2">
-											 <input type="text"
-												class="form-control" id="fitness_name" name="fitness_name"
-												placeholder="피트니스명" value="${vo.fitness_name}"
-												required="required">
+											<input type="text" class="form-control" id="fitness_name"
+												name="fitness_name" placeholder="피트니스명"
+												value="${vo.fitness_name}" required="required">
 										</div>
 									</div>
 
 									<div class="form-group row justify-content-between">
-											<label for="zipcode" class="col-form-label text-left">우편번호</label>
+										<label for="zipcode" class="col-form-label text-left">우편번호</label>
 										<div class="col-8 mb-md-2">
 											<div class="input-group" style="margin-bottom: 20px;">
 												<input type="number" class="form-control" id="zipcode"
-													name="zipcode" placeholder="우편번호" value="${zipcode}"
+													name="zipcode" placeholder="우편번호" value="${vo.zipcode}"
 													required="required">
 												<div class="input-group-append">
 													<input class="btn btn-primary" type="button"
@@ -195,21 +195,21 @@
 
 									</div>
 									<div class="form-group row justify-content-between">
-											<label for="address" class="col-form-label text-left">주소</label>
+										<label for="address" class="col-form-label text-left">주소</label>
 										<div class="col-8 mb-md-2">
-											 <input type="text"
-												class="form-control" id="address" name="address"
-												placeholder="헬스클럽 주소" value="${address}" required="required">
+											<input type="text" class="form-control" id="address"
+												name="address" placeholder="헬스클럽 주소" value="${vo.address}"
+												required="required">
 											<div class="invalid-feedback">헬스클럽 주소를 입력해주세요.</div>
 										</div>
 									</div>
 									<div class="form-group row justify-content-between">
-											<label for="address_detail" class="col-form-label text-left">주소 상세<span
-												class="text-muted">(Optional)</span></label>
-										<div class="col-8 mb-md-2"> 
-												 <input type="text"
-												class="form-control" id="address_detail"
-												name="address_detail" value="${address_detail}"
+										<label for="address_detail" class="col-form-label text-left">주소
+											상세<span class="text-muted">(Optional)</span>
+										</label>
+										<div class="col-8 mb-md-2">
+											<input type="text" class="form-control" id="address_detail"
+												name="address_detail" value="${vo.address_detail}"
 												placeholder="주소 상세">
 										</div>
 									</div>
@@ -218,14 +218,15 @@
 								</div>
 
 							</div>
-								<div class="row justify-content-center">
+							<div class="row justify-content-center">
 
-									<div class="col-6 mt-5">
-										<button class="btn btn-primary btn-lg btn-block" type="submit">수정</button>
-									</div>
-
-
+								<div class="col-6 mt-5">
+									<button class="btn btn-primary btn-lg btn-block postFormBtn"
+										type="button">수정</button>
 								</div>
+
+
+							</div>
 						</form>
 					</div>
 
@@ -325,6 +326,56 @@
 	</div>
 </div>
 <script>
+const formbtns = document.querySelectorAll('.postFormBtn');
+formbtns.forEach(formbtn=>{formbtn.addEventListener('click', formClick)});
+
+function formClick(){
+	console.log(this.parentNode.parentNode.parentNode);
+	
+	if(document.querySelector("#newPW").value!="" && document.querySelector("#newPW").value.length>=4){
+		if(document.querySelector("#password").value=="")
+	{ alert('비밀번호를 입력해주세요');
+	document.querySelector("#password").focus();
+	return;
+			}
+		
+		if(document.querySelector("#pwCon").value!=document.querySelector("#newPW").value){
+			alert('새 비밀번호가 동일하지 않습니다.');
+			document.querySelector("#pwCon").value="";
+			document.querySelector("#newPW").value="";
+			document.querySelector("#newPW").focus();
+			return;
+		}
+		
+	}
+	else if(document.querySelector("#newPW").value=="") {}
+	else{alert('비밀번호는 4글자 이상 입력해주세요.');
+	return;}			
+		
+		
+	
+
+	let con= confirm('수정하시겠습니까?');
+	if(con){
+		let updateForm = this.parentNode.parentNode.parentNode;
+		let params=new FormData(updateForm).params;
+	fetch(updateForm.action, { //fetch. ajax 와 비슷한 기능. loginForm.action 의 url 받아옴 (/spring/authenticate)
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+        body: new URLSearchParams(new FormData(updateForm)) })
+
+        .then(response => response.text())
+        .then(result=>{ alert(result);
+        })
+        
+        .catch(error => console.error('Error:', error));
+	}
+	
+
+}
+
+
+
 	function getPostcode() {
 		new daum.Postcode({
 			oncomplete : function(data) {

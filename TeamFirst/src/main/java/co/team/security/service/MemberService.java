@@ -25,6 +25,6 @@ public interface MemberService extends UserDbService {
 	public MemberVO getAllBy(MemberVO vo) throws NullPointerException;
 	public int setPassword(MemberVO vo);
 	public AdminVO getProfileInfo(String id);
-	public int updateOwner(AdminVO member);
-	public int comparePw(AdminVO member);
+	public Integer updateOwner(AdminVO member);
+	public String comparePw(AdminVO member);
 }

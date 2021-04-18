@@ -15,8 +15,8 @@ public interface AdminMapper {
 
 	public AdminVO getProfileInfo(String id); // 아이디 받아서 프로필정보뿌려줌
 
-	public int updateOwner(AdminVO member); // 정보 변경
+	public Integer updateOwner(AdminVO member); // 정보 변경
 
-	public int comparePw(AdminVO member);
+	public String comparePw(AdminVO member);
 
 }

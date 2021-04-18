@@ -27,8 +27,8 @@
 	</select>
 	
 <!-- 비번동일조회 -->	
-<select id="comparePw" resultType="int" parameterType="adminVO">
-	select count(*) from admin where id=#{id} and password=#{password}
+<select id="comparePw" resultType="String" parameterType="adminVO">
+	select password from admin where id=#{id}
 	</select>
 	
 
@@ -56,29 +56,27 @@
 	update admin
 	<set>
 	<if test="password !=null and password !=''">
-	password=#{password}
+	password=#{password},
 	</if>
 	<if test="phone_number !=null and phone_number !=''">
-	phone_number=#{phone_number}
+	phone_number=#{phone_number},
 	</if>
 	<if test="zipcode !=null and zipcode !=''">
-	zipcode=#{zipcode}
+	zipcode=#{zipcode},
 	</if>
 	<if test="address !=null and address !=''">
-	address=#{address}
+	address=#{address},
 	</if>
 	<if test="address_detail !=null and address_detail !=''">
-	address_detail=#{address_detail}
+	address_detail=#{address_detail},
 	</if>
 	<if test="fitness_name !=null and fitness_name !=''">
-	fitness_name=#{fitness_name}
+	fitness_name=#{fitness_name},
 	</if>
 	<if test="email !=null and email !=''">
-	email=#{email}
+	email=#{email},
 	</if>
-	
-	
-	
+
 	</set>
 	
 	

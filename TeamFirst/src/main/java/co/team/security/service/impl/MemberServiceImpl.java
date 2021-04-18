@@ -138,12 +138,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int updateOwner(AdminVO member) {
+	public Integer updateOwner(AdminVO member) {
 		return adminMapper.updateOwner(member);
 	}
 
 	@Override
-	public int comparePw(AdminVO member) {
+	public String comparePw(AdminVO member) {
 		
 		return adminMapper.comparePw(member);
 	}
