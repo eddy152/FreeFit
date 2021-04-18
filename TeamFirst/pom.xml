@@ -37,42 +37,7 @@
 
 
 	<dependencies>
-		<!-- 구글 drive api 용 -->
-		<dependency>
-			<groupId>com.google.apis</groupId>
-			<artifactId>google-api-services-drive</artifactId>
-			<version>v3-rev20210315-1.31.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
-		<dependency>
-			<groupId>com.google.api-client</groupId>
-			<artifactId>google-api-client</artifactId>
-			<version>1.31.1</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client -->
-		<dependency>
-			<groupId>com.google.oauth-client</groupId>
-			<artifactId>google-oauth-client</artifactId>
-			<version>1.31.1</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
-<dependency>
-    <groupId>com.google.oauth-client</groupId>
-    <artifactId>google-oauth-client-jetty</artifactId>
-    <version>1.31.1</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-java6 -->
-<dependency>
-    <groupId>com.google.oauth-client</groupId>
-    <artifactId>google-oauth-client-java6</artifactId>
-    <version>1.31.1</version>
-</dependency>
-
 		
-
-
-
-
 
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail 자바메일 api -->
 		<dependency>
@@ -82,18 +47,18 @@
 		</dependency>
 
 		<!-- 파일업로드/다운로드 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- 파일관련 / 썸네일라이브러리 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.imgscalr</groupId>
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
-		</dependency>
+		</dependency> -->
 
 
 		<!-- Apache commons DBCP -->

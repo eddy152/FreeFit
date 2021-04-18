@@ -1,19 +1,8 @@
 package co.team.home.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import org.imgscalr.Scalr;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles requests for the application home page.
@@ -21,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-	@Autowired
-	String uploadPath;
+//	@Autowired
+//	String uploadPath;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -55,15 +44,9 @@ public class HomeController {
 	public String tilesNo() {
 		return "popup/home"; // popup 폴더에 넣기
 	}
-	
-	
-	
-	
-	//파일업로드기능
 
-	
+	// 파일업로드기능
 
-	
 //	//post 일때 작동하는 upload 기능
 //	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 //	public ModelAndView uploadForm(MultipartFile file, ModelAndView mv) throws IOException {

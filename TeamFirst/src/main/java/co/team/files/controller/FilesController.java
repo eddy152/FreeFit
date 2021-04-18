@@ -1,20 +1,15 @@
 package co.team.files.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import co.team.files.service.FilesService;
 import co.team.files.service.FilesVO;
@@ -23,8 +18,8 @@ import co.team.files.service.FilesVO;
 @RequestMapping(path = "/files")
 public class FilesController {
 
-	@Autowired
-	String uploadPath;
+//	@Autowired
+//	String uploadPath;
 
 	@Autowired
 	FilesService service;
@@ -37,7 +32,7 @@ public class FilesController {
 
 	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String uploadForm(FilesVO vo, HttpSession session) throws IOException {
+	public String uploadForm(@ModelAttribute FilesVO vo, HttpSession session) throws IOException {
 
 		vo.setUploader((String) session.getAttribute("id"));
 		

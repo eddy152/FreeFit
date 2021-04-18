@@ -12,8 +12,8 @@
 <context:component-scan base-package="co.team"></context:component-scan>
 
 
-   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    <!--  파일업로드 용량 (10MB)-->
+<!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     파일업로드 용량 (10MB)
     <property name="maxUploadSize" value="10485760"/>
     <property name="defaultEncoding" value="UTF-8" />
   </bean>
@@ -21,10 +21,10 @@
   
 
   
-  <!--  파일업로드 디렉토리 설정 -->
+   파일업로드 디렉토리 설정
   <bean id="uploadPath" class="java.lang.String">
     <constructor-arg value="\\192.168.0.87\project4\pyramidFit\img"/>
     
-  </bean>    
+  </bean>     -->
      
 </beans>

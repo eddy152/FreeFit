@@ -47,17 +47,24 @@ if (imgSize.size<10000000){
 fetch("https://api.imgur.com/3/image", requestOptions)
   .then(response => response.json())
   .then(result => {
+	  json=result;
+	  jsid=json.data.id;
+	  jslink=json.data.link;
 	  
-	  var formdata=new FormData();
-	  formdata.append("fileName", result.data.id);
-	  formdata.append("pathName", result.data.link);
-	  fetch("/spring/files/upload", {method:'POST', body: formdata})
-	  .then(response=>response.text())
-	  .then(result=>console.log(result))
-	  .catch(error=>console.log('error',error));
+  }).then(
+	function(){
+		console.log(jslink);
+		var formdata=new URLSearchParams();
+		  formdata.append("fileName", jsid);
+		  formdata.append("pathName", jslink);
+		  fetch("/spring/files/upload", {method:'POST', headers:{"Content-Type":"application/x-www-form-urlencoded"}, body: formdata})
+		  .then(response=>response.text())
+		  .then(result=>document.getElementById("img").src=result)
+		  .catch(error=>console.log('error',error));
 
-	  document.getElementById("img").src=result.data.link;
-  })
+	}	  
+  
+  )
   .catch(error => console.log('error', error));
 }
 else { alert('파일 용량이 10MB를 초과합니다.');
