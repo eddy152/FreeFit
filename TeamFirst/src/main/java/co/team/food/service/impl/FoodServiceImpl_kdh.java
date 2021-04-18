@@ -128,9 +128,9 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	}
 
 	@Override
-	// 이미지 업로드
-	public void updateImg(FoodVO vo) {
-		dao.updateImg(vo);
+	// 식단 내용 수정
+	public void foodUpdate(FoodVO vo) {
+		dao.foodUpdate(vo);
 	}
 
 	@Override
@@ -143,6 +143,30 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	// 식단 내용 등록
 	public void insertImg(FoodVO vo) {
 		dao.insertImg(vo);
+	}
+
+	@Override
+	// 식단 내용 삭제
+	public void foodDel(FoodVO vo) {
+		dao.foodDel(vo);
+	}
+
+	@Override
+	// 일별 회원 식단 조회
+	public List<FoodVO> getFoodOne(FoodVO vo) {
+		return dao.getFoodOne(vo);
+	}
+
+	@Override
+	// 일별 단건 조회
+	public FoodVO getDay(FoodVO vo) {
+		return dao.getDay(vo);
+	}
+
+	@Override
+	public FoodVO current(FoodVO vo) {
+		// TODO Auto-generated method stub
+		return dao.current(vo);
 	}
 
 

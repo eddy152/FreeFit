@@ -67,8 +67,19 @@ public interface FoodMapper_kdh {
 	// 식단 내용 등록
 	public void insertImg(FoodVO vo);
 	
-	// 이미지 업로드
-	public void updateImg(FoodVO vo);
+	// 식단 내용 수정
+	public void foodUpdate(FoodVO vo);
+	
+	// 식단 내용 삭제
+	public void foodDel(FoodVO vo);
+	
+	// 일별 회원 식단 조회
+	public List<FoodVO> getFoodOne(FoodVO vo);
+	
+	// 일별 단건 조회
+	public FoodVO getDay(FoodVO vo);
+	
+	public FoodVO current(FoodVO vo);
 	
 	// 총칼로리 저장
 	public void updateCalorie(FoodVO vo);

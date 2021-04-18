@@ -153,6 +153,8 @@ public class FoodController_kdh {
 		model.addAttribute("food", service.getRealFoodMember(vo)); // 실제 섭취 식단 단건 조회
 		model.addAttribute("user", service.getFood(vo)); // 회원 단건 조회
 		model.addAttribute("foodList", service.getFoodList(vo)); // 음식 정보
+		List<FoodVO> list = service.getFoodOne(vo);
+		model.addAttribute("oneDay", list); // 일별 회원 식단 조회
 		return "app/Food/getMemberFoodInsert";
 	}
 	
@@ -195,12 +197,49 @@ public class FoodController_kdh {
 		return vo;
 	}
 	
-	// 이미지 업로드
+	// 식단 내용 등록
 	@RequestMapping("/insertImg")
 	@ResponseBody
 	public FoodVO insertImg(FoodVO vo) {
 		service.insertImg(vo);
 		return vo;
+	}
+	
+	// 식단 내용 수정
+	@RequestMapping("/foodUpdate")
+	@ResponseBody
+	public FoodVO foodUpdate(FoodVO vo) {
+		service.foodUpdate(vo);
+		return vo;
+	}
+	
+	// 식단 내용 삭제
+	@RequestMapping("/foodDel")
+	@ResponseBody
+	public FoodVO foodDel(FoodVO vo) {
+		service.foodDel(vo);
+		return vo;
+	}
+	
+	// 일별 단건 조회
+	@RequestMapping("/getDay")
+	@ResponseBody
+	public FoodVO getDay(FoodVO vo) {
+		FoodVO result = service.getDay(vo);
+		if(result == null) {
+			vo.setReal_diet_no("0");
+			System.out.println(vo.getReal_diet_no() + "--------------------------");
+			return vo;
+		}
+		System.out.println(result + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		return result;
+		
+	}
+	
+	@RequestMapping("/currentDay")
+	@ResponseBody
+	public FoodVO current(FoodVO vo) {
+		return service.current(vo);
 	}
 	
 	// 총 칼로리 저장
