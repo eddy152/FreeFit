@@ -26,14 +26,16 @@
 <!-- Custom styles for this template -->
 <!-- <link href="pricing.css" rel="stylesheet"> -->
 </head>
-<body>
+<body class="d-flex flex-column h-100"> 
 
+	<div class="container-fluid">
 			<tiles:insertAttribute name="header" />
 
-	<div class="container">
+	<div style="margin-bottom: 120px"></div>
 			<tiles:insertAttribute name="content" />
-	</div>
+	<div style="margin-bottom: 120px"></div>	 	
 
+	</div>
 			<tiles:insertAttribute name="footer" />
 
 

@@ -137,4 +137,15 @@ public class MemberServiceImpl implements MemberService {
 		return adminMapper.getProfileInfo(id);
 	}
 
+	@Override
+	public int updateOwner(AdminVO member) {
+		return adminMapper.updateOwner(member);
+	}
+
+	@Override
+	public int comparePw(AdminVO member) {
+		
+		return adminMapper.comparePw(member);
+	}
+
 }

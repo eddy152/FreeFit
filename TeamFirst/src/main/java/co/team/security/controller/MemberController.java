@@ -141,7 +141,7 @@ public class MemberController {
 		int max = mapper.getMax(); // 가입자수 불러오기
 
 		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId("trainer" + max + session.getAttribute("mem_reg_id")); // 아이디 = trainer가입자수mem_reg_id
+		member.setId("trainer" + session.getAttribute("mem_reg_id") + "_" + max); // 아이디 = trainer가입자수mem_reg_id
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addTrainerMember(member);
@@ -153,7 +153,7 @@ public class MemberController {
 	public String joinUser(@ModelAttribute UserVO member, HttpSession session) {
 		int max = mapper.getMax();
 		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId("user" + max + session.getAttribute("mem_reg_id"));
+		member.setId("user" + session.getAttribute("mem_reg_id") + "_" + max);
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addUserMember(member);
@@ -168,6 +168,39 @@ public class MemberController {
 
 		return memberService.userCheck(id);
 	}
+	
+	
+	
+	// 정보 변경
+	@PostMapping("/updateOwner")
+	public String updateOwner(@ModelAttribute AdminVO member, HttpSession session) {
+		member.setId((String) session.getAttribute("id"));
+		if(member.getNewPW()!= null) {
+			//비번비교 후 맞으면 새비번 입력
+			int pwcheck= memberService.comparePw(member);
+			if (pwcheck!=0) {
+				member.setPassword(member.getNewPW());
+			}
+		}
+		int update=memberService.updateOwner(member);
+		if (update==1) {
+			return "수정 성공";
+		}
+		
+		return "수정 실패";
+	}
+	
+	@PostMapping("/updateFitness")
+	public String updateFitness(@ModelAttribute AdminVO member, HttpSession session) {
+		member.setId((String) session.getAttribute("id"));
+		
+		return "";
+	}
+	
+	
+	
+	
+	
 
 	// 아이디, 비밀번호 찾기 폼
 	@GetMapping("/rememberForm")
@@ -177,6 +210,7 @@ public class MemberController {
 
 	// 아이디, 비밀번호 찾기 기능
 	@ResponseBody
+	// 아이디찾기
 	@PostMapping("/rememberId")
 	public String rememberId(@ModelAttribute MemberVO member) {
 
@@ -186,6 +220,7 @@ public class MemberController {
 		return id;
 	}
 
+//비번찾기
 	@ResponseBody
 	@PostMapping("/newPassword")
 	public String sendEmail(@ModelAttribute MemberVO member) {
@@ -211,6 +246,7 @@ public class MemberController {
 		return "error";
 	}
 
+//랜덤문자 만들기
 	public static String getRandomStr(int size) {
 		if (size > 0) {
 			char[] tmp = new char[size];
@@ -227,7 +263,13 @@ public class MemberController {
 		}
 		return "ERROR : Size is required.";
 	}
+
+	
+
 }
+
+//정보변경
+
 // 시간(sysdate), id 저장하는 비번용 테이블 생성
 // address 에 sysdate 값 넣기
 
