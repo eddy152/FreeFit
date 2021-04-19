@@ -26,7 +26,8 @@
 	function search(){
 			location = "getAdminNoticeBoardList?search="+$("#search_text").val();
 	}
-</script>
+	</script>
+	
 </head>
 <body>
 	<div class="page-wrapper">

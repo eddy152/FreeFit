@@ -36,18 +36,30 @@
 									<tr> 
 										<th>이름</th>
 										<td><input value="${gym.name}" readonly="readonly"></td>
+									</tr>
+									<tr>
 										<th>사업자번호</th>
 										<td><input value="${gym.business_number}" readonly="readonly"></td>
+									</tr>
+									<tr>
 										<th>매장주소</th>
 										<td><input value="${gym.address.concat(' ').concat(gym.address_detail)}" readonly="readonly"></td>
+									</tr>
+									<tr>
 										<th>연락처</th>
-										<td><input value="${gym.phone_number}" readonly="readonly"></td>
+										<td><input value="${gym.tel_number}" readonly="readonly"></td>
+									</tr>
+									<tr>
 										<th>영업시간</th>
-										<td><input ></td>
+										<td>전화문의</td>
+									</tr>
+									<tr>
 										<th>멤버쉽등급</th>
-										<td><input value="${gym.membership_no}" readonly="readonly"></td>
+										<td><input value="${gym.membership_name}" readonly="readonly"></td>
+									</tr>
+									<tr>
 										<th>기타</th>
-										<td><input ></td>
+										<td>기타 문의사항 전화문의</td>
 									</tr>
 							</table>
 						</div>

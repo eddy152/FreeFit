@@ -15,43 +15,55 @@
 		,a.tel_number
 		,a.business_number
 		,mi.membership_name
-		FROM ADMIN a
+		FROM FITNESSADMIN a
 		LEFT JOIN membership_reg mr on mr.admin_id = a.id
 		LEFT JOIN membership_info mi on mi.membership_no = mr.membership_no
-		where a.id = #{id}
+		WHERE a.id = #{id}
 	</select>
 	
-	<select id="searchGymList" resultType="GymVO" parameterType="GymListSearch">
+		<select id="searchGymList"
+		parameterType="GymListSearch" resultType="GymVO">
 		SELECT id
-		,fitness name
+		,fitness_name
 		,address
-		,adrress_detail
+		,address_detail
 		,email
 		,tel_number
-		FROM (
-		SELECT * FROM ADMIN
-		WHERE 1=1
+		FROM (SELECT * FROM (
+		
+		SELECT
+		ROWNUM AS SEQ
+		,id
+		,fitness_name
+		,address
+		,address_detail
+		,email
+		,tel_number
+		
+		FROM ( SELECT *
+		FROM FITNESSADMIN
+		where 1=1
 		<choose>
-			<when test = "search!=null" >
-		    and title by fitness_name asc
+			<when test="search!=null">
+				and title like #{search}
 			</when>
 		</choose>
-		order by fitness_name asc
+		ORDER BY fitness_name asc
 		)
 		<![CDATA[
-		) where seq >= {start}
+		) where seq >= #{start}
 		)
-		where rownum <= 10
+		where ROWNUM <= 10
 		]]>
- 	</select>	
+	</select>	
  	
- 	<select id = "countGymList" resultType="Integer" parameterType="GymListSearch">
+ 	<select id="countGymList" resultType="int" parameterType="GymListSearch">
  	
  		SELECT COUNT (1)
- 		FROM ADMIN
+ 		FROM FITNESSADMIN
  		WHERE 1=1
  		<choose>
- 			<when test="search != null">
+ 			<when test="search!=null">
 				and fitness_name like #{search}
 			</when>
  		</choose>
