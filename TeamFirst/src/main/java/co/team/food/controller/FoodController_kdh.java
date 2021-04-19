@@ -155,6 +155,25 @@ public class FoodController_kdh {
 		model.addAttribute("foodList", service.getFoodList(vo)); // 음식 정보
 		List<FoodVO> list = service.getFoodOne(vo);
 		model.addAttribute("oneDay", list); // 일별 회원 식단 조회
+		
+		FoodVO rvo = service.getRealFoodMember(vo);
+		String[] arr = rvo.getDetail_content().split("/");
+		ArrayList<FoodVO> aList = new ArrayList<>();
+		for(int i=0; i<arr.length; i++) {
+			FoodVO fvo = new FoodVO();
+			String[] arr2 = arr[i].split(",");
+			
+			fvo.setDetail_food(arr2[0]);
+			fvo.setDetail_calorie(arr2[1]);
+			fvo.setDetail_count(arr2[2]);
+			
+			aList.add(fvo);
+		}
+		
+		model.addAttribute("detail", aList);
+		System.out.println(aList + "-----------------");
+		
+		
 		return "app/Food/getMemberFoodInsert";
 	}
 	
@@ -227,11 +246,9 @@ public class FoodController_kdh {
 	public FoodVO getDay(FoodVO vo) {
 		FoodVO result = service.getDay(vo);
 		if(result == null) {
-			vo.setReal_diet_no("0");
-			System.out.println(vo.getReal_diet_no() + "--------------------------");
+			vo.setAge("0");
 			return vo;
 		}
-		System.out.println(result + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		return result;
 		
 	}
@@ -246,9 +263,10 @@ public class FoodController_kdh {
 	@RequestMapping("/updateCalorie")
 	@ResponseBody
 	public FoodVO updateCalorie(FoodVO vo) {
+		System.out.println(vo + "-------------------------");
 		service.updateCalorie(vo);
-		System.out.println(vo + "-----------------------------------------");
 		return vo;
+		
 	}
 	
 }

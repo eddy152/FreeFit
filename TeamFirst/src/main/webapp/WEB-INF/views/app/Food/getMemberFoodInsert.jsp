@@ -18,8 +18,7 @@
 			<tr>
 
 				<td>이름</td>
-				<td>${user.name }<input name="name" value="${user.name }"
-					hidden="hidden">
+				<td>${user.name }<input name="name" value="${user.name }" hidden="hidden">
 				</td>
 			</tr>
 			<tr>
@@ -48,8 +47,7 @@
 	</div>
 	<br>
 	<div>
-		식단 번호 : <input type="text" value="${food.real_diet_no }"
-			id="real_diet_no1">
+		식단 번호 : <input type="text" value="${food.real_diet_no }" id="real_diet_no1">
 
 		<c:if test="${food.diet_content ne null }">
 			<div>
@@ -65,9 +63,9 @@
 		<div class="comments">
 			<c:forEach var="com" items="${comment }">
 				<div id="priv_comment">
-					<input type="text" value="${com.diet_comment }"> <input
-						type="text" value="${com.comment_no }" name="comment_no"
-						hidden="hidden"> <a href="#" class="updateComment">[수정]</a>
+					<input type="text" value="${com.diet_comment }"> 
+					<input type="text" value="${com.comment_no }" name="comment_no" hidden="hidden">
+					<a href="#" class="updateComment">[수정]</a>
 					<a href="#" class="deleteComment">[삭제]</a>
 				</div>
 				<br>
@@ -81,7 +79,7 @@
 		</div>
 		<hr>
 		<div>
-			<input type="text" value="${food.calorie }" hidden="hidden">
+			<input type="text" value="${food.calorie }" readonly="readonly">
 			<button type="button" id="calorieBtn">칼로리 계산하기</button>
 		</div>
 
@@ -166,8 +164,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="exampleModalLabel">칼로리 계산하기</h4>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -185,11 +182,24 @@
 				</div>
 				<button type="button" class="addFood">+</button>
 				<hr>
-				<div class="frm1">음식명 :</div>
-				총 칼로리 : <input type="text" name="total_calorie1"> <br>
+				<div class="frm1">음식명 :
+				<c:forEach items="${oneDay }" var="list">
+					<c:if test="${list.real_diet_no eq food.real_diet_no}">
+						<c:forEach items="${detail }" var="detail">
+							<div>
+								<input type="text" name="detail_food" value="${detail.detail_food}">
+								<input type="text" name="detail_count" onchange="change(this)" value="${detail.detail_count}">
+								<input type="text" name="detail_calorie" value="${detail.detail_calorie}">개
+								<button type="button" class="deleteFood">-</button><br>
+							</div>					
+						</c:forEach>
+					</c:if>
+				</c:forEach>
+				</div>
+				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"> <br>
 
 				<form action="updateCalorie" method="post" class="frm">
-					<input type="text" name="total_calorie">
+					<input type="text" name="total_calorie" hidden="hidden">
 				</form>
 
 			</div>
@@ -235,7 +245,7 @@
 			var result = TotalCalorie(food_calorie, count); 
 			
 			$('.frm1').append(
-				'<div>' +
+				'<div class="foods">' +
 				'<input type="text" name="food_name" value="' 
 				+ selectFoodName 
 				+ '">' 
@@ -283,11 +293,21 @@
 	
 	// 등록 버튼 클릭시 총 칼로리를 저장한다
 	function Click(){
+		var food = $('.foods');
+		var foods = '';
+		for(i=0; i<food.length; i++) {
+			foods += food[i].children[0].value + ',' + food[i].children[1].value + ',' + food[i].children[2].value;
+			if(i < food.length-1) {				
+			foods += '/';
+			}
+		}
 		
-		$.ajax({
+		console.log(foods);
+		 $.ajax({
 			url: 'updateCalorie',
 			data: { real_diet_no : $('input:text[name="real_diet_no"]').val(),
-					total_calorie : $('input:text[name="total_calorie1"]').val()	
+					total_calorie : $('input:text[name="total_calorie1"]').val(),
+					detail_content : foods
 			},
 			dataType: 'json',
 			type: 'post',
@@ -301,6 +321,7 @@
 			}
 		});
 	}
+
 	
 	// 음싯 갯수 input 태그의 값을 변경할 때 발생하는 이벤트
 	function change(obj) {
@@ -370,27 +391,39 @@
 			success: function drawChart(result) {
 				console.log(result);
 				var today = result.take_date;
+				var calorie = result.calorie;
 				  $('.food_contents').html(result.diet_content);
 				  
-				if(result.real_diet_no == '0') {
-					$('#real_diet_no1').val('');
-					var weight = $('input:text[name="weight"]').val(); // = 몸무게
-					var total = weight * 12 * 1.5;
-					var arr =[]; 
-					arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-				
-					    arr.push(['', 0, total]);
-					
-					  var data = google.visualization.arrayToDataTable(arr);
-					
-					  var options = {
-							  width : '1000',
-					          vAxis: { viewWindow: { max: 3000 } },
-					          seriesType: 'bars' };
-					
-					  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-					
-					  chart.draw(data, options);
+				if(result.age == '0') {
+
+					$.ajax({
+						url : 'currentDay',
+						data : {cnt : cnt},
+						dataType: 'json',
+						success: function(e) {
+							console.log(e.sysdate);
+							$('input:text[name=dates]').val(e.sysdate);
+							$('#real_diet_no1').val('');
+							var weight = $('input:text[name="weight"]').val(); // = 몸무게
+							var total = weight * 12 * 1.5;
+							var arr =[]; 
+							arr.push( ['섭취날짜', '실제섭취량', '권장량']);
+						
+							    arr.push(['', 0, total]);
+							
+							  var data = google.visualization.arrayToDataTable(arr);
+							
+							  var options = {
+									  width : '1000',
+							          vAxis: { viewWindow: { max: 3000 } },
+							          seriesType: 'bars' };
+							
+							  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
+							
+							  chart.draw(data, options);
+							
+						}
+					});
 			  
 				} else {
 					$('input:text[name=dates]').val(today);
@@ -432,25 +465,36 @@
 			var calorie = result.calorie;
 			  $('.food_contents').html(result.diet_content);
 			  
-			if(result.real_diet_no == '0') {
-				$('#real_diet_no1').val('');
-				var weight = $('input:text[name="weight"]').val(); // = 몸무게
-				var total = weight * 12 * 1.5;
-				var arr =[]; 
-				arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-			
-				    arr.push(['', 0, total]);
+			if(result.age == '0') {
 				
-				  var data = google.visualization.arrayToDataTable(arr);
-				
-				  var options = {
-						  width : '1000',
-				          vAxis: { viewWindow: { max: 3000 } },
-				          seriesType: 'bars' };
-				
-				  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-				
-				  chart.draw(data, options);
+				$.ajax({
+					url : 'currentDay',
+					data : {cnt : cnt},
+					dataType: 'json',
+					success: function(e) {
+						console.log(e.sysdate);
+						$('input:text[name=dates]').val(e.sysdate);
+						$('#real_diet_no1').val('');
+						var weight = $('input:text[name="weight"]').val(); // = 몸무게
+						var total = weight * 12 * 1.5;
+						var arr =[]; 
+						arr.push( ['섭취날짜', '실제섭취량', '권장량']);
+					
+						    arr.push(['', 0, total]);
+						
+						  var data = google.visualization.arrayToDataTable(arr);
+						
+						  var options = {
+								  width : '1000',
+						          vAxis: { viewWindow: { max: 3000 } },
+						          seriesType: 'bars' };
+						
+						  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
+						
+						  chart.draw(data, options);
+						
+					}
+				});
 		  
 			} else {
 				$('input:text[name=dates]').val(today);
@@ -619,7 +663,6 @@
 		$(document).on('click', '#calorieBtn', function(e) {
 			e.preventDefault();
 			$('#exampleModal2').modal("show");
-			$('.note-editable').html('<p>dkdk</p>');
 		});
 	});
 	 	 
