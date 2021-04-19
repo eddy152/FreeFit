@@ -6,15 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+
 
 public class GymListSearch {
 
 	private int page;
 	private int start;
-	private int String search;
+	private String search;
 	
 	public int getPage() {
 		return page;
@@ -23,13 +24,13 @@ public class GymListSearch {
 		this.page = page;		this.start = page * 10 + 1;
 		
 	}
-	public String getSearch() {
+	public String getSerach() {
 		return search;
-		
 	}
+	
 	public void setSearch(String search) {
+	
 		this.search = search;
-		
 	}
 	public int getStart() {
 		return start;
