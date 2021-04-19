@@ -21,4 +21,40 @@
 		where a.id = #{id}
 	</select>
 	
+	<select id="searchGymList" resultType="GymVO" parameterType="GymListSearch">
+		SELECT id
+		,fitness name
+		,address
+		,adrress_detail
+		,email
+		,tel_number
+		FROM (
+		SELECT * FROM ADMIN
+		WHERE 1=1
+		<choose>
+			<when test = "search ! = null" >
+		    and title by fitness_name asc
+			</when>
+		</choose>
+		order by fitness_name asc
+		)
+		<![CDATA[
+		) where seq >= {start}
+		)
+		where rownum <= 10
+		]]>
+ 	</select>	
+ 	
+ 	<select id = "countGymList" resultType="Integer" parameterType="GymListSearch">
+ 	
+ 		SELECT COUNT (1)
+ 		FROM ADMIN
+ 		WHERE 1=1
+ 		<choose>
+ 			<when test="search != null">
+				and fitness_name like #{search}
+			</when>
+ 		</choose>
+ 	</select>
+ 	
 </mapper>
