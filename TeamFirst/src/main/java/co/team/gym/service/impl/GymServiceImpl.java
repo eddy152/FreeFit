@@ -17,7 +17,7 @@ public class GymServiceImpl implements GymService {
 
 	@Override
 	public List<GymVO> searchGymList(GymListSearch vo) {
-		return dao.serarchGymList(vo);
+		return dao.searchGymList(vo);
 	}
 
 	@Override

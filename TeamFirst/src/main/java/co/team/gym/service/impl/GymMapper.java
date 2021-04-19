@@ -7,7 +7,7 @@ import co.team.gym.service.GymVO;
 
 public interface GymMapper {
 
-	public List<GymVO> serarchGymList(GymListSearch vo);
+	public List<GymVO> searchGymList(GymListSearch vo);
 	
 	public int countGymList(GymListSearch vo);
 	

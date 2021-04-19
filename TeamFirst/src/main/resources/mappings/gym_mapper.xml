@@ -32,7 +32,7 @@
 		SELECT * FROM ADMIN
 		WHERE 1=1
 		<choose>
-			<when test = "search ! = null" >
+			<when test = "search!=null" >
 		    and title by fitness_name asc
 			</when>
 		</choose>

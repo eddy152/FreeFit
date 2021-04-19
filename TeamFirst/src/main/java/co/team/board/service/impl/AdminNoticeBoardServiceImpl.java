@@ -28,7 +28,7 @@ public class AdminNoticeBoardServiceImpl implements AdminNoticeBoardService{
 		return dao.searchAdminNoticeBoardList(vo);
 	}
 	@Override
-	public Integer countAdminNoticeBoardList(AdminNoticeBoardListSearch vo) {
+	public int countAdminNoticeBoardList(AdminNoticeBoardListSearch vo) {
 		return dao.countAdminNoticeBoardList(vo);
 	}
 	@Override

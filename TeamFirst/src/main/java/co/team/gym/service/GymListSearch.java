@@ -6,9 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 
 
 public class GymListSearch {
@@ -21,7 +21,8 @@ public class GymListSearch {
 		return page;
 	}
 	public void setPage(int page) {
-		this.page = page;		this.start = page * 10 + 1;
+		this.page = page;		
+		this.start = page * 10 + 1;
 		
 	}
 	public String getSerach() {

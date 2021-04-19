@@ -19,7 +19,7 @@ public interface AdminNoticeBoardService {
 	public List<AdminNoticeBoardVO> searchAdminNoticeBoardList(AdminNoticeBoardListSearch vo);
 	
 	
-	public Integer countAdminNoticeBoardList(AdminNoticeBoardListSearch vo);
+	public int countAdminNoticeBoardList(AdminNoticeBoardListSearch vo);
 
 	//등록
 	public int insertAdminNoticeBoard(AdminNoticeBoardVO vo);
