@@ -10,29 +10,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-
 public class GymListSearch {
-
+	
 	private int page;
 	private int start;
 	private String search;
-	
+
 	public int getPage() {
 		return page;
 	}
+
 	public void setPage(int page) {
-		this.page = page;		
-		this.start = page * 10 + 1;
-		
+		this.page = page;
+		this.start = page*10 + 1;
 	}
-	public String getSerach() {
+
+	public String getSearch() {
 		return search;
 	}
-	
+
 	public void setSearch(String search) {
-	
 		this.search = search;
 	}
+
 	public int getStart() {
 		return start;
 	}

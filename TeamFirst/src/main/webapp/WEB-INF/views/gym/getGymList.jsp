@@ -32,7 +32,7 @@
 			<div class="col-lg-8">
 				<!--게시판 넓이 -->
 				<div class="col-lg-12">
-					<h1 class="page-header">헬스장 상세목록</h1>
+					<h1 class="page-header">헬스장 리스트</h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
