@@ -27,14 +27,12 @@ public class HomeController {
 		@GetMapping("/fitnessHome")
 		public String fitnessHome(String fitness_id, HttpSession session)
 		{
+			if(fitness_id != null) {
+				session.setAttribute("fitness_id", fitness_id);						
+			}
 			if(session.getAttribute("fitness_id")!=null) {
 				return "program/test/home";
-			}
-	
-			else if(fitness_id != null) {
-				session.setAttribute("fitness_id", fitness_id);
-				return "program/test/home";			
-			}
+			}		
 			else {
 				return "redirect:/members/profile";
 			}
