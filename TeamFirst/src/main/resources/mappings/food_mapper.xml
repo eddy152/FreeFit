@@ -123,7 +123,7 @@
 
 	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리)-앱 -->
 	<select id="getRealFoodMember" resultType="FoodVO" parameterType="FoodVO">
-		select real_diet_no, user_id, take_date, diet_content, calorie, sysdate from real_diet
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, sysdate, detail_content from real_diet
 		where user_id = #{id}
 		and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
 	</select>
@@ -154,7 +154,7 @@
 		where comment_no = #{comment_no}
 	</delete>
 	
-	<!-- 이미지 경로명 diet_content에 추가 -->
+	<!-- 실제 섭취 식단 내용 등록 -->
 	<insert id="insertImg" parameterType="FoodVO">
 		insert into real_diet
 		values(REAL_FOOD.nextval, #{id}, sysdate, #{diet_content}, 0)
@@ -174,7 +174,7 @@
 	
 	<!-- 일별 회원 식단 -->
 	<select id="getFoodOne" parameterType="FoodVO" resultType="FoodVO">
-		select real_diet_no, user_id, take_date, diet_content, calorie, sysdate from real_diet
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, to_char(sysdate, 'yyyy-MM-dd') "sysdate" from real_diet
 		where user_id = #{id}
 	</select>
 	
@@ -192,8 +192,15 @@
 	
 	<!-- 총칼로리 저장 -->
 	<update id="updateCalorie" parameterType="FoodVO">
-		update real_diet set calorie=#{total_calorie}
+		update real_diet set calorie=#{total_calorie}, detail_content=#{detail_content}
 		where real_diet_no = #{real_diet_no}
 	</update>
+	
+	<!-- 식단 번호 단건 조회 -->
+	<select id="getContent" resultType="FoodVO" parameterType="FoodVO">
+		select * from
+		real_diet
+		where real_diet_no = #{real_diet_no}
+	</select>
 	
 </mapper>

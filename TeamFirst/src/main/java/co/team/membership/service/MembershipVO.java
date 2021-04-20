@@ -1,6 +1,5 @@
 package co.team.membership.service;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +15,7 @@ public class MembershipVO {
 	private String membership_start;
 	private String membership_end;
 	private String admin_id;
+	private String fitness_id;
 	private String membership_name;
 	private String membership_price;
 }

@@ -14,10 +14,7 @@
 <meta name="generator" content="Hugo 0.80.0">
 <title>Pyramid Fit</title>
 
-<!-- <link rel="canonical"
-	href="https://getbootstrap.com/docs/4.6/examples/pricing/">
- -->
-
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap core CSS -->
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +41,6 @@
 var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : "=null;"%>
 	
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
 <script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/spring/resources/assets/dist/js/loginout.js"></script>
