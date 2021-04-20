@@ -24,7 +24,7 @@
 		
 		INSERT INTO TRAINER(
 		 ID
-		,MEM_REG_ID
+		,fitness_id
 		,PASSWORD
 		,PHONE_NUMBER
 		,NAME
@@ -33,7 +33,7 @@
 		
 		VALUES (
 		 #{id}
-		,#{mem_reg_id}
+		,#{fitness_id}
 		,#{password}
 		,#{phone_number}
 		,#{name}
