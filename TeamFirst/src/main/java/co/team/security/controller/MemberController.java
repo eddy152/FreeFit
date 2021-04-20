@@ -85,7 +85,7 @@ public class MemberController {
 		return "popup/members/denied";
 	}
 
-	// 아이디, mem_reg_id 세션저장, 삭제
+	// 아이디, fitness_id 세션저장
 	@RequestMapping("/log")
 	@ResponseBody
 	public String log(HttpSession session) {
@@ -97,8 +97,15 @@ public class MemberController {
 			session.invalidate(); // 세션을 삭제한다
 			return "delSession";
 		} else {
+			//오너 권한 있는지 확인
+			boolean hasOwnerRole = auth.getAuthorities().stream()
+			          .anyMatch(r -> r.getAuthority().equals("ROLE_OWNER"));
+				
 			MemberVO vo = mapper.getMemberById(username);
-			session.setAttribute("mem_reg_id", vo.getMem_reg_id());
+			
+			//오너가 아니면 로그인할때 fitness_id 값을 세션저장한다
+			if(!hasOwnerRole) {
+			session.setAttribute("fitness_id", vo.getFitness_id());}
 			session.setAttribute("id", vo.getId());
 			return "setSession";
 		}
@@ -147,8 +154,8 @@ public class MemberController {
 	public String joinTrainer(@ModelAttribute TrainerVO member, HttpSession session) {
 		int max = mapper.getMax(); // 가입자수 불러오기
 
-		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId("trainer" + session.getAttribute("mem_reg_id") + "_" + max); // 아이디 = trainer가입자수mem_reg_id
+		member.setFitness_id((int) session.getAttribute("fitness_id"));
+		member.setId(session.getAttribute("fitness_id") + "_" + "trainer" + max);
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addTrainerMember(member);
@@ -159,8 +166,8 @@ public class MemberController {
 	@PostMapping("/joinU")
 	public String joinUser(@ModelAttribute UserVO member, HttpSession session) {
 		int max = mapper.getMax();
-		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId("user" + session.getAttribute("mem_reg_id") + "_" + max);
+		member.setFitness_id((int) session.getAttribute("fitness_id"));
+		member.setId(session.getAttribute("fitness_id") + "_" + "user" + max);
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addUserMember(member);

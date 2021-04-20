@@ -296,7 +296,7 @@
 	</select>
 	
 	<!-- EXERCISE_PERSONAL_DETAIL insert -->	
-	<insert id="insertExercisePersonalDetail" parameterType="ExePersonalDetailVO">
+	<insert id="insertExercisePersonalDetail" parameterType="map">
 		INSERT INTO exe_personal_detail
 		(
 			epd_no,
@@ -309,7 +309,7 @@
 		)
 		VALUES
 		(
-			#{epd_no},
+			epd_no_seq.nextval,
 			#{exep_no},
 			#{exe_no},
 			#{epd_set},
@@ -510,7 +510,7 @@
 				height,
 				notice,
 				gender,
-				mem_reg_id
+				fitness_id
 		FROM ff_user
 	</select>
 	
@@ -524,7 +524,7 @@
 				height,
 				notice,
 				gender,
-				mem_reg_id
+				fitness_id
 		FROM ff_user
 		WHERE id = #{id}
 	</select>
@@ -543,13 +543,12 @@
 	
 	<!-- USER_WEIGHT select one -->
 	<select id="getUserWeightProc"  resultType="UserWeightVO" parameterType="UserWeightVO">
-		SELECT weight_no,
+		SELECT  weight_no,
 				user_id,
 				weight,
 				check_date
 		FROM user_weight
-		WHERE weight_no = #{weight_no}
-		AND user_id = #{user_id}
+		WHERE user_id = #{user_id}
 	</select>
 	
 	<!-- USER_WEIGHT insert -->	

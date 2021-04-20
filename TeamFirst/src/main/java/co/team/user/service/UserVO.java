@@ -19,5 +19,5 @@ public class UserVO {
 	private String height;
 	private String notice;
 	private int gender;
-	private int mem_reg_id;
+	private int fitness_id;
 }

@@ -50,18 +50,15 @@
 	<!-- 멤버쉽 리스트조회(admin_id/fitness_id로거름) -->
 	<select id="ownerMemberships" resultType="adminVO"
 		parameterType="adminVO">
-		select m.mem_reg_id, m.membership_no, m.membership_start,
-		m.membership_end , f.fitness_id , m.admin_id, f.fitness_name,
-		f.tel_number, f.zipcode, f.address, F.ADDRESS_DETAIL
-		from membership_reg m, fitness f
+		select * from membership_dday
 
 		<where>
-			m.fitness_id=f.fitness_id
+			
 			<if test="admin_id !=null and admin_id !=''">
-				and m.admin_id=#{admin_id}
+				and admin_id=#{admin_id}
 			</if>
 			<if test="fitness_id !=null and fitness_id !=''">
-				and m.fitness_id=#{fitness_id}
+				and fitness_id=#{fitness_id}
 			</if>
 		</where>
 

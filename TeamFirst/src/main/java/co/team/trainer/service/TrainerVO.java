@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TrainerVO {
 	private String id;
-	private int mem_reg_id;
+	private int fitness_id;
 	private String password;
 	private String phone_number;
 	private String name;

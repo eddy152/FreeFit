@@ -1,6 +1,7 @@
 package co.team.exercise.service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ExerciseService {
 	public List<ExerciseListVO> getSearchExerciseList(ExerciseListVO vo);
@@ -30,7 +31,7 @@ public interface ExerciseService {
 	
 	public List<ExePersonalDetailVO> getSearchExercisePersonalDetail(ExePersonalDetailVO vo);
 	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo);
-	public int insertExercisePersonalDetail(ExePersonalDetailVO vo);
+	public int insertExercisePersonalDetail(Map<String, Object> vo);
 	public int updateExercisePersonalDetail(ExePersonalDetailVO vo);
 	public int deleteExercisePersonalDetail(ExePersonalDetailVO vo);
 	
