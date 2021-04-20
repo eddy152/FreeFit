@@ -35,10 +35,10 @@ public class CalendarController {
 	
 	
 	
-	@RequestMapping("/daycal")
-	public String daycal(ReservationVO vo, Model model) {
+	@RequestMapping("/trainerCal")
+	public String trainerCal(ReservationVO vo, Model model) {
 		model.addAttribute("list", reservationService.getReserv(vo));
-		return "calendar/daycal";
+		return "calendar/trainerCal";
 		
 	}
 	

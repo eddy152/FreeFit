@@ -68,9 +68,9 @@
 			
 	</select>
 	
-	<select id="getUserNoticeBoardList" 
+	<select id="" 
 			parameterType="UserNoticeBoardVO"
-			resultType="UserNoticeBoardVO">
+			resultType="UsernVO">
 			
 		 	
 			 SELECT BOARD_NO
