@@ -65,7 +65,20 @@
 
 							</div>
 							<div class="row exp-row">
-								<div style="padding: 300px;"></div>
+								<c:if test="${fitList ne null}">
+							<div class="row">
+							<c:forEach var="fitness" items="${fitList}" varStatus="status">
+							<div class="card" style="width: 18rem;">
+									<div class="card-header"> ${fitness.fitness_name}</div>
+									<div class="card-body">
+										<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}" class="btn btn-primary d-flex">피트니스 홈</a>
+										<!--  -->
+									</div>
+								</div>
+							</c:forEach>
+								</div>	
+						</c:if>
+						<c:if test="${fitList eq null}"> 피트니스를 등록해주세요. </c:if>
 							</div>
 
 						</div>
@@ -162,30 +175,27 @@
 						aria-labelledby="fitness-tab">
 						
 						
-						<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+						<ul class="nav nav-tabs justify-content-between" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">피트니스 목록</a>
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="fit-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">피트니스 등록</a>
   </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="fit-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" hidden="hidden">피트니스 상세</a>
+  <li class="nav-item" role="presentation" hidden="hidden">
+    <a class="nav-link" id="fit-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">피트니스 상세</a>
   </li>
 </ul>
 
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 						<c:if test="${fitList ne null}">
-							<div>
+							<div class="row">
 							<c:forEach var="fitness" items="${fitList}" varStatus="status">
-							<div class="card" style="width: 18rem;">
+							<div class="card" style="width: 16rem; margin: 5px">
 									<div class="card-header"> ${fitness.fitness_name}</div>
 									<div class="card-body">
 										<a name="${status.index}" class="btn btn-primary d-flex p-5 mb-2 text-align toFitnessDetail" >상세페이지로</a>
-										<!-- 상세페이지 버튼 누르면 수정폼 나오면서 value 에 정보 뿌리기 -->
-										<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}" class="btn btn-primary d-flex">피트니스관리 바로가기</a>
-										<!--  -->
 									</div>
 								</div>
 							</c:forEach>
@@ -251,33 +261,22 @@
 					<div class="tab-pane fade exp-cover" id="membership"
 						role="tabpanel" aria-labelledby="membership-tab">
 						<div class="data-box">
-							<div class="sec-title">
-								<h2>My Profile</h2>
-							</div>
-							<div class="row exp-row">
-								<h6>Business Development</h6>
-								<span>Microsoft</span> <i>Apiral 2011 - Present</i>
-
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Aenean a urna posuere, aliquet elit in, fermentum ligula. Sed
-									est augue, molestie sed tortor sed, posuere commodo lectus.</p>
-							</div>
-							<div class="row exp-row">
-								<h6>Business Development</h6>
-								<span>Microsoft</span> <i>Apiral 2011 - Present</i>
-
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Aenean a urna posuere, aliquet elit in, fermentum ligula. Sed
-									est augue, molestie sed tortor sed, posuere commodo lectus.</p>
-							</div>
-							<div class="row exp-row last">
-								<h6>Business Development</h6>
-								<span>Microsoft</span> <i>Apiral 2011 - Present</i>
-
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Aenean a urna posuere, aliquet elit in, fermentum ligula. Sed
-									est augue, molestie sed tortor sed, posuere commodo lectus.</p>
-							</div>
+							<%-- <c:if test="${memList ne null }">
+							<table>
+							<tr><th>멤버십 등록번호</th><th>멤버십 </th>
+							</tr>
+							<c:forEach var="mem" items="${memList}">
+							<tr>
+							<td>${mem.mem_reg_id}</td>
+							<td>${mem.fitness_id}</td>
+							<td>${mem.membership_name }</td>
+							<td>${mem.membership_start }</td>
+							<td>${mem.membership_end }</td>
+							<td>${mem.d_day }</td>
+							</tr>
+							</c:forEach>							
+							</table>
+							</c:if> --%>
 						</div>
 					</div>
 
@@ -458,7 +457,7 @@ function formClick(){
 
         .then(response => response.text())
         .then(result=>{ 
-        	if(result.length>1){ alert(result);}
+        	if(result.length>1){ alert(result); location.reload();}
         	else location.reload();
         })
         
