@@ -18,7 +18,7 @@
 				<div>
 					<img class="mb-2" src="/spring/resources/images/gym.png">
 
-					<div class="mb-4">${vo.id}님</div>
+					<div class="mb-4">${admin.id}님</div>
 
 
 				</div>
@@ -50,11 +50,18 @@
 					<div class="tab-pane fade exp-cover show active" id="profile"
 						role="tabpanel" aria-labelledby="profile-tab">
 						<div class="data-box">
-							<div class="sec-title">
-								<h2>${vo.membership_name}D-day${vo.dday }일</h2>
-							</div>
+						<c:if test="${memList ne null}">
+						<c:forEach var="membership" items="${memList}">
+						<!-- select m.mem_reg_id, m.membership_no, m.membership_start,
+		m.membership_end , f.fitness_id , m.admin_id, f.fitness_name,
+		f.tel_number, f.zipcode, f.address, F.ADDRESS_DETAIL -->
+						</c:forEach>
+						</c:if>
+						
+						
+							
 							<div class="row exp-row">
-								<h6>잔여 포인트 : ${vo.all_point }</h6>
+								<h6>잔여 포인트 : ${admin.all_point }</h6>
 
 							</div>
 							<div class="row exp-row">
@@ -72,8 +79,6 @@
 					<div class="tab-pane fade exp-cover" id="home" role="tabpanel"
 						aria-labelledby="home-tab">
 
-
-
 						<form method="post" action="/spring/members/updateOwner">
 							<div class="row justify-content-center">
 								<h4 class="ltitle">개인정보</h4>
@@ -90,7 +95,7 @@
 										<div class="col-8 mb-md-2">
 
 											<input type="text" class="form-control" id="name" name="name"
-												placeholder="이름" value="${vo.name}" disabled="disabled">
+												placeholder="이름" value="${admin.name}" disabled="disabled">
 											<div class="invalid-feedback">이름을 입력해주세요.</div>
 										</div>
 									</div>
@@ -99,7 +104,7 @@
 										<div class="col-8 mb-md-2">
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
 											<input type="email" class="form-control" id="email"
-												name="email" placeholder="이메일" value="${vo.email}">
+												name="email" placeholder="이메일" value="${admin.email}">
 											<div class="invalid-feedback">이메일을 입력해주세요.</div>
 										</div>
 									</div>
@@ -110,7 +115,7 @@
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
 											<input type="text" class="form-control" id="phone_number"
 												name="phone_number" placeholder="핸드폰 번호" minlength="13"
-												maxlength="13" value="${vo.phone_number}">
+												maxlength="13" value="${admin.phone_number}">
 											<div class="invalid-feedback">핸드폰 번호를 입력해주세요.</div>
 										</div>
 									</div>
@@ -158,6 +163,15 @@
 
 					<div class="tab-pane fade exp-cover" id="fitness" role="tabpanel"
 						aria-labelledby="fitness-tab">
+						<!--  https://getbootstrap.com/docs/4.6/components/card/ -->
+						
+						
+						
+						<!-- foreach 로 카드 만들기. 피트니스 이름이랑 멤버쉽상태정도출력하고
+							상세 / 바로가기(멤버십없으면 멤버십결제페이지로) 버튼 등록하기
+						  -->
+						
+						
 						<form method="post" action="/spring/members/updateFitness">
 							<div class="row justify-content-center">
 								<h4 class="ltitle">피트니스정보</h4>

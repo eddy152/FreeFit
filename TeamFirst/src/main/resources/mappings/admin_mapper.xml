@@ -4,86 +4,153 @@
 <!-- users_mapper.xml -->
 <mapper namespace="co.team.admin.service.impl.AdminMapper">
 
-<!-- ADMIN select 리스트 -->
-	<select id="getAdmin" resultType="adminVO" parameterType="adminVO">
+	<!-- ADMIN select 리스트 -->
+	<select id="getAdmin" resultType="adminVO"
+		parameterType="adminVO">
 		select *
 		from ADMIN
 
 	</select>
-	
 
-	
-<!-- 프로필 정보 단건조회 -->
-<select id="getProfileInfo" resultType="adminVO" parameterType="String">
-		select * 
-			from profile_info 
-			where	rownum=1 
-					and id=#{id}
+
+
+	<!-- 어드민 정보 단건조회 -->
+	<select id="getProfileInfo" resultType="adminVO"
+		parameterType="String">
+		select *
+		from admin
+		where id=#{id}
 
 	</select>
-	
-<select id="getOwnerId" resultType="string" parameterType="adminVO">
-	select id from admin where id=#{id}
-	</select>
-	
-<!-- 비번동일조회 -->	
-<select id="comparePw" resultType="String" parameterType="adminVO">
-	select password from admin where id=#{id}
-	</select>
-	
 
-<!-- 회원가입 -->	
-	
-		<insert id="addOwnerMember" parameterType="adminVO">
-		insert into ADMIN(id, password, name, phone_number, zipcode, 
-							address, address_detail, fitness_name, email) values
+	<select id="getOwnerId" resultType="string"
+		parameterType="adminVO">
+		select id from admin where id=#{id}
+	</select>
+
+	<!-- 비번동일조회 -->
+	<select id="comparePw" resultType="String"
+		parameterType="adminVO">
+		select password from admin where id=#{id}
+	</select>
+
+
+	<!-- 피트니스 리스트조회(id로거름) -->
+	<select id="ownerFitnesses" resultType="adminVO"
+		parameterType="adminVO">
+		select * from fitness where id=#{id}
+	</select>
+
+	<!-- 피트니스 단건조회 -->
+	<select id="selectedFitness" resultType="adminVO"
+		parameterType="adminVO">
+		select * from fitness where fitness_id=#{fitness_id}
+	</select>
+
+	<!-- 멤버쉽 리스트조회(admin_id/fitness_id로거름) -->
+	<select id="ownerMemberships" resultType="adminVO"
+		parameterType="adminVO">
+		select m.mem_reg_id, m.membership_no, m.membership_start,
+		m.membership_end , f.fitness_id , m.admin_id, f.fitness_name,
+		f.tel_number, f.zipcode, f.address, F.ADDRESS_DETAIL
+		from membership_reg m, fitness f
+
+		<where>
+			m.fitness_id=f.fitness_id
+			<if test="admin_id !=null and admin_id !=''">
+				and m.admin_id=#{admin_id}
+			</if>
+			<if test="fitness_id !=null and fitness_id !=''">
+				and m.fitness_id=#{fitness_id}
+			</if>
+		</where>
+
+	</select>
+	<!-- 멤버쉽 단건조회(mem_reg_id로거름) -->
+	<select id="selectedMembership" resultType="adminVO"
+		parameterType="adminVO">
+		select * from membership_reg m, fitness f where m.fitness_id=f.fitness_id
+		and m.mem_reg_id=#{mem_reg_id}
+	</select>
+
+	<!-- 회원가입 -->
+
+	<insert id="addOwnerMember" parameterType="adminVO">
+		insert into ADMIN(id,
+		password, name, phone_number,email) values
 		(
 		#{id},
-		#{password}, 
+		#{password},
 		#{name},
 		#{phone_number},
-		#{zipcode},
-		#{address},
-		#{address_detail},
-		#{fitness_name},
 		#{email}
-	
-		)
-				
-	</insert>
-	
-	<update id="updateOwner" parameterType="adminVO">
-	update admin
-	<set>
-	<if test="password !=null and password !=''">
-	password=#{password},
-	</if>
-	<if test="phone_number !=null and phone_number !=''">
-	phone_number=#{phone_number},
-	</if>
-	<if test="zipcode !=null and zipcode !=''">
-	zipcode=#{zipcode},
-	</if>
-	<if test="address !=null and address !=''">
-	address=#{address},
-	</if>
-	<if test="address_detail !=null and address_detail !=''">
-	address_detail=#{address_detail},
-	</if>
-	<if test="fitness_name !=null and fitness_name !=''">
-	fitness_name=#{fitness_name},
-	</if>
-	<if test="email !=null and email !=''">
-	email=#{email},
-	</if>
 
-	</set>
-	
-	
-	where id=#{id}
-	
+		)
+
+	</insert>
+
+
+
+
+	<!-- 정보 수정 -->
+	<update id="updateOwner" parameterType="adminVO">
+		update admin
+		<set>
+			<if test="password !=null and password !=''">
+				password=#{password},
+			</if>
+			<if test="phone_number !=null and phone_number !=''">
+				phone_number=#{phone_number},
+			</if>
+			<if test="email !=null and email !=''">
+				email=#{email},
+			</if>
+		</set>
+		where id=#{id}
 	</update>
-	
-	
-	
+
+
+	<!-- 피트니스등록 -->
+
+	<insert id="addFitness" parameterType="adminVO">
+		insert into
+		fitness(fitness_id, id, tel_number, zipcode,
+		address, address_detail, fitness_name) values
+		(
+		(SELECT NVL(MAX(id)+1, 1) FROM
+		fitness), #{id}, #{tel_number}, #{zipcode},
+		#{address}, #{address_detail}, #{fitness_name}
+		)
+
+	</insert>
+
+
+	<!-- 피트니스 수정 -->
+	<update id="updateFitness" parameterType="adminVO">
+		update fitness
+		<set>
+			<if test="tel_number !=null and tel_number !=''">
+				tel_number=#{tel_number},
+			</if>
+			<if test="zipcode !=null and zipcode !=''">
+				zipcode=#{zipcode},
+			</if>
+			<if test="address !=null and address !=''">
+				address=#{address},
+			</if>
+			<if test="address_detail !=null and address_detail !=''">
+				address_detail=#{address_detail},
+			</if>
+			<if test="fitness_name !=null and fitness_name !=''">
+				fitness_name=#{fitness_name},
+			</if>
+		</set>
+		where fitness_id=#{fitness_id}
+	</update>
+
+
+
+	<delete id="deleteFitness" parameterType="adminVO">
+		delete from fitness where fitness_id=#{fitness_id}
+	</delete>
 </mapper>
