@@ -1,6 +1,9 @@
 package co.team.home.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,9 +24,16 @@ public class HomeController {
 	
 	
 	// 프로그램 홈으로
-		@RequestMapping("/fitnessHome")
-		public String fitnessHome() {
-			return "program/test/home";
+		@GetMapping("/fitnessHome")
+		public String fitnessHome(String fitness_id, HttpSession session) {
+			if(fitness_id != null) {
+				session.setAttribute("fitness_id", fitness_id);
+				return "program/test/home";			
+			}
+			else {
+				return "redirect:/members/profile";
+			}
+			
 		}
 
 	
