@@ -18,6 +18,16 @@ public class HomeController {
 
 		return "homepage/home";
 	}
+	
+	
+	// 프로그램 홈으로
+		@RequestMapping("/fitnessHome")
+		public String fitnessHome() {
+			return "program/test/home";
+		}
+
+	
+	
 
 	// 타일즈 테스트
 
@@ -27,12 +37,7 @@ public class HomeController {
 		return "homepage/test/home"; // return 값 "homepage/*/*"
 	}
 
-	// 프로그램 타일즈
-	@RequestMapping("/tilesTestProgram")
-	public String tilesTestProgram() {
-		return "program/test/home";
-	}
-
+	
 	// 앱 타일즈
 	@RequestMapping("/tilesTestApp")
 	public String tilesTestApp() {

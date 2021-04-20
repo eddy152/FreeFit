@@ -139,7 +139,7 @@ public class MemberController {
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		memberService.addOwnerMember(member);
-		return "redirect:/tilesTestProgram";
+		return "redirect:/members/loginform";
 	}
 
 	// 트레이너 가입
@@ -221,7 +221,7 @@ public class MemberController {
 	@PostMapping(value = "/addFitness", produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String addFitness(@ModelAttribute AdminVO member, HttpSession session) {
 		member.setId((String) session.getAttribute("id"));
-
+		memberService.addFitness(member);
 		return "";
 	}
 
