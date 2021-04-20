@@ -9,9 +9,9 @@
 <div>
 	<h1>회원의 식단</h1>
 	<div>
-	<c:if test="${food.diet_content eq null}">
-		<button type="button" class="insertForm">작성하기</button>
-	</c:if>
+		<c:if test="${food.real_diet_no eq null}">
+			<button type="button" class="insertForm">작성하기</button>
+		</c:if>
 	</div>
 	<br>
 	<div>
@@ -52,12 +52,9 @@
 		
 		<c:if test="${food.real_diet_no ne null}">
 			식단 번호 : <input type="text" value="${food.real_diet_no }" id="real_diet_no1">
-		</c:if>
-
-		<c:if test="${food.diet_content ne null }">
 			<div>
 				<div class="food_contents">${food.diet_content }</div>
-				<div>
+				<div class="contentBtn">
 					<button type="button" class="contentUpd">수정</button>
 					<button type="button" class="contentDel">삭제</button>
 				</div>
@@ -66,17 +63,17 @@
 		<hr>
 		
 		<div class="comments">
-		<c:forEach items="${comment }" var="comm">
-							<input type="text" value="${comm.diet_comment }" name="comment_upd" readonly="readonly"> 
-							<textarea class="hide_comment" style="display: none;">${comm.diet_comment }</textarea>
-							<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden">
-							<a href="#" class="updateComment">[수정]</a>
-							<a href="#" class="updateComment2" style="display: none;">[수정]</a>
-							<a href="#" class="deleteComment">[삭제]</a><br><br>
-		</c:forEach>
-		</div>
-
-			
+			<c:forEach items="${comment }" var="comm">
+				<div>
+					<input type="text" value="${comm.diet_comment }" name="comment_upd" readonly="readonly"> 
+					<textarea class="hide_comment" style="display: none;">${comm.diet_comment }</textarea>
+					<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden">
+					<a href="#" class="updateComment">[수정]</a>
+					<a href="#" class="updateComment2" style="display: none;">[수정]</a>
+					<a href="#" class="deleteComment">[삭제]</a><br><br>
+				</div>
+			</c:forEach>
+		</div>	
 <hr>
 		<div>
 			<h6>댓글 남기기</h6>
@@ -401,16 +398,54 @@
 		$.ajax({
 			url: 'getDay',
 			data : { id : $('input:text[name="id"]').val(),
-			    	cnt : cnt},
+			    	cnt : cnt 	    	
+			},
 			dataType: 'json',
 			type: 'get',
 			success: function drawChart(result) {
-				console.log(result[0]);
+				
 				var today = result[0].take_date;
 				var calorie = result[0].calorie;
 				  $('.food_contents').html(result[0].diet_content);
 				  $('input:text[name="calorie_total"]').val(calorie);
+				  //$('.comments').empty();
 				  
+				  console.log(result[0].real_diet_no + "======result 배열");
+				  
+				  // 댓글 내용이 있으면
+				if(result[0].diet_content != null) {
+					
+				 var real_diet_no = result[0].real_diet_no;
+				 console.log(result[0].diet_content + "-- 컨텐츠 내용 유무ddd" + real_diet_no);
+				$.ajax({
+					url:'getComment',
+					data:{real_diet_no : real_diet_no},
+					dataType: 'json',
+					type: 'get',
+					success : function(response) {
+				  
+					  $('.comments').empty();
+					  for(i=0; i<response.length; i++) {
+						  $('.comments').append(
+							  '<div>'
+							  + '<input type="text" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
+							  + '<textarea class="hide_comment" style="display: none;">' + response[i].diet_comment + '</textarea>'
+							  + '<input type="text" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
+							  + '<a href="#" class="updateComment">[수정]</a>'
+							  + '<a href="#" class="updateComment2" style="display: none;">[수정]</a>'
+							  + '<a href="#" class="deleteComment">[삭제]</a><br><br>'
+							  + '</div>'
+						  );
+					  }
+					  
+				  },
+					error: function() {
+						alert('ERROR');
+				  }
+				}); // 댓글조회 아작스
+				
+				  }
+				 // 로우 자체가 없다면(=댓글이 없으면)
 				if(result[0].age == '0') {
 					$.ajax({
 						url : 'currentDay',
@@ -420,6 +455,10 @@
 							console.log(e.sysdate);
 							$('input:text[name=dates]').val(e.sysdate);
 							$('#real_diet_no1').val('');
+							
+							console.log($('.contentBtn').children().hide());
+							$('.contentBtn').children().hide()
+							
 							var weight = $('input:text[name="weight"]').val(); // = 몸무게
 							var total = weight * 12 * 1.5;
 							var arr =[]; 
@@ -441,10 +480,13 @@
 						}
 					});
 			  
+				// 로우 값이 있다면
 				} else {
+					$('.contentBtn').children().show()
 					$('input:text[name="calorie_total"]').val(calorie);
 					$('input:text[name=dates]').val(today);
 					$('#real_diet_no1').val(result[0].real_diet_no);
+					
 					var weight = $('input:text[name="weight"]').val(); // = 몸무게
 					var total = weight * 12 * 1.5;
 					var arr =[]; 
@@ -463,7 +505,9 @@
 					
 					  chart.draw(data, options);
 				}
-			}
+					
+					 
+			} // 아작스 success
 		});
 	}
 	
@@ -472,16 +516,55 @@
 	$.ajax({
 		url: 'getDay',
 		data : { id : $('input:text[name="id"]').val(),
-		    	cnt : cnt},
+		    	cnt : cnt 	    	
+		},
 		dataType: 'json',
 		type: 'get',
 		success: function drawChart(result) {
+			
 			var today = result[0].take_date;
 			var calorie = result[0].calorie;
 			  $('.food_contents').html(result[0].diet_content);
 			  $('input:text[name="calorie_total"]').val(calorie);
-			if(result[0].age == '0') {
+			  //$('.comments').empty();
+			  
+			  console.log(result[0].real_diet_no + "======result 배열");
+			  
+			  // 댓글 내용이 있으면
+			if(result[0].diet_content != null) {
 				
+			 console.log(result[0].diet_content + "-- 컨텐츠 내용 유무" + result[0].real_diet_no);
+			$.ajax({
+				url: 'getComment',
+				data: {real_diet_no : result[0].real_diet_no},
+				dataType: 'json',
+				success : function(response) {
+					console.log(response.length + "=====댓글 조회 아작스 리턴값z");
+			  
+				  $('.comments').empty();
+				  for(i=0; i<response.length; i++) {
+					  console.log(response + "ooooooooooo");
+					  $('.comments').append(
+						  '<div>'
+						  + '<input type="text" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
+						  + '<textarea class="hide_comment" style="display: none;">' + response[i].diet_comment + '</textarea>'
+						  + '<input type="text" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
+						  + '<a href="#" class="updateComment">[수정]</a>'
+						  + '<a href="#" class="updateComment2" style="display: none;">[수정]</a>'
+						  + '<a href="#" class="deleteComment">[삭제]</a><br><br>'
+						  + '</div>'
+					  );
+				  }
+				  
+			  },
+				error: function() {
+					alert('ERROR');
+			  }
+			}); // 댓글조회 아작스
+			
+			  }
+			 // 로우 자체가 없다면(=댓글이 없으면)
+			if(result[0].age == '0') {
 				$.ajax({
 					url : 'currentDay',
 					data : {cnt : cnt},
@@ -490,6 +573,10 @@
 						console.log(e.sysdate);
 						$('input:text[name=dates]').val(e.sysdate);
 						$('#real_diet_no1').val('');
+						
+						console.log($('.contentBtn').children().hide());
+						$('.contentBtn').children().hide()
+						
 						var weight = $('input:text[name="weight"]').val(); // = 몸무게
 						var total = weight * 12 * 1.5;
 						var arr =[]; 
@@ -511,16 +598,19 @@
 					}
 				});
 		  
+			// 로우 값이 있지만 댓글이 없다면
 			} else {
-				 $('input:text[name="calorie_total"]').val(calorie);
+				$('.contentBtn').children().show()
+				$('input:text[name="calorie_total"]').val(calorie);
 				$('input:text[name=dates]').val(today);
 				$('#real_diet_no1').val(result[0].real_diet_no);
+				$('.comments').empty();
 				var weight = $('input:text[name="weight"]').val(); // = 몸무게
 				var total = weight * 12 * 1.5;
 				var arr =[]; 
 				arr.push( ['섭취날짜', '실제섭취량', '권장량']);
 			
-				    arr.push([today, parseInt(calorie), total]);
+				arr.push([today, parseInt(calorie), total]);
 				
 				  var data = google.visualization.arrayToDataTable(arr);
 				
@@ -533,7 +623,9 @@
 				
 				  chart.draw(data, options);
 			}
-		}
+				
+				 
+		} // 아작스 success
 	});
 }
 	
@@ -550,10 +642,12 @@
 				console.log(response.diet_comment);
 				alert('성공!');
 			
-				
+			
 				$('.comments').append(
 					'<input type="text" name="comment_upd" value="'+ response.diet_comment +'">'
-					+ '<a href="#" class="updateComment">[수정]</a>' 
+					+ '<textarea class="hide_comment" style="display: none;">' + response.diet_comment + '</textarea>'
+					+ '<a href="#" class="updateComment">[수정]</a>'
+					+ '<a href="#" class="updateComment2" style="display: none;">[수정]</a>'
 					+ '<a href="#" class="deleteComment">[삭제]</a>'
 				);
 				
@@ -571,9 +665,9 @@
 		$(document).on('click', '.updateComment', function(e) {/* 
 			console.log($(this).closest('div').children('input').eq(0));
 				console.log($(this).closest('div').children('input').eq(0));	 */	
-				console.log($(this).closest('div').children('input').val())
+				console.log($(this).closest('div').children('input').val() + "====> 해당 input 값")
 				$(this).closest('div').children('input').hide();
-				console.log($(this).closest('div').children('a.updateComment').hide())
+				console.log($(this).closest('div').children('a.updateComment').hide() + "======");
 				$(this).closest('div').children('a.updateComment').hide();
 				$(this).closest('div').children('a.updateComment2').show();
 				$(this).closest('div').children('textarea').show();
@@ -635,18 +729,20 @@
 	
 	// 식단 생성하기
  	function foodInsert(){
+		console.log($('input:text[name="dates"]').val());
 		$.ajax({
 			url : 'insertImg',
 			type: 'post',
 			data: {diet_content : $("textarea#summernote").val(),
-				id : $('input:text[name="id"]').val()
+				id : $('input:text[name="id"]').val(),
+				take_date : $('input:text[name="dates"]').val()
 			},
 			dataType : 'json',
 			success : function(response) {
+				$('.food_contents').val(response.diet_content);
 				alert('SUCCESS!');
 				$('#exampleModal').modal('hide');
 				location.reload();
-				
 			},
 			error: function() {
 				alert('ERROR!');
@@ -664,6 +760,8 @@
 			},
 			dataType : 'json',
 			success : function(response) {
+				console.log(response + "------------------->");
+				
 				alert('SUCCESS!');
 				$('#exampleModal3').modal('hide');
 				location.reload();

@@ -118,23 +118,22 @@
 	<!-- 실제 섭취 식단 추가 -->
 	<update id="getMemberFoodInsert" parameterType="FoodVO">
 		update real_diet set diet_content = #{diet_content}
-		where user_id = #{id}
+		where real_diet_no = #{real_diet_no}
 	</update>
 
 	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리)-앱 -->
 	<select id="getRealFoodMember" resultType="FoodVO" parameterType="FoodVO">
 		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, sysdate, detail_content from real_diet
-		where user_id = #{id}
+		where user_id = #{id} 
 		and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
 		order by take_date
 	</select>
 	
 	<!-- 댓글 조회 -->
 	<select id="getComment" resultType="FoodVO" parameterType="FoodVO">
-		select r.*, c.*
-		from real_diet r, comments c
-		where r.real_diet_no = c.real_diet_no
-		and r.real_diet_no = #{real_diet_no}
+		select comment_no, real_diet_no, diet_comment
+		from comments
+		where real_diet_no = #{real_diet_no}
 	</select>
 	
 	<!-- 댓글 등록 -->
@@ -158,7 +157,7 @@
 	<!-- 실제 섭취 식단 내용 등록 -->
 	<insert id="insertImg" parameterType="FoodVO">
 		insert into real_diet (real_diet_no, user_id, take_date, diet_content, calorie, detail_content)
-		values(REAL_FOOD.nextval, #{id}, sysdate, #{diet_content}, 0, '')
+		values(REAL_FOOD.nextval, #{id}, #{take_date}, #{diet_content}, 0, '')
 	</insert>
 	
 	<!-- 이미지 경로명 diet_content에 수정 -->
@@ -180,12 +179,24 @@
 	</select>
 	
 	<select id="getDay" resultType="FoodVO" parameterType="FoodVO">
-	    select r.real_diet_no, r.user_id, to_char(r.take_date, 'yyyy-MM-dd') take_date, r.diet_content, r.calorie, c.*
-		from real_diet r inner join comments c
-	    on r.real_diet_no = c.real_diet_no
-	    and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate+#{cnt}, 'yyyy-MM-dd')
-	    and r.user_id=#{id}
+	    <choose>
+	    <when test="diet_content != null">
+		    select r.real_diet_no, r.user_id, to_char(r.take_date, 'yyyy-MM-dd') take_date, r.diet_content, r.calorie, c.*
+			from real_diet r inner join comments c
+		    on r.real_diet_no = c.real_diet_no
+		    and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate+#{cnt}, 'yyyy-MM-dd')
+		    and r.user_id=#{id}
+	    </when>
+	    <otherwise>
+	    	select * from
+	    	real_diet 
+	    	where user_id = #{id}
+	    	and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate+#{cnt}, 'yyyy-MM-dd')
+	    </otherwise>
+	    </choose>
 	</select>
+	
+	
 	
 	<select id="current" resultType="FoodVO" parameterType="FoodVO">
 		select to_char(sysdate+#{cnt}, 'yyyy-MM-dd') "sysdate" from dual

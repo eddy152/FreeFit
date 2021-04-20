@@ -3,6 +3,7 @@ package co.team.food.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -183,8 +184,6 @@ public class FoodController_kdh {
 		vo = new FoodVO();
 		vo.setReal_diet_no(rvo.getReal_diet_no()); // vo에 식단번호 담기
 		System.out.println(vo + "---------------------------------------");
-		model.addAttribute("comment", service.getComment(vo));
-		System.out.println("-----------------------" + service.getComment(vo));
 		model.addAttribute("oneDay", service.getFoodOne(vo)); // 일별 회원 식단 조회
 		
 		if(rvo != null) {
@@ -283,16 +282,27 @@ public class FoodController_kdh {
 	@RequestMapping("/getDay")
 	@ResponseBody
 	public List<FoodVO> getDay(FoodVO vo) {
-		 List<FoodVO> result = service.getDay(vo);
-		System.out.println("----------------" + result.size());
+		List<FoodVO> result = service.getDay(vo);
+		//result = service.getComment(vo.getReal_diet_no());
+		//System.out.println(result + "-----comment");
 		
 		if(result.size() == 0) { 
-			//result = "0";
-			System.out.println("======" + result);
+			vo.setAge("0");
+			result.add(vo);
 		  return result;
 		  }
 		return result;
 		
+	}
+	
+	@RequestMapping("/getComment")
+	@ResponseBody
+	public List<FoodVO> getComment(FoodVO real_no){
+		System.out.println("---------real_no : " + real_no);
+		List<FoodVO> list = service.getComment(real_no); 
+		System.out.println("--------댓글리스트 조회 : " + list);
+		
+		return list;
 	}
 	
 	@RequestMapping("/currentDay")
