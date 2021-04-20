@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="co.team.course.service.impl.CourseMapper">
+
+<select id="getCourse" resultType="Course_Info_VO" parameterType="Course_Info_VO">
+	SELECT 	*
+	FROM 	COURSE_INFO
+		<where> 
+		  <if test="course_title != null ">
+		
+			 	trainer_id 	 LIKE #{trainer_id} 
+			AND 	course_title LIKE #{course_title}
+		
+		  </if>
+		</where>
+	ORDER BY course_no
+</select>
+<!-- update -->
+<select id="get1Course" resultType="Course_Info_VO" parameterType="Course_Info_VO">
+	SELECT 	*
+	FROM 	COURSE_INFO
+		<where> 
+		  <if test="course_no != null ">
+			 	course_no  =  #{course_no} 
+		  </if>
+		</where>
+</select>
+
+
+<select id="getCourse_Tuition" resultType="Course_TuitionVO" parameterType="Course_TuitionVO">
+	SELECT 	*
+	FROM 	COURSE_TUITION
+</select>
+
+
+<insert id="productInsert" parameterType="Course_Info_VO">
+	INSERT INTO COURSE_INFO
+	(
+		course_no,
+		trainer_id,
+		category,
+		course_title,
+		course_day,
+		start_date,
+		end_date,
+		limit
+ 	)
+ 	VALUES
+ 	(
+ 		(select NVL(count(*),0)+1 FROM Course_Info), 
+ 		#{trainer_id},
+ 		#{category},
+ 		#{course_title},
+ 		#{course_day},
+ 		#{start_date},
+ 		#{end_date},
+ 		#{limit}
+ 	)
+</insert>
+
+
+<insert id="productInserts" parameterType="Course_TuitionVO">
+	INSERT INTO COURSE_TUITION
+	(
+		course_no,
+		tuition_no,
+		tuition_title,
+		unit_method,
+		unit				
+ 	)
+ 	VALUES
+ 	(
+ 		#{course_no},
+		(select NVL(count(*),0)+1 FROM COURSE_TUITION), 	
+ 		#{tuition_title},
+ 		#{unit_method},
+ 		#{unit}
+ 	)
+</insert>
+
+<update id="productUpdate" parameterType="Course_Info_VO">
+	UPDATE COURSE_INFO
+	SET			
+		trainer_id = #{trainer_id},
+		category = #{category},
+		course_title = #{course_title},
+		course_day = #{course_day},
+		start_date = #{start_date},
+		end_date = #{end_date},
+		limit = #{limit}
+ 	WHERE
+ 		course_no = #{course_no} 
+</update>
+
+<update id="productUpdates" parameterType="Course_TuitionVO">
+	UPDATE COURSE_TUITION
+	SET
+		tuition_title = #{tuition_title},
+		unit_method = #{unit_method},
+		unit = #{unit}
+	WHERE				
+ 		course_no = #{course_no}
+</update>
+
+
+<delete id="proDel" parameterType="Course_Info_VO">
+	DELETE FROM COURSE_INFO
+	WHERE course_no = #{course_no}
+</delete>
+<delete id="productDeletes" parameterType="Course_TuitionVO">
+	delete from course_tuition
+	where course_no = #{course_no}
+</delete>
+
+</mapper>

@@ -16,8 +16,7 @@
 		select u.*, w.*
 		from ff_user u, user_weight w
 		where u.id = w.user_id
-		and u.id =
-		#{id}
+		and u.id = #{id}
 	</select>
 
 	<!-- Food 식단 권장량 조회(= 각 회원 기준 권장 칼로리) -->
@@ -40,24 +39,26 @@
 	</select>
 
 	<select id="getDate" resultType="FoodVO" parameterType="FoodVO">
-		select real_diet_no, user_id, take_date, diet_content, calorie,
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie,
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		from real_diet
 		where
 		user_id = #{id}
 		and to_char(take_date, 'yyyy-MM-w') =
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+		order by take_date
 	</select>
 
 	<select id="getBeforeDate" resultType="FoodVO"
 		parameterType="FoodVO">
-		select real_diet_no, user_id, take_date, diet_content, calorie,
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie,
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		from real_diet
 		where
 		user_id = #{id}
 		and to_char(take_date, 'yyyy-MM-w') =
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+		order by take_date
 	</select>
 
 	<!-- 추천별 식단 전체 리스트 -->
@@ -122,7 +123,7 @@
 
 	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리)-앱 -->
 	<select id="getRealFoodMember" resultType="FoodVO" parameterType="FoodVO">
-		select real_diet_no, user_id, take_date, diet_content, calorie, sysdate from real_diet
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, sysdate, detail_content from real_diet
 		where user_id = #{id}
 		and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
 	</select>
@@ -153,10 +154,53 @@
 		where comment_no = #{comment_no}
 	</delete>
 	
-	<!-- 이미지 경로명 diet_content에 추가 -->
-	<update id="insertImg" parameterType="FoodVO">
+	<!-- 실제 섭취 식단 내용 등록 -->
+	<insert id="insertImg" parameterType="FoodVO">
+		insert into real_diet
+		values(REAL_FOOD.nextval, #{id}, sysdate, #{diet_content}, 0)
+	</insert>
+	
+	<!-- 이미지 경로명 diet_content에 수정 -->
+	<update id="foodUpdate" parameterType="FoodVO">
 		update real_diet set diet_content = #{diet_content}
 		where real_diet_no = #{real_diet_no}
 	</update>
+	
+	<!-- 식단내용 삭제 -->
+	<delete id="foodDel" parameterType="FoodVO">
+		delete from real_diet
+		where real_diet_no = #{real_diet_no}
+	</delete>
+	
+	<!-- 일별 회원 식단 -->
+	<select id="getFoodOne" parameterType="FoodVO" resultType="FoodVO">
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, to_char(sysdate, 'yyyy-MM-dd') "sysdate" from real_diet
+		where user_id = #{id}
+	</select>
+	
+	<select id="getDay" resultType="FoodVO" parameterType="FoodVO">
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie
+		from real_diet
+		where user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate+#{cnt}, 'yyyy-MM-dd')
+		order by take_date
+	</select>
+	
+	<select id="current" resultType="FoodVO" parameterType="FoodVO">
+		select to_char(sysdate+#{cnt}, 'yyyy-MM-dd') "sysdate" from dual
+	</select>
+	
+	<!-- 총칼로리 저장 -->
+	<update id="updateCalorie" parameterType="FoodVO">
+		update real_diet set calorie=#{total_calorie}, detail_content=#{detail_content}
+		where real_diet_no = #{real_diet_no}
+	</update>
+	
+	<!-- 식단 번호 단건 조회 -->
+	<select id="getContent" resultType="FoodVO" parameterType="FoodVO">
+		select * from
+		real_diet
+		where real_diet_no = #{real_diet_no}
+	</select>
 	
 </mapper>

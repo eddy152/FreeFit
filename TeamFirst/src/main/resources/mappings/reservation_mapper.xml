@@ -35,8 +35,8 @@
 		VALUES
 		(
 			reservation_no.nextval,
-			'김예담',
-			'565',
+			#{user_id},
+			#{trainer_id},
 			#{reservation_date},
 			#{content}
 		)

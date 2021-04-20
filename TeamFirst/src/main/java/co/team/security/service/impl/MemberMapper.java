@@ -8,7 +8,6 @@ import co.team.security.service.MemberVO;
 @Repository
 public interface MemberMapper {
 	public MemberVO getMemberById(String id);
-
 	public MemberVO rememberId(MemberVO vo);
 	public MemberVO getAllBy(MemberVO vo);
 	public int getMax();

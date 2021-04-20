@@ -1,6 +1,7 @@
 package co.team.security.service;
 
-import java.util.Random;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -10,7 +11,14 @@ public class PasswordEncoderTest {
 
     @Test
     public void passwordEncode() throws Exception{
-    	System.out.println(getRandomStr(8));
+    	String str ="하하.png";
+    	String word = str.split("\\.")[str.split("\\.").length -1];
+    	System.out.println(word);
+    	//String list [] = str.split(".");
+		/*
+		 * for(int i=0; i<list.length; i++) { System.out.println(list[i]); }
+		 */
+//    	System.out.println(getRandomStr(8));
     }
     
     
@@ -30,6 +38,8 @@ public class PasswordEncoderTest {
 		}
 		return "ERROR : Size is required."; 
 	}
+    
+    
     
     
     //    @Test

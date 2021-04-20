@@ -37,7 +37,9 @@
 
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail 자바메일 api-->
+		
+
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail 자바메일 api -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -45,18 +47,18 @@
 		</dependency>
 
 		<!-- 파일업로드/다운로드 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- 파일관련 / 썸네일라이브러리 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.imgscalr</groupId>
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
-		</dependency>
+		</dependency> -->
 
 
 		<!-- Apache commons DBCP -->

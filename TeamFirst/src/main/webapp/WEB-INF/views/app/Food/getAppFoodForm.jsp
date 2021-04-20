@@ -132,7 +132,7 @@
 	<hr>
 	<div class="frm1">
 	À½½Ä¸í : 
-		</div>
+	</div>
 		ÃÑ Ä®·Î¸® : <input type="text" name="total_calorie1">
 		<br>
 		<button type="button" onclick="Click()">µî·Ï</button>

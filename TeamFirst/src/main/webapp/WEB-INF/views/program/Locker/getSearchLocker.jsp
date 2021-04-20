@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Locker/getSearchLocker.jsp</title>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-
+ -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 
 	// 해당 락커의 회원 상세조회
@@ -155,8 +151,8 @@
 	
 	// 락커룸 삭제하기
 	$(document).ready(function() {
-		$('.deleteBtn').click(function() {
-		if(windwo.confirm('정말 삭제하시겠습니까?')) {	
+		$('input[name="deleteBtn"]').click(function() {
+		if(window.confirm('정말 삭제하시겠습니까?')) {	
 		$.ajax({
 			url: 'deleteRoom',
 			type: 'post',
@@ -183,7 +179,7 @@
 	
 	// 락커갯수 관리하기
 	$(document).ready(function() {
-		$('.manageBtn').click(function() {
+		$('input[name="manageBtn"]').click(function() {
 			confirm('정말 수정하시겠습니까?');
 			$.ajax({
 				url: 'manageRoom',
@@ -290,8 +286,8 @@
 	
 	
 </script>
-</head>
-<body>
+
+<div>
 	<div>
 		<h3>락커관리</h3>
 		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
@@ -372,8 +368,9 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close">X</button>
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
 				</div>
 				<div class="modal-body">
 					<h1>수정하기</h1>
@@ -417,8 +414,8 @@
 
 				</div>
 				<div class="modal-footer">
-					<input type="button" class="manageBtn" value="등록하기">
-					<input type="button" class="deleteBtn" value="삭제하기">
+					<input type="button" name="manageBtn" value="등록하기">
+					<input type="button" name="deleteBtn" value="삭제하기">
 				</div>
 			</div>
 		</div>
@@ -461,6 +458,4 @@
 		</div>
 	</div>
 
-
-</body>
-</html>
+</div>

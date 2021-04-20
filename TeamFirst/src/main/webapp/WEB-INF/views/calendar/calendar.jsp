@@ -25,7 +25,9 @@ var calendar
  *   	입력시 빨간글씨로 입력값이 나온다. 새로고침하면 글씨바탕색이 사라진다. 
  */
 function form_ajax(){
-	var date = new Date( $('#day').val() +'T00:00:00');
+
+	var date = new Date( $('#day').val() +'T15:00:00');
+	 timeZone: 'UTC'
 	var content = $('[name=content]').val();
 	var queryString = $("form[name=calForm]").serialize();
 	$.ajax({
@@ -44,10 +46,14 @@ function form_ajax(){
 			
 		}
 	})
-}
+} 
+
+//function form_ajax(){
+	
+//}
 
 
-/*    date 포맷      */
+/*   일정입력  date 포맷      */	
 function date_to_str(format)
 {
     var year = format.getFullYear();
@@ -65,25 +71,38 @@ function date_to_str(format)
 		
      calendar = new FullCalendar.Calendar(calendarEl, {
     	 
-    	 headerToolbar: {
+    	headerToolbar: {
+    	hour: 'numeric',
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       
       locale : 'ko',
-      initialDate: '2021-04-02',
+      initialDate: '2021-04-10',
       
      navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
 
+      /* */
+      
       /*  삭제 */
       eventClick: function(arg) {
+    	  console.log(arg)
         if (confirm('삭제합니까?')) {
-          arg.event.remove()
-        }
-      },
+    		 $.ajax({
+    	       	  url : 'deleteReserv',
+    	       	  type: 'post',
+    	       	  data : {reservation_no : arg.event._def.publicId},
+    	       	  dataType : 'json',
+    	       	  success : function(data){
+    	       	  }
+    	   	  }) // ajax
+      
+        } // if
+    	 }, // function
+        
       
       navLinkDayClick: function(date, jsEvent) {
     	    console.dir(date);
@@ -91,6 +110,7 @@ function date_to_str(format)
     	    console.log('coords', jsEvent.pageX, jsEvent.pageY);
     	   var today = date_to_str(date);
     	   console.log(today);
+    	 
     	    $("#day").val(today);
     		$('#exampleModal').modal('show');
     	    
@@ -103,9 +123,11 @@ function date_to_str(format)
 
 
         {
+          id : '${calendar.reservation_no}',
           title: '${calendar.content}' ,
           start: '${calendar.reservation_date}'
         },
+        
     		  </c:forEach>
       ]
     });
@@ -131,13 +153,14 @@ body {
 </style>
 </head>
 
-
 <body>
+<div align="center">
+	<h2>일정관리</h2><br><br>
 	<div id='calendar'></div>
-
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary" data-toggle="modal"
 		data-target="#exampleModal">클릭하면 일정입력</button>
+</div>
 
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -151,18 +174,20 @@ body {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form  name="calForm" >
+				<form name="calForm">
 					<div class="modal-body">
-						<input name="reservation_date" class="formInput" type="date" id="day" /><br>
-						<input name="content" type="text"  placeholder="일정입력합니까?" />
+						<input name="reservation_date" class="formInput" type="date"
+							id="day" /><br> <input name="content" type="text"
+							placeholder="일정입력합니까?" />
 					</div>
-					</form>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
-						<button type="button" onclick="form_ajax()"   class="btn btn-primary" id="">저장</button>
-					</div>
-			
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">닫기</button>
+					<button type="button" onclick="form_ajax()" class="btn btn-primary"
+						id="">저장</button>
+				</div>
+
 			</div>
 		</div>
 	</div>

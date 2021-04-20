@@ -19,9 +19,22 @@
 		<beans:property name="suffix" value=".jsp" />
 
 	</beans:bean> -->
+<context:component-scan base-package="co.team"></context:component-scan>
 
-	<context:component-scan
-		base-package="co.team" />
+<mvc:annotation-driven>
+    <mvc:message-converters>
+        <!-- @ResponseBody Content-Type:application/json;charset=UTF-8  -->
+        <beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            <beans:property name="supportedMediaTypes">
+                <beans:list>
+                    <beans:value>text/html;charset=UTF-8</beans:value>
+                </beans:list>
+            </beans:property>
+        </beans:bean>
+    </mvc:message-converters>
+</mvc:annotation-driven>
+
+
 
 	<mvc:annotation-driven />
 <!-- 일반 파일 업로드 경로 -->

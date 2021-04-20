@@ -10,10 +10,9 @@
 
 	<div style="margin: 10% 10% 10% 10%;">
 		<!--  파일첨부 -->
-		<form action="/spring/files/upload" method="post"
-			enctype="multipart/form-data">
-			<input type="file" name="file" /> <input
-				class="btn btn-primary btn-sm" type="submit" value="업로드" />
+		<form method="post" id="myForm">
+			<input type="file" name="image" id="imageF" /> <input
+				class="btn btn-primary btn-sm" type="button" value="업로드" id="upbtn" />
 		</form>
 	</div>
 	<div>
@@ -22,6 +21,60 @@
 </div>
 
 <script>
+window.onload=function(){
+	let jslink;
+	let jsid;
+	let json;
+upbtn.addEventListener('click', onClick);
+
+function onClick(){
+var imgSize=imageF.files[0];
+if (imgSize.size<10000000){
+	
+	var myHeaders = new Headers();
+	myHeaders.append("Authorization", "Client-ID 52d00d8257f11ed");
+
+	var formdata = new FormData();
+	formdata.append("image", imgSize, "[PROXY]");
+
+	var requestOptions = {
+			  method: 'POST',
+			  headers: myHeaders,
+			  body: formdata,
+			  redirect: 'follow'
+			};
+
+fetch("https://api.imgur.com/3/image", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+	  json=result;
+	  jsid=json.data.id;
+	  jslink=json.data.link;
+	  
+  }).then(
+	function(){
+		console.log(jslink);
+		var formdata=new URLSearchParams();
+		  formdata.append("fileName", jsid);
+		  formdata.append("pathName", jslink);
+		  fetch("/spring/files/upload", {method:'POST', headers:{"Content-Type":"application/x-www-form-urlencoded"}, body: formdata})
+		  .then(response=>response.text())
+		  .then(result=>document.getElementById("img").src=result)
+		  .catch(error=>console.log('error',error));
+
+	}	  
+  
+  )
+  .catch(error => console.log('error', error));
+}
+else { alert('파일 용량이 10MB를 초과합니다.');
+location.reload();}
+
+}
+
+}
+
+
 <c:if test="${file ne null and file ne 'error'}">
 	var link = '${file}';
 	document.getElementById("img").src = link;

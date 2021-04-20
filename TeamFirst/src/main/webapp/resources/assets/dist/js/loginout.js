@@ -15,17 +15,18 @@
    		let profile;
         if (isLogin && isLogin !== '') {
             if (typeof loginBtn !== "undefined") { // loginBtn은 object type.  / typeof 를 사용하면 선언하지 않은 변수라도 오류x.
+                loginBtn.text = "로그아웃";
+                
+                if (typeof homepageLogin!== "undefined"){
                 profile=document.createElement("a");
                 profile.setAttribute("class","btn btn-outline-primary");
                 profile.setAttribute("id","profileBtn");
-                profile.text = "마이페이지";
-                loginBtn.parentNode.prepend(profile);
-                loginBtn.text = "로그아웃";
-                
+                profile.text = "마이페이지";                
                 profile.onclick=function(){
                 location.href="/spring/members/profile";
                 
-                };
+                };}
+                loginBtn.parentNode.prepend(profile);
             }
 
         }
@@ -158,7 +159,7 @@ document.body.prepend(modalNode);
 if (typeof id !== "undefined") {
     id.addEventListener('focusout', (event) => {
     
-    if(event.target.value.length>5){
+    if(event.target.value.length>4){
         console.log(event.target.value);
         let url = "/spring/members/checkId?";
         url += event.target.name + "=" + event.target.value;

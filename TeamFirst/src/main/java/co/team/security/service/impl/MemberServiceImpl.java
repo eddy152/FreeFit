@@ -137,4 +137,59 @@ public class MemberServiceImpl implements MemberService {
 		return adminMapper.getProfileInfo(id);
 	}
 
+	@Override
+	public Integer updateOwner(AdminVO member) {
+		return adminMapper.updateOwner(member);
+	}
+
+	@Override
+	public List<AdminVO> getAdmin(AdminVO member) {
+		return adminMapper.getAdmin(member);
+	}
+
+	@Override
+	public String getOwnerId(AdminVO member) {
+		return null;
+	}
+
+	@Override
+	public List<AdminVO> ownerFitnesses(AdminVO member) {
+		return adminMapper.ownerFitnesses(member);
+	}
+
+	@Override
+	public AdminVO selectedFitness(AdminVO member) {
+		return adminMapper.selectedFitness(member);
+	}
+
+	@Override
+	public Integer addFitness(AdminVO member) {
+		return adminMapper.addFitness(member);
+	}
+
+	@Override
+	public Integer updateFitness(AdminVO member) {
+		return adminMapper.updateFitness(member);
+	}
+
+	@Override
+	public Integer deleteFitness(AdminVO member) {
+		return adminMapper.deleteFitness(member);
+	}
+
+	@Override
+	public String comparePw(AdminVO member) {
+		return adminMapper.comparePw(member);
+	}
+
+	@Override
+	public List<AdminVO> ownerMemberships(AdminVO member) {
+		return adminMapper.ownerMemberships(member);
+	}
+
+	@Override
+	public AdminVO selectedMembership(AdminVO member) {
+		return adminMapper.selectedMembership(member);
+	}
+
 }

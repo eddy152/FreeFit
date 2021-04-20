@@ -1,5 +1,6 @@
 package co.team.security.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -28,23 +29,6 @@ import co.team.user.service.UserVO;
 @Controller
 @RequestMapping(path = "/members")
 public class MemberController {
-
-	// 정규식으로 번호 이외 걸러내기
-	public String phoneReplace(String str) {
-		String restr = str.replaceAll("[^0-9]", "");
-		return restr;
-	}
-
-	// 가입시
-	// owner - admin
-	// trainer - trainer
-	// user - ff_user
-
-	// 로그인시
-	// homepage - admin
-	// program - admin
-	// app - trainer, user
-
 	// 스프링 컨테이너가 생성자를 통해 자동으로 주입한다.
 	@Autowired
 	MemberService memberService;
@@ -53,34 +37,56 @@ public class MemberController {
 	@Autowired
 	MemberMapper mapper;
 
+	// 정규식으로 번호 이외 걸러내기
+	public String phoneReplace(String str) {
+		String restr = str.replaceAll("[^0-9]", "");
+		return restr;
+	}
+
 	// 마이페이지(프로필폼)
 	@GetMapping("/profile")
 	public String profile(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
+		AdminVO member=new AdminVO();
+		member.setId(id);
+		member.setAdmin_id(id);
+		List<AdminVO> fitness=memberService.ownerFitnesses(member);
+		List<AdminVO> membership=memberService.ownerMemberships(member);
+		if (membership!=null) {
+			model.addAttribute("memList", membership);
+		}
+		if (fitness!=null) {
+		model.addAttribute("fitList", fitness);}
 
-		AdminVO vo = memberService.getProfileInfo(id);
-		model.addAttribute("vo", vo);
+		AdminVO admin = memberService.getProfileInfo(id);
+		model.addAttribute("admin", admin);
+		
+		
 
 		return "homepage/membership/profile";
 	}
 
-	@GetMapping("/loginform") // 로그인폼으로
+	// 로그인폼으로
+	@GetMapping("/loginform")
 	public String loginform(HttpSession session) {
 
 		return "popup/members/loginform";
 	}
 
+//로그인 에러
 	@RequestMapping("/loginerror")
 	public String loginerror(@RequestParam("login_error") String loginError) {
 		return "popup/members/loginerror";
 	}
 
+//거부 당함
 	@GetMapping("/denied")
 	public String denied() {
 		return "popup/members/denied";
 	}
 
-	@RequestMapping("/log") // 아이디, mem_reg_id 세션저장, 삭제
+	// 아이디, mem_reg_id 세션저장, 삭제
+	@RequestMapping("/log")
 	@ResponseBody
 	public String log(HttpSession session) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 인증정보
@@ -99,6 +105,7 @@ public class MemberController {
 
 	}
 
+	// 권한없음
 	@RequestMapping("/noAuth")
 	public String dellog(HttpSession session) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 인증정보
@@ -114,19 +121,19 @@ public class MemberController {
 
 	}
 
-	// 회원가입 폼
-
+	// owner 가입 폼
 	@GetMapping("/joinformH")
 	public String joinformH() {
 		return "homepage/joinLogin/joinform";
 	}
 
+	// trainer, user 등록 폼
 	@GetMapping("/joinformP")
 	public String joinformP() {
 		return "popup/members/joinform";
 	}
 
-	// 오너 가입
+	// owner 가입
 	@PostMapping("/joinO")
 	public String joinOwner(@ModelAttribute AdminVO member) {
 
@@ -141,7 +148,7 @@ public class MemberController {
 		int max = mapper.getMax(); // 가입자수 불러오기
 
 		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId("trainer" + max + session.getAttribute("mem_reg_id")); // 아이디 = trainer가입자수mem_reg_id
+		member.setId("trainer" + session.getAttribute("mem_reg_id") + "_" + max); // 아이디 = trainer가입자수mem_reg_id
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addTrainerMember(member);
@@ -153,7 +160,7 @@ public class MemberController {
 	public String joinUser(@ModelAttribute UserVO member, HttpSession session) {
 		int max = mapper.getMax();
 		member.setMem_reg_id((int) session.getAttribute("mem_reg_id"));
-		member.setId("user" + max + session.getAttribute("mem_reg_id"));
+		member.setId("user" + session.getAttribute("mem_reg_id") + "_" + max);
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addUserMember(member);
@@ -169,6 +176,55 @@ public class MemberController {
 		return memberService.userCheck(id);
 	}
 
+	// owner 개인 정보 수정
+	@ResponseBody
+	@PostMapping(value = "/updateOwner", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	public String updateOwner(@ModelAttribute AdminVO member, HttpSession session) {
+		member.setId((String) session.getAttribute("id"));
+		if (member.getNewPW() != "" & member.getPassword() != "") {
+
+			// 비번비교 후 맞으면 새비번 입력
+			if (passwordEncoder.matches(member.getPassword(), memberService.comparePw(member))) {
+				member.setPassword(passwordEncoder.encode(member.getNewPW()));
+			} else {
+				return "비밀번호가 다릅니다.";
+			}
+		} else {
+			member.setPassword(null);
+		}
+
+		int update = memberService.updateOwner(member);
+		System.out.println(update + " : 업데이트");
+		if (update == 1) {
+			return "수정 성공";
+		}
+
+		return "수정 실패";
+	}
+
+	// 피트니스 정보 수정
+	@ResponseBody
+	@PostMapping(value = "/updateFitness", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	public String updateFitness(@ModelAttribute AdminVO member, HttpSession session) {
+		// fitness_id hidden 값
+
+		int update = memberService.updateFitness(member);
+		if (update == 1) {
+			return "수정 성공";
+		}
+
+		return "수정 실패";
+	}
+
+	// 피트니스 등록
+	@ResponseBody
+	@PostMapping(value = "/addFitness", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	public String addFitness(@ModelAttribute AdminVO member, HttpSession session) {
+		member.setId((String) session.getAttribute("id"));
+
+		return "";
+	}
+
 	// 아이디, 비밀번호 찾기 폼
 	@GetMapping("/rememberForm")
 	public String rememberForm() {
@@ -177,6 +233,7 @@ public class MemberController {
 
 	// 아이디, 비밀번호 찾기 기능
 	@ResponseBody
+	// 아이디찾기
 	@PostMapping("/rememberId")
 	public String rememberId(@ModelAttribute MemberVO member) {
 
@@ -186,6 +243,7 @@ public class MemberController {
 		return id;
 	}
 
+//비번찾기
 	@ResponseBody
 	@PostMapping("/newPassword")
 	public String sendEmail(@ModelAttribute MemberVO member) {
@@ -211,6 +269,7 @@ public class MemberController {
 		return "error";
 	}
 
+//랜덤문자 만들기
 	public static String getRandomStr(int size) {
 		if (size > 0) {
 			char[] tmp = new char[size];
@@ -227,7 +286,11 @@ public class MemberController {
 		}
 		return "ERROR : Size is required.";
 	}
+
 }
+
+//정보변경
+
 // 시간(sysdate), id 저장하는 비번용 테이블 생성
 // address 에 sysdate 값 넣기
 
