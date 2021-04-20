@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import co.team.exercise.service.ExeBasicDetailVO;
 import co.team.exercise.service.ExePersonalDetailVO;
@@ -91,8 +93,8 @@ public class ExerciseController {
 	// EXERCISE_PROGRAM_BASIC start
 	// 리스트 조회
 	@PostMapping("/getSearchExerciseProgramBasic")
-	public String getSearchExerciseProgramBasic(FFUserVO vo3, Model model) {
-		model.addAttribute("ffUser", service.getFFUserProc(vo3));
+	public String getSearchExerciseProgramBasic(FFUserVO vo, Model model) {
+		model.addAttribute("ffUser", service.getFFUserProc(vo));
 		return "exercise/getSearchExerciseProgramBasic";
 	}
 
@@ -220,9 +222,14 @@ public class ExerciseController {
 	 * service.insertExercisePersonalDetail(vo); return
 	 * "redirect:/getSearchExercisePersonalDetail";
 	 }*/	
-	@RequestMapping(value = "/insertExercisePersonalDetail", method = { RequestMethod.GET, RequestMethod.POST})
-	public void test(@RequestBody Map<String, Object> params) throws Exception {
-	 System.out.println(params);
+	@PostMapping(value = "/insertExercisePersonalDetail")
+	@ResponseBody
+	public boolean insertExercisePersonalDetail(@RequestBody Map<String, Object> params) throws Exception {
+		for ( String key : params.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + params.get(key));
+		    service.insertExercisePersonalDetail((Map<String, Object>)params.get(key));
+		}
+	    return true;
 	}
 
 	// 단건 수정
@@ -315,8 +322,9 @@ public class ExerciseController {
 
 	// 단건 조회
 	@PostMapping("/getFFUserProc")
-	public String getFFUserProc(FFUserVO vo, Model model) {
+	public String getFFUserProc(FFUserVO vo, UserWeightVO vo2, Model model) {
 		model.addAttribute("list", service.getFFUserProc(vo));
+		model.addAttribute("list2", service.getUserWeightProc(vo2));
 		return "exercise/getFFUserProc";
 	}
 	// FF_USER end

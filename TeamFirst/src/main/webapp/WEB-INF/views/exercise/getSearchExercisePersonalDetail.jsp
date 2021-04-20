@@ -17,7 +17,6 @@
 		opener.$("#exeNameTbl tr").remove();
 		opener.$("#exeNameTbl").append('<tr><td>운동 목록</td><td>설정 횟수</td></tr>');
 		for(var i = 0; i < inputExeNo.length; i++) {
-			
         	for(var j = 0; j < inputExeNo.length; j++) {
         		if($("input[name=exep_no" + i +"]")[j] != null) {
         			var exeName = $("input[name=exep_no" + i +"]")[j].value;
@@ -26,17 +25,23 @@
         		}
         	}
     	}
+        alert("등록 완료");
 	});
 </script>
 </head>
 <body>
-	<div style="float: left; width: 60%; padding: 10px;">
-		<table>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-		</tr>
+	<div align="center">
+		<table style="text-align: center;" border="1">
+			<tr>
+				<th>번호</th>
+				<th>프로그램 번호</th>
+				<th>운동 번호</th>
+				<th>세트수</th>
+				<th>운동 횟수</th>
+				<th>운동 무게</th>
+				<th>아이디</th>
+				<th>운동명</th>
+			</tr>
 			<c:forEach items="${list}" var="list">
 				<tr>
 					<td>${list.epd_no }</td>
@@ -47,14 +52,13 @@
 					<td>${list.epd_weight }</td>
 					<td>${list.user_id }</td>
 					<td>${list.exe_name }</td>
-					<td><input type="text" name="exe_no" value="${list.exe_no }"></td>
-					<td><input type="text" name="exep_no${list.exep_no}" value="${list.exe_name }"></td>
 				</tr>
+				<input type="hidden" name="exe_no" value="${list.exe_no }">
+				<input type="hidden" name="exep_no${list.exep_no}" value="${list.exe_name }">
 			</c:forEach>
 		</table><br>
-	    <b><font size="5" color="gray">자식창</font></b><br><br>
-	    <input type="button" value="전달하기" id="exePut"><br><br>
 	    <input type="button" value="창닫기" onclick="window.close()">
-	</div>
+	    <input type="button" value="전달하기" id="exePut">
+    </div>
 </body>
 </html>

@@ -26,8 +26,8 @@
 	
 	$(function () {
 		$("#datepicker").datepicker({ onSelect: function(dateText) {  
-			selDate = dateText;
-			drawChart();
+				selDate = dateText;
+				drawChart();
 			} 
 		})
 	});//end datepicker

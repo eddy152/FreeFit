@@ -15,13 +15,20 @@
 			var id = $(this)[0].firstElementChild.innerText;
 			var form = document.createElement('form');
 			var objs;
+			var objs2;
 			
 			objs = document.createElement('input');
 			objs.setAttribute('type', 'hidden');
 			objs.setAttribute('name', 'id');
 			objs.setAttribute('value', id);
 			
+			objs2 = document.createElement('input');
+			objs2.setAttribute('type', 'hidden');
+			objs2.setAttribute('name', 'user_id');
+			objs2.setAttribute('value', id);
+			
 			form.appendChild(objs);
+			form.appendChild(objs2);
 			form.setAttribute('method', 'post');
 			form.setAttribute('action', "getFFUserProc");
 			
@@ -36,11 +43,11 @@
 	<div align="center">
 		<table border="1">
 			<tr>
-				<th>ID</th>
-				<th>NAME</th>
-				<th>PHONE_NUMBER</th>
-				<th>AGE</th>
-				<th>GENDER</th>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>전화번호</th>
+				<th>나이</th>
+				<th>성별</th>
 			</tr>
 			<c:forEach items="${list}" var="list">
 				<tr>

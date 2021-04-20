@@ -13,6 +13,8 @@ var arr = {};
 $(function() {
 	var part = '가슴';
 	var exeName = '';
+	var exepNo = 0;
+	var userId = '';
 	
 	//상단 메뉴바 클릭
 	$(".menuLink").on("click", function() {
@@ -106,11 +108,11 @@ $(function() {
 		var epdCount = Number($("input[name=epd_count]")[0].value);
 		var epdWeight = Number($("input[name=epd_weight]")[0].value);
 		var exeNo = Number($("input[name=exe_no]")[0].value);
-		var epdNo = Number($("input[name=epd_no]")[0].value);
-		var exepNo = Number($("input[name=exep_no]")[0].value);
-		var userId = $("input[name=user_id]")[0].value;
+		
+		exepNo = Number($("input[name=exep_no]")[0].value);
+		userId = $("input[name=user_id]")[0].value;
 
-		arr[exeName] = {"epd_set":epdSet , "epd_count":epdCount , "epd_weight":epdWeight, "exe_no":exeNo, "epd_no":epdNo, "exep_no":exepNo, "user_id":userId };
+		arr[exeName] = {"epd_set":epdSet , "epd_count":epdCount , "epd_weight":epdWeight, "exe_no":exeNo, "exep_no":exepNo, "user_id":userId };
 		$("#" + exeName + "set").html("세트수 : " + epdSet + " / 설정횟수 : " + epdCount + " / 설정무게 : " + epdWeight);
 		
 		document.getElementById("setExePr").style.display = "block";
@@ -118,19 +120,25 @@ $(function() {
 	
 	//버튼 클릭 이벤트(등록하기)
 	$(document).on("click", "#setExePr", function() {
-		var result = JSON.stringify(arr)
-		$.ajax({
-			url: "insertExercisePersonalDetail",  // 서버 url
-			type: 'post',
-			data: result,
-			header:{
-				"Content-Type":"application/json",	//Content-Type 설정
-				"X-HTTP-Method-Override":"POST"},
-			success: function(result) {
-				alert("성공");
-				$('#exeList').val(result);
-			}
-		})  // End of ajax
+		if($("warmingUp").value != null) {
+			arr["준비운동"] = {"epd_set":1 , "epd_count":Number($("warmingUp").value) , "epd_weight":0, "exe_no":0, "exep_no":exepNo, "user_id":userId };
+		}
+			
+		if(confirm("등록하시겠습니까?")){
+			var result = JSON.stringify(arr);
+			$.ajax({
+				url: "insertExercisePersonalDetail", 
+				method: 'POST',
+				data: result,
+				traditional: true,
+				dataType:'json',
+				contentType : 'application/json',
+				success: function(result) {
+					alert("등록성공");
+					$('#exeList').val(result);
+				}
+			})  // End of ajax
+		}
 	})
 	
 	//버튼 클릭 이벤트(운동 추가 & 삭제 & 불러오기)
@@ -149,7 +157,7 @@ $(function() {
 			success: function(result) {
 				window.name = "parentForm";
 		        window.open("getSearchExercisePersonalDetail?user_id=" + $("input[name=user_id]").val()
-		                	, "childForm", "width=570, height=350, resizable = no, scrollbars = no");
+		                	, "childForm", "width=800, height=500, resizable = no, scrollbars = no");
 			}
 		})  // End of ajax
 	})
@@ -294,7 +302,7 @@ ul.sub li:hover {
 						<th>준비 운동</th>
 					</tr>
 					<tr>
-						<td><input type="number" id="0" name="0" min="0" max="15">회
+						<td><input type="number" id="warmingUp" name="0" min="0" max="50">회
 						</td>
 					</tr>
 				</table>
@@ -313,7 +321,6 @@ ul.sub li:hover {
 			<div id="divThird" style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
 				<form action="" id="exeSetCount">
 					<table border="1" id="exeSet"></table>
-					운동 프로그램 번호<br><input type="text" name="epd_no" value="5"><br>
 					프로그램 번호<br><input type="text" name="exep_no" value="1"><br>
 					유저 아이디<br><input type="text" name="user_id" value="${ffUser.id }"><br>
 				</form>
