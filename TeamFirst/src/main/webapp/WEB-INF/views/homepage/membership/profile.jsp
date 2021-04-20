@@ -164,6 +164,9 @@
 					<div class="tab-pane fade exp-cover" id="fitness" role="tabpanel"
 						aria-labelledby="fitness-tab">
 						<!--  https://getbootstrap.com/docs/4.6/components/card/ -->
+						
+						
+						
 						<!-- foreach 로 카드 만들기. 피트니스 이름이랑 멤버쉽상태정도출력하고
 							상세 / 바로가기(멤버십없으면 멤버십결제페이지로) 버튼 등록하기
 						  -->

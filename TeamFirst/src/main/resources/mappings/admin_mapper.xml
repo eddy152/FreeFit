@@ -77,17 +77,12 @@
 
 	<insert id="addOwnerMember" parameterType="adminVO">
 		insert into ADMIN(id,
-		password, name, phone_number, zipcode,
-		address, address_detail, fitness_name, email) values
+		password, name, phone_number,email) values
 		(
 		#{id},
 		#{password},
 		#{name},
 		#{phone_number},
-		#{zipcode},
-		#{address},
-		#{address_detail},
-		#{fitness_name},
 		#{email}
 
 		)
