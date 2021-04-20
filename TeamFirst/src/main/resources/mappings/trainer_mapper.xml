@@ -8,7 +8,7 @@
 		    parameterType="TrainerVO">
 	
 			SELECT ID
-			,MEM_REG_ID
+			,FITNESS_ID 
 			,PASSWORD
 			,PHONE_NUMBER
 			,NAME
@@ -24,7 +24,7 @@
 		
 		INSERT INTO TRAINER(
 		 ID
-		,MEM_REG_ID
+		,FITNESS_ID
 		,PASSWORD
 		,PHONE_NUMBER
 		,NAME
@@ -33,7 +33,7 @@
 		
 		VALUES (
 		 #{id}
-		,#{mem_reg_id}
+		,#{fitness_id}
 		,#{password}
 		,#{phone_number}
 		,#{name}
@@ -53,7 +53,7 @@
 		parameterType="string">
 
 			SELECT ID
-			,MEM_REG_ID
+			,FITNESS_ID 
 			,PASSWORD
 			,PHONE_NUMBER
 			,NAME
