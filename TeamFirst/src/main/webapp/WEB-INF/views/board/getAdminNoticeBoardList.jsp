@@ -13,6 +13,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>board List</title>
+
 <script type="text/javascript">
 	$(function() {
 		$(".dataRow").click(function() {
