@@ -1,6 +1,8 @@
 package co.team.course.service;
 
-import java.util.List;
+import java.util.List; 
+
+import co.team.trainer.service.TrainerVO; 
 
 public interface CourseService {
 	public List<Course_Info_VO> getCourse(Course_Info_VO vo);
@@ -21,7 +23,8 @@ public interface CourseService {
 	
 	public Course_Info_VO  get1Course(Course_Info_VO vo);
 	
-	
+
+		
 	
 	
 	

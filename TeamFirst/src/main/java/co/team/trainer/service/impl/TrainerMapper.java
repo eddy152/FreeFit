@@ -26,6 +26,7 @@ public interface TrainerMapper {
 	
 	//삭제
 	public void deleteTrainer(String id);
+
 	
 }
 	

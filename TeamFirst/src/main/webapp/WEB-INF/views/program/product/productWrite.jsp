@@ -164,11 +164,7 @@
 						</thead>
 						<tbody id='trainer_id'>
 							<!-- thead, tbody 분리하여 tbody id에 getElementById('trainer_id')innerHTML 값을 찾아 넣어준다. -->
-								
 						</tbody>
-
-					
-
 					</table>
 				</div>
 				<!--   table div -->

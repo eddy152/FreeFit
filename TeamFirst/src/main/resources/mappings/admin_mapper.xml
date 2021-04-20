@@ -117,7 +117,7 @@
 		fitness(fitness_id, id, tel_number, zipcode,
 		address, address_detail, fitness_name) values
 		(
-		(SELECT NVL(MAX(id)+1, 1) FROM
+		(SELECT NVL(MAX(fitness_id)+1, 1) FROM
 		fitness), #{id}, #{tel_number}, #{zipcode},
 		#{address}, #{address_detail}, #{fitness_name}
 		)

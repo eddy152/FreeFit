@@ -39,7 +39,7 @@ public class CourseController {
 	public String productWriteForm(Course_Info_VO vo, Model model, Course_TuitionVO vo1, TrainerVO vo2) {
 
 		model.addAttribute("tuit", courseService.getCourse_Tuition(vo1));
-		model.addAttribute("train", trService.getTrainer(vo2.getId()));
+		model.addAttribute("train", trService.getTrainerList(vo2));
 		return "program/product/productWrite";
 	}
 
@@ -62,7 +62,7 @@ public class CourseController {
 		System.out.println(vo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("tuit", courseService.getCourse_Tuition(vo1));
-		model.addAttribute("train", trService.getTrainer(vo2.getId()));
+		model.addAttribute("train", trService.getTrainerList(vo2));
 		return "program/product/productUpdate";
 	}
 	

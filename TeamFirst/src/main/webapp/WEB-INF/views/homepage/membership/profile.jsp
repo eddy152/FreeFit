@@ -50,25 +50,22 @@
 					<div class="tab-pane fade exp-cover show active" id="profile"
 						role="tabpanel" aria-labelledby="profile-tab">
 						<div class="data-box">
-						<c:if test="${memList ne null}">
-						<c:forEach var="membership" items="${memList}">
-						<!-- select m.mem_reg_id, m.membership_no, m.membership_start,
+							<c:if test="${memList ne null}">
+								<c:forEach var="membership" items="${memList}">
+									<!-- select m.mem_reg_id, m.membership_no, m.membership_start,
 		m.membership_end , f.fitness_id , m.admin_id, f.fitness_name,
 		f.tel_number, f.zipcode, f.address, F.ADDRESS_DETAIL -->
-						</c:forEach>
-						</c:if>
-						
-						
-							
+								</c:forEach>
+							</c:if>
+
+
+
 							<div class="row exp-row">
 								<h6>잔여 포인트 : ${admin.all_point }</h6>
 
 							</div>
 							<div class="row exp-row">
-								<button type="button" id="gotoProgram"
-									class="btn btn-primary btn-lg btn-block"
-									onclick="location.href='/spring/tilesTestProgram'">
-									헬스클럽 관리 페이지로</button>
+								<div style="padding: 300px;"></div>
 							</div>
 
 						</div>
@@ -125,7 +122,7 @@
 										<div class="col-8 mb-md-2">
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
 											<input type="password" class="form-control" id="password"
-												name="password" placeholder="현재 비밀번호">
+												name="password" placeholder="현재 비밀번호" autocomplete="off">
 											<div class="invalid-feedback">현재 비밀번호를 입력해주세요.</div>
 										</div>
 									</div>
@@ -135,10 +132,10 @@
 										<div class="col-8 mb-0 pb-0">
 											<!-- col 의 margin bottom 을 - midium - 2만큼 -->
 											<input type="password" class="form-control" id="newPW"
-												name="newPW" placeholder="새 비밀번호">
+												name="newPW" placeholder="새 비밀번호" autocomplete="off">
 											<div class="invalid-feedback">새 비밀번호를 입력해주세요.</div>
 											<input type="password" class="form-control" id="pwCon"
-												name="pwCon" placeholder="비밀번호 확인">
+												name="pwCon" placeholder="비밀번호 확인" autocomplete="off">
 											<div class="invalid-feedback">동일한 비밀번호를 입력해주세요.</div>
 										</div>
 									</div>
@@ -163,85 +160,90 @@
 
 					<div class="tab-pane fade exp-cover" id="fitness" role="tabpanel"
 						aria-labelledby="fitness-tab">
-						<!--  https://getbootstrap.com/docs/4.6/components/card/ -->
 						
 						
-						
-						<!-- foreach 로 카드 만들기. 피트니스 이름이랑 멤버쉽상태정도출력하고
-							상세 / 바로가기(멤버십없으면 멤버십결제페이지로) 버튼 등록하기
-						  -->
-						
-						
-						<form method="post" action="/spring/members/updateFitness">
+						<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">피트니스 목록</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="fit-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">피트니스 등록</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="fit-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">피트니스 상세</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+						<c:if test="${fitList ne null}">
+							<div>
+							<c:forEach var="fitness" items="${fitList}" varStatus="status">
+							<div class="card" style="width: 18rem;">
+									<div class="card-header"> ${fitness.fitness_name}</div>
+									<div class="card-body">
+										<a name="${status.index}" class="btn btn-primary d-flex p-5 mb-2 text-align" id="toFitnessDetail">상세페이지로</a>
+										<!-- 상세페이지 버튼 누르면 수정폼 나오면서 value 에 정보 뿌리기 -->
+										<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}" class="btn btn-primary d-flex">피트니스관리 바로가기</a>
+										<!--  -->
+									</div>
+								</div>
+							</c:forEach>
+								</div>	
+						</c:if>
+						<c:if test="${fitList eq null}"> 피트니스를 등록해주세요. </c:if>
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+  
+  <form method="post" action="/spring/members/addFitness">
 							<div class="row justify-content-center">
-								<h4 class="ltitle">피트니스정보</h4>
+								<h4 class="ltitle">피트니스 등록</h4>
 
 							</div>
 							<div
-								class="row no-margin fitness-det justify-content-center align-items-center"
+								class="row no-margin fitness-det justify-content-center align-items-center fitnessAdd"
 								style="min-height: 550px;">
-								<div class="col-8">
-
-									<div class="form-group row justify-content-between">
-										<label for="address_detail" class="col-form-label text-left">피트니스명</label>
-										<div class="col-8 mb-md-2">
-											<input type="text" class="form-control" id="fitness_name"
-												name="fitness_name" placeholder="피트니스명"
-												value="${vo.fitness_name}" required="required">
-										</div>
-									</div>
-
-									<div class="form-group row justify-content-between">
-										<label for="zipcode" class="col-form-label text-left">우편번호</label>
-										<div class="col-8 mb-md-2">
-											<div class="input-group" style="margin-bottom: 20px;">
-												<input type="number" class="form-control" id="zipcode"
-													name="zipcode" placeholder="우편번호" value="${vo.zipcode}"
-													required="required">
-												<div class="input-group-append">
-													<input class="btn btn-primary" type="button"
-														id="execPostCode" value="우편번호 찾기">
-												</div>
-											</div>
-											<div class="invalid-feedback">우편번호를 입력해주세요.</div>
-										</div>
-
-
-									</div>
-									<div class="form-group row justify-content-between">
-										<label for="address" class="col-form-label text-left">주소</label>
-										<div class="col-8 mb-md-2">
-											<input type="text" class="form-control" id="address"
-												name="address" placeholder="헬스클럽 주소" value="${vo.address}"
-												required="required">
-											<div class="invalid-feedback">헬스클럽 주소를 입력해주세요.</div>
-										</div>
-									</div>
-									<div class="form-group row justify-content-between">
-										<label for="address_detail" class="col-form-label text-left">주소
-											상세<span class="text-muted">(Optional)</span>
-										</label>
-										<div class="col-8 mb-md-2">
-											<input type="text" class="form-control" id="address_detail"
-												name="address_detail" value="${vo.address_detail}"
-												placeholder="주소 상세">
-										</div>
-									</div>
-
-
-								</div>
-
+								
 							</div>
 							<div class="row justify-content-center">
 
 								<div class="col-6 mt-5">
 									<button class="btn btn-primary btn-lg btn-block postFormBtn"
-										type="button">수정</button>
+										type="button">등록</button>
 								</div>
 
 
 							</div>
 						</form>
+  </div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+  
+  <form method="post" action="/spring/members/addFitness">
+							<div class="row justify-content-center">
+								<h4 class="ltitle">피트니스 수정</h4>
+
+							</div>
+							<div
+								class="row no-margin fitness-det justify-content-center align-items-center fitnessUpdate"
+								style="min-height: 550px;">
+								
+							</div>
+							<div class="row justify-content-center">
+
+								<div class="col-6 mt-5">
+									<button class="btn btn-primary btn-lg btn-block postFormBtn"
+										type="button">등록</button>
+								</div>
+
+
+							</div>
+						</form>
+  </div>
+</div>
+						
+						
+				
+						
 					</div>
 
 
@@ -339,8 +341,72 @@
 		</div>
 	</div>
 </div>
+
+
 <script>
+let fitness_name=[]; 
+let tel_number=[];
+let zipcode=[];
+let address=[];
+let address_detail=[];
+<c:if test="${fitList ne null}">
+<c:forEach var="fitness" items="${fitList}" varStatus="status">
+fitness_name.push('${fitness.fitness_name}');
+tel_number.push('${fitness.tel_number}');
+zipcode.push('${fitness.zipcode}');
+address.push('${fitness.address}');
+address_detail.push('${fitness.address_detail}');
+</c:forEach>
+</c:if>
+
+
+
+
+window.onload=function(){
+
+//피트니스 등록수정폼
+var fitform='<div class="form-group row justify-content-between"><label for="fitness_name"class="col-form-label text-left">피트니스명</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="fitness_name"name="fitness_name"placeholder="피트니스명"required="required"></div></div><div class="form-group row justify-content-between"><label for="tel_number"class="col-form-label text-left">전화번호</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="tel_number"name="tel_number"placeholder="전화번호"required="required"></div></div><div class="form-group row justify-content-between"><label for="zipcode"class="col-form-label text-left">우편번호</label><div class="col-8 mb-md-2"><div class="input-group"style="margin-bottom: 20px;"><input type="number"class="form-control"id="zipcode"name="zipcode"placeholder="우편번호"required="required"><div class="input-group-append"><input class="btn btn-primary"type="button"id="execPostCode"value="우편번호 찾기"></div></div><div class="invalid-feedback">우편번호를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address"class="col-form-label text-left">주소</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address"name="address"placeholder="헬스클럽 주소"required="required"><div class="invalid-feedback">헬스클럽주소를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address_detail"class="col-form-label text-left">주소상세<span class="text-muted">(Optional)</span></label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address_detail"name="address_detail"placeholder="주소 상세"></div></div>';
+	
+
+
+//피트니스등록수정폼에인덱스넘기기 펑션
+function goTo(index){	
+	document.querySelector("#fit-contact-tab").click(index);
+	
+}
+//상세 페이지 클릭해서 피트니스 등록수정폼에 인덱스넘기기
+document.getElementById("toFitnessDetail").addEventListener('click',function(){
+	goTO(this.name);
+}); 
+
+
+
+document.getElementById("fit-profile-tab").addEventListener('click',function(){
+	document.querySelector(".fitnessUpdate").innerHTML="";	
+	document.querySelector(".fitnessAdd").innerHTML=""; 
+	let fform=document.createElement('div');
+	fform.setAttribute("class","col-8");
+	fform.innerHTML=fitform;
+	document.querySelector(".fitnessAdd").append(fform);
+});
+
+document.getElementById("fit-contact-tab").addEventListener('click',function(index){
+	
+	
+	document.querySelector(".fitnessUpdate").innerHTML="";
+	document.querySelector(".fitnessAdd").innerHTML=""; 
+	let aform=document.createElement("div");
+	aform.setAttribute("class","col-8");
+	aform.innerHTML=fitform;
+	document.querySelector(".fitnessUpdate").append(aform);
+	document.querySelector("#fitness_name").value=fitness_name[index];
+
+	});
+
+
 const formbtns = document.querySelectorAll('.postFormBtn');
+if(typeof formbtns !=null){
+	
 formbtns.forEach(formbtn=>{formbtn.addEventListener('click', formClick)});
 
 function formClick(){
@@ -369,7 +435,7 @@ function formClick(){
 		
 	
 
-	let con= confirm('수정하시겠습니까?');
+	let con= confirm('등록하시겠습니까?');
 	if(con){
 		let updateForm = this.parentNode.parentNode.parentNode;
 		let params=new FormData(updateForm).params;
@@ -379,7 +445,9 @@ function formClick(){
         body: new URLSearchParams(new FormData(updateForm)) })
 
         .then(response => response.text())
-        .then(result=>{ alert(result);
+        .then(result=>{ 
+        	if(result.length>1){ alert(result);}
+        	else location.reload();
         })
         
         .catch(error => console.error('Error:', error));
@@ -403,18 +471,22 @@ function formClick(){
 		}).open();
 	}
 
+	if
+	(typeof execPostCode !=="undefined" && typeof execPostCode !=="zipcode" && typeof address !=="undefined")
+	{
+		
 	document.getElementById('execPostCode').addEventListener("click",
 			getPostcode);
-
 	document.getElementById('zipcode').addEventListener("click", getPostcode);
-
 	document.getElementById('address').addEventListener("click", getPostcode);
+	}
 
-	<c:if test="${vo.membership_name eq null}">
-	//살아있는 멤버십이 없다면
-	document.querySelector("#gotoProgram").setAttribute("disabled", "disabled");
+}
 
-	</c:if>
+
+
+
+}
 </script>
 
 <script src="/spring/resources/assets/dist/js/form-validation.js"></script>

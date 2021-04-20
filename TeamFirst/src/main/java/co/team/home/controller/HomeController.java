@@ -1,6 +1,9 @@
 package co.team.home.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +21,26 @@ public class HomeController {
 
 		return "homepage/home";
 	}
+	
+	
+	// 프로그램 홈으로
+		@GetMapping("/fitnessHome")
+		public String fitnessHome(String fitness_id, HttpSession session)
+		{
+			if(fitness_id != null) {
+				session.setAttribute("fitness_id", fitness_id);						
+			}
+			if(session.getAttribute("fitness_id")!=null) {
+				return "program/test/home";
+			}		
+			else {
+				return "redirect:/members/profile";
+			}
+			
+		}
+
+	
+	
 
 	// 타일즈 테스트
 
@@ -27,12 +50,7 @@ public class HomeController {
 		return "homepage/test/home"; // return 값 "homepage/*/*"
 	}
 
-	// 프로그램 타일즈
-	@RequestMapping("/tilesTestProgram")
-	public String tilesTestProgram() {
-		return "program/test/home";
-	}
-
+	
 	// 앱 타일즈
 	@RequestMapping("/tilesTestApp")
 	public String tilesTestApp() {
