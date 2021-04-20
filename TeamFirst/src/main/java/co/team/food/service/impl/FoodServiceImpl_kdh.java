@@ -159,7 +159,7 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 일별 단건 조회
-	public FoodVO getDay(FoodVO vo) {
+	public List<FoodVO> getDay(FoodVO vo) {
 		return dao.getDay(vo);
 	}
 

@@ -74,7 +74,7 @@ public interface FoodService_kdh {
 	public List<FoodVO> getFoodOne(FoodVO vo);
 
 	// 일별 단건 조회
-	public FoodVO getDay(FoodVO vo);
+	public List<FoodVO> getDay(FoodVO vo);
 	
 	public FoodVO current(FoodVO vo);
 
