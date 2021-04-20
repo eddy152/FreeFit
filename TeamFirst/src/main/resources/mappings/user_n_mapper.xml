@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="co.team.usern.service.impl.UsernMapper">
+ 	
+ 	<!--  user N 전체 조회   -->
+ 	<select id="userNList" resultType="UsernVO" parameterType="UsernVO">
+ 		SELECT board_no
+ 			  ,category
+ 			  ,title
+ 			  ,content
+ 			  ,reg_date
+ 			  ,hit
+ 		FROM
+ 		 	  user_notice_board
+ 	</select>
+ 	
+ 	<select id="searchUserN" resultType="UsernVO" parameterType="UserNSearch">
+ 		SELECT board_no
+ 			  ,category
+ 			  ,title
+ 			  ,content
+ 			  ,reg_date
+ 			  ,hit
+ 		FROM
+ 		 	 (
+ 		 	 	select * from (
+	 		 	 					select rownum as seq,
+	 		 	 					board_no,
+	 		 	 					category,
+	 		 	 					title,
+	 		 	 					content,
+	 		 	 					reg_date,
+	 		 	 					hit
+ 		 	 				FROM(
+ 		 	 						SELECT * 
+ 		 	 						FROM user_notice_board
+ 		 	 						where 1=1
+ 		 	 					<choose>
+ 		 	 						<when test="search != null">
+ 		 	 							and title like #{search}	
+ 		 	 						</when>
+ 		 	 					</choose>
+ 		 	 					ORDER BY board_no desc	
+ 		 	 					)
+ 		 	 					<![CDATA[
+ 		 	 				   )WHERE SEQ >= #{start}
+				        	   )
+ 		 	 					WHERE rownum <= 10
+ 		 	 					]]>	
+ 	</select>
+ 	
+ 	<!-- count query -->
+ 	<select id="countUserN" 
+ 	 parameterType="UserNSearch" resultType="Integer">
+ 		
+ 		SELECT COUNT(1)
+ 		FROM user_notice_board
+ 		where 1=1
+ 		<choose>
+ 			<when test = "search != null">
+ 				and title like #{search}
+ 			</when>
+ 		</choose>
+ 	</select>
+ 	
+ 	
+ 	
+ 	<!-- user N 단건 조회 -->
+ 	<select id="getUserN" parameterType="UsernVO" resultType="UsernVO">
+ 		select * from user_notice_board
+ 		where id=#{id}
+ 	</select>
+ 	<!-- 글쓰기 등록 -->
+ 	<insert id="userWrite" parameterType="UsernVO">
+ 		INSERT INTO user_notice_board(
+ 									board_no,
+ 									mem_board_no,
+ 									category,
+ 									title,
+ 									content,
+ 									reg_date,
+ 									hit,
+ 									fitness_id 
+ 									)
+ 									
+ 		VALUES	(
+ 				  (
+ 				  	SELECT NVL(MAX(board_no), 0) + 1 from user_notice_board  
+ 				  )
+ 				 	,#{mem_board_no}
+ 				 	,#{category}
+ 				 	,#{title}
+ 				 	,#{content}
+ 				 	,sysdate
+ 				 	,#{hit} 
+ 				 	,#{fitness_id}
+ 				 )
+ 	</insert>
+ 	<!-- 상세조회 -->
+ 	<select id="getUserh" resultType="usernVO" parameterType="int">
+ 	 SELECT 		*
+ 	 FROM		user_notice_board 
+ 	 WHERE		board_no = #{board_no}
+ 	</select>
+ 	<!-- 조회수 -->
+ 	<update id="userHit" parameterType="int">
+ 		UPDATE 		 user_notice_board 
+ 		SET	  		 hit = hit + 1 WHERE BOARD_NO = #{board_no}
+ 	</update>
+ 	
+ 	<!-- 글 수정 -->
+ 	<update id="userUpdate">
+ 	UPDATE 		user_notice_board 
+ 	SET 		title	= #{title},
+ 				content = #{content}
+ 				
+ 	WHERE		board_no = #{board_no}			
+ 	</update>
+	<!-- 삭제 --> 	
+	<delete id="userDelete" parameterType="int">
+	DELETE FROM 	user_notice_board
+	
+	WHERE 			board_no = #{board_no}
+	</delete>
+ </mapper>

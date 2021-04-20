@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.team.course.service.Course_Info_VO;
 import co.team.course.service.Course_TuitionVO;
+import co.team.trainer.service.TrainerVO;
 
 public interface CourseMapper {
 
@@ -24,8 +25,6 @@ public interface CourseMapper {
 	public int proDel(Course_TuitionVO tvo);
 	
 	public Course_Info_VO  get1Course(Course_Info_VO vo);
-	
-
 	
 	
 }

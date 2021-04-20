@@ -13,6 +13,7 @@
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.80.0">
 <title>Pyramid Fit</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <!-- <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.6/examples/pricing/">
@@ -52,7 +53,7 @@
 			<tiles:insertAttribute name="side" />
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 				<div
-					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<tiles:insertAttribute name="content" />
 				</div>
 			</main>
@@ -64,7 +65,6 @@
 var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : ";"%>
 	
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <script src="/spring/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
 

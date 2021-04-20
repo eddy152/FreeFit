@@ -110,9 +110,9 @@
 					<input type="date" name="end_date"	 value="<fmt:formatDate value="${vo.end_date}" 	 pattern="yyyy-MM-dd" />"><br><br> 
 				<label for=" ">수강체크</label>&nbsp; 
 					<input type="radio" name="unit_method_get" value="1" id="unit_m"
-					<c:if test="${vo.unit_method_get eq 1 }">checked="checked"</c:if> >기간제&nbsp;&nbsp;
+					<c:if test="${vo.unit_method_get != null}">checked="checked"</c:if> >기간제&nbsp;&nbsp;
 					<input type="radio" name="unit_method_get" value="2"
-					<c:if test="${vo.unit_method_get eq 2 }">checked="checked"</c:if> >횟수제&nbsp;&nbsp; 
+					<c:if test="${vo.unit_method_get != null }">checked="checked"</c:if> >횟수제&nbsp;&nbsp; 
 				<label for="title">정원 </label> 
 					<input type="text" name="limit" size="1" value="${vo.limit}">명
 			</div>					
@@ -277,7 +277,7 @@ document.querySelector("#codays > option[value='${vo.course_day}']")
 
 <c:if test="${vo1.unit_method_get != null}">
 document.querySelector("#unit_m > option[value='${vo1.unit_method_get}']")
-.setAttribute
+.setAttribute("selected", "selected")
 </c:if>
 }
 </script>
