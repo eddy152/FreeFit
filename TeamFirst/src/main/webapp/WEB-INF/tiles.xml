@@ -25,7 +25,6 @@ Configuration 2.1//EN"
 		<put-attribute name="footer"
 			value="/WEB-INF/views/tiles/homepage/footerH.jsp" />
 	</definition>
-
 	<definition name="homepage/*/*" extends="homepage">
 		<put-attribute name="content"
 			value="/WEB-INF/views/homepage/{1}/{2}.jsp" />
@@ -46,7 +45,6 @@ Configuration 2.1//EN"
 		<put-attribute name="side"
 			value="/WEB-INF/views/tiles/program/sideP.jsp" />
 	</definition>
-
 	<definition name="program/*/*" extends="program">
 		<put-attribute name="content"
 			value="/WEB-INF/views/program/{1}/{2}.jsp" />
@@ -54,7 +52,6 @@ Configuration 2.1//EN"
 
 
 	<!-- 앱 : 헤더 사이드바 컨텐츠 -->
-
 	<definition name="app"
 		template="/WEB-INF/views/tiles/app/layoutA.jsp">
 		<put-attribute name="content"
@@ -63,7 +60,6 @@ Configuration 2.1//EN"
 			value="/WEB-INF/views/tiles/app/headerA.jsp" />
 		<put-attribute name="side"
 			value="/WEB-INF/views/tiles/app/sideA.jsp" />
-
 	</definition>
 
 	<definition name="app/*/*" extends="app">
@@ -75,13 +71,28 @@ Configuration 2.1//EN"
 	<!-- 타일즈 없는 단일 페이지(팝업 등) -->
 
 
-	<!-- <definition name="mainTemplate" template="/WEB-INF/views/tiles/layout.jsp"> 
-		<put-attribute name="content" value="/WEB-INF/views/home.jsp" /> <put-attribute 
-		name="header" value="/WEB-INF/views/tiles/header.jsp" /> <put-attribute name="side" 
-		value="/WEB-INF/views/tiles/side.jsp" /> <put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" 
-		/> </definition> <definition name="not_tiles/*" extends="mainTemplate"> <put-attribute 
-		name="content" value="/WEB-INF/views/app/{1}.jsp" /> </definition> <definition 
-		name="*" extends="mainTemplate"> <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" 
-		/> </definition> -->
+<!-- 	<definition name="mainTemplate"
+	template="/WEB-INF/views/tiles/layout.jsp">
+	<put-attribute name="content"
+		value="/WEB-INF/views/home.jsp" />
+	<put-attribute name="header"
+		value="/WEB-INF/views/tiles/header.jsp" />
+	<put-attribute name="side"
+		value="/WEB-INF/views/tiles/side.jsp" />
+	<put-attribute name="footer"
+		value="/WEB-INF/views/tiles/footer.jsp" />
+</definition> -->
+	<definition name="nolayout/*/*/*" template="/WEB-INF/views/tiles/nolayout.jsp">
+		<put-attribute name="content"
+			value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+	<definition name="nolayout/*/*" template="/WEB-INF/views/tiles/nolayout.jsp">
+		<put-attribute name="content"
+			value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+<!-- 	<definition name="*" extends="mainTemplate">
+		<put-attribute name="content"
+			value="/WEB-INF/views/{1}.jsp" />
+	</definition> -->
 
 </tiles-definitions>

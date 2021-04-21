@@ -10,11 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import co.team.exercise.service.ExeBasicDetailVO;
 import co.team.exercise.service.ExePersonalDetailVO;
@@ -38,21 +34,21 @@ public class ExerciseController {
 	@GetMapping("/getSearchExerciseList")
 	public String getSearchExerciseList(ExerciseListVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExerciseList(vo));
-		return "program/exercise/getSearchExerciseList";
+		return "nolayout/program/exercise/getSearchExerciseList";
 	}
 
 	// ListALL
 	@GetMapping("/getSearchExerciseListAll")
 	public String getSearchExerciseListAll(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
-		return "program/exercise/getSearchExerciseListAll";
+		return "nolayout/program/exercise/getSearchExerciseListAll";
 	}
 
 	// ListALLDel
 	@GetMapping("/deleteExerciseListForm")
 	public String deleteExerciseListForm(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
-		return "program/exercise/deleteExerciseListForm";
+		return "nolayout/program/exercise/deleteExerciseListForm";
 	}
 
 	// 단건 조회
@@ -72,7 +68,7 @@ public class ExerciseController {
 	// 등록 폼
 	@GetMapping("/insertExerciseListForm")
 	public String insertExerciseListForm() {
-		return "program/exercise/insertExerciseListForm";
+		return "nolayout/program/exercise/insertExerciseListForm";
 	}
 
 	// 단건 수정
