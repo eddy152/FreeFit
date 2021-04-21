@@ -120,8 +120,8 @@ $(function() {
 	
 	//버튼 클릭 이벤트(등록하기)
 	$(document).on("click", "#setExePr", function() {
-		if($("warmingUp").value != null) {
-			arr["준비운동"] = {"epd_set":1 , "epd_count":Number($("warmingUp").value) , "epd_weight":0, "exe_no":0, "exep_no":exepNo, "user_id":userId };
+		if($("#warmingUp").val() != null) {
+			arr["준비운동"] = {"epd_set":1 , "epd_count":Number($("#warmingUp").val()) , "epd_weight":0, "exe_no":0, "exep_no":exepNo, "user_id":userId };
 		}
 			
 		if(confirm("등록하시겠습니까?")){
