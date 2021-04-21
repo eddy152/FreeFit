@@ -52,7 +52,7 @@
 							<tbody>
 								<c:forEach items="${list}" var="list">
 									<tr class="dataRow">
-										<td>${list.mem_reg_id}</td>
+										<td>${list.fitness_id}</td>
 										<td>${list.id}</td>
 										<td>${list.name}</td>
 										<td>${list.phone_number}</td>

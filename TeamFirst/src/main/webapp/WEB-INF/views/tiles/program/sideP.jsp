@@ -11,8 +11,9 @@
 			<li class="nav-item"><a class="nav-link" href="/spring/calendar">
 					<span data-feather="bar-chart-2"></span> 일정관리
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="/spring/trainerList">
-					<span data-feather="bar-chart-2"></span> 트레이너 리스트
+			<li class="nav-item"><a class="nav-link"
+				href="/spring/trainerList"> <span data-feather="bar-chart-2"></span>
+					트레이너 리스트
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/getSearchFood"> <span data-feather="file"></span>
@@ -20,7 +21,7 @@
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/getSearchFFUser"> <span data-feather="bar-chart-2"></span>
-					회원운동관리(찾을수없음)
+					회원운동관리
 			</a></li>
 
 			<li class="nav-item"><a class="nav-link"
@@ -36,14 +37,24 @@
 					data-feather="layers"></span> 회원/트레이너등록(임시)
 			</a></li>
 
-		<li class="nav-item"><a class="nav-link"
-			href="/spring/tilesTestHomepage"> <span data-feather="user-check"></span>
-				홈페이지로
-		</a></li>
-		<li class="nav-item"><a class="nav-link"
-			href="/spring/tilesTestApp"> <span data-feather="thumbs-up"></span>
-				앱으로
-		</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/spring/userNList"> <span data-feather="thumbs-up"></span>
+					공지사항
+			</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/spring/productManagement"> <span data-feather="thumbs-up"></span>
+					owner 강습등록
+			</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/spring/tilesTestHomepage"> <span
+					data-feather="user-check"></span> 홈페이지로
+			</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/spring/tilesTestApp"> <span data-feather="thumbs-up"></span>
+					앱으로
+			</a></li>
+			
+
 		</ul>
 	</div>
 </nav>

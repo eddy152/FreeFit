@@ -23,20 +23,20 @@ public class TrainerController {
   @RequestMapping("/trainerList")
   public String trainerList(TrainerVO vo, Model model) throws Exception {
     model.addAttribute("list", service.getTrainerList(vo));
-    return "trainer/trainerList";
+    return "program/trainer/trainerList";
   }
 
   //단건조회
   @GetMapping("/getTrainer")
   public String getTrainer(TrainerVO vo, Model model, @RequestParam("id") String id) {
     model.addAttribute("emp", service.getTrainer(id));
-    return "trainer/getTrainer";
+    return "program/trainer/getTrainer";
   }
   
   @GetMapping("/getTrainerModify")
   public String getTrainerModify( Model model, @RequestParam("id") String id) {
     model.addAttribute("emp", service.getTrainer(id));
-    return "trainer/getTrainerModify";
+    return "program/trainer/getTrainerModify";
   }
   
   @PostMapping("/updateTrainer")

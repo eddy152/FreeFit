@@ -38,41 +38,41 @@ public class ExerciseController {
 	@GetMapping("/getSearchExerciseList")
 	public String getSearchExerciseList(ExerciseListVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExerciseList(vo));
-		return "exercise/getSearchExerciseList";
+		return "program/exercise/getSearchExerciseList";
 	}
 
 	// ListALL
 	@GetMapping("/getSearchExerciseListAll")
 	public String getSearchExerciseListAll(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
-		return "exercise/getSearchExerciseListAll";
+		return "program/exercise/getSearchExerciseListAll";
 	}
 
 	// ListALLDel
 	@GetMapping("/deleteExerciseListForm")
 	public String deleteExerciseListForm(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
-		return "exercise/deleteExerciseListForm";
+		return "program/exercise/deleteExerciseListForm";
 	}
 
 	// 단건 조회
 	@GetMapping("/getExerciseListProc")
 	public String getExerciseListProc(ExerciseListVO vo, Model model) {
 		model.addAttribute("list", service.getExerciseListProc(vo));
-		return "exercise/getExerciseListProc";
+		return "program/exercise/getExerciseListProc";
 	}
 
 	// 단건 등록
 	@GetMapping("/insertExerciseList")
 	public String insertExerciseList(ExerciseListVO vo) {
 		service.insertExerciseList(vo);
-		return "exercise/insertExerciseListForm";
+		return "program/exercise/insertExerciseListForm";
 	}
 
 	// 등록 폼
 	@GetMapping("/insertExerciseListForm")
 	public String insertExerciseListForm() {
-		return "exercise/insertExerciseListForm";
+		return "program/exercise/insertExerciseListForm";
 	}
 
 	// 단건 수정
@@ -86,7 +86,7 @@ public class ExerciseController {
 	@GetMapping("/deleteExerciseList")
 	public String deleteExerciseList(ExerciseListVO vo) {
 		service.deleteExerciseList(vo);
-		return "exercise/deleteExerciseListForm";
+		return "program/exercise/deleteExerciseListForm";
 	}
 	// EXERCISE_LIST end
 
@@ -95,7 +95,7 @@ public class ExerciseController {
 	@PostMapping("/getSearchExerciseProgramBasic")
 	public String getSearchExerciseProgramBasic(FFUserVO vo, Model model) {
 		model.addAttribute("ffUser", service.getFFUserProc(vo));
-		return "exercise/getSearchExerciseProgramBasic";
+		return "program/exercise/getSearchExerciseProgramBasic";
 	}
 
 	// 단건 조회
@@ -205,7 +205,7 @@ public class ExerciseController {
 	@GetMapping("/getSearchExercisePersonalDetail")
 	public String getSearchExercisePersonalDetail(ExePersonalDetailVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExercisePersonalDetail(vo));
-		return "exercise/getSearchExercisePersonalDetail";
+		return "program/exercise/getSearchExercisePersonalDetail";
 	}
 
 	// 단건 조회
@@ -251,7 +251,7 @@ public class ExerciseController {
 	@PostMapping("/getSearchExerciseRecord")
 	public String getSearchExerciseRecord(ExerciseRecordVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExerciseRecord(vo));
-		return "exercise/getSearchExerciseRecord";
+		return "program/exercise/getSearchExerciseRecord";
 	}
 
 	// ajax용 리스트 호출
@@ -316,7 +316,7 @@ public class ExerciseController {
 	@GetMapping("/getSearchFFUser")
 	public String getSearchFFUser(FFUserVO vo, Model model) {
 		model.addAttribute("list", service.getSearchFFUser(vo));
-		return "exercise/getSearchFFUser";
+		return "program/exercise/getSearchFFUser";
 	}
 
 	// 단건 조회
@@ -324,7 +324,7 @@ public class ExerciseController {
 	public String getFFUserProc(FFUserVO vo, UserWeightVO vo2, Model model) {
 		model.addAttribute("list", service.getFFUserProc(vo));
 		model.addAttribute("list2", service.getUserWeightProc(vo2));
-		return "exercise/getFFUserProc";
+		return "program/exercise/getFFUserProc";
 	}
 	// FF_USER end
 
