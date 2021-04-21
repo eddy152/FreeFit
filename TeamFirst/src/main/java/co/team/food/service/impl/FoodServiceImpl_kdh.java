@@ -135,8 +135,8 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 총칼로리 저장
-	public void updateCalorie(FoodVO vo) {
-		dao.updateCalorie(vo);
+	public FoodVO updateCalorie(FoodVO vo) {
+		return dao.updateCalorie(vo);
 	}
 
 	@Override

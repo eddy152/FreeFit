@@ -192,18 +192,13 @@
 				<button type="button" class="addFood">+</button>
 				<hr>
 				<div class="frm1">음식명 :
-				<c:forEach items="${oneDay }" var="list">
-					<c:if test="${list.real_diet_no eq food.real_diet_no}">
-						<c:forEach items="${detail }" var="detail">
-							<div>
+							<div class="foods">
 								<input type="text" name="detail_food" value="${detail.detail_food}">
 								<input type="text" name="detail_count" onchange="change(this)" value="${detail.detail_count}">
 								<input type="text" name="detail_calorie" value="${detail.detail_calorie}">개
 								<button type="button" class="deleteFood">-</button><br>
 							</div>					
-						</c:forEach>
-					</c:if>
-				</c:forEach>
+						
 				</div>
 				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"> <br>
 
@@ -403,27 +398,47 @@
 			dataType: 'json',
 			type: 'get',
 			success: function drawChart(result) {
+				$('input:text[name="total_calorie1"]').val(result[0].calorie);
+				var content_food = [];
+				var content_cnt = [];
+				var content_cal = [];
+				
+				if(result[0].detail_content != null) {			
+				var contents = result[0].detail_content.split("/");
+				$('.foods').hide();
+				for(i=0; i<contents.length; i++) {
+					var contents2 = contents[i].split(",");
+					
+					
+					$('.frm1').append(
+						'<div class="foods">'
+						+ '<input type="text" name="detail_food" value="' + contents2[0] + '">'
+						+ '<input type="text" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
+						+ '<input type="text" name="detail_calorie" value="' + contents2[1] + '">'
+						+ '</div>'
+					);
+					
+				}
+					
+			} else {
+				$('.foods').hide();
+			}
 				
 				var today = result[0].take_date;
 				var calorie = result[0].calorie;
 				  $('.food_contents').html(result[0].diet_content);
 				  $('input:text[name="calorie_total"]').val(calorie);
-				  //$('.comments').empty();
 				  
-				  console.log(result[0].real_diet_no + "======result 배열");
-				  
-				  // 댓글 내용이 있으면
+				  // 식단 내용이 있고 댓글이 출력 될 때
 				if(result[0].diet_content != null) {
-					
 				 var real_diet_no = result[0].real_diet_no;
-				 console.log(result[0].diet_content + "-- 컨텐츠 내용 유무ddd" + real_diet_no);
 				$.ajax({
 					url:'getComment',
 					data:{real_diet_no : real_diet_no},
 					dataType: 'json',
 					type: 'get',
 					success : function(response) {
-				  
+				  	
 					  $('.comments').empty();
 					  for(i=0; i<response.length; i++) {
 						  $('.comments').append(
@@ -445,7 +460,7 @@
 				}); // 댓글조회 아작스
 				
 				  }
-				 // 로우 자체가 없다면(=댓글이 없으면)
+				 // 로우 자체가 없다면(=식단번호가 없으면)
 				if(result[0].age == '0') {
 					$.ajax({
 						url : 'currentDay',
@@ -480,10 +495,10 @@
 						}
 					});
 			  
-				// 로우 값이 있다면
+				// 로우 값이 있다면(식단 내용이 있고 댓글이 없을 때)
 				} else {
-					$('.contentBtn').children().show()
-					$('input:text[name="calorie_total"]').val(calorie);
+					$('.contentBtn').children().show() // 수정, 삭제 버튼을 show
+					$('input:text[name="calorie_total"]').val(result[0].calorie);
 					$('input:text[name=dates]').val(today);
 					$('#real_diet_no1').val(result[0].real_diet_no);
 					
@@ -521,29 +536,49 @@
 		dataType: 'json',
 		type: 'get',
 		success: function drawChart(result) {
+			$('input:text[name="total_calorie1"]').val(result[0].calorie);
+			var content_food = [];
+			var content_cnt = [];
+			var content_cal = [];
+			
+			if(result[0].detail_content != null) {			
+			var contents = result[0].detail_content.split("/");
+			$('.foods').hide();
+			for(i=0; i<contents.length; i++) {
+				var contents2 = contents[i].split(",");
+				
+				
+				$('.frm1').append(
+					'<div class="foods">'
+					+ '<input type="text" name="detail_food" value="' + contents2[0] + '">'
+					+ '<input type="text" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
+					+ '<input type="text" name="detail_calorie" value="' + contents2[1] + '">'
+					+ '</div>'
+				);
+				
+			}
+				
+		} else {
+			$('.foods').hide();
+		}
 			
 			var today = result[0].take_date;
 			var calorie = result[0].calorie;
 			  $('.food_contents').html(result[0].diet_content);
 			  $('input:text[name="calorie_total"]').val(calorie);
-			  //$('.comments').empty();
 			  
-			  console.log(result[0].real_diet_no + "======result 배열");
-			  
-			  // 댓글 내용이 있으면
+			  // 식단 내용이 있고 댓글이 출력 될 때
 			if(result[0].diet_content != null) {
-				
-			 console.log(result[0].diet_content + "-- 컨텐츠 내용 유무" + result[0].real_diet_no);
+			 var real_diet_no = result[0].real_diet_no;
 			$.ajax({
-				url: 'getComment',
-				data: {real_diet_no : result[0].real_diet_no},
+				url:'getComment',
+				data:{real_diet_no : real_diet_no},
 				dataType: 'json',
+				type: 'get',
 				success : function(response) {
-					console.log(response.length + "=====댓글 조회 아작스 리턴값z");
-			  
+			  	
 				  $('.comments').empty();
 				  for(i=0; i<response.length; i++) {
-					  console.log(response + "ooooooooooo");
 					  $('.comments').append(
 						  '<div>'
 						  + '<input type="text" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
@@ -562,8 +597,10 @@
 			  }
 			}); // 댓글조회 아작스
 			
+			  } else {
+				  $('.comments').hide();
 			  }
-			 // 로우 자체가 없다면(=댓글이 없으면)
+			 // 로우 자체가 없다면(=식단번호가 없으면)
 			if(result[0].age == '0') {
 				$.ajax({
 					url : 'currentDay',
@@ -598,13 +635,13 @@
 					}
 				});
 		  
-			// 로우 값이 있지만 댓글이 없다면
+			// 로우 값이 있다면(식단 내용이 있고 댓글이 없을 때)
 			} else {
-				$('.contentBtn').children().show()
-				$('input:text[name="calorie_total"]').val(calorie);
+				$('.contentBtn').children().show() // 수정, 삭제 버튼을 show
+				$('input:text[name="calorie_total"]').val(result[0].calorie);
 				$('input:text[name=dates]').val(today);
 				$('#real_diet_no1').val(result[0].real_diet_no);
-				$('.comments').empty();
+				
 				var weight = $('input:text[name="weight"]').val(); // = 몸무게
 				var total = weight * 12 * 1.5;
 				var arr =[]; 

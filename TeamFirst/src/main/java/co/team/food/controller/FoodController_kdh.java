@@ -179,11 +179,13 @@ public class FoodController_kdh {
 		model.addAttribute("user", service.getFood(vo)); // 회원 단건 조회
 		model.addAttribute("foodList", service.getFoodList(vo)); // 음식 정보
 		model.addAttribute("food", rvo); // 실제 섭취 식단 단건 조회
-		System.out.println(rvo + "---------------------------");
+		//System.out.println(rvo + "---------------------------");
 		vo = new FoodVO();
 		vo.setReal_diet_no(rvo.getReal_diet_no()); // vo에 식단번호 담기
-		System.out.println(vo + "---------------------------------------");
+		//System.out.println(vo + "---------------------------------------");
 		model.addAttribute("oneDay", service.getFoodOne(vo)); // 일별 회원 식단 조회
+		
+		//System.out.println(service.getFoodOne(vo));
 		
 		if(rvo != null) {
 			
@@ -203,8 +205,8 @@ public class FoodController_kdh {
 					aList.add(fvo);
 				}
 				model.addAttribute("detail", aList);
+				System.out.println(aList);
 			}
-
 	}
 		
 		
@@ -281,10 +283,19 @@ public class FoodController_kdh {
 	@RequestMapping("/getDay")
 	@ResponseBody
 	public List<FoodVO> getDay(FoodVO vo) {
-		List<FoodVO> result = service.getDay(vo);
-		//result = service.getComment(vo.getReal_diet_no());
-		//System.out.println(result + "-----comment");
 		
+		List<FoodVO> result = service.getDay(vo);
+		
+		/*
+		 * String[] list = result.to.getDetail_content().split("/");
+		 * 
+		 * System.out.println("12312313   " + list);
+		 * 
+		 * for(int i=0; i<result.size(); i++) { FoodVO rvo = new FoodVO();
+		 * 
+		 * }
+		 * 
+		 */
 		if(result.size() == 0) { 
 			vo.setAge("0");
 			result.add(vo);
@@ -314,9 +325,12 @@ public class FoodController_kdh {
 	@RequestMapping("/updateCalorie")
 	@ResponseBody
 	public FoodVO updateCalorie(FoodVO vo) {
-		System.out.println(vo + "-------------------------");
-		service.updateCalorie(vo);
-		return vo;
+		System.out.println(vo.getDetail_content() + "-------------------------");
+		if(vo.getDetail_content() == null) {
+			vo.setDetail_content("");
+			return service.updateCalorie(vo);
+		}
+		return service.updateCalorie(vo);
 		
 	}
 	
