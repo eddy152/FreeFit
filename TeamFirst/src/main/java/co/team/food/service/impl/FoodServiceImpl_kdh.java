@@ -135,8 +135,8 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 총칼로리 저장
-	public FoodVO updateCalorie(FoodVO vo) {
-		return dao.updateCalorie(vo);
+	public void updateCalorie(FoodVO vo) {
+		dao.updateCalorie(vo);
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 일별 단건 조회
-	public List<FoodVO> getDay(FoodVO vo) {
+	public FoodVO getDay(FoodVO vo) {
 		return dao.getDay(vo);
 	}
 

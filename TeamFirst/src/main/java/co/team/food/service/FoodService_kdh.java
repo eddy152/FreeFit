@@ -74,10 +74,10 @@ public interface FoodService_kdh {
 	public List<FoodVO> getFoodOne(FoodVO vo);
 
 	// 일별 단건 조회
-	public List<FoodVO> getDay(FoodVO vo);
+	public FoodVO getDay(FoodVO vo);
 	
 	public FoodVO current(FoodVO vo);
 
 	// 총칼로리 저장
-	public FoodVO updateCalorie(FoodVO vo);
+	public void updateCalorie(FoodVO vo);
 }

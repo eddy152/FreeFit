@@ -282,9 +282,9 @@ public class FoodController_kdh {
 	// 일별 단건 조회
 	@RequestMapping("/getDay")
 	@ResponseBody
-	public List<FoodVO> getDay(FoodVO vo) {
+	public FoodVO getDay(FoodVO vo) {
 		
-		List<FoodVO> result = service.getDay(vo);
+		FoodVO result = service.getDay(vo);
 		
 		/*
 		 * String[] list = result.to.getDetail_content().split("/");
@@ -296,11 +296,7 @@ public class FoodController_kdh {
 		 * }
 		 * 
 		 */
-		if(result.size() == 0) { 
-			vo.setAge("0");
-			result.add(vo);
-		  return result;
-		  }
+		
 		return result;
 		
 	}
@@ -326,11 +322,9 @@ public class FoodController_kdh {
 	@ResponseBody
 	public FoodVO updateCalorie(FoodVO vo) {
 		System.out.println(vo.getDetail_content() + "-------------------------");
-		if(vo.getDetail_content() == null) {
-			vo.setDetail_content("");
-			return service.updateCalorie(vo);
-		}
-		return service.updateCalorie(vo);
+	
+		service.updateCalorie(vo);
+		return vo;
 		
 	}
 	
