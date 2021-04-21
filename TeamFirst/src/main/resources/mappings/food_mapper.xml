@@ -179,21 +179,10 @@
 	</select>
 	
 	<select id="getDay" resultType="FoodVO" parameterType="FoodVO">
-	    <choose>
-	    <when test="diet_content != null">
-		    select r.real_diet_no, r.user_id, to_char(r.take_date, 'yyyy-MM-dd') take_date, r.diet_content, r.calorie, c.*
-			from real_diet r inner join comments c
-		    on r.real_diet_no = c.real_diet_no
-		    and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate+#{cnt}, 'yyyy-MM-dd')
-		    and r.user_id=#{id}
-	    </when>
-	    <otherwise>
-	    	select * from
+	    	select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, detail_content from
 	    	real_diet 
 	    	where user_id = #{id}
 	    	and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate+#{cnt}, 'yyyy-MM-dd')
-	    </otherwise>
-	    </choose>
 	</select>
 	
 	

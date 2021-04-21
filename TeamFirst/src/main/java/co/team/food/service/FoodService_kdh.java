@@ -79,5 +79,5 @@ public interface FoodService_kdh {
 	public FoodVO current(FoodVO vo);
 
 	// 총칼로리 저장
-	public void updateCalorie(FoodVO vo);
+	public FoodVO updateCalorie(FoodVO vo);
 }
