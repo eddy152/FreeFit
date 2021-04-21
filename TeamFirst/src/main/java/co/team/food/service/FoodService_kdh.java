@@ -50,7 +50,7 @@ public interface FoodService_kdh {
 	public FoodVO getRealFoodMember(FoodVO vo);
 
 	// 댓글 조회
-	public List<FoodVO> getComment(FoodVO vo);
+	public List<FoodVO> getComment(FoodVO real_no);
 
 	// 댓글 추가
 	public void addComment(FoodVO vo);
@@ -74,7 +74,7 @@ public interface FoodService_kdh {
 	public List<FoodVO> getFoodOne(FoodVO vo);
 
 	// 일별 단건 조회
-	public FoodVO getDay(FoodVO vo);
+	public List<FoodVO> getDay(FoodVO vo);
 	
 	public FoodVO current(FoodVO vo);
 

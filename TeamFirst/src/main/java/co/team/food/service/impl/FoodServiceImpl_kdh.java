@@ -111,8 +111,8 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 댓글 조회
-	public List<FoodVO> getComment(FoodVO vo) {
-		return dao.getComment(vo);
+	public List<FoodVO> getComment(FoodVO real_no) {
+		return dao.getComment(real_no);
 	}
 	
 	@Override
@@ -159,7 +159,7 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 일별 단건 조회
-	public FoodVO getDay(FoodVO vo) {
+	public List<FoodVO> getDay(FoodVO vo) {
 		return dao.getDay(vo);
 	}
 

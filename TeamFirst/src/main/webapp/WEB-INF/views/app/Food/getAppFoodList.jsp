@@ -13,7 +13,7 @@
 				success: function(res) {
 					e.preventDefault();
 					$('#exampleModal').modal("show");
-				
+						console.log(res + ", " + res.detail_food + ", " + res.detail_calorie + ", " + res.detail_count);
 						$('#diet_no').text(res.diet_no);
 						$('#diet_title').text(res.diet_title);
 						$('#diet_content').text(res.diet_content); 
