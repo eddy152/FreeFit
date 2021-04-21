@@ -2,8 +2,6 @@ package co.team.security.service.security;
 
 import java.util.List;
 
-import co.team.admin.service.AdminVO;
-
 public interface UserDbService {
     public UserEntity getUser(String loginUserId);
 

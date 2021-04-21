@@ -1,9 +1,9 @@
 package co.team.board.service.impl;
 
 
-import co.team.board.service.AdminNoticeBoardListSearch;
 import java.util.List;
 
+import co.team.board.service.AdminNoticeBoardListSearch;
 import co.team.board.service.AdminNoticeBoardVO;
 
 public interface AdminNoticeBoardMapper {

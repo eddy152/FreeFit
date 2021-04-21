@@ -22,6 +22,9 @@
 				</div>
 			</li>  -->
 			<li class="nav-item">
+				<a class="nav-link" href="/spring/appNoticeList">
+					<span data-feather="user-check"></span> 유저 공지사항
+				</a>
 				<a class="nav-link" href="/spring/getAppFoodList">
 					<span data-feather="user-check"></span> 추천식단리스트
 				</a>

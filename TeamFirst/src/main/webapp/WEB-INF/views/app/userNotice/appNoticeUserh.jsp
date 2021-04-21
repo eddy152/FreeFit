@@ -63,7 +63,7 @@ textarea {
 		<h2 style="text-align: center;">상세보기 페이지</h2>
 		<br> <br>
 		<form method="post" action="appUserh">
-			카테고리 : <input readonly="readonly" type="text" name="category"
+			카테고리 : <input type="text" name="category"
 				value="${us.category}"><br> 게시물번호 : <input
 				readonly="readonly" type="text" name="board_no"
 				value="${us.board_no}"><br> 제목 : <input

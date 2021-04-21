@@ -1,9 +1,5 @@
 package co.team.food.service;
 
-import java.util.Date;
-
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
