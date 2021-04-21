@@ -111,8 +111,8 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 댓글 조회
-	public List<FoodVO> getComment(FoodVO vo) {
-		return dao.getComment(vo);
+	public List<FoodVO> getComment(FoodVO real_no) {
+		return dao.getComment(real_no);
 	}
 	
 	@Override

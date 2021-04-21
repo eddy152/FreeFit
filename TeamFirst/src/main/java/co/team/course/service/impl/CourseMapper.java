@@ -4,7 +4,6 @@ import java.util.List;
 
 import co.team.course.service.Course_Info_VO;
 import co.team.course.service.Course_TuitionVO;
-import co.team.trainer.service.TrainerVO;
 
 public interface CourseMapper {
 

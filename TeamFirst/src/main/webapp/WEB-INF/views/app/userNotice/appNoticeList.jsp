@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>appuserNList.jsp</title>
+<title>appNoticeist.jsp</title>
 </head>
 <body>
 	<div class="page-wrapper">
@@ -55,18 +55,18 @@
 			</div>
 			<!-- Paging -->
 			<div align="center" class="row">
-				<c:if test="${pagination.curRange ne 1 }">
+				<c:if test="${paginations.curRange ne 1 }">
 					<a href="#" onClick="fn_paging(1)"> [처음]</a>
 				</c:if>
-				<c:if test="${pagination.curRange ne 1 }">
-					<a href="#" onClick="fn_paging('${pagination.prevPage}')">
+				<c:if test="${paginations.curRange ne 1 }">
+					<a href="#" onClick="fn_paging('${paginations.prevPage}')">
 						[이전]</a>
 				</c:if>
 
-				<c:forEach var="pageNum" begin="${pagination.startPage}"
-					end="${pagination.endPage}">
+				<c:forEach var="pageNum" begin="${paginations.startPage}"
+					end="${paginations.endPage}">
 					<c:choose>
-						<c:when test="${pageNum eq pagination.curPage}">
+						<c:when test="${pageNum eq paginations.curPage}">
 							<span style="font-weight: bold;"><a href="#"
 								onclick="fn_paging('${pageNum}')">${pageNum}</a></span>
 						</c:when>
@@ -76,17 +76,17 @@
 					</c:choose>
 				</c:forEach>
 				<c:if
-					test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-					<a href="#" onClick="fn_paging('${pagination.nextPage}')">[다음]</a>
+					test="${paginations.curPage ne paginations.pageCnt && paginations.pageCnt > 0}">
+					<a href="#" onClick="fn_paging('${paginations.nextPage}')">[다음]</a>
 				</c:if>
 				<c:if
-					test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-					<a href="#" onClick="fn_paging('${pagination.nextPage}')">[끝]</a>
+					test="${paginations.curPage ne paginations.pageCnt && paginations.pageCnt > 0}">
+					<a href="#" onClick="fn_paging('${paginations.nextPage}')">[끝]</a>
 				</c:if>
 			</div>
 			<div>총 게시글 수 : ${pagination.listCnt} / 총 페이지 수 :
-				${pagination.pageCnt} / 현재 페이지 : ${pagenation.curPage} / 현재 블럭 :
-				${pagination.curRange} / 총 블럭 수 : ${pagination.rangeCnt}</div>
+				${paginations.pageCnt} / 현재 페이지 : ${pagenations.curPage} / 현재 블럭 :
+				${paginations.curRange} / 총 블럭 수 : ${paginations.rangeCnt}</div>
 		</div>
 	</div>
 
@@ -95,16 +95,16 @@
 	$(function() {
 		$(".dataRow").click(function() {
 			var no = $(this)[0].children[0].innerText
-			location ="appUserh?board_no="+no;
+			location ="appNoticeUserh?board_no="+no;
 		})
 	});
 
 	function fn_paging(page) {
-		location = "appuserNList?page="+page+"&search="+$("#search_text").val();
+		location = "appNoticeList?page="+page+"&search="+$("#search_text").val();
 	}
 
 	function search() {
-		location = "appuserNList?search="+$("#search_text").val();
+		location = "appNoticeList?search="+$("#search_text").val();
 	}
 </script>
 </html>
