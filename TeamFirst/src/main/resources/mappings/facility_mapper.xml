@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="co.team.Facility.service.impl.FacilityMapper_kdh">
+ 
+ <select id="getSearchFacility" resultType="FacilityVO" parameterType="FacilityVO">
+ 	select facility_num, fitness_id, location, facility_name, special_content, purchase_date, broken, image from facility
+ </select>
+ 
+ </mapper>
