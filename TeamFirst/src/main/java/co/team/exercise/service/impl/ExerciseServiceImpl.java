@@ -144,7 +144,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 
 	@Override
-	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
+	public List<ExePersonalDetailVO> getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
 		return dao.getExercisePersonalDetailProc(vo);
 	}
 

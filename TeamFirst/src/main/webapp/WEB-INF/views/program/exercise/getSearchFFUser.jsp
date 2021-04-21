@@ -11,7 +11,7 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(function() {
-		$("tr").on("click", function() {
+		$(".ffuser").on("click", function() {
 			var id = $(this)[0].firstElementChild.innerText;
 			var form = document.createElement('form');
 			var objs;
@@ -50,7 +50,7 @@
 				<th>성별</th>
 			</tr>
 			<c:forEach items="${list}" var="list">
-				<tr>
+				<tr class="ffuser">
 					<td>${list.id}</td>
 					<td>${list.name}</td>
 					<td>${list.phone_number}</td>

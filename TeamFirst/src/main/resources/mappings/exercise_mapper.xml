@@ -291,7 +291,7 @@
 				e.exe_name
 		FROM exe_personal_detail p, exercise_list e
 		WHERE p.exe_no = e.exe_no
-		AND epd_no = #{epd_no}
+		AND exep_no = #{exep_no}
 		AND user_id = #{user_id}
 	</select>
 	

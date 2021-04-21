@@ -30,7 +30,7 @@ public interface ExerciseService {
 	public int deleteExerciseProgramPersonal(ExerciseProgramPersonalVO vo);
 	
 	public List<ExePersonalDetailVO> getSearchExercisePersonalDetail(ExePersonalDetailVO vo);
-	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo);
+	public List<ExePersonalDetailVO> getExercisePersonalDetailProc(ExePersonalDetailVO vo);
 	public int insertExercisePersonalDetail(Map<String, Object> vo);
 	public int updateExercisePersonalDetail(ExePersonalDetailVO vo);
 	public int deleteExercisePersonalDetail(ExePersonalDetailVO vo);

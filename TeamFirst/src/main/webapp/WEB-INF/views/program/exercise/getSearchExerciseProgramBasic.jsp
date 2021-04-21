@@ -152,12 +152,18 @@ $(function() {
 	
 	$(document).on("click", "a[name=exeGet]", function() {
         $.ajax({
-			url: "getSearchExercisePersonalDetail?user_id=" + $("input[name=user_id]").val(),  // 서버 url
-			type: 'get',
+			url: "getSearchExercisePersonalDetail",
+			data: {user_id : $("input[name=user_id]").val()},
+			type: 'post',
 			success: function(result) {
 				window.name = "parentForm";
-		        window.open("getSearchExercisePersonalDetail?user_id=" + $("input[name=user_id]").val()
+				var myForm = document.popForm;
+		        window.open("", "popForm"
 		                	, "childForm", "width=800, height=500, resizable = no, scrollbars = no");
+				myForm.action = "getSearchExercisePersonalDetail";
+				myForm.method = "post";
+				myForm.target = "popForm";
+				myForm.submit();
 			}
 		})  // End of ajax
 	})
@@ -287,7 +293,7 @@ ul.sub li:hover {
 										<ul class="sub">
 											<li><a name="exeAdd">운동 추가</a></li>
 											<li><a name="exeDel">운동 삭제</a></li>
-											<li><a name="exeGet">운동 목록 불러오기</a></li>
+											<li><a name="exeGet">목록 불러오기</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -323,6 +329,9 @@ ul.sub li:hover {
 					<table border="1" id="exeSet"></table>
 					프로그램 번호<br><input type="text" name="exep_no" value="1"><br>
 					유저 아이디<br><input type="text" name="user_id" value="${ffUser.id }"><br>
+				</form>
+				<form name="popForm">
+					<input type="hidden" name="user_id" value="${ffUser.id }" />
 				</form>
 			</div>
 		</div>

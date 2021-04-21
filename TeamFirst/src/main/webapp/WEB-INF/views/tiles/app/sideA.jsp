@@ -46,7 +46,7 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="/spring/getSearchFFUser">
-					<span data-feather="file"></span> 회원 운동 관리
+					<span data-feather="file"></span> 회원 운동 관리(트레이너용)
 				</a>
 				<form name="myForm" action="getFFUserProc" method="POST">
 					<input type="hidden" name="id" value="some_value1" />
@@ -58,7 +58,7 @@
 				<c:choose>
 					<c:when test="">
 						<a class="nav-link" href="/spring/getSearchFFUser">
-							<span data-feather="file"></span> 회원 운동 관리
+							<span data-feather="file"></span> 회원 운동 관리(트레이너용)
 						</a>
 					</c:when>
 					<c:when test="">

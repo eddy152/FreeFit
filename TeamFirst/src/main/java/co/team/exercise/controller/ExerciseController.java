@@ -163,8 +163,9 @@ public class ExerciseController {
 	// EXERCISE_PROGRAM_PERSONAL start
 	// 리스트 조회
 	@PostMapping("/getSearchExerciseProgramPersonal")
-	public List<ExerciseProgramPersonalVO> getSearchExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
-		return service.getSearchExerciseProgramPersonal(vo);
+	public String getSearchExerciseProgramPersonal(ExerciseProgramPersonalVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExerciseProgramPersonal(vo));
+		return "program/exercise/getSearchExerciseProgramPersonal";
 	}
 
 	// 단건 조회
@@ -198,25 +199,20 @@ public class ExerciseController {
 
 	// EXERCISE_PERSONAL_DETAIL start
 	// 리스트 조회
-	@GetMapping("/getSearchExercisePersonalDetail")
+	@PostMapping("/getSearchExercisePersonalDetail")
 	public String getSearchExercisePersonalDetail(ExePersonalDetailVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExercisePersonalDetail(vo));
-		return "program/exercise/getSearchExercisePersonalDetail";
+		return "nolayout/program/exercise/getSearchExercisePersonalDetail";
 	}
 
 	// 단건 조회
-	@GetMapping("/getExercisePersonalDetailProc")
-	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
+	@PostMapping("/getExercisePersonalDetailProc")
+	@ResponseBody
+	public List<ExePersonalDetailVO> getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
 		return service.getExercisePersonalDetailProc(vo);
 	}
-
-	// 단건 등록
-	/*
-	 * @GetMapping("/insertExercisePersonalDetail") public String
-	 * insertExercisePersonalDetail(ExePersonalDetailVO vo) {
-	 * service.insertExercisePersonalDetail(vo); return
-	 * "redirect:/getSearchExercisePersonalDetail";
-	 }*/	
+	
+	// 운동 리스트 입력
 	@PostMapping(value = "/insertExercisePersonalDetail")
 	@ResponseBody
 	public boolean insertExercisePersonalDetail(@RequestBody Map<String, Object> params) throws Exception {
