@@ -166,8 +166,7 @@ public class ExerciseController {
 
 	// EXERCISE_PROGRAM_PERSONAL start
 	// 리스트 조회
-	@ResponseBody
-	@GetMapping("/getSearchExerciseProgramPersonal")
+	@PostMapping("/getSearchExerciseProgramPersonal")
 	public List<ExerciseProgramPersonalVO> getSearchExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
 		return service.getSearchExerciseProgramPersonal(vo);
 	}
