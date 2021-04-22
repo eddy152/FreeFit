@@ -41,7 +41,7 @@ public class AdminVO {
 	private String membership_no;
 	private String membership_name; //멤버쉽이름
 	private String membership_start;
-	private Date membership_end;
+	private String membership_end;
 	private Integer dday; //멤버쉽남은시간
 	private String membership_price;
 	

@@ -261,22 +261,24 @@
 					<div class="tab-pane fade exp-cover" id="membership"
 						role="tabpanel" aria-labelledby="membership-tab">
 						<div class="data-box">
-							<%-- <c:if test="${memList ne null }">
+							<c:if test="${memList ne null }">
 							<table>
-							<tr><th>멤버십 등록번호</th><th>멤버십 </th>
+							<tr><th>멤버십 번호</th><th>멤버십 등급</th><th>피트니스 번호</th><th>피트니스 이름</th>
+							<th>멤버십 시작일</th><th>멤버십 종료일</th><th>남은 날짜</th>
 							</tr>
 							<c:forEach var="mem" items="${memList}">
 							<tr>
 							<td>${mem.mem_reg_id}</td>
-							<td>${mem.fitness_id}</td>
 							<td>${mem.membership_name }</td>
+							<td>${mem.fitness_id}</td>
+							<td>${mem.fitness_name}</td>
 							<td>${mem.membership_start }</td>
 							<td>${mem.membership_end }</td>
-							<td>${mem.d_day }</td>
+							<td>${mem.dday }</td>
 							</tr>
 							</c:forEach>							
 							</table>
-							</c:if> --%>
+							</c:if>
 						</div>
 					</div>
 

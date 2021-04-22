@@ -29,7 +29,7 @@
           <h4 class="my-0 font-weight-normal">골드</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">15,000 원<small class="text-muted">/ 월</small></h1>
+          <h1 class="card-title pricing-card-title">0 원<small class="text-muted">/ 월</small></h1>
           <ul class="list-unstyled mt-3 mb-4">
             
             <li>트레이너 10명</li>
@@ -45,7 +45,7 @@
           <h4 class="my-0 font-weight-normal">플래티넘</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">150,000 원<small class="text-muted">/ 월</small></h1>
+          <h1 class="card-title pricing-card-title">0 원<small class="text-muted">/ 월</small></h1>
           <ul class="list-unstyled mt-3 mb-4">
             <li>트레이너 무제한</li>
             <li>회원 무제한</li>
