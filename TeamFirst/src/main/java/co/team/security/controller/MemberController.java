@@ -154,24 +154,24 @@ public class MemberController {
 	public String joinTrainer(@ModelAttribute TrainerVO member, HttpSession session) {
 		int max = mapper.getMax(); // 가입자수 불러오기
 
-		member.setFitness_id((int) session.getAttribute("fitness_id"));
+		member.setFitness_id(Integer.parseInt((String) session.getAttribute("fitness_id")));
 		member.setId(session.getAttribute("fitness_id") + "_" + "trainer" + max);
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addTrainerMember(member);
-		return "redirect:/tilesTestProgram";
+		return "redirect:/fitnessHome";
 	}
 
 	// 유저 가입
 	@PostMapping("/joinU")
 	public String joinUser(@ModelAttribute UserVO member, HttpSession session) {
 		int max = mapper.getMax();
-		member.setFitness_id((int) session.getAttribute("fitness_id"));
+		member.setFitness_id(Integer.parseInt((String) session.getAttribute("fitness_id")));
 		member.setId(session.getAttribute("fitness_id") + "_" + "user" + max);
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));
 		memberService.addUserMember(member);
-		return "redirect:/tilesTestProgram";
+		return "redirect:/fitnessHome";
 	}
 
 	// 아이디 중복체크

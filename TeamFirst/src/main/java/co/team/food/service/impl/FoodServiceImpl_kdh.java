@@ -106,7 +106,7 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	@Override
 	// 댓글 추가
 	public void addComment(FoodVO vo) {
-		 dao.addComment(vo);
+		dao.addComment(vo);
 	}
 
 	@Override
@@ -167,6 +167,12 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	public FoodVO current(FoodVO vo) {
 		// TODO Auto-generated method stub
 		return dao.current(vo);
+	}
+
+	@Override
+	// 최신 댓글 조회(단건)
+	public FoodVO getDescComment(FoodVO vo) {
+		return dao.getDescComment(vo);
 	}
 
 

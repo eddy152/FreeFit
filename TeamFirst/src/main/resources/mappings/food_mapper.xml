@@ -142,6 +142,12 @@
 		values(com_seq.nextval, #{real_diet_no}, #{diet_comment})
 	</insert>
 	
+	<!-- 댓글 최신 값 조회 -->
+	<select id="getDescComment" resultType="FoodVO" parameterType="FoodVO">
+		select max(comment_no) as comment_no from comments 
+		where real_diet_no = #{real_diet_no}
+	</select>
+	
 	<!-- 댓글 수정 -->
 	<update id="updateComment" parameterType="FoodVO">
 		update comments set diet_comment = #{diet_comment}

@@ -190,12 +190,18 @@
 				<button type="button" class="addFood">+</button>
 				<hr>
 				<div class="frm1">음식명 :
-							<div class="foods">
-								<%-- <input type="text" name="detail_food" value="${detail.detail_food}">
-								<input type="text" name="detail_count" onchange="change(this)" value="${detail.detail_count}">
-								<input type="text" name="detail_calorie" value="${detail.detail_calorie}">개
-								<button type="button" class="deleteFood">-</button><br> --%>
-							</div>					
+						<c:if test="${detail ne null }">
+							 <div class="foods">
+							 <c:forEach items="${detail}" var="detail">
+								<div class="each_food">
+									<input type="text" name="detail_food" value="${detail.detail_food}">
+									<input type="text" name="detail_calorie" value="${detail.detail_calorie}" hidden="hidden">
+									<input type="text" name="detail_count" onchange="change(this)" value="${detail.detail_count}">개
+									<button type="button" class="deleteFood">-</button><br>
+								</div>
+							 </c:forEach>
+							</div>			
+						</c:if>
 						
 				</div>
 				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"> <br>
@@ -249,18 +255,20 @@
 			if(selectFoodName != $('input:text[name="food_name"]').val()) {
 			
 			$('.frm1').append(
-				'<div class="foods">' +
-				'<input type="text" name="food_name" value="' 
+				'<div class="foods">' 
+				+ '<div>'
+				+ '<input type="text" name="detail_food" value="' 
 				+ selectFoodName 
 				+ '">' 
-				+ '<input type="text" name="food_calorie" hidden="hidden" value="' 
+				+ '<input type="text" name="detail_calorie" hidden="hidden" value="' 
 				+ selectFood 
 				+ '">' 
-				+ '<input type="text" name="count" onchange="change(this)" value="' 
+				+ '<input type="text" name="detail_count" onchange="change(this)" value="' 
 				+ count 
 				+ '">' 
 				+ '개'
 				+ '<button type="button" class="deleteFood">-</button>'
+				+ '</div>'
 				+ '</div>'
 			);
 			} else {
@@ -285,6 +293,7 @@
 	$(document).ready(function() {
 		$(document).on('click', '.deleteFood', function() {
 			var selectFood = $(this).siblings().eq(1).val(); // 칼로리
+			console.log($(this).siblings().eq(2).val());
 			var count = $(this).siblings().eq(2).val(); // 갯수
 			
 			var result = TotalCalorie(selectFood, count); // 칼로리 * 갯수
@@ -299,10 +308,15 @@
 	
 	// 등록 버튼 클릭시 총 칼로리를 저장한다
 	function Click(){
+		//var food = $('.frm1');
 		var food = $('.foods');
 		var foods = '';
 		for(i=0; i<food.length; i++) {
-			foods += food[i].children[0].value + ',' + food[i].children[1].value + ',' + food[i].children[2].value;
+			var name = $('input:text[name="detail_food"]').eq(i).val();
+			var cal = $('input:text[name="detail_calorie"]').eq(i).val();
+			var cnt = $('input:text[name="detail_count"]').eq(i).val();
+		console.log();
+			foods +=  name + "," + cal + "," + cnt;
 			if(i < food.length-1) {				
 			foods += '/';
 			}
@@ -325,7 +339,7 @@
 			error: function() {
 				alert('ERROR!');
 			}
-		});
+		}); 
 	}
 
 	
@@ -333,10 +347,11 @@
 	function change(obj) {
 		var total_foods = 0; 
 		
-		var size = $('.frm1').find('div').length;
+		var size = $('.foods').find('div').length;
 		for(i=0; i<size; i++) {
-			var calorie = $('.frm1').find('div')[i].children[1].value;
-			var count = $('.frm1').find('div')[i].children[2].value;
+			var calorie = $('.foods').find('div')[i].children[1].value;
+			console.log($('.foods').find('div')[i].children[2].value);
+			var count = $('.foods').find('div')[i].children[2].value;
 			total_foods += (calorie * count);
 			$('input:text[name="total_calorie1"]').val(total_foods);
 		}
@@ -361,18 +376,24 @@
 		});
 	});
 
+	// 구글 차트
 	google.charts.load('visualization','1', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 	
 	function drawChart() {
 		var weight = $('input:text[name="weight"]').val(); // = 몸무게
 		var result = weight * 12 * 1.5;
-		var arr =[]; 
-		arr.push( ['섭취날짜', '실제섭취량', '권장량']);
+		//var arr =[]; 
+		//arr.push(['섭취날짜', '실제섭취량', '권쟝량']); 		   				
 	
-		    arr.push(['${food.take_date}', parseInt(${food.calorie }), result]);
+		//arr.push(['${food.take_date}', parseInt(${food.calorie}), result]);
 		
-	  var data = google.visualization.arrayToDataTable(arr);
+	  //var data = google.visualization.arrayToDataTable(arr);
+	   var data = google.visualization.arrayToDataTable([
+		   ['섭취날짜', '실제섭취량', '권쟝량'],
+		   ['${food.take_date}', parseInt(${food.calorie}), result]
+	   ]);
+	 
 	
 	  var options = {
 			  width : '300',
@@ -405,22 +426,25 @@
 				console.log(result.detail_content);
 				if(result.detail_content != null) {
 					var contents = result.detail_content.split("/");
-				//$('.foods').hide();
+				$('.foods').remove();
 				for(i=0; i<contents.length; i++) {
 					var contents2 = contents[i].split(",");
-					
+					console.log(contents2[2]);
 					$('.frm1').append(
 						'<div class="foods">'
+						+ '<div class="each_food">'
 						+ '<input type="text" name="detail_food" value="' + contents2[0] + '">'
+						+ '<input type="text" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
 						+ '<input type="text" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
-						+ '<input type="text" name="detail_calorie" value="' + contents2[1] + '">'
+						+ '<button type="button" class="deleteFood">-</button>'
+						+ '</div>'
 						+ '</div>'
 					);
 					
 				}
 					
 			} else {
-				$('.foods').hide();
+				$('.foods').remove();
 			}
 				
 				var today = result.take_date;
@@ -541,33 +565,34 @@
 		dataType: 'json',
 		type: 'get',
 		success: function drawChart(result) {
+			
 			if(result.real_diet_no == null) {
 				$('.insertFood').show();
 			}
 			$('input:text[name="total_calorie1"]').val(result.calorie);
-			var content_food = [];
-			var content_cnt = [];
-			var content_cal = [];
 			
-				console.log(result.detail_content);
+			console.log(result.detail_content);
 			if(result.detail_content != null) {
-			var contents = result.detail_content.split("/");
-			//$('.foods').hide();
+				var contents = result.detail_content.split("/");
+			$('.foods').remove();
 			for(i=0; i<contents.length; i++) {
 				var contents2 = contents[i].split(",");
-				
+				console.log(contents2[2]);
 				$('.frm1').append(
 					'<div class="foods">'
+					+ '<div class="each_food">'
 					+ '<input type="text" name="detail_food" value="' + contents2[0] + '">'
+					+ '<input type="text" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
 					+ '<input type="text" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
-					+ '<input type="text" name="detail_calorie" value="' + contents2[1] + '">'
+					+ '<button type="button" class="deleteFood">-</button>'
+					+ '</div>'
 					+ '</div>'
 				);
 				
 			}
 				
 		} else {
-			$('.foods').hide();
+			$('.foods').remove();
 		}
 			
 			var today = result.take_date;
@@ -679,6 +704,11 @@
 	
 	// 댓글 등록
 	function comment() {
+		if($('input:text[name="diet_comment"]').val() == null && $('input:text[name="diet_comment"]').val() == ''){
+			alert('댓글을 입력해야 합니다.');
+		} else {
+			
+		
 		$.ajax({
 			url : 'addComment',
 			data: { real_diet_no: $('#real_diet_no1').val(),
@@ -687,16 +717,20 @@
 			dataType: 'json',
 			type: 'post',
 			success: function(response) {
-				console.log(response.diet_comment);
+				console.log(response.comment_no);
 				alert('성공!');
-			
+				
+				
 			
 				$('.comments').append(
-					'<input type="text" name="comment_upd" value="'+ response.diet_comment +'">'
+				 	  '<div>'
+					+ '<input type="text" name="comment_upd" value="'+ response.diet_comment +'">'
+					+ '<input type="text" value="' + response.comment_no + '" name="comment_no" hidden="hidden">'
 					+ '<textarea class="hide_comment" style="display: none;">' + response.diet_comment + '</textarea>'
 					+ '<a href="#" class="updateComment">[수정]</a>'
 					+ '<a href="#" class="updateComment2" style="display: none;">[수정]</a>'
 					+ '<a href="#" class="deleteComment">[삭제]</a>'
+					+ '</div>'
 				);
 				
 				$('input:text[name="diet_comment"]').val('');
@@ -706,6 +740,7 @@
 			}
 			
 		});
+		}
 	}
 	
 	// 댓글 수정
@@ -725,6 +760,8 @@
 	
 	$(document).ready(function() {
 		$(document).on('click', '.updateComment2', function(e) {
+			
+			console.log($(this).closest('div'));
 			
 			if(confirm('수정하시겠습니까?')) {
 				

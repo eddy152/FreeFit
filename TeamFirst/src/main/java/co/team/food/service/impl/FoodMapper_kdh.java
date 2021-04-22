@@ -58,6 +58,9 @@ public interface FoodMapper_kdh {
 	// 댓글 추가
 	public void addComment(FoodVO vo);
 	
+	// 최신 댓글 조회
+	public FoodVO getDescComment(FoodVO vo);
+	
 	// 댓글 수정
 	public void updateComment(FoodVO vo);
 	
