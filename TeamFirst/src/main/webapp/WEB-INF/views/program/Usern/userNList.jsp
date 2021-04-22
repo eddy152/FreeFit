@@ -2,23 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
 <title>userNList.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="page-wrapper">
 		<div class="container-fluid">
-			<div class="col-lg-15">
+			<div class="row row-2">
 				<!-- 게시판 col-lg-* 1200px이하에서 세로로 표시 시작-->
-				<div class="col-lg-15">
-					<h2 class="page-header">오너 공지사항jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</h2>
+				<div class="col-sm-5">
+					<h1 class="page-header">오너 공지사항</h1>
 				</div>
 
-				<div class="panel panel-default">
-					<div class="panel-heading">헤드글 아무거나</div>
-					<div align="center" class="panel-body">
+				<div class="table-responsive">
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -42,20 +40,17 @@
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-12">
-						<input type="text" id="search_text" style="width: 300px;"
-							value="${search}" /> <input type="button" value="검색하기"
+				<div class="input-group mb-3">
+						<input type="text" id="search_text" style="width: 100px;" class="form-control";
+							value="${search}" />&nbsp;&nbsp; <input type="button" value="검색하기"  class="btn btn-secondary mb-5";
 							onclick="search()">
-					</div>
 					<!-- col-lg-12끝 -->
 				</div>
 				<!--row 끝 -->
 				<div class="row">
 					<div class="col-lg-12">
-						<input type="button" value="글쓰기" style="float: right;"
+						<input type="button" value="글쓰기" style="float: right;" class="btn btn-secondary mb-3";
 							onclick="location.href='userNW';">
 					</div>
 				</div>
@@ -92,9 +87,6 @@
 					<a href="#" onClick="fn_paging('${pagination.nextPage}')">[끝]</a>
 				</c:if>
 			</div>
-			<div>총 게시글 수 : ${pagination.listCnt} / 총 페이지 수 :
-				${pagination.pageCnt} / 현재 페이지 : ${pagenation.curPage} / 현재 블럭 :
-				${pagination.curRange} / 총 블럭 수 : ${pagination.rangeCnt}</div>
 		</div>
 	</div>
 

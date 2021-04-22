@@ -15,6 +15,7 @@ public class UsernVO {
 	private Date reg_date;
 	private int hit;
 	private int fitness_id;
+	private int seq;
 	
 	public static void setStartIndex(int startIndex) {
 	}

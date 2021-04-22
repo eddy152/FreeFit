@@ -6,67 +6,62 @@
 	<!-- user notice 유저공지  -->
 	<mapper namespace="co.team.board.service.impl.UserNoticeBoardMapper">
 	
-	<insert id="insertUserNoticeBoard"
-			parameterType="UserNoticeBoardVO">
-		
-		INSERT INTO USER_NOTICE_BOARD( 
-		BOARD_NO
-		,MEM_BOARD_NO
-		,CATEGORY
-		,TITLE
-		,CONTENT
-		,REG_DATE
-		,HIT
-		,MEM_REG_ID
-		)
-		
-		VALUES( 
-		#{board_no}
-		,#{mem_board_no}
-		,#{category}
-		,#{title}
-		,#{content}
-		,#{reg_date}
-		,#{hit}
-		,#{mem_reg_id}
-		
-		)
-	</insert>
-
-	<update id="updateUserNoticeBoard" 
-			parameterType="co.team.board.service.impl.UserNoticeBoardMapper">
-			
-			UPDATE USER_NOTICE_BOARD
-			SET CONTENT = #{content}
-			WHERE BOARD_NO = #{board_no} 
-	</update>
-	
-	
-	<delete id="deleteUserNoticeBoard" 
-			parameterType="UserNoticeBoardVO">
-		
-		DELETE FROM USER_NOTICE_BOARD
-		
-		WHERE BOARD_NO = #{board_no}
-
-	</delete>
 	
 	<select id="getUserNoticeBoard" 
 			resultType="UserNoticeBoardVO"
 			parameterType="UserNoticeBoardVO">
 			
-			SELECT BOARD_NO
-				,MEM_BOARD_NO
-				,CATEGORY
-				,TITLE
-				,CONTENT
-				,REG_DATE
-				,HIT
-				,MEM_REG_ID
-			FROM USER_NOTICE_BOARD
-			WHERE BOARD_NO = #{board_no}
+				SELECT 	  rownum as seq,
+	 			  board_no
+	 			  ,category
+	 			  ,title
+	 			  ,content
+	 			  ,reg_date
+	 			  ,hit
+ 		FROM
+ 		 	 (
+ 		 	 	SELECT *  FROM (
+	 		 	 			
+	 		 	 	
+ 		 	 						SELECT 	Board_no,	rownum as seq,	
+ 		 	 								
+			 		 	 					category,
+			 		 	 					title,
+			 		 	 					content,
+			 		 	 					reg_date,
+			 		 	 					hit
+			 		 	 			FROM (
+			 		 	 			SELECT RANK() OVER(ORDER BY board_no) 
+ 		 	 						AS Board_no,	
+ 		 	 								
+			 		 	 					category,
+			 		 	 					title,
+			 		 	 					content,
+			 		 	 					reg_date,
+			 		 	 					hit
+ 		 	 						FROM	 user_notice_board
+ 		 	 						WHERE 	 1=1
+ 		 	 						AND
+ 		 	 						fitness_id = #{fitness_id}
+ 		 	 					<choose>
+ 		 	 						<when test="search != null">
+ 		 	 							and title like #{search}	
+ 		 	 						</when>
+ 		 	 					</choose>
+ 		 	 					ORDER BY board_no desc	
+ 		 	 					) 
+ 		 	 					<![CDATA[
+ 		 	 				   )WHERE SEQ >= #{start}
+				        	   )
+ 		 	 					WHERE rownum <= 10
+ 		 	 					]]>	
 			
 	</select>
+	
+		<select id="appNoticeUserh" parameterType="UserNoticeBoardVO" resultType="UserNoticeBoardVO">
+ 		select * from user_notice_board
+ 		where id=#{id}
+		</select>
 	
 	<select id="" 
 			parameterType="UserNoticeBoardVO"

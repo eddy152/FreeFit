@@ -16,57 +16,70 @@
  		 	  user_notice_board
  	
  	 	WHERE fitness_id = #{fitness_id} 
- 			
  		  
  	</select>
  	
  	<select id="searchUserN" resultType="UsernVO" parameterType="UserNSearch">
- 		SELECT board_no
- 			  ,category
- 			  ,title
- 			  ,content
- 			  ,reg_date
- 			  ,hit
+	 	SELECT 	  rownum as seq,
+	 			  board_no
+	 			  ,category
+	 			  ,title
+	 			  ,content
+	 			  ,reg_date
+	 			  ,hit
  		FROM
  		 	 (
- 		 	 	select * from (
-	 		 	 					select rownum as seq,
-	 		 	 					board_no,
-	 		 	 					category,
-	 		 	 					title,
-	 		 	 					content,
-	 		 	 					reg_date,
-	 		 	 					hit
- 		 	 				FROM(
- 		 	 						SELECT * 
- 		 	 						FROM user_notice_board
- 		 	 						where 1=1
+ 		 	 	SELECT *  FROM (
+	 		 	 			
+	 		 	 	
+ 		 	 						SELECT 	Board_no,	rownum as seq,	
+ 		 	 								
+			 		 	 					category,
+			 		 	 					title,
+			 		 	 					content,
+			 		 	 					reg_date,
+			 		 	 					hit
+			 		 	 			FROM (
+			 		 	 			SELECT RANK() OVER(ORDER BY board_no) 
+ 		 	 						AS Board_no,	
+ 		 	 								
+			 		 	 					category,
+			 		 	 					title,
+			 		 	 					content,
+			 		 	 					reg_date,
+			 		 	 					hit
+ 		 	 						FROM	 user_notice_board
+ 		 	 						WHERE 	 1=1
+ 		 	 						AND
+ 		 	 						fitness_id = #{fitness_id}
  		 	 					<choose>
  		 	 						<when test="search != null">
  		 	 							and title like #{search}	
  		 	 						</when>
  		 	 					</choose>
  		 	 					ORDER BY board_no desc	
- 		 	 					)
+ 		 	 					) 
  		 	 					<![CDATA[
  		 	 				   )WHERE SEQ >= #{start}
 				        	   )
  		 	 					WHERE rownum <= 10
  		 	 					]]>	
+ 		  	 					
  	</select>
  	
  	<!-- count query -->
  	<select id="countUserN" 
  	 parameterType="UserNSearch" resultType="Integer">
  		
- 		SELECT COUNT(1)
+ 		SELECT COUNT(1) as count
  		FROM user_notice_board
- 		where 1=1
+ 		where 1=1 and fitness_id = #{fitness_id}
  		<choose>
  			<when test = "search != null">
  				and title like #{search}
  			</when>
  		</choose>
+ 		
  	</select>
  	
  	

@@ -266,9 +266,9 @@ document.querySelector("#coti > option[value='${vo.course_title}']")
 
 <c:if test="${vo.course_day !=null}" >
 document.querySelector("#coday > option[value='${vo.course_day}']")
+document.querySelector("#codays > option[value='${vo.course_day}']")
 .setAttribute("selected", "selected")
 </c:if>
-
 
 <c:if test="${vo.course_day !=null}" >
 document.querySelector("#codays > option[value='${vo.course_day}']")

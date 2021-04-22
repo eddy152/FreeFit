@@ -9,6 +9,8 @@ public class UserNSearch {
 	private int page;
 	private int start;
 	private String search;
+	private String fitness_id;
+	
 	
 	public int getPage() {
 		return page;
