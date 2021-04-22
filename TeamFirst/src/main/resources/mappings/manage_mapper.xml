@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="co.team.usern.service.impl.ManageMemberMapper">
+ 	
+ 	<!-- ManageMember 전체 조회 -->
+ 	<select id="manageList" resultType="ManageMemberVO" parameterType="ManageMemberVO">
+ 		select * from course_member
+ 	</select>
+ 	
+ 	<!-- ManageMember 단건 조회 -->
+ 	<select id="getMem" parameterType="ManageMemberVO" resultType="ManageMemberVO">
+ 		select * 
+ 		from course_member
+ 		where course_reg_no = #{course_reg_no}
+ 	</select>
+ </mapper>

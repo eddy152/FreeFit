@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.exercise.service.ExeBasicDetailVO;
@@ -36,41 +34,41 @@ public class ExerciseController {
 	@GetMapping("/getSearchExerciseList")
 	public String getSearchExerciseList(ExerciseListVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExerciseList(vo));
-		return "exercise/getSearchExerciseList";
+		return "nolayout/program/exercise/getSearchExerciseList";
 	}
 
 	// ListALL
 	@GetMapping("/getSearchExerciseListAll")
 	public String getSearchExerciseListAll(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
-		return "exercise/getSearchExerciseListAll";
+		return "nolayout/program/exercise/getSearchExerciseListAll";
 	}
 
 	// ListALLDel
 	@GetMapping("/deleteExerciseListForm")
 	public String deleteExerciseListForm(ExerciseListVO vo, Model model) {
 		model.addAttribute("listAll", service.getSearchExerciseListAll(vo));
-		return "exercise/deleteExerciseListForm";
+		return "nolayout/program/exercise/deleteExerciseListForm";
 	}
 
 	// 단건 조회
 	@GetMapping("/getExerciseListProc")
 	public String getExerciseListProc(ExerciseListVO vo, Model model) {
 		model.addAttribute("list", service.getExerciseListProc(vo));
-		return "exercise/getExerciseListProc";
+		return "program/exercise/getExerciseListProc";
 	}
 
 	// 단건 등록
 	@GetMapping("/insertExerciseList")
 	public String insertExerciseList(ExerciseListVO vo) {
 		service.insertExerciseList(vo);
-		return "exercise/insertExerciseListForm";
+		return "program/exercise/insertExerciseListForm";
 	}
 
 	// 등록 폼
 	@GetMapping("/insertExerciseListForm")
 	public String insertExerciseListForm() {
-		return "exercise/insertExerciseListForm";
+		return "nolayout/program/exercise/insertExerciseListForm";
 	}
 
 	// 단건 수정
@@ -84,16 +82,16 @@ public class ExerciseController {
 	@GetMapping("/deleteExerciseList")
 	public String deleteExerciseList(ExerciseListVO vo) {
 		service.deleteExerciseList(vo);
-		return "exercise/deleteExerciseListForm";
+		return "program/exercise/deleteExerciseListForm";
 	}
 	// EXERCISE_LIST end
 
 	// EXERCISE_PROGRAM_BASIC start
 	// 리스트 조회
 	@PostMapping("/getSearchExerciseProgramBasic")
-	public String getSearchExerciseProgramBasic(FFUserVO vo3, Model model) {
-		model.addAttribute("ffUser", service.getFFUserProc(vo3));
-		return "exercise/getSearchExerciseProgramBasic";
+	public String getSearchExerciseProgramBasic(FFUserVO vo, Model model) {
+		model.addAttribute("ffUser", service.getFFUserProc(vo));
+		return "program/exercise/getSearchExerciseProgramBasic";
 	}
 
 	// 단건 조회
@@ -164,10 +162,10 @@ public class ExerciseController {
 
 	// EXERCISE_PROGRAM_PERSONAL start
 	// 리스트 조회
-	@ResponseBody
-	@GetMapping("/getSearchExerciseProgramPersonal")
-	public List<ExerciseProgramPersonalVO> getSearchExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
-		return service.getSearchExerciseProgramPersonal(vo);
+	@PostMapping("/getSearchExerciseProgramPersonal")
+	public String getSearchExerciseProgramPersonal(ExerciseProgramPersonalVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExerciseProgramPersonal(vo));
+		return "program/exercise/getSearchExerciseProgramPersonal";
 	}
 
 	// 단건 조회
@@ -201,28 +199,28 @@ public class ExerciseController {
 
 	// EXERCISE_PERSONAL_DETAIL start
 	// 리스트 조회
-	@GetMapping("/getSearchExercisePersonalDetail")
+	@PostMapping("/getSearchExercisePersonalDetail")
 	public String getSearchExercisePersonalDetail(ExePersonalDetailVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExercisePersonalDetail(vo));
-		return "exercise/getSearchExercisePersonalDetail";
+		return "nolayout/program/exercise/getSearchExercisePersonalDetail";
 	}
 
 	// 단건 조회
-	@GetMapping("/getExercisePersonalDetailProc")
-	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
+	@PostMapping("/getExercisePersonalDetailProc")
+	@ResponseBody
+	public List<ExePersonalDetailVO> getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
 		return service.getExercisePersonalDetailProc(vo);
 	}
-
-	// 단건 등록
-	/*
-	 * @GetMapping("/insertExercisePersonalDetail") public String
-	 * insertExercisePersonalDetail(ExePersonalDetailVO vo) {
-	 * service.insertExercisePersonalDetail(vo); return
-	 * "redirect:/getSearchExercisePersonalDetail";
-	 }*/	
-	@RequestMapping(value = "/insertExercisePersonalDetail", method = { RequestMethod.GET, RequestMethod.POST})
-	public void test(@RequestBody Map<String, Object> params) throws Exception {
-	 System.out.println(params);
+	
+	// 운동 리스트 입력
+	@PostMapping(value = "/insertExercisePersonalDetail")
+	@ResponseBody
+	public boolean insertExercisePersonalDetail(@RequestBody Map<String, Object> params) throws Exception {
+		for ( String key : params.keySet() ) {
+		    System.out.println("방법1) key : " + key +" / value : " + params.get(key));
+		    service.insertExercisePersonalDetail((Map<String, Object>)params.get(key));
+		}
+	    return true;
 	}
 
 	// 단건 수정
@@ -245,7 +243,7 @@ public class ExerciseController {
 	@PostMapping("/getSearchExerciseRecord")
 	public String getSearchExerciseRecord(ExerciseRecordVO vo, Model model) {
 		model.addAttribute("list", service.getSearchExerciseRecord(vo));
-		return "exercise/getSearchExerciseRecord";
+		return "program/exercise/getSearchExerciseRecord";
 	}
 
 	// ajax용 리스트 호출
@@ -310,14 +308,15 @@ public class ExerciseController {
 	@GetMapping("/getSearchFFUser")
 	public String getSearchFFUser(FFUserVO vo, Model model) {
 		model.addAttribute("list", service.getSearchFFUser(vo));
-		return "exercise/getSearchFFUser";
+		return "program/exercise/getSearchFFUser";
 	}
 
 	// 단건 조회
 	@PostMapping("/getFFUserProc")
-	public String getFFUserProc(FFUserVO vo, Model model) {
+	public String getFFUserProc(FFUserVO vo, UserWeightVO vo2, Model model) {
 		model.addAttribute("list", service.getFFUserProc(vo));
-		return "exercise/getFFUserProc";
+		model.addAttribute("list2", service.getUserWeightProc(vo2));
+		return "program/exercise/getFFUserProc";
 	}
 	// FF_USER end
 

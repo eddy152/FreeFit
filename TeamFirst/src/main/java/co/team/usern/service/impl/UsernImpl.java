@@ -10,17 +10,17 @@ import co.team.usern.service.UsernService;
 import co.team.usern.service.UsernVO;
 
 @Service
-public class UsernImpl  implements UsernService{
+public class UsernImpl implements UsernService {
 
-	@Autowired UsernMapper usernMapper;
-	
+	@Autowired
+	UsernMapper usernMapper;
 
 	@Override
 	public List<UsernVO> userNList(UsernVO vo) {
 		return usernMapper.userNList(vo);
 	}
-	
-	//단건조회
+
+	// 단건조회
 	@Override
 	public UsernVO getUserh(int board_no) {
 		return usernMapper.getUserh(board_no);
@@ -37,12 +37,14 @@ public class UsernImpl  implements UsernService{
 
 		return usernMapper.countUserN(vo);
 	}
-	//등록
+
+	// 등록
 	@Override
 	public int userWrite(UsernVO vo) {
 		return usernMapper.userWrite(vo);
 	}
-	//수정 상세보기
+
+	// 수정 상세보기
 	public boolean userView(UsernVO vo) {
 		return usernMapper.userView(vo);
 	}
@@ -66,9 +68,19 @@ public class UsernImpl  implements UsernService{
 	@Override
 	public int userDelete(int board_no) {
 		return usernMapper.userDelete(board_no);
-				
+
 	}
 
-	
+	//////////////////////// app 시작
+	// 전체조회
+	@Override
+	public List<UsernVO> appuserNList(UsernVO vo) {
+		return usernMapper.userNList(vo);
+	}
+
+	@Override
+	public UsernVO appUserh(int board_no) {
+		return usernMapper.appUserh(board_no);
+	}
 
 }

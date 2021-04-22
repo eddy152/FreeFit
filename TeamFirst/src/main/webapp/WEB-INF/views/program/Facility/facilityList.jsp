@@ -15,7 +15,7 @@
 		<td>시설명</td>
 		<td>시설위치</td>
 		<td>구입일자</td>
-		<td>수정 | 삭제</td>
+		<td colspan="2">수정 || 삭제</td>
 	</tr>
 	<tr>
 		<td></td>
@@ -23,8 +23,10 @@
 		<td></td>
 		<td></td>
 		<td>
-			<input type="button">수정
-			<input type="button">삭제
+			<input type="button" value="수정">
+		</td>
+		<td>
+			<input type="button" value="삭제">
 		</td>
 	</tr>
 </table>

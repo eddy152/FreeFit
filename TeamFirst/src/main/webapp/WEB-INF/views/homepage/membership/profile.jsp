@@ -65,7 +65,20 @@
 
 							</div>
 							<div class="row exp-row">
-								<div style="padding: 300px;"></div>
+								<c:if test="${fitList ne null}">
+							<div class="row">
+							<c:forEach var="fitness" items="${fitList}" varStatus="status">
+							<div class="card" style="width: 18rem;">
+									<div class="card-header"> ${fitness.fitness_name}</div>
+									<div class="card-body">
+										<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}" class="btn btn-primary d-flex">피트니스 홈</a>
+										<!--  -->
+									</div>
+								</div>
+							</c:forEach>
+								</div>	
+						</c:if>
+						<c:if test="${fitList eq null}"> 피트니스를 등록해주세요. </c:if>
 							</div>
 
 						</div>
@@ -162,14 +175,14 @@
 						aria-labelledby="fitness-tab">
 						
 						
-						<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+						<ul class="nav nav-tabs justify-content-between" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">피트니스 목록</a>
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="fit-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">피트니스 등록</a>
   </li>
-  <li class="nav-item" role="presentation">
+  <li class="nav-item" role="presentation" hidden="hidden">
     <a class="nav-link" id="fit-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">피트니스 상세</a>
   </li>
 </ul>
@@ -177,15 +190,12 @@
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 						<c:if test="${fitList ne null}">
-							<div>
+							<div class="row">
 							<c:forEach var="fitness" items="${fitList}" varStatus="status">
-							<div class="card" style="width: 18rem;">
+							<div class="card" style="width: 16rem; margin: 5px">
 									<div class="card-header"> ${fitness.fitness_name}</div>
 									<div class="card-body">
-										<a name="${status.index}" class="btn btn-primary d-flex p-5 mb-2 text-align" id="toFitnessDetail">상세페이지로</a>
-										<!-- 상세페이지 버튼 누르면 수정폼 나오면서 value 에 정보 뿌리기 -->
-										<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}" class="btn btn-primary d-flex">피트니스관리 바로가기</a>
-										<!--  -->
+										<a name="${status.index}" class="btn btn-primary d-flex p-5 mb-2 text-align toFitnessDetail" >상세페이지로</a>
 									</div>
 								</div>
 							</c:forEach>
@@ -251,33 +261,24 @@
 					<div class="tab-pane fade exp-cover" id="membership"
 						role="tabpanel" aria-labelledby="membership-tab">
 						<div class="data-box">
-							<div class="sec-title">
-								<h2>My Profile</h2>
-							</div>
-							<div class="row exp-row">
-								<h6>Business Development</h6>
-								<span>Microsoft</span> <i>Apiral 2011 - Present</i>
-
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Aenean a urna posuere, aliquet elit in, fermentum ligula. Sed
-									est augue, molestie sed tortor sed, posuere commodo lectus.</p>
-							</div>
-							<div class="row exp-row">
-								<h6>Business Development</h6>
-								<span>Microsoft</span> <i>Apiral 2011 - Present</i>
-
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Aenean a urna posuere, aliquet elit in, fermentum ligula. Sed
-									est augue, molestie sed tortor sed, posuere commodo lectus.</p>
-							</div>
-							<div class="row exp-row last">
-								<h6>Business Development</h6>
-								<span>Microsoft</span> <i>Apiral 2011 - Present</i>
-
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Aenean a urna posuere, aliquet elit in, fermentum ligula. Sed
-									est augue, molestie sed tortor sed, posuere commodo lectus.</p>
-							</div>
+							<c:if test="${memList ne null }">
+							<table>
+							<tr><th>멤버십 번호</th><th>멤버십 등급</th><th>피트니스 번호</th><th>피트니스 이름</th>
+							<th>멤버십 시작일</th><th>멤버십 종료일</th><th>남은 날짜</th>
+							</tr>
+							<c:forEach var="mem" items="${memList}">
+							<tr>
+							<td>${mem.mem_reg_id}</td>
+							<td>${mem.membership_name }</td>
+							<td>${mem.fitness_id}</td>
+							<td>${mem.fitness_name}</td>
+							<td>${mem.membership_start }</td>
+							<td>${mem.membership_end }</td>
+							<td>${mem.dday }</td>
+							</tr>
+							</c:forEach>							
+							</table>
+							</c:if>
 						</div>
 					</div>
 
@@ -349,6 +350,7 @@ let tel_number=[];
 let zipcode=[];
 let address=[];
 let address_detail=[];
+let fitness_id=[];
 <c:if test="${fitList ne null}">
 <c:forEach var="fitness" items="${fitList}" varStatus="status">
 fitness_name.push('${fitness.fitness_name}');
@@ -356,6 +358,7 @@ tel_number.push('${fitness.tel_number}');
 zipcode.push('${fitness.zipcode}');
 address.push('${fitness.address}');
 address_detail.push('${fitness.address_detail}');
+fitness_id.push('${fitness.fitness_id}');
 </c:forEach>
 </c:if>
 
@@ -365,22 +368,44 @@ address_detail.push('${fitness.address_detail}');
 window.onload=function(){
 
 //피트니스 등록수정폼
-var fitform='<div class="form-group row justify-content-between"><label for="fitness_name"class="col-form-label text-left">피트니스명</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="fitness_name"name="fitness_name"placeholder="피트니스명"required="required"></div></div><div class="form-group row justify-content-between"><label for="tel_number"class="col-form-label text-left">전화번호</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="tel_number"name="tel_number"placeholder="전화번호"required="required"></div></div><div class="form-group row justify-content-between"><label for="zipcode"class="col-form-label text-left">우편번호</label><div class="col-8 mb-md-2"><div class="input-group"style="margin-bottom: 20px;"><input type="number"class="form-control"id="zipcode"name="zipcode"placeholder="우편번호"required="required"><div class="input-group-append"><input class="btn btn-primary"type="button"id="execPostCode"value="우편번호 찾기"></div></div><div class="invalid-feedback">우편번호를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address"class="col-form-label text-left">주소</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address"name="address"placeholder="헬스클럽 주소"required="required"><div class="invalid-feedback">헬스클럽주소를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address_detail"class="col-form-label text-left">주소상세<span class="text-muted">(Optional)</span></label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address_detail"name="address_detail"placeholder="주소 상세"></div></div>';
+var fitform='<div class="form-group row justify-content-between"><label for="fitness_name"class="col-form-label text-left">피트니스명</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="fitness_name"name="fitness_name"placeholder="피트니스명"required="required"></div></div><div class="form-group row justify-content-between"><label for="tel_number"class="col-form-label text-left">전화번호</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="tel_number"name="tel_number"placeholder="전화번호"required="required"></div></div><div class="form-group row justify-content-between"><label for="zipcode"class="col-form-label text-left">우편번호</label><div class="col-8 mb-md-2"><div class="input-group"style="margin-bottom: 20px;"><input type="number"class="form-control"id="zipcode"name="zipcode"placeholder="우편번호"required="required"><div class="input-group-append"><input class="btn btn-primary"type="button"id="execPostCode"value="우편번호 찾기"></div></div><div class="invalid-feedback">우편번호를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address"class="col-form-label text-left">주소</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address"name="address"placeholder="헬스클럽 주소"required="required"><div class="invalid-feedback">헬스클럽주소를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address_detail"class="col-form-label text-left">주소상세<span class="text-muted">(Optional)</span></label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address_detail"name="address_detail"placeholder="주소 상세"></div></div><input type="text" name="fitness_id" id="fitness_id" hidden="hidden">';
 	
 
-
+ 
 //피트니스등록수정폼에인덱스넘기기 펑션
-function goTo(index){	
-	document.querySelector("#fit-contact-tab").click(index);
+function gotoupdate(index){
+	var indexNo=index;
+	//피트니스수정탭에 폼넣기
+	document.getElementById("fit-contact-tab").addEventListener('click',function(){
+		
+		
+		document.querySelector(".fitnessUpdate").innerHTML="";
+		document.querySelector(".fitnessAdd").innerHTML=""; 
+		let aform=document.createElement("div");
+		aform.setAttribute("class","col-8");
+		aform.innerHTML=fitform;
+		document.querySelector(".fitnessUpdate").append(aform);
+		document.querySelector("#fitness_name").value=fitness_name[indexNo];
+		document.querySelector("#tel_number").value=tel_number[indexNo];
+		document.querySelector("#zipcode").value=zipcode[indexNo];
+		document.querySelector("#address").value=address[indexNo];
+		document.querySelector("#address_detail").value=address_detail[indexNo];
+		document.querySelector("#fitness_id").value=fitness_id[indexNo];
+		});
 	
+	document.getElementById("fit-contact-tab").click();
 }
 //상세 페이지 클릭해서 피트니스 등록수정폼에 인덱스넘기기
-document.getElementById("toFitnessDetail").addEventListener('click',function(){
-	goTO(this.name);
-}); 
+
+document.querySelectorAll('.toFitnessDetail').forEach(function(e){
+        e.addEventListener('click',function(){
+        	gotoupdate(this.name);
+        });
+    });
 
 
 
+//피트니스등록탭에 폼넣기
 document.getElementById("fit-profile-tab").addEventListener('click',function(){
 	document.querySelector(".fitnessUpdate").innerHTML="";	
 	document.querySelector(".fitnessAdd").innerHTML=""; 
@@ -390,18 +415,6 @@ document.getElementById("fit-profile-tab").addEventListener('click',function(){
 	document.querySelector(".fitnessAdd").append(fform);
 });
 
-document.getElementById("fit-contact-tab").addEventListener('click',function(index){
-	
-	
-	document.querySelector(".fitnessUpdate").innerHTML="";
-	document.querySelector(".fitnessAdd").innerHTML=""; 
-	let aform=document.createElement("div");
-	aform.setAttribute("class","col-8");
-	aform.innerHTML=fitform;
-	document.querySelector(".fitnessUpdate").append(aform);
-	document.querySelector("#fitness_name").value=fitness_name[index];
-
-	});
 
 
 const formbtns = document.querySelectorAll('.postFormBtn');
@@ -446,7 +459,7 @@ function formClick(){
 
         .then(response => response.text())
         .then(result=>{ 
-        	if(result.length>1){ alert(result);}
+        	if(result.length>1){ alert(result); location.reload();}
         	else location.reload();
         })
         

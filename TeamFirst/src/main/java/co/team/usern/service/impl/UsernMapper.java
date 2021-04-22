@@ -20,16 +20,22 @@ public interface UsernMapper {
 
 	// 등록
 	public int userWrite(UsernVO vo);
-	
+
 	public boolean userView(UsernVO vo);
-	
-	//조회수
+
+	// 조회수
 	public boolean userHit(int board_no);
-	
-	//수정
+
+	// 수정
 	public boolean userUpdate(UsernVO vo);
-	
-	//삭제
+
+	// 삭제
 	public int userDelete(int board_no);
 
+	//////////////////////// app 시작
+	// 전체조회
+	public List<UsernVO> appuserNList(UsernVO vo);
+
+	// 단건조회
+	public UsernVO appUserh(int board_no);
 }

@@ -18,5 +18,5 @@ public class FFUserVO {
 	int height;
 	String notice;
 	int gender;
-	int mem_reg_id;
+	int fitness_id;
 }

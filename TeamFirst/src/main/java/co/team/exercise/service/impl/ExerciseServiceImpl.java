@@ -1,6 +1,7 @@
 package co.team.exercise.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -143,12 +144,12 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 
 	@Override
-	public ExePersonalDetailVO getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
+	public List<ExePersonalDetailVO> getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
 		return dao.getExercisePersonalDetailProc(vo);
 	}
 
 	@Override
-	public int insertExercisePersonalDetail(ExePersonalDetailVO vo) {
+	public int insertExercisePersonalDetail(Map<String, Object> vo) {
 		dao.insertExercisePersonalDetail(vo);
 		return 0;
 	}

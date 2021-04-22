@@ -53,7 +53,7 @@ public interface FoodMapper_kdh {
 	public FoodVO getRealFoodMember(FoodVO vo);
 	
 	// 댓글 조회
-	public List<FoodVO> getComment(FoodVO vo);
+	public List<FoodVO> getComment(FoodVO real_no);
 	
 	// 댓글 추가
 	public void addComment(FoodVO vo);
@@ -83,5 +83,7 @@ public interface FoodMapper_kdh {
 	
 	// 총칼로리 저장
 	public void updateCalorie(FoodVO vo);
+
+	public List<FoodVO> getDay2(Object setAge);
 	
 }

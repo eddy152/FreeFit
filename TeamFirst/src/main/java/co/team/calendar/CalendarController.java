@@ -19,7 +19,7 @@ public class CalendarController {
 	@RequestMapping("/calendar")
 	public String calendar(ReservationVO vo, Model model) {
 		model.addAttribute("list", reservationService.getReserv(vo));
-		return "calendar/calendar";
+		return "program/calendar/calendar";
 		
 	}
 	

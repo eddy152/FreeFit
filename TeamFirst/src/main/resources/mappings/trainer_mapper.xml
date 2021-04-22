@@ -7,14 +7,13 @@
 	<select id="getTrainerList" resultType="TrainerVO"
 		    parameterType="TrainerVO">
 	
-			SELECT ID
-			,FITNESS_ID
-			,PASSWORD
-			,PHONE_NUMBER
+			SELECT 
+			FITNESS_ID
+			,ID
 			,NAME
-			,GENDER
-			,AWARDS
+			,PHONE_NUMBER
 			,CAREER
+			,GENDER
 			,HIRE_DATE
 			FROM TRAINER
 			WHERE FITNESS_ID = #{fitness_id}
