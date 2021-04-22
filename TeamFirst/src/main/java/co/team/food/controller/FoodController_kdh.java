@@ -1,6 +1,5 @@
 package co.team.food.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,14 +65,14 @@ public class FoodController_kdh {
 	public List<FoodVO> getBeforeDate(FoodVO vo, Model model) {
 		return service.getBeforeDate(vo);
 	}
-	
+
 	// 추천별 식단 리스트(앱)
 	@RequestMapping("/getAppFoodList")
 	public String getAppFoodList(FoodVO vo, Model model) {
 		model.addAttribute("list", service.getAppFoodList(vo));
 		return "app/Food/getAppFoodList";
 	}
-	
+
 	// 추천별 식단 단건 조회(앱)
 	@RequestMapping("/getAppFood")
 	@ResponseBody
@@ -82,58 +81,58 @@ public class FoodController_kdh {
 		FoodVO vo = service.getAppFood(diet_no);
 		String[] list = vo.getDiet_content().split(",");
 		ArrayList<FoodVO> aList = new ArrayList<>();
-		
-		for(int i=0; i<list.length; i++) {
+
+		for (int i = 0; i < list.length; i++) {
 			FoodVO fvo = new FoodVO();
 			String[] list2 = list[i].split("/");
 
 			fvo.setDetail_food(list2[0]);
 			fvo.setDetail_count(list2[1]);
-			
+
 			aList.add(fvo);
 		}
-		
+
 		System.out.println("------------" + aList);
-		
+
 		return aList;
 	}
-	
+
 	// 추천별 식단 추가 게시판(앱)
 	@GetMapping("/insertFood")
 	public String getAppFoodForm(FoodVO vo, Model model) {
 		model.addAttribute("foodList", service.getFoodList(vo));
 		return "app/Food/getAppFoodForm";
 	}
-	
+
 	// 추천별 식단 등록(앱)
 	@PostMapping("/insertFood")
-	//@ResponseBody
+	// @ResponseBody
 	public String insertFood(FoodVO vo, Model model) {
 		service.insertFood(vo);
 		return "redirect:/getAppFoodList";
 	}
-	
+
 	// 추천별 식단 수정(앱)
 	@GetMapping("/updateFood")
 	public String updateFoodForm(@RequestParam String diet_no, Model model) {
 		FoodVO vo = service.getAppFood(diet_no);
 		String[] arr = vo.getDiet_content().split(", ");
 		ArrayList<FoodVO> list = new ArrayList<>();
-		for(int i=0; i<arr.length; i++) {
+		for (int i = 0; i < arr.length; i++) {
 			FoodVO fvo = new FoodVO();
 			String[] arr2 = arr[i].split("/");
-			
+
 			fvo.setFood_name(arr2[0]);
 			fvo.setFood_cnt(arr2[1]);
-			
+
 			list.add(fvo);
 		}
-		
+
 		model.addAttribute("arr", list);
 		model.addAttribute("vo", vo);
 		model.addAttribute("list", service.getFoodList(null));
 		return "app/Food/getAppFoodUpdateForm";
-		}
+	}
 
 	// 추천별 식단 수정(앱)
 	@PostMapping("/updateFood")
@@ -141,37 +140,37 @@ public class FoodController_kdh {
 		service.updateFood(vo);
 		return "redirect:/getAppFoodList";
 	}
-	
+
 	// 추천별 식단 삭제(앱)
 	@PostMapping("/deleteFood")
 	@ResponseBody
 	public int deleteFood(FoodVO vo) {
 		return service.deleteFood(vo);
 	}
-	
+
 	@RequestMapping("/Test")
 	// @ResponseBody
 	public String Test(FoodVO vo, Model model) {
 		model.addAttribute("list", service.getSearchFood(vo));
 		return "app/Food/Test";
 	}
-	
+
 	// 해당 회원의 실제 섭취 식단 통계 (앱)
 	@RequestMapping("/getMemberFoodList")
 	public String getMemberFoodList(FoodVO vo, Model model) {
 		List<FoodVO> rvo = service.getRealFood(vo);
-		if(rvo != null) {
+		if (rvo != null) {
 			System.out.println(rvo + "------------------------------");
-			model.addAttribute("list", service.getRealFood(vo)); // 실제 섭취 식단 단건 조회			
+			model.addAttribute("list", service.getRealFood(vo)); // 실제 섭취 식단 단건 조회
 		} else {
 			vo.setTake_date("sysdate");
 			model.addAttribute("list", service.getRealFood(vo));
-			
+
 		}
 		model.addAttribute("food", service.getFood(vo));
 		return "app/Food/getMemberFoodList";
 	}
-	
+
 	// 해당 회원의 실제 섭취 식단 상세 및 작성 폼(앱)
 	@GetMapping("/getMemberFoodInsert")
 	public String getMemberFoodInsertForm(FoodVO vo, Model model) {
@@ -179,66 +178,74 @@ public class FoodController_kdh {
 		model.addAttribute("user", service.getFood(vo)); // 회원 단건 조회
 		model.addAttribute("foodList", service.getFoodList(vo)); // 음식 정보
 		model.addAttribute("food", rvo); // 실제 섭취 식단 단건 조회
-		//System.out.println(rvo + "---------------------------");
-		vo = new FoodVO();
 		vo.setReal_diet_no(rvo.getReal_diet_no()); // vo에 식단번호 담기
-		//System.out.println(vo + "---------------------------------------");
+		
+		model.addAttribute("comment", service.getComment(vo));
 		model.addAttribute("oneDay", service.getFoodOne(vo)); // 일별 회원 식단 조회
-		
-		//System.out.println(service.getFoodOne(vo));
-		
-		if(rvo != null) {
-			
-			if(rvo.getDetail_content() != null) {
-				
+
+
+		if (rvo != null) {
+
+			if (rvo.getDetail_content() != null) {
+
 				String[] arr = rvo.getDetail_content().split("/");
 				System.out.println(arr + "--------------------------");
 				ArrayList<FoodVO> aList = new ArrayList<>();
-				for(int i=0; i<arr.length; i++) {
+				for (int i = 0; i < arr.length; i++) {
 					FoodVO fvo = new FoodVO();
 					String[] arr2 = arr[i].split(",");
-					
+
 					fvo.setDetail_food(arr2[0]);
 					fvo.setDetail_calorie(arr2[1]);
 					fvo.setDetail_count(arr2[2]);
-					
+
 					aList.add(fvo);
 				}
 				model.addAttribute("detail", aList);
 				System.out.println(aList);
 			}
-	}
-		
-		
+		}
+
 		return "app/Food/getMemberFoodInsert";
 	}
-	
+
 	// 실제 섭취 식단 추가(앱)
 	@PostMapping("/getMemberFoodInsert")
 	@ResponseBody
 	public int getMemberFoodInsert(FoodVO vo) {
 		return service.getMemberFoodInsert(vo);
 	}
+
 	
-	/*
-	 * // 댓글 조회
-	 * 
-	 * @GetMapping("/getComment")
-	 * 
-	 * @ResponseBody public List<FoodVO> getComment(FoodVO vo, Model model) {
-	 * List<FoodVO> rvo = service.getComment(vo); // 댓글 조회
-	 * 
-	 * return rvo; }
-	 */
-	
+	 // 댓글 조회
+	 
+	@GetMapping("/getComment")
+	@ResponseBody public List<FoodVO> getComment(FoodVO vo, Model model) {
+	  List<FoodVO> rvo = service.getComment(vo); // 댓글 조회
+	  System.out.println(rvo + "------");
+	  return rvo; 
+	  }
+	  
+	 
 	// 댓글 추가
 	@RequestMapping("/addComment")
 	@ResponseBody
 	public FoodVO addComment(FoodVO vo) {
-		 service.addComment(vo);
-		 return vo;
+		service.addComment(vo);
+		
+		System.out.println("vo ----->" + vo);
+		
+		FoodVO rvo = service.getDescComment(vo);
+		
+		vo.setComment_no(rvo.getComment_no());
+		
+		System.out.println("댓글 정보 -----> " + vo);
+		
+		return vo;
+		
+		
 	}
-	
+
 	// 댓글 수정
 	@RequestMapping("/updateComment")
 	@ResponseBody
@@ -246,7 +253,7 @@ public class FoodController_kdh {
 		service.updateComment(vo);
 		return vo;
 	}
-	
+
 	// 댓글 삭제
 	@RequestMapping("/deleteComment")
 	@ResponseBody
@@ -254,7 +261,7 @@ public class FoodController_kdh {
 		service.deleteComment(vo);
 		return vo;
 	}
-	
+
 	// 식단 내용 등록
 	@RequestMapping("/insertImg")
 	@ResponseBody
@@ -262,7 +269,7 @@ public class FoodController_kdh {
 		service.insertImg(vo);
 		return vo;
 	}
-	
+
 	// 식단 내용 수정
 	@RequestMapping("/foodUpdate")
 	@ResponseBody
@@ -270,7 +277,7 @@ public class FoodController_kdh {
 		service.foodUpdate(vo);
 		return vo;
 	}
-	
+
 	// 식단 내용 삭제
 	@RequestMapping("/foodDel")
 	@ResponseBody
@@ -278,54 +285,50 @@ public class FoodController_kdh {
 		service.foodDel(vo);
 		return vo;
 	}
-	
+
 	// 일별 단건 조회
 	@RequestMapping("/getDay")
 	@ResponseBody
 	public FoodVO getDay(FoodVO vo) {
-		
+
 		FoodVO result = service.getDay(vo);
-		
-		/*
-		 * String[] list = result.to.getDetail_content().split("/");
-		 * 
-		 * System.out.println("12312313   " + list);
-		 * 
-		 * for(int i=0; i<result.size(); i++) { FoodVO rvo = new FoodVO();
-		 * 
-		 * }
-		 * 
-		 */
-		
+
+		if(result == null) {
+			vo.setAge("0");
+			result = vo;
+			System.out.println("-----" + result);
+			return result;
+		}
+
 		return result;
-		
+
 	}
-	
+
 	@RequestMapping("/getComment")
 	@ResponseBody
-	public List<FoodVO> getComment(FoodVO real_no){
+	public List<FoodVO> getComment(FoodVO real_no) {
 		System.out.println("---------real_no : " + real_no);
-		List<FoodVO> list = service.getComment(real_no); 
+		List<FoodVO> list = service.getComment(real_no);
 		System.out.println("--------댓글리스트 조회 : " + list);
-		
+
 		return list;
 	}
-	
+
 	@RequestMapping("/currentDay")
 	@ResponseBody
 	public FoodVO current(FoodVO vo) {
 		return service.current(vo);
 	}
-	
+
 	// 총 칼로리 저장
 	@RequestMapping("/updateCalorie")
 	@ResponseBody
 	public FoodVO updateCalorie(FoodVO vo) {
 		System.out.println(vo.getDetail_content() + "-------------------------");
-	
+
 		service.updateCalorie(vo);
 		return vo;
-		
+
 	}
-	
+
 }
