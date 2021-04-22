@@ -2,20 +2,24 @@ package co.team.security.service;
 
 import org.junit.Test;
 
+import co.team.food.service.FoodVO;
+
 
 public class PasswordEncoderTest {
 
 
     @Test
     public void passwordEncode() throws Exception{
-    	String str ="하하.png";
-    	String word = str.split("\\.")[str.split("\\.").length -1];
-    	System.out.println(word);
+    	//String str ="하하.png";
+    	//String word = str.split("\\.")[str.split("\\.").length -1];
+    	//System.out.println(word);
     	//String list [] = str.split(".");
 		/*
 		 * for(int i=0; i<list.length; i++) { System.out.println(list[i]); }
 		 */
 //    	System.out.println(getRandomStr(8));
+    	
+    
     }
     
     
