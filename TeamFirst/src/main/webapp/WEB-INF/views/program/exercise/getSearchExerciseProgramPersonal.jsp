@@ -29,7 +29,7 @@
 					if(pTr.text() == "▼") {
 						pTr.text("▲")
 						for(rs of result){
-							/* var rs.exep_no;
+							<%-- var rs.exep_no;
 							var rs.exe_no;
 							var rs.epd_set;
 							var rs.epd_count;
@@ -40,7 +40,7 @@
 							objs = document.createElement('input');
 							objs.setAttribute('type', 'hidden');
 							objs.setAttribute('name', 'user_id');
-							objs.setAttribute('value', "${list.id}"); */
+							objs.setAttribute('value', "${list.id}"); --%>
 							
 							ulLi = "<ul>" +
 									"<li>" + rs.exe_name + "</li>" +
@@ -70,7 +70,7 @@
 			})  // End of ajax
 		})
 		
-		/* $(document).on("click", ".exeStart", function() {
+		<%-- $(document).on("click", ".exeStart", function() {
 			var form = document.createElement('form');
 			var objs;
 			
@@ -86,7 +86,7 @@
 			document.body.appendChild(form);
 			
 			form.submit();			
-		}) */
+		}) --%>
 	})
 	
 </script>
