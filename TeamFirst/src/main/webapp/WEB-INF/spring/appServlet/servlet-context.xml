@@ -15,7 +15,8 @@
 <mvc:interceptors>
          <mvc:interceptor>
                   <mvc:mapping path="/**" />
-                   
+                  <mvc:exclude-mapping path="/membership/pricing"/>
+                  <mvc:exclude-mapping path="/getAdminNoticeBoardList"/> 
                   <mvc:exclude-mapping path="/"/>
                   <mvc:exclude-mapping path="/members/**"/>
                   <mvc:exclude-mapping path="/resources/**"/>
