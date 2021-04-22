@@ -77,24 +77,26 @@ public class FoodController_kdh {
 	@RequestMapping("/getAppFood")
 	@ResponseBody
 	public ArrayList<FoodVO> getAppFood(@RequestParam String diet_no) {
-		System.out.println(service.getAppFood(diet_no) + "---------------------------");
 		FoodVO vo = service.getAppFood(diet_no);
-		String[] list = vo.getDiet_content().split(",");
+		String[] list = vo.getDiet_content().split(", ");
 		ArrayList<FoodVO> aList = new ArrayList<>();
-
 		for (int i = 0; i < list.length; i++) {
+			System.out.println("444 " + list[i]);
 			FoodVO fvo = new FoodVO();
 			String[] list2 = list[i].split("/");
-
 			fvo.setDetail_food(list2[0]);
+			System.out.println(list2[0] + " ---- " + list2[1]);
 			fvo.setDetail_count(list2[1]);
-
+			fvo.setDiet_no(diet_no);
+			fvo.setDiet_title(vo.getDiet_title());
+			fvo.setTotal_calorie(vo.getTotal_calorie());
+			System.out.println("-----fvo ======" + fvo);
 			aList.add(fvo);
+			System.out.println("------------" + aList);
 		}
-
-		System.out.println("------------" + aList);
-
 		return aList;
+
+
 	}
 
 	// 추천별 식단 추가 게시판(앱)

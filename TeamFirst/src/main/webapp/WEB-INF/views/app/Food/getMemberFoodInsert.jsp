@@ -5,6 +5,64 @@
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
 
+<script type="text/javascript">
+
+window.onload=function(){
+	let jslink;
+	let jsid;
+	let json;
+upbtn.addEventListener('click', onClick);
+
+function onClick(){
+var imgSize=imageF.files[0];
+if (imgSize.size<10000000){
+	
+	var myHeaders = new Headers();
+	myHeaders.append("Authorization", "Client-ID 52d00d8257f11ed");
+
+	var formdata = new FormData();
+	formdata.append("image", imgSize, "[PROXY]");
+
+	var requestOptions = {
+			  method: 'POST',
+			  headers: myHeaders,
+			  body: formdata,
+			  redirect: 'follow'
+			};
+
+fetch("https://api.imgur.com/3/image", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+	  json=result;
+	  jsid=json.data.id;
+	  jslink=json.data.link;
+	  
+  }).then(
+	function(){
+		console.log(jslink);
+		var formdata=new URLSearchParams();
+		  formdata.append("fileName", jsid);
+		  formdata.append("pathName", jslink);
+		  fetch("/spring/files/upload", 
+			{method:'POST', headers:{"Content-Type":"application/x-www-form-urlencoded"}, 
+				body: formdata})
+		  .then(response=>response.text())
+		  .then(result=>document.getElementById("img").src=result)
+		  .catch(error=>console.log('error',error));
+
+	}	  
+  
+  )
+  .catch(error => console.log('error', error));
+}
+else { alert('파일 용량이 10MB를 초과합니다.');
+location.reload();}
+
+}
+
+}
+	
+</script>
 
 <div>
 	<h1>회원의 식단</h1>
@@ -143,13 +201,22 @@
 				<h5 class="modal-title" id="exampleModalLabel">식단 수정하기</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
+					
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-	
+			
+				<form method="post" id="myForm">
+					<input type="file" name="image" id="imageF" /> 
+					<input class="btn btn-primary btn-sm" type="button" value="업로드" id="upbtn" />
+				</form>
 				<form id="frm2" method="post">
 					<textarea name="diet_content" id="summernote_upd"></textarea>
+						
+					<div contenteditable="true" id="summernote_upd">
+						<img src="" id="img">
+					</div>
 					<input name="real_diet_no2" value="${food.real_diet_no }"
 						hidden="hidden"><br>
 				</form>
@@ -245,38 +312,47 @@
 			console.log(selectFood + "-> selectFood");
 			
 			if( !selectFood || !count ) {
-				alert('음식과 갯수를 선택하세요!');
+				alert('음식을 선택하세요!');
 			} else {
 			
 			var food_calorie = $('#foods option:selected').val();
 			
 			var result = TotalCalorie(food_calorie, count); 
 			
-			if(selectFoodName != $('input:text[name="food_name"]').val()) {
-			
-			$('.frm1').append(
-				'<div class="foods">' 
-				+ '<div>'
-				+ '<input type="text" name="detail_food" value="' 
-				+ selectFoodName 
-				+ '">' 
-				+ '<input type="text" name="detail_calorie" hidden="hidden" value="' 
-				+ selectFood 
-				+ '">' 
-				+ '<input type="text" name="detail_count" onchange="change(this)" value="' 
-				+ count 
-				+ '">' 
-				+ '개'
-				+ '<button type="button" class="deleteFood">-</button>'
-				+ '</div>'
-				+ '</div>'
-			);
-			} else {
-				alert('선택한 음식이 이미 존재합니다.');
+			var size = $('.each_food').length;		
+				
+			for(i=0; i<size; i++) {
+				var food = $('.each_food ')[i].children[0].value;
+				if(selectFoodName != food) {
+					if(i==size-1) {
+						console.log("dddd");
+					$('.frm1').append(
+						'<div class="foods">' 
+						+ '<div class="each_food">'
+						+ '<input type="text" name="detail_food" value="' 
+						+ selectFoodName 
+						+ '">' 
+						+ '<input type="text" name="detail_calorie" hidden="hidden" value="' 
+						+ selectFood 
+						+ '">' 
+						+ '<input type="text" name="detail_count" onchange="change(this)" value="' 
+						+ count 
+						+ '">' 
+						+ '<button type="button" class="deleteFood">-</button>'
+						+ '</div>'
+						+ '</div>'
+						);
+					}
+					
+				} else {
+					alert('선택한 음식이 이미 존재합니다.');	
+					break;
+					
+				} 
 			}
+		
+				
 			var calorie = $('input:text[name="total_calorie1"]').val();
-			
-			console.log(calorie + ', ' + result);
 			if( !calorie ) {
 				$('input:text[name="total_calorie1"]').val(parseInt(result));
 			} else {
@@ -293,14 +369,16 @@
 	$(document).ready(function() {
 		$(document).on('click', '.deleteFood', function() {
 			var selectFood = $(this).siblings().eq(1).val(); // 칼로리
-			console.log($(this).siblings().eq(2).val());
+			//console.log($(this).siblings().eq(2).val());
 			var count = $(this).siblings().eq(2).val(); // 갯수
 			
 			var result = TotalCalorie(selectFood, count); // 칼로리 * 갯수
 			var calorie = $('input:text[name="total_calorie1"]').val(); // 총 칼로리
 			$('input:text[name="total_calorie1"]').val(parseInt(calorie) - parseInt(result));				
 			
-			$(this).closest('div').remove();
+			//console.log("삭제 - " + $(this).closest('div.foods').remove());
+			
+			$(this).closest('div.foods').remove();
 			
 		});
 	});
@@ -704,7 +782,7 @@
 	
 	// 댓글 등록
 	function comment() {
-		if($('input:text[name="diet_comment"]').val() == null && $('input:text[name="diet_comment"]').val() == ''){
+		if($('input:text[name="diet_comment"]').val() == ""){
 			alert('댓글을 입력해야 합니다.');
 		} else {
 			
@@ -975,6 +1053,9 @@ $(document).ready(function() {
 	    		});
 	    	}
 }) 
+
+
+
 	    </script>
 
 	   
