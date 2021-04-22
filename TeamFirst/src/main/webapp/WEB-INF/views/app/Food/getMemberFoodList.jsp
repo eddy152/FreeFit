@@ -71,8 +71,8 @@
 	  var data = google.visualization.arrayToDataTable(arr);
 	
 	  var options = {
-			  width : '300',
-	          vAxis: { viewWindow: { max: 3000 } },
+			  width : '600',
+	          vAxis: { viewWindow: { max: 3000 } },			
 	          seriesType: 'bars',
 	          series: {1: {type: 'line'}} };
 	
@@ -115,7 +115,7 @@
 		        var data = google.visualization.arrayToDataTable(arr);
 		        
 		        var options = {
-		        		width : '300', 
+		        		width : '600',
 		                vAxis: { viewWindow: { max: 3000 } },
 		                seriesType: 'bars',
 		                series: {1: {type: 'line'}}	
@@ -140,7 +140,7 @@
 					  var data = google.visualization.arrayToDataTable(arr);
 					
 					  var options = {
-							  width : '300',
+							  width : '600',
 					          vAxis: { viewWindow: { max: 3000 } },
 					          seriesType: 'bars' };
 					
@@ -184,7 +184,7 @@
 	        var data = google.visualization.arrayToDataTable(arr);
 	        
 	        var options = {
-	        		width : '300',
+	        		width : '600',
 	                vAxis: { viewWindow: { max: 3000 } },
 	                seriesType: 'bars',
 	                series: {1: {type: 'line'}} };
@@ -205,7 +205,7 @@
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
-						  width : '300',
+						  width : '600',
 				          vAxis: { viewWindow: { max: 3000 } },
 				          seriesType: 'bars' };
 				
