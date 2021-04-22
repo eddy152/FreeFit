@@ -30,11 +30,11 @@
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/getSearchFacility"> <span data-feather="users"></span>
-					시설관리(찾을수없음)
+					시설관리(임시)
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/members/joinformP" target="_blank"> <span
-					data-feather="layers"></span> 회원/트레이너등록(임시)
+					data-feather="layers"></span> 회원/트레이너등록
 			</a></li>
 
 			<li class="nav-item"><a class="nav-link"

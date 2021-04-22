@@ -7,6 +7,48 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </head>
+<style>
+.right {
+
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  vertical-align: top;
+  border: 0 10px;
+  margin: 0 10px;
+  padding: 0 10px;
+  list-style: none;
+}
+
+table {
+	width: 70%;
+}
+
+
+td {
+	padding: 15px;
+	text-align: center;
+}
+
+th {
+	padding: 15px;
+	text-align: center;
+}
+
+#t01 tr:nth-child(even) {
+	background-color: #eee;
+}
+
+#t01 tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+#t01 th {
+	background-color: black;
+	color: white;
+}
+
+</style>
 <body>
 	<div class="page-wrapper">
 		<div class="container-fluid">
@@ -15,9 +57,8 @@
 				<div class="col-sm-5">
 					<h1 class="page-header">오너 공지사항</h1>
 				</div>
-
 				<div class="table-responsive">
-						<table class="table table-hover">
+						<table class="table table">
 							<thead>
 								<tr>
 									<th>No</th>
@@ -41,31 +82,28 @@
 							</tbody>
 						</table>
 				</div>
+				<div class="right"> 
+					<input type="button" value="글쓰기" align="center"  class="btn btn-primary"; style="width: 100px;"
+							onclick="location.href='userNW';">
+				</div>
 				<div class="input-group mb-3">
 						<input type="text" id="search_text" style="width: 100px;" class="form-control";
-							value="${search}" />&nbsp;&nbsp; <input type="button" value="검색하기"  class="btn btn-secondary mb-5";
-							onclick="search()">
-					<!-- col-lg-12끝 -->
+							value="${search}" />&nbsp;&nbsp; 
+							<input type="button" value="검색하기"  class="btn btn-primary";
+							onclick="search()">&nbsp;&nbsp;
+					
 				</div>
-				<!--row 끝 -->
-				<div class="row">
-					<div class="col-lg-12">
-						<input type="button" value="글쓰기" style="float: right;" class="btn btn-secondary mb-3";
-							onclick="location.href='userNW';">
-					</div>
-				</div>
-				<!--row 끝 -->
 			</div>
 			<!-- Paging -->
-			<div align="center" class="row">
+			<div align="center" class="container" >
+			 <ul class="pagination pagination-lg">
 				<c:if test="${pagination.curRange ne 1 }">
-					<a href="#" onClick="fn_paging(1)"> [처음]</a>
+					<li class="page-item"><a href="#" onClick="fn_paging(1)">[처음]</a></li>
 				</c:if>
 				<c:if test="${pagination.curRange ne 1 }">
-					<a href="#" onClick="fn_paging('${pagination.prevPage}')">
-						[이전]</a>
+					<li class="page-item"><a href="#" onClick="fn_paging('${pagination.prevPage}')">[이전]</a></li>
 				</c:if>
-
+			</ul>
 				<c:forEach var="pageNum" begin="${pagination.startPage}"
 					end="${pagination.endPage}">
 					<c:choose>
