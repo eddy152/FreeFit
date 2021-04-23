@@ -238,7 +238,7 @@
 			#{trainer_id},
 			#{exep_name},
 			#{exep_trainer_id},
-			#{exep_date},
+			sysdate,
 			#{user_id}
 		)
 	</insert>

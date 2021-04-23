@@ -122,7 +122,7 @@
 		$(document).on("click", "#prAdd", function() {
 			$.ajax({
 				url: "insertExerciseProgramPersonalForm",
-				//data: {user_id : user_id},
+				data: {user_id : user_id},
 				type: 'post',
 				success: function(result) {
 					window.name = "parentForm";
@@ -180,6 +180,8 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 					</ul>
 				</div>
 			</c:forEach>
+			<form name="popForm">
+			</form>
 		</div>
 		<button onclick="history.back()">뒤로 가기</button>
 		<button type="button" id="prAdd">추가하기</button>
