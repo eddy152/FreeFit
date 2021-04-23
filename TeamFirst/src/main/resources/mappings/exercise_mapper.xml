@@ -238,7 +238,7 @@
 			#{trainer_id},
 			#{exep_name},
 			#{exep_trainer_id},
-			#{exep_date},
+			sysdate,
 			#{user_id}
 		)
 	</insert>
@@ -451,27 +451,21 @@
 			user_id,
 			exer_count,
 			exer_date,
-			exer_end_date,
 			exer_weight,
-			exer_do_count,
 			exep_no,
 			exe_no,
-			epd_set,
-			exer_do_set
+			epd_set
 		)
 		VALUES
 		(
-			#{exer_no},
+			exer_seq.nextval,
 			#{user_id},
 			#{exer_count},
-			#{exer_date},
-			#{exer_end_date},
+			sysdate,
 			#{exer_weight},
-			#{exer_do_count},
 			#{exep_no},
 			#{exe_no},
-			#{epd_set},
-			#{exer_do_set}
+			#{epd_set}
 		)
 	</insert>
 	

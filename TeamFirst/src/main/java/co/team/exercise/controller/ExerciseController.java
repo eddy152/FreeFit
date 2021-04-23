@@ -176,12 +176,18 @@ public class ExerciseController {
 	}
 
 	// 단건 등록
-	@GetMapping("/insertExerciseProgramPersonal")
+	@PostMapping("/insertExerciseProgramPersonal")
 	public String insertExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
 		service.insertExerciseProgramPersonal(vo);
 		return "redirect:/getSearchExerciseProgramPersonal";
 	}
-
+	
+	// 단건 등록폼 호출
+	@PostMapping("/insertExerciseProgramPersonalForm")
+	public String insertExerciseProgramPersonalForm() {
+		return "nolayout/program/exercise/insertExerciseProgramPersonalForm";
+	}
+	
 	// 단건 수정
 	@GetMapping("/updateExerciseProgramPersonal")
 	public String updateExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
@@ -190,7 +196,7 @@ public class ExerciseController {
 	}
 
 	// 단건 삭제
-	@GetMapping("/deleteExerciseProgramPersonal")
+	@PostMapping("/deleteExerciseProgramPersonal")
 	public String deleteExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
 		service.deleteExerciseProgramPersonal(vo);
 		return "redirect:/getSearchExerciseProgramPersonal";
@@ -211,16 +217,15 @@ public class ExerciseController {
 	public List<ExePersonalDetailVO> getExercisePersonalDetailProc(ExePersonalDetailVO vo) {
 		return service.getExercisePersonalDetailProc(vo);
 	}
-	
+
 	// 운동 리스트 입력
 	@PostMapping(value = "/insertExercisePersonalDetail")
 	@ResponseBody
 	public boolean insertExercisePersonalDetail(@RequestBody Map<String, Object> params) throws Exception {
-		for ( String key : params.keySet() ) {
-		    System.out.println("방법1) key : " + key +" / value : " + params.get(key));
-		    service.insertExercisePersonalDetail((Map<String, Object>)params.get(key));
+		for (String key : params.keySet()) {
+			service.insertExercisePersonalDetail((Map<String, Object>) params.get(key));
 		}
-	    return true;
+		return true;
 	}
 
 	// 단건 수정
@@ -282,10 +287,13 @@ public class ExerciseController {
 	}
 
 	// 단건 등록
-	@GetMapping("/insertExerciseRecord")
-	public String insertExerciseRecord(ExerciseRecordVO vo) {
-		service.insertExerciseRecord(vo);
-		return "redirect:/getSearchExerciseRecord";
+	@PostMapping("/insertExerciseRecord")
+	@ResponseBody
+	public boolean insertExerciseRecord(@RequestBody Map<String, Object> params) throws Exception {
+		for (String key : params.keySet()) {
+			service.insertExerciseRecord((Map<String, Object>) params.get(key));
+		}
+		return true;
 	}
 
 	// 단건 수정

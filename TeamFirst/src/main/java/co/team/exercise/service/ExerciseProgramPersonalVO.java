@@ -16,7 +16,7 @@ public class ExerciseProgramPersonalVO {
 	int exep_no;
 	String trainer_id;
 	String exep_name;
-	String exep_trainer_name;
+	String exep_trainer_id;
 	Date exep_date;
 	String user_id;
 }
