@@ -154,7 +154,7 @@ public class MemberController {
 	public String joinTrainer(@ModelAttribute TrainerVO member, HttpSession session) {
 		int max = mapper.getMax(); // 가입자수 불러오기
 
-		member.setFitness_id((int) session.getAttribute("fitness_id"));
+		member.setFitness_id(Integer.parseInt((String) session.getAttribute("fitness_id")));
 		member.setId("trainer" + session.getAttribute("fitness_id") + "_" + max); // 아이디 = trainer가입자수mem_reg_id
 		member.setPhone_number(phoneReplace(member.getPhone_number()));
 		member.setPassword(passwordEncoder.encode(member.getPhone_number()));

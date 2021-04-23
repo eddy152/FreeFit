@@ -6,6 +6,7 @@
 
 	$(document).ready(function() {
 		$(document).on('click', '.tr', function(e) {
+			console.log("식단 번호 : " + $(this).find('#td').text());
 			$.ajax({
 				url: 'getAppFood',
 				data: {diet_no : $(this).find('#td').text()},

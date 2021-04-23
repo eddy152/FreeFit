@@ -2,6 +2,8 @@ package co.team.usern.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +32,11 @@ public class UsernController {
 	// 전체조회
 	@RequestMapping("/userNList")
 	public String userNList(@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "search", required = false) String search, Model model) throws Exception {
+			@RequestParam(value = "search", required = false) String search, Model model, HttpSession session) throws Exception {
+		
 		UserNSearch c = new UserNSearch();
+		c.setFitness_id((String) session.getAttribute("fitness_id"));
+		
 		c.setPage(page - 1);
 		c.setSearch(StringUtils.isNotBlank(search) ? ("%" + StringUtils.trim(search) + "%") : null);
 		model.addAttribute("search", search);
@@ -49,15 +54,17 @@ public class UsernController {
 
 		paginations.setStartPage(Math.max(1, page - 5)); // 보여지는 화면에 페이지가 몇개선택할지 숫자조절가능하다.
 		paginations.setEndPage(Math.min(paginations.getPageCnt(), page + 5));
-
+		
+		
 		model.addAttribute("pagination", paginations);
-
+		
 		return "program/Usern/userNList";
 	}
 
 	// 등록
 	@RequestMapping("/userWrite")
-	public String userWrite(UsernVO vo) {
+	public String userWrite(UsernVO vo, HttpSession session) {
+		vo.setFitness_id(Integer.parseInt((String) session.getAttribute("fitness_id")));
 		usernService.userWrite(vo);
 		return "redirect:/userNList";
 	}
