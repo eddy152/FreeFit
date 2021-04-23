@@ -135,7 +135,6 @@ $(function() {
 				contentType : 'application/json',
 				success: function(result) {
 					alert("등록성공");
-					$('#exeList').val(result);
 				}
 			})  // End of ajax
 		}
@@ -320,7 +319,6 @@ ul.sub li:hover {
 							<td>운동 목록</td><td>설정 횟수</td>
 						</tr>
 					</table>
-					<input type="text" id="exeList">
 					<button type="button" id="setExePr" style="display: none;">등록하기</button>
 				</form>
 			</div>

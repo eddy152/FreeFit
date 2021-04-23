@@ -14,11 +14,16 @@
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
+	var arr = {};
+	var exep_no;
+	var user_id;
+	
 	$(function() {
 		$(".exeProgram").on("click", function() {
-			var exep_no = $(this).children(":eq(0)").children().val();
-			var user_id = $(this).children(":eq(1)").children().val();
 			var pTr = $(this).children(":eq(4)").children();
+			
+			exep_no = $(this).children(":eq(0)").children().val();
+			user_id = $(this).children(":eq(1)").children().val();
 			
 			$.ajax({
 				url: "getExercisePersonalDetailProc", 
@@ -27,20 +32,12 @@
 				success: function(result) {
 					var ulLi = "";
 					if(pTr.text() == "▼") {
+						$(".postnTab").text("▼")
+						$(".exeList").empty();
+						$(".exeList").slideUp();
 						pTr.text("▲")
+						
 						for(rs of result){
-							<%-- var rs.exep_no;
-							var rs.exe_no;
-							var rs.epd_set;
-							var rs.epd_count;
-							var rs.epd_weight;
-							var rs.user_id;
-							var rs.exe_name;
-							
-							objs = document.createElement('input');
-							objs.setAttribute('type', 'hidden');
-							objs.setAttribute('name', 'user_id');
-							objs.setAttribute('value', "${list.id}"); --%>
 							
 							ulLi = "<ul>" +
 									"<li>" + rs.exe_name + "</li>" +
@@ -57,6 +54,7 @@
 						$("#" + exep_no).append(
 							"<ul>" +
 							"<li><button class='exeStart'>운동 시작하기</button></li>" +
+							"<li><button class='exeDel'>삭제하기</button></li>" +
 							"</ul>"
 						);
 						
@@ -70,25 +68,75 @@
 			})  // End of ajax
 		})
 		
-		<%-- $(document).on("click", ".exeStart", function() {
-			var form = document.createElement('form');
-			var objs;
-			
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'hidden');
-			objs.setAttribute('name', 'user_id');
-			objs.setAttribute('value', "${list.id}");
-			
-			form.appendChild(objs);
-			form.setAttribute('method', 'post');
-			form.setAttribute('action', "getSearchExerciseProgramPersonal");
-			
-			document.body.appendChild(form);
-			
-			form.submit();			
-		}) --%>
+		$(document).on("click", ".exeStart", function() {
+			$.ajax({
+				url: "getExercisePersonalDetailProc", 
+				method: 'POST',
+				data: "user_id=" + user_id + "&exep_no=" + exep_no,
+				success: function(result) {
+					for(rs of result){
+						var exeName = rs.exe_name;
+						var epdSet = rs.epd_set;
+						var epdCount = rs.epd_count;
+						var epdWeight = rs.epd_weight;
+						var exeNo = rs.exe_no;
+						var exepNo = rs.exep_no;
+						var userId = rs.user_id;
+						
+						arr[exeName] = {"epd_set":epdSet , "exer_count":epdCount , "exer_weight":epdWeight, "exe_no":exeNo, "exep_no":exepNo, "user_id":userId };
+					}
+					
+					var exeStartNow = confirm( '운동을 시작하시겠습니까?' );
+					if(exeStartNow) {
+						var result = JSON.stringify(arr);
+							
+						$.ajax({
+							url: "insertExerciseRecord", 
+							method: 'POST',
+							data: result,
+							traditional: true,
+							dataType:'json',
+							contentType : 'application/json',
+							success: function(result) {
+								alert("등록성공");
+							}
+						})  // End of ajax
+					} else {
+						arr = {};
+					}
+				}
+			})
+		})
+		
+		$(document).on("click", ".exeDel", function() {
+			$.ajax({
+				url: "deleteExerciseProgramPersonal", 
+				method: 'POST',
+				data: "user_id=" + user_id + "&exep_no=" + exep_no,
+				success: function(result) {
+					alert("삭제 완료");
+				}
+			}) // End of ajax
+		})
+		
+		$(document).on("click", "#prAdd", function() {
+			$.ajax({
+				url: "insertExerciseProgramPersonalForm",
+				//data: {user_id : user_id},
+				type: 'post',
+				success: function(result) {
+					window.name = "parentForm";
+					var myForm = document.popForm;
+			        window.open("", "popForm"
+			                	, "childForm", "width=800", "height=500", "resizable = no", "scrollbars = no");
+					myForm.action = "insertExerciseProgramPersonalForm";
+					myForm.method = "post";
+					myForm.target = "popForm";
+					myForm.submit();
+				}
+			}) // End of Ajax
+		})
 	})
-	
 </script>
 <style type="text/css">
 ul {display: table;}
@@ -109,8 +157,14 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 			<c:forEach items="${list}" var="list">
 				<div>
 					<ul class="exeProgram">
-						<li>${list.exep_name}<input type="hidden" name="exep_no" class="exep_no" value="${list.exep_no }"></li>
-						<li>${list.user_id}<input type="hidden" name="user_id" class="user_id" value="${list.user_id }"></li>
+						<li>
+							${list.exep_name}
+							<input type="hidden" name="exep_no" class="exep_no" value="${list.exep_no }">
+						</li>
+						<li>
+							${list.user_id}
+							<input type="hidden" name="user_id" class="user_id" value="${list.user_id }">
+						</li>
 						<c:choose>
 							<c:when test="${list.trainer_id ne null}">
 								<li>${list.trainer_id}</li>
@@ -122,13 +176,13 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 						<li><fmt:formatDate value="${list.exep_date}" pattern="yyyy-MM-dd" /></li>
 						<li><font class="postnTab">▼</font></li>
 					</ul>
-					<ul id="${list.exep_no }" style="display: none;">
+					<ul id="${list.exep_no }" class="exeList" style="display: none;">
 					</ul>
 				</div>
 			</c:forEach>
 		</div>
 		<button onclick="history.back()">뒤로 가기</button>
-		<button onclick="">추가하기</button>
+		<button type="button" id="prAdd">추가하기</button>
 	</div>
 </body>
 </html>
