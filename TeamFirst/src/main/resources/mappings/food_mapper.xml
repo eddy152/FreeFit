@@ -15,7 +15,7 @@
 	<select id="getFood" resultType="FoodVO" parameterType="FoodVO">
 		select u.*, w.*
 		from ff_user u, user_weight w
-		where u.id = w.user_id
+		where u.id = w.user_id(+)
 		and u.id = #{id}
 	</select>
 
@@ -29,12 +29,14 @@
 	</select>
 
 	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리) -->
-	<select id="getRealFood" resultType="FoodVO"
-		parameterType="FoodVO">
+	<select id="getRealFood" resultType="FoodVO" parameterType="FoodVO">
 		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content,
 		calorie, to_char(sysdate, 'yyyy-MM-dd') as "sysdate", to_char(sysdate, 'yyyy-MM-w') as week from real_diet
-		where user_id = #{id}
+		<where>
+		 user_id = #{id}
 		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
+
+		</where>
 
 	</select>
 
@@ -123,7 +125,7 @@
 
 	<!-- Food 식단 실제 섭취량 조회(= 각 회원 기준 총 섭취 칼로리)-앱 -->
 	<select id="getRealFoodMember" resultType="FoodVO" parameterType="FoodVO">
-		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, sysdate, detail_content from real_diet
+		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, to_char(sysdate, 'yyyy-MM-dd') "sysdate", detail_content from real_diet
 		where user_id = #{id} 
 		and to_char(take_date, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
 		order by take_date

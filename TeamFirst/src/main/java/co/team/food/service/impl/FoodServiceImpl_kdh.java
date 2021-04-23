@@ -1,6 +1,11 @@
 package co.team.food.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,7 +105,10 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	@Override
 	// 실제 섭취 식단 폼(오늘)
 	public FoodVO getRealFoodMember(FoodVO vo) {
-		return dao.getRealFoodMember(vo);
+		FoodVO isthisvo=dao.getRealFoodMember(vo);
+		if (isthisvo!=null) {
+		return isthisvo;}
+		else return vo;
 	}
 
 	@Override
@@ -153,8 +161,16 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 
 	@Override
 	// 일별 회원 식단 조회
-	public List<FoodVO> getFoodOne(FoodVO vo) {
-		return dao.getFoodOne(vo);
+	public FoodVO getFoodOne(FoodVO vo) {
+		FoodVO nvo=new FoodVO();
+		vo=dao.getFoodOne(vo);
+		if (vo==null) {
+			SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");    
+			Date today = new Date();
+			nvo.setSysdate(formatter.format(today));
+			return nvo;
+		}
+		return vo;
 	}
 
 	@Override
@@ -164,7 +180,7 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	}
 
 	@Override
-	public FoodVO current(FoodVO vo) {
+	public FoodVO current(String vo) {
 		// TODO Auto-generated method stub
 		return dao.current(vo);
 	}

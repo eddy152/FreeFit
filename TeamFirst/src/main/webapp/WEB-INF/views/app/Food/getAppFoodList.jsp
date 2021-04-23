@@ -14,11 +14,20 @@
 				success: function(res) {
 					e.preventDefault();
 					$('#exampleModal').modal("show");
-						console.log(res + ", " + res.detail_food + ", " + res.detail_calorie + ", " + res.detail_count);
-						$('#diet_no').text(res.diet_no);
-						$('#diet_title').text(res.diet_title);
-						$('#diet_content').text(res.diet_content); 
-						$('#total_calorie').text(res.total_calorie);
+					
+					var food = [];
+					for(i=0; i<res.length; i++) {
+					console.log(res[i].detail_food + " " + res[i].detail_count + "°³");
+					food += res[i].detail_food + " " + res[i].detail_count + "°³";
+					if(i<res.length-1) {
+						food += ", ";
+						}
+					}
+					console.log(food);
+					$('#diet_content').text(food);
+					$('#diet_no').text(res[0].diet_no);
+					$('#diet_title').text(res[0].diet_title);
+					$('#total_calorie').text(res[0].total_calorie);
 
 				},
 				error:function() {

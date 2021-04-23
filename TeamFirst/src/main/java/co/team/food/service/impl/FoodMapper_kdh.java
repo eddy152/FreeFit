@@ -77,12 +77,12 @@ public interface FoodMapper_kdh {
 	public void foodDel(FoodVO vo);
 	
 	// 일별 회원 식단 조회
-	public List<FoodVO> getFoodOne(FoodVO vo);
+	public FoodVO getFoodOne(FoodVO vo);
 	
 	// 일별 단건 조회
 	public FoodVO getDay(FoodVO vo);
 	
-	public FoodVO current(FoodVO vo);
+	public FoodVO current(String vo);
 	
 	// 총칼로리 저장
 	public void updateCalorie(FoodVO vo);
