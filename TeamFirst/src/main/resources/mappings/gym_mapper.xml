@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- gym_mapper.xml -->
+<mapper namespace="co.team.gym.service.impl.GymMapper">
+		
+	<select id="getGym" resultType="GymVO" parameterType="String" >
+		
+		SELECT a.id
+		,a.name
+		,a.fitness_name
+		,a.address
+		,a.address_detail
+		,a.email
+		,a.tel_number
+		,a.business_number
+		,mi.membership_name
+		FROM FITNESSADMIN a
+		LEFT JOIN membership_reg mr on mr.admin_id = a.id
+		LEFT JOIN membership_info mi on mi.membership_no = mr.membership_no
+		WHERE a.id = #{id}
+	</select>
+	
+		<select id="searchGymList"
+		parameterType="GymListSearch" resultType="GymVO">
+		SELECT id
+		,fitness_name
+		,address
+		,address_detail
+		,email
+		,tel_number
+		FROM (SELECT * FROM (
+		
+		SELECT
+		ROWNUM AS SEQ
+		,id
+		,fitness_name
+		,address
+		,address_detail
+		,email
+		,tel_number
+		
+		FROM ( SELECT *
+		FROM FITNESSADMIN
+		where 1=1
+		<choose>
+			<when test="search!=null">
+				AND fitness_name LIKE #{search}
+			</when>
+		</choose>
+		ORDER BY fitness_name ASC
+		)
+		<![CDATA[
+		) where seq >= #{start}
+		)
+		where ROWNUM <= 10
+		]]>
+	</select>	
+ 	
+ 	<select id="countGymList" resultType="int" parameterType="GymListSearch">
+ 	
+ 		SELECT COUNT (1)
+ 		FROM FITNESSADMIN
+ 		WHERE 1=1
+ 		<choose>
+ 			<when test="search!=null">
+				and fitness_name like #{search}
+			</when>
+ 		</choose>
+ 	</select>
+ 	
+</mapper>

@@ -77,7 +77,7 @@
 								<!-- col 의 margin bottom 을 - midium - 2만큼 -->
 								<label for="name">이름</label> <input type="text"
 									class="form-control" id="name" name="name"
-									placeholder="이름" value="테스트" required>
+									placeholder="이름" value="김이박이름입력" required>
 								<div class="invalid-feedback">이름을 입력해주세요.</div>
 							</div>
 						</div>

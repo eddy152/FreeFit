@@ -17,12 +17,9 @@
 <!-- <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.6/examples/pricing/">
  -->
-
-
 <!-- Bootstrap core CSS -->
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -32,19 +29,15 @@
 	-ms-user-select: none;
 	user-select: none;
 }
-
 @media ( min-width : 768px) {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
 }
 </style>
-<link href="/spring/resources/assets/dist/css/dashboard.css"
-	rel="stylesheet">
+<link href="/spring/resources/assets/dist/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
-
-
 	<tiles:insertAttribute name="header" />
 
 	<div class="container-fluid">
@@ -61,7 +54,8 @@
 
 </body>
 <script>
-var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : ";"%>
+	var isLogin
+<%=session.getAttribute("id") != null ? ("='" + session.getAttribute("id") + "';") : ";"%>
 	
 </script>
 
