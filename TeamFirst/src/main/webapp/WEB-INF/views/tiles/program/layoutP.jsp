@@ -14,16 +14,10 @@
 <meta name="generator" content="Hugo 0.80.0">
 <title>Pyramid Fit</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
 <!-- <link rel="canonical"
-	href="https://getbootstrap.com/docs/4.6/examples/pricing/">
- -->
-
-
+	href="https://getbootstrap.com/docs/4.6/examples/pricing/"> -->
 <!-- Bootstrap core CSS -->
-<link href="/spring/resources/assets/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
+<link href="/spring/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;

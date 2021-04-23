@@ -290,23 +290,23 @@
 <div>
 	<div>
 		<h3>락커관리</h3>
-		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
-		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
-		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=2'">여자</button>
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
+		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=1'" class="btn btn-secondary">남자</button>&nbsp;
+		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=2'" class="btn btn-secondary">여자</button>
 	</div>
 
 	<hr>
 	<!-- start 락카버튼 -->
-	<form id="form2">
-	<table>
+	<form id="form2" >
+	<table class="table">
 		<tr>
 			<c:set var="j" value="${list[0].lock_width}" />
 			<c:forEach var="locker" items="${list }">
 				<c:if test='${locker.user_id ne null}'>
-					<td style="background-color: gray;"><button type="button" class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td style="background-color: gray;"><button type="button" class="btn btn-warning" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.user_id eq null}">
-					<td><button class="btn"  type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button class="btn btn-light"  type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.each_lock_no % j == 0}">			
 					</tr>
@@ -316,15 +316,18 @@
 	</table>
 	</form>
 	<!-- end 락카버튼 -->
-
-	<h3>락커 상세보기</h3>
+	
 	<br>
 	<div>
-		<form id="form1"">
-			<table border="1">
+		<div align="center">
+		<h3>락커 상세보기</h3>
+		</div>
+		<form id="form1" >
+			<div class="container my-3">
+			<table border="1" class="table">
 				<tr>
 					<td>락커 번호</td>
-					<td><input type="text" id="lock_no" name="lock_no"
+					<td><input type="text" id="lock_no" name="lock_no" 
 						readonly="readonly"></td>
 				</tr>
 				<tr>
@@ -338,8 +341,8 @@
 				<tr>
 					<td>종료일</td>
 					<td><input type="date" name="final_date" id="final_date">
-						<button type="button" id="addDate" onclick="">+</button>
-						<button type="button" id="delDate" onclick="">-</button>
+						<button type="button" id="addDate" onclick="" class="btn btn-info" ><i class="fas fa-plus"></i></button>
+						<button type="button" id="delDate" onclick="" class="btn btn-info"><i class="fas fa-minus"></i></button>
 					</td>
 				</tr>
 				<tr>
@@ -354,10 +357,13 @@
 					<td><input type="text" name="room_no" readonly="readonly"></td>
 				</tr>
 			</table>
+			</div>
 		</form>
-		<input type="button" id="btnInsert" value="추가">&nbsp; 
-		<input type="button" value="수정" id="btnUpdate">&nbsp; 
-		<input type="button" value="삭제" id="btnDelete">&nbsp;
+		<div align="center">
+		<input type="button" id="btnInsert" value="추가" class="btn btn-dark">&nbsp; 
+		<input type="button" value="수정" id="btnUpdate" class="btn btn-dark">&nbsp; 
+		<input type="button" value="삭제" id="btnDelete" class="btn btn-dark">&nbsp;
+		</div>
 	</div>
 
 	<!-- Modal -->

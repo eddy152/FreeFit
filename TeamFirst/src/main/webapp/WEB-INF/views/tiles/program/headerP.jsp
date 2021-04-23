@@ -18,7 +18,7 @@ body{
 	font-family: 'Source Sans Pro';
 }
 
-a {
+a{
 	text-decoration: none;
 	color: white;
 }
@@ -41,6 +41,7 @@ a {
 }
 
 .navbar_menu{
+	color: white;
 	display: flex;
 	list-style: none;
 	padding-left: 0; 
@@ -78,6 +79,7 @@ a {
 		padding: 8px 24px;
 	}
 	.navbar_menu{
+		color: white;
 		flex-direction: column;
 		align-items: center;
 		width: 100%;

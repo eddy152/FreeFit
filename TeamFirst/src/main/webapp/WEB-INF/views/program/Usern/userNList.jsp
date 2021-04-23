@@ -82,16 +82,13 @@ th {
 							</tbody>
 						</table>
 				</div>
-				<div class="right"> 
-					<input type="button" value="글쓰기" align="center"  class="btn btn-primary"; style="width: 100px;"
-							onclick="location.href='userNW';">
-				</div>
-				<div class="input-group mb-3">
-						<input type="text" id="search_text" style="width: 100px;" class="form-control";
-							value="${search}" />&nbsp;&nbsp; 
-							<input type="button" value="검색하기"  class="btn btn-primary";
+				<div class="mx-auto mt-5 search-bar input-group mb-3">
+						<input type="text" id="search_text" style="width: 100px;" class="form-control rounded-pill"; placeholder="검색하기"; 
+							value="${search}" /> 
+						<input type="button" value="검색하기"  class="btn btn-primary";
 							onclick="search()">&nbsp;&nbsp;
-					
+						<input type="button" value="글쓰기"   class="btn btn-primary"; style="width: 100px;"
+							onclick="location.href='userNW';">					
 				</div>
 			</div>
 			<!-- Paging -->

@@ -6,13 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css"
 	rel="stylesheet">
@@ -66,26 +69,25 @@ textarea {
 <body>
 <body>
 	<div style="width: 60%; margin: auto;">
-	<h2 style="text-align: center;">상세보기 페이지</h2>
-	<br>
-	<br>
+		<h2 style="text-align: center;">상세보기 페이지</h2>
+		<br> <br>
 		<form method="post" action="getUserh">
-			카테고리 : <input readonly="readonly" type="text" name="category"
-				value="${us.category}"><br> 게시물번호 : <input
-				readonly="readonly" type="text" name="board_no"
+
+			게시물번호 : <input readonly="readonly" type="text" name="board_no"
 				value="${us.board_no}"><br> 제목 : <input
 				readonly="readonly" type="text" name="title" style="width: 30%;"
 				placeholder="제목" value="${us.title}" />
 
 			<textarea readonly="readonly" id="summernote" name="content"></textarea>
 
-			<input id="subBtn" type="button" value="수정하기" style="float: right;"
+			<input id="subBtn" type="submit" class="btn btn-primary" value="수정하기"
+				style="float: right;"
 				onclick="location.href='userUpdate?board_no=${us.board_no}';" />
 			<!--"goModify(this.form)"  -->
 			<input type="button" value="삭제" style="float: right;"
-				onclick="del(${us.board_no})"> <input type="button"
-				value="목록으로" style="float: right;"
-				onclick="location.href='userNList';">
+				class="btn btn-danger" onclick="del(${us.board_no})"> <input
+				type="button" class="btn btn-info" value="목록으로"
+				style="float: right;" onclick="location.href='userNList';">
 		</form>
 	</div>
 </body>
