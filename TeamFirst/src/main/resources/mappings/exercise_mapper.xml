@@ -234,7 +234,7 @@
 		)
 		VALUES
 		(
-			#{exep_no},
+			exe_program_personal_seq.nextval,
 			#{trainer_id},
 			#{exep_name},
 			#{exep_trainer_id},

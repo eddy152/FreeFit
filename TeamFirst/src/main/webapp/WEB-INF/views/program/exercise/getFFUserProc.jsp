@@ -30,24 +30,6 @@
 			form.submit();
 		})
 		
-		$("#btnExe").on("click", function(){
-			var form = document.createElement('form');
-			var objs;
-			
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'hidden');
-			objs.setAttribute('name', 'id');
-			objs.setAttribute('value', "${list.id}");
-			
-			form.appendChild(objs);
-			form.setAttribute('method', 'post');
-			form.setAttribute('action', "getSearchExerciseProgramBasic");
-			
-			document.body.appendChild(form);
-			
-			form.submit();
-		})
-		
 		$("#btnPro").on("click", function(){
 			var form = document.createElement('form');
 			var objs;
@@ -164,7 +146,6 @@
 			</tr>
 		</table>
 		<button onclick="history.back()">뒤로 가기</button>
-		<button id="btnExe">운동등록</button>
 		<button id="btnRsv">운동기록</button>
 		<button id="btnPro">프로그램</button>
 	</div>

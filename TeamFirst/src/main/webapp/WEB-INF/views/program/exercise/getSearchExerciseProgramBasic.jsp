@@ -151,15 +151,15 @@ $(function() {
 	
 	$(document).on("click", "a[name=exeGet]", function() {
         $.ajax({
-			url: "getSearchExercisePersonalDetail",
-			data: {user_id : $("input[name=user_id]").val()},
+			url: "getSearchExerciseProgramPersonalView",
+			data: {user_id : $("input[name=user_id]").val(), exep_no : $("input[name=exep_no]").val()},
 			type: 'post',
 			success: function(result) {
 				window.name = "parentForm";
 				var myForm = document.popForm;
 		        window.open("", "popForm"
 		                	, "childForm", "width=800, height=500, resizable = no, scrollbars = no");
-				myForm.action = "getSearchExercisePersonalDetail";
+				myForm.action = "getSearchExerciseProgramPersonalView";
 				myForm.method = "post";
 				myForm.target = "popForm";
 				myForm.submit();
@@ -292,7 +292,7 @@ ul.sub li:hover {
 										<ul class="sub">
 											<li><a name="exeAdd">운동 추가</a></li>
 											<li><a name="exeDel">운동 삭제</a></li>
-											<li><a name="exeGet">목록 불러오기</a></li>
+											<li><a name="exeGet">프로그램</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -325,7 +325,7 @@ ul.sub li:hover {
 			<div id="divThird" style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
 				<form action="" id="exeSetCount">
 					<table border="1" id="exeSet"></table>
-					프로그램 번호<br><input type="text" name="exep_no" value="1"><br>
+					프로그램 번호<br><input type="text" name="exep_no" value="${ffUser1}"><br>
 					유저 아이디<br><input type="text" name="user_id" value="${ffUser.id }"><br>
 				</form>
 				<form name="popForm">

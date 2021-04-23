@@ -90,6 +90,7 @@ public class ExerciseController {
 	// 리스트 조회
 	@PostMapping("/getSearchExerciseProgramBasic")
 	public String getSearchExerciseProgramBasic(FFUserVO vo, Model model) {
+		model.addAttribute("ffUser1", vo.getExep_no());
 		model.addAttribute("ffUser", service.getFFUserProc(vo));
 		return "program/exercise/getSearchExerciseProgramBasic";
 	}
@@ -167,6 +168,13 @@ public class ExerciseController {
 		model.addAttribute("list", service.getSearchExerciseProgramPersonal(vo));
 		return "program/exercise/getSearchExerciseProgramPersonal";
 	}
+	
+	// 리스트 조회
+		@PostMapping("/getSearchExerciseProgramPersonalView")
+		public String getSearchExerciseProgramPersonalView(ExerciseProgramPersonalVO vo, Model model) {
+			model.addAttribute("list", service.getSearchExerciseProgramPersonal(vo));
+			return "nolayout/program/exercise/getSearchExerciseProgramPersonalView";
+		}
 
 	// 단건 조회
 	@ResponseBody

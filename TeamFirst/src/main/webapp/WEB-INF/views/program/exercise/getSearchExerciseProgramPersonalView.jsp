@@ -43,7 +43,9 @@
 							
 							ulLi = "<ul>" +
 									"<li>" + rs.exe_name + "</li>" +
-									"<li>" + rs.epd_set + "세트</li>" +
+									"<li>" + rs.epd_set + "세트" +
+									"<input type='hidden' name='exe_no' value=" + rs.exe_no + ">" +
+									"<input type='hidden' name='exep_name' value=" + rs.exe_name + "></li>" +
 									"<li>" + rs.epd_count + "회</li>"
 									
 							if(rs.epd_weight != 0) {
@@ -56,14 +58,14 @@
 						if(exeCheckName != null) {
 							$("#" + exep_no).append(
 								"<ul>" +
-								"<li><button class='exeStart'>운동 시작하기</button></li>" +
+								"<li><input type='button' value='전달하기' id='exePut'></li>" +
 								"<li><button class='exeDel'>삭제하기</button></li>" +
 								"</ul>"
 							);	
 						} else {
 							$("#" + exep_no).append(
 								"<ul>" +
-								"<li><button class='exeAdd'>운동 추가하기</button></li>" +
+								"<li>저장된 루틴이 없습니다.</li>" +
 								"</ul>"
 							);
 						}
@@ -76,46 +78,6 @@
 					}
 				}
 			})  // End of ajax
-		})
-		
-		$(document).on("click", ".exeStart", function() {
-			$.ajax({
-				url: "getExercisePersonalDetailProc", 
-				method: 'POST',
-				data: "user_id=" + user_id + "&exep_no=" + exep_no,
-				success: function(result) {
-					for(rs of result){
-						var exeName = rs.exe_name;
-						var epdSet = rs.epd_set;
-						var epdCount = rs.epd_count;
-						var epdWeight = rs.epd_weight;
-						var exeNo = rs.exe_no;
-						var exepNo = rs.exep_no;
-						var userId = rs.user_id;
-						
-						arr[exeName] = {"epd_set":epdSet , "exer_count":epdCount , "exer_weight":epdWeight, "exe_no":exeNo, "exep_no":exepNo, "user_id":userId };
-					}
-					
-					var exeStartNow = confirm( '운동을 시작하시겠습니까?' );
-					if(exeStartNow) {
-						var result = JSON.stringify(arr);
-							
-						$.ajax({
-							url: "insertExerciseRecord", 
-							method: 'POST',
-							data: result,
-							traditional: true,
-							dataType:'json',
-							contentType : 'application/json',
-							success: function(result) {
-								alert("등록성공");
-							}
-						})  // End of ajax
-					} else {
-						arr = {};
-					}
-				}
-			})
 		})
 		
 		$(document).on("click", ".exeDel", function() {
@@ -146,30 +108,22 @@
 				}
 			}) // End of Ajax
 		})
-		$(document).on("click", ".exeAdd", function() {
-			var form = document.createElement('form');
-			var objs;
-			var objs2;
+		
+		$(document).on("click", "#exePut", function() {
+			var exeNo = '';
+			var inputExeNo = $("input[name=exe_no]");
 			
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'hidden');
-			objs.setAttribute('name', 'id');
-			objs.setAttribute('value', user_id);
-			
-			objs2 = document.createElement('input');
-			objs2.setAttribute('type', 'hidden');
-			objs2.setAttribute('name', 'exep_no');
-			objs2.setAttribute('value', exep_no);
-			
-			form.appendChild(objs);
-			form.appendChild(objs2);
-			form.setAttribute('method', 'post');
-			form.setAttribute('action', "getSearchExerciseProgramBasic");
-			
-			document.body.appendChild(form);
-			
-			form.submit();
-		})
+			opener.$("#exeNameTbl tr").remove();
+			opener.$("#exeNameTbl").append('<tr><td>운동 목록</td><td>설정 횟수</td></tr>');
+			for(var i = 0; i < inputExeNo.length; i++) {
+        		exeNo = inputExeNo[i].value;
+        		var exeName = $("input[name=exep_name]")[i].value;
+	        		
+        		console.log(exeNo, exeName);
+        		opener.$("#exeNameTbl").append('<tr name="exeNameTr"><td id=' + exeNo + '>' + exeName + '</td><td id=' + exeName + 'set></td></tr>');
+        	}
+	        alert("등록 완료");
+		});
 	})
 </script>
 <style type="text/css">
@@ -217,8 +171,8 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 			<form name="popForm">
 			</form>
 		</div>
-		<button onclick="history.back()">뒤로 가기</button>
-		<button type="button" id="prAdd">추가하기</button>
+		<input type="button" value="창닫기" onclick="window.close()">
+		<button type="button" id="prAdd">프로그램 추가하기</button>
 	</div>
 </body>
 </html>

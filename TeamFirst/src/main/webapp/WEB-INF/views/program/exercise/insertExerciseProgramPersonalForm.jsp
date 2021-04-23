@@ -13,14 +13,12 @@
 		<form action="insertExerciseProgramPersonal" method="post">
 			<table style="text-align: center;" border="1">
 				<tr>
-					<th>프로그램 번호</th>
 					<th>트레이너 아이디</th>
 					<th>프로그램명</th>
-					<th>트레이너 아이디</th>
+					<th>트레이너 이름</th>
 					<th>유저 아이디</th>
 				</tr>
 				<tr>
-					<td><input type="text" name="exep_no"></td>
 					<td><input type="text" name="trainer_id"></td>
 					<td><input type="text" name="exep_name"></td>
 					<td><input type="text" name="exep_trainer_id"></td>

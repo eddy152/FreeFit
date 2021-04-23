@@ -19,4 +19,5 @@ public class FFUserVO {
 	String notice;
 	int gender;
 	int fitness_id;
+	int exep_no;
 }
