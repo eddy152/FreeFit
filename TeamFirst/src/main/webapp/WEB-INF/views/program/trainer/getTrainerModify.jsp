@@ -35,7 +35,7 @@
 					<thead>
 						<tr>
 							<th>멤버쉽</th>
-							<td><input name="mem_reg_id" value="${emp.mem_reg_id}"
+							<td><input name="fitness_id" value="${emp.fitness_id}"
 								readonly="readonly"></td>
 						</tr>
 						<tr>

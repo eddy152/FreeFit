@@ -40,7 +40,7 @@
 						<thead>
 						<tr>
 							<th>멤버쉽</th>
-							<td><input name="mem_reg_id" value="${emp.mem_reg_id}" readonly="readonly"></td>
+							<td><input name="fitness_id" value="${emp.fitness_id}" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<th>ID</th>
@@ -64,7 +64,6 @@
 						</tr>
 					</table>
 				</div>
-				
 				<button onClick="javascript:modify()">수정</button>
 				<button onClick="javascript:deleteEmp()">삭제</button>
 				<button onClick="javascript:list()">목록</button>
