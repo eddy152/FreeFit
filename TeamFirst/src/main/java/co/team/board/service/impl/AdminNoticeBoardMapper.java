@@ -20,7 +20,7 @@ public interface AdminNoticeBoardMapper {
 	//게시믈 검색
 	public List<AdminNoticeBoardVO> searchAdminNoticeBoardList(AdminNoticeBoardListSearch vo);
 	
-	public Integer countAdminNoticeBoardList(AdminNoticeBoardListSearch vo);
+	public int countAdminNoticeBoardList(AdminNoticeBoardListSearch vo);
 	
 	// 등록
 	public int insertAdminNoticeBoard(AdminNoticeBoardVO vo);

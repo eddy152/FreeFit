@@ -1,5 +1,7 @@
 package co.team.trainer.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,9 +24,11 @@ public class TrainerController {
 
   //트레이너 전체 리스트
   @RequestMapping("/trainerList")
-  public String trainerList(TrainerVO vo, Model model) throws Exception {
-    model.addAttribute("list", service.getTrainerList(vo));
-    return "program/trainer/trainerList";
+  public String trainerList(TrainerVO vo, Model model, HttpSession session) throws Exception {
+	//vo.setFitness_id((int)session.getAttribute("fitness_id"));
+	vo.setFitness_id(Integer.parseInt((String)session.getAttribute("fitness_id")));
+	model.addAttribute("list", service.getTrainerList(vo));
+	return "program/trainer/trainerList";
   }
 
   //단건조회

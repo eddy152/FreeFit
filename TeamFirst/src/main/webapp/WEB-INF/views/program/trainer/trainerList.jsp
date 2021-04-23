@@ -91,7 +91,7 @@ th {
 								</c:forEach>
 							</tbody>
 						</table>
-						<div>
+						<div class="input-group mb-3">
 							<input type="button" value="트레이너추가" style="float: right;"
 								class="btn btn-primary"
 								onclick="location.href='/spring/members/joinformP'">
