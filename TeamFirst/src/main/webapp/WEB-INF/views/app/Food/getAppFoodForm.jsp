@@ -27,7 +27,7 @@
 	
 	// + 클릭 시 하단의 div 태그에 음식, 수량 추가
 	$(document).ready(function() {
-		$('.addFood').click(function() {
+		$('#addFood').click(function() {
 			var selectFood = $('#foods option:selected').val();
 			var count = $('#Foodcount').val();
 			var selectFoodName = $('option:selected').text();
