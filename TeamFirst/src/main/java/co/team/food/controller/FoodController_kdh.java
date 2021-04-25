@@ -1,7 +1,12 @@
 package co.team.food.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.team.food.service.FoodService_kdh;
 import co.team.food.service.FoodVO;
-import co.team.food.service.impl.FoodMapper_kdh;
 
 @Controller
 public class FoodController_kdh {
 	@Autowired
-	FoodMapper_kdh service;
+	FoodService_kdh service;
 
 	// 식단 전체 조회
 	@RequestMapping("/getSearchFood")
@@ -59,19 +64,13 @@ public class FoodController_kdh {
 		return service.getDate(vo);
 	}
 
-	// 날짜 조회(-)
-	@RequestMapping("/getBeforeDate")
-	@ResponseBody
-	public List<FoodVO> getBeforeDate(FoodVO vo, Model model) {
-		return service.getBeforeDate(vo);
-	}
-
 	// 추천별 식단 리스트(앱)
 	@RequestMapping("/getAppFoodList")
 	public String getAppFoodList(FoodVO vo, Model model) {
 		model.addAttribute("list", service.getAppFoodList(vo));
+		System.out.println("list ---->" + service.getAppFoodList(vo));
 		return "app/Food/getAppFoodList";
-	}
+	}      
 
 	// 추천별 식단 단건 조회(앱)
 	@RequestMapping("/getAppFood")
@@ -161,29 +160,55 @@ public class FoodController_kdh {
 	@RequestMapping("/getMemberFoodList")
 	public String getMemberFoodList(FoodVO vo, Model model) {
 		List<FoodVO> rvo = service.getRealFood(vo);
+		System.out.println("-----" + rvo);
 		if (rvo != null) {
 			System.out.println(rvo + "------------------------------");
 			model.addAttribute("list", service.getRealFood(vo)); // 실제 섭취 식단 단건 조회
 		} else {
 			vo.setTake_date("sysdate");
 			model.addAttribute("list", service.getRealFood(vo));
-
 		}
 		model.addAttribute("food", service.getFood(vo));
+		model.addAttribute("week", service.getFoodWeek(vo)); // 주간별 회원 식단 조회
+		vo.setCnt("0");
+		model.addAttribute("day", service.getWeeks(vo));
 		return "app/Food/getMemberFoodList";
+	}
+	
+	@RequestMapping("/getBeforeDate")
+	@ResponseBody
+	public List<FoodVO> getBeforeDate(FoodVO vo) {
+		List<FoodVO> list = service.getWeeks(vo);
+		return list;
 	}
 
 	// 해당 회원의 실제 섭취 식단 상세 및 작성 폼(앱)
 	@GetMapping("/getMemberFoodInsert")
 	public String getMemberFoodInsertForm(FoodVO vo, Model model) {
-		FoodVO rvo = service.getRealFoodMember(vo);
+		vo.setTake_date("sysdate");
+		List<FoodVO> fake = new ArrayList<FoodVO>();
+		FoodVO rvo= new FoodVO();
+		rvo = service.getRealFoodMember(vo);
 		model.addAttribute("user", service.getFood(vo)); // 회원 단건 조회
 		model.addAttribute("foodList", service.getFoodList(vo)); // 음식 정보
 		model.addAttribute("food", rvo); // 실제 섭취 식단 단건 조회
+		if(rvo.getReal_diet_no()!=null) {
+			System.out.println(rvo.getReal_diet_no() +"널값아닌");
 		vo.setReal_diet_no(rvo.getReal_diet_no()); // vo에 식단번호 담기
 		
 		model.addAttribute("comment", service.getComment(vo));
+		} else { 
+		rvo.setCnt("0");
+		rvo.setCalorie("0");
+		model.addAttribute("comment", fake); 
+		model.addAttribute("date", service.current(rvo.getCnt()));
+		model.addAttribute("food", rvo);
+		System.out.println("calorie : " + rvo.getCalorie());
+		System.out.println(rvo.getReal_diet_no() +"널값인");
+		
+		}
 		model.addAttribute("oneDay", service.getFoodOne(vo)); // 일별 회원 식단 조회
+		
 
 
 		if (rvo != null) {
@@ -207,6 +232,7 @@ public class FoodController_kdh {
 				System.out.println(aList);
 			}
 		}
+		
 
 		return "app/Food/getMemberFoodInsert";
 	}
@@ -318,8 +344,24 @@ public class FoodController_kdh {
 
 	@RequestMapping("/currentDay")
 	@ResponseBody
-	public FoodVO current(FoodVO vo) {
-		return service.current(vo);
+	public FoodVO current(String cnt) {
+		FoodVO fv = service.current(cnt);
+		if (fv==null) {
+
+			SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");    
+
+			Date today = new Date();
+
+			Calendar cal = new GregorianCalendar(Locale.KOREA);
+			cal.setTime(today);
+
+			cal.add(Calendar.DATE, Integer.parseInt(cnt));
+
+			String y_date = formatter.format(cal.getTime());
+			fv.setSysdate(y_date);
+			
+		}
+		return fv;
 	}
 
 	// 총 칼로리 저장

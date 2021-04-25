@@ -59,14 +59,10 @@ th {
 
 </head>
 <body>
-	<div class="page-wrapper">
-		<div class="container-fluid">
-			<div class="row row-2">
+			<div class="col-md-9 pr-30 padding-top-40">
 				<!--게시판 넓이 -->
-				<div class="col-sm-5">
+				<div align="center">
 					<h1 class="page-header">트레이너 리스트</h1>
-				</div>
-				<div class="table-responsive">
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -91,14 +87,10 @@ th {
 								</c:forEach>
 							</tbody>
 						</table>
-						<div class="input-group mb-3">
 							<input type="button" value="트레이너추가" style="float: right;"
 								class="btn btn-primary"
 								onclick="location.href='/spring/members/joinformP'">
-						</div>
 				</div>
 			</div>
-		</div>
-	</div>
 </body>
 </html>

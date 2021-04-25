@@ -5,68 +5,10 @@
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
 
-<script type="text/javascript">
-
-window.onload=function(){
-	let jslink;
-	let jsid;
-	let json;
-upbtn.addEventListener('click', onClick);
-
-function onClick(){
-var imgSize=imageF.files[0];
-if (imgSize.size<10000000){
-	
-	var myHeaders = new Headers();
-	myHeaders.append("Authorization", "Client-ID 52d00d8257f11ed");
-
-	var formdata = new FormData();
-	formdata.append("image", imgSize, "[PROXY]");
-
-	var requestOptions = {
-			  method: 'POST',
-			  headers: myHeaders,
-			  body: formdata,
-			  redirect: 'follow'
-			};
-
-fetch("https://api.imgur.com/3/image", requestOptions)
-  .then(response => response.json())
-  .then(result => {
-	  json=result;
-	  jsid=json.data.id;
-	  jslink=json.data.link;
-	  
-  }).then(
-	function(){
-		console.log(jslink);
-		var formdata=new URLSearchParams();
-		  formdata.append("fileName", jsid);
-		  formdata.append("pathName", jslink);
-		  fetch("/spring/files/upload", 
-			{method:'POST', headers:{"Content-Type":"application/x-www-form-urlencoded"}, 
-				body: formdata})
-		  .then(response=>response.text())
-		  .then(result=>document.getElementById("img").src=result)
-		  .catch(error=>console.log('error',error));
-
-	}	  
-  
-  )
-  .catch(error => console.log('error', error));
-}
-else { alert('파일 용량이 10MB를 초과합니다.');
-location.reload();}
-
-}
-
-}
-	
-</script>
-
 <div>
+
 	<h1>회원의 식단</h1>
-	<div class="insertFood"  style="display: none;">
+	<div class="insertFood" <c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
 		<button class="insertForm" type="button">작성하기</button>
 	</div>
 	<br>
@@ -89,7 +31,10 @@ location.reload();}
 			</tr>
 			<tr>
 				<td>키</td>
-				<td>${user.height }</td>
+				<td>${user.height }
+					<input type="text" hidden="hidden"
+					name="height" value="${user.height }">
+				</td>
 			</tr>
 			<tr>
 				<td>몸무게</td>
@@ -106,16 +51,18 @@ location.reload();}
 	<br>
 	<div>
 		
-		<c:if test="${food.real_diet_no ne null}">
+
 			식단 번호 : <input type="text" value="${food.real_diet_no }" id="real_diet_no1">
 			<div>
 				<div class="food_contents">${food.diet_content }</div>
 				<div class="contentBtn">
-					<button type="button" class="contentUpd">수정</button>
-					<button type="button" class="contentDel">삭제</button>
+					<c:if test="${food.real_diet_no ne null}">
+						<button type="button" class="contentUpd">수정</button>
+						<button type="button" class="contentDel">삭제</button>
+					</c:if>
 				</div>
 			</div>
-		</c:if>
+
 		<hr>
 		
 		<div class="comments">
@@ -154,7 +101,7 @@ location.reload();}
 <div>
 	<button type="button" onclick="before()"><</button>
 	
-	<input type="text" name="dates" value="${oneDay[0].sysdate}">
+	<input type="text" name="dates" value="${oneDay.sysdate}">
 	<button type="button" onclick="after()">></button>
 </div>
 <div id="columnchart_material" style="width: 500px; height: 500px;"></div>
@@ -184,7 +131,9 @@ location.reload();}
 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="foodInsert()">전송</button>
+			
+						
+				<button type="button" class="btn btn-primary summernotesubmitBtn" onclick="foodInsert()">전송</button>
 				<button class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
@@ -212,7 +161,8 @@ location.reload();}
 					<input class="btn btn-primary btn-sm" type="button" value="업로드" id="upbtn" />
 				</form>
 				<form id="frm2" method="post">
-					<textarea name="diet_content" id="summernote_upd"></textarea>
+					<textarea name="diet_content" id="summernote_upd">
+					</textarea>
 						
 					<div contenteditable="true" id="summernote_upd">
 						<img src="" id="img">
@@ -223,7 +173,12 @@ location.reload();}
 
 			</div>
 			<div class="modal-footer">
+			<c:if test="${food.diet_content ne null}">
 				<button type="button" class="btn btn-primary" onclick="foodUpdate()">전송</button>
+			</c:if>
+						<c:if test="${food.diet_content ne null}">
+				<button type="button" class="btn btn-primary" onclick="foodUpdate()">전송</button>
+			</c:if>
 				<button class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
@@ -271,7 +226,7 @@ location.reload();}
 						</c:if>
 						
 				</div>
-				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"> <br>
+				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"><br>
 
 				<form action="updateCalorie" method="post" class="frm">
 					<input type="text" name="total_calorie" hidden="hidden">
@@ -292,6 +247,7 @@ location.reload();}
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script type="text/javascript">
+var nowData='${food.diet_content}';
 	
 	//해당 음식과 갯수로 인한 칼로리 계산
 	function TotalCalorie(a, b) {
@@ -308,24 +264,45 @@ location.reload();}
 			var selectFood = $('#foods option:selected').val();
 			var count = $('#Foodcount').val();
 			var selectFoodName = $('option:selected').text();
+			var calorie = $('input:text[name="total_calorie1"]').val();
 			
-			console.log(selectFood + "-> selectFood");
-			
-			if( !selectFood || !count ) {
+			if( !selectFood || !count ) {        
 				alert('음식을 선택하세요!');
 			} else {
 			
-			var food_calorie = $('#foods option:selected').val();
+			var result = parseInt($('input:text[name="total_calorie1"]').val());
 			
-			var result = TotalCalorie(food_calorie, count); 
+			if($('input:text[name="total_calorie1"]').val() == "0") {
+				
+				$('.frm1').append(
+					'<div class="foods">' 
+				  + '<div class="each_food">'
+				  + '<input type="text" name="detail_food" value="' 
+				  + selectFoodName
+				  + '">'
+				  + '<input type="text" name="detail_calorie" hidden="hidden" value="'
+				  + selectFood
+				  + '">'
+				  + '<input type="text" name="detail_count" onchange="change(this)" value="'
+				  + count
+				  + '">'
+				  + '<button type="button" class="deleteFood">-</button>'
+				  + '</div>'
+				  + '</div>'
+				);
+				
+				result += TotalCalorie(parseInt(selectFood), parseInt(count));
+				$('input:text[name="total_calorie1"]').val(parseInt(result));
+				console.log(result + " --> 총 칼로리가 0 일때");
+				
+			} else {
 			
 			var size = $('.each_food').length;		
 				
 			for(i=0; i<size; i++) {
-				var food = $('.each_food ')[i].children[0].value;
+				var food = $('.each_food ')[i].children[0].value; // 음식명
 				if(selectFoodName != food) {
 					if(i==size-1) {
-						console.log("dddd");
 					$('.frm1').append(
 						'<div class="foods">' 
 						+ '<div class="each_food">'
@@ -342,22 +319,19 @@ location.reload();}
 						+ '</div>'
 						+ '</div>'
 						);
+
+					result = TotalCalorie(selectFood, count);
 					}
-					
 				} else {
+					result = 0;
 					alert('선택한 음식이 이미 존재합니다.');	
 					break;
-					
 				} 
+					
 			}
-		
-				
-			var calorie = $('input:text[name="total_calorie1"]').val();
-			if( !calorie ) {
-				$('input:text[name="total_calorie1"]').val(parseInt(result));
-			} else {
-				$('input:text[name="total_calorie1"]').val(parseInt(calorie) + parseInt(result));				
-			}
+			$('input:text[name="total_calorie1"]').val(parseInt(calorie) + parseInt(result));
+			
+		}
 				$('select').val('');
 				$('#Foodcount').val('1');
 			}
@@ -376,8 +350,6 @@ location.reload();}
 			var calorie = $('input:text[name="total_calorie1"]').val(); // 총 칼로리
 			$('input:text[name="total_calorie1"]').val(parseInt(calorie) - parseInt(result));				
 			
-			//console.log("삭제 - " + $(this).closest('div.foods').remove());
-			
 			$(this).closest('div.foods').remove();
 			
 		});
@@ -386,21 +358,21 @@ location.reload();}
 	
 	// 등록 버튼 클릭시 총 칼로리를 저장한다
 	function Click(){
-		//var food = $('.frm1');
+		
+		
 		var food = $('.foods');
 		var foods = '';
 		for(i=0; i<food.length; i++) {
 			var name = $('input:text[name="detail_food"]').eq(i).val();
 			var cal = $('input:text[name="detail_calorie"]').eq(i).val();
 			var cnt = $('input:text[name="detail_count"]').eq(i).val();
-		console.log();
+		console.log(name + ", " + cal + ", " + cnt);
 			foods +=  name + "," + cal + "," + cnt;
 			if(i < food.length-1) {				
 			foods += '/';
 			}
 		}
 		
-		console.log(foods);
 		 $.ajax({
 			url: 'updateCalorie',
 			data: { real_diet_no : $('#real_diet_no1').val(),
@@ -442,6 +414,14 @@ location.reload();}
 			e.preventDefault();
 			$('#exampleModal').modal("show");
 			$('input:text[name="user_id"]').val($('#id').val());
+			
+			
+			if (nowData == '' || nowData ==null){ 
+				console.log(nowData);
+				$('.summernotesubmitBtn')[0].innerText="작성";
+				$('.summernotesubmitBtn')[0].onclick=foodInsert;
+				} 
+
 		});
 	});
 	
@@ -449,8 +429,15 @@ location.reload();}
 	$(document).ready(function() {
 		$(document).on('click', '.contentUpd', function(e) {
 			e.preventDefault();
-			$('#exampleModal3').modal("show");
+			$('#exampleModal').modal("show");
 			$('.note-editable').html($('.food_contents').html());
+			
+			if (nowData != '' || nowData !=null){ 
+				console.log(nowData);
+				$('.summernotesubmitBtn')[0].innerText="수정";
+				$('.summernotesubmitBtn')[0].onclick=foodUpdate;
+				} 
+			
 		});
 	});
 
@@ -459,20 +446,16 @@ location.reload();}
 	google.charts.setOnLoadCallback(drawChart);
 	
 	function drawChart() {
-		var weight = $('input:text[name="weight"]').val(); // = 몸무게
-		var result = weight * 12 * 1.5;
-		//var arr =[]; 
-		//arr.push(['섭취날짜', '실제섭취량', '권쟝량']); 		   				
-	
-		//arr.push(['${food.take_date}', parseInt(${food.calorie}), result]);
+		var height = $('input:text[name="height"]').val();
+		var weight = (height-100) * 0.9; // = 몸무게
+		var total = weight * 30;
+		var arr =[]; 
+		arr.push(['섭취날짜', '실제섭취량', '권쟝량']); 		   				
+
+		arr.push(['${oneDay.sysdate}', parseInt(${food.calorie}), total]);
 		
-	  //var data = google.visualization.arrayToDataTable(arr);
-	   var data = google.visualization.arrayToDataTable([
-		   ['섭취날짜', '실제섭취량', '권쟝량'],
-		   ['${food.take_date}', parseInt(${food.calorie}), result]
-	   ]);
+		var data = google.visualization.arrayToDataTable(arr);
 	 
-	
 	  var options = {
 			  width : '300',
 	          vAxis: { viewWindow: { max: 3000 } },
@@ -486,6 +469,8 @@ location.reload();}
 	var cnt = 0;
 	
 	function before() {
+		loadingModal();
+		$('#Loadingmodal').modal('show'); //모달 보이기
 		cnt += (-1);
 		$.ajax({
 			url: 'getDay',
@@ -495,167 +480,173 @@ location.reload();}
 			dataType: 'json',
 			type: 'get',
 			success: function drawChart(result) {
-				
-				if(result.real_diet_no == null) {
-					$('.insertFood').show();
-				}
-				$('input:text[name="total_calorie1"]').val(result.calorie);
-				
-				console.log(result.detail_content);
-				if(result.detail_content != null) {
-					var contents = result.detail_content.split("/");
-				$('.foods').remove();
-				for(i=0; i<contents.length; i++) {
-					var contents2 = contents[i].split(",");
-					console.log(contents2[2]);
-					$('.frm1').append(
-						'<div class="foods">'
-						+ '<div class="each_food">'
-						+ '<input type="text" name="detail_food" value="' + contents2[0] + '">'
-						+ '<input type="text" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
-						+ '<input type="text" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
-						+ '<button type="button" class="deleteFood">-</button>'
-						+ '</div>'
-						+ '</div>'
-					);
-					
-				}
-					
-			} else {
-				$('.foods').remove();
-			}
-				
-				var today = result.take_date;
-				var calorie = result.calorie;
-				  $('.food_contents').html(result.diet_content);
-				  $('input:text[name="calorie_total"]').val(calorie);
-				  
-				  // 식단 내용이 있고 댓글이 출력 될 때
-				//if(result.diet_content != null) {
-				 var real_diet_no = result.real_diet_no;
-				 console.log(real_diet_no);
-				$.ajax({
-					url:'getComment',
-					data:{real_diet_no : real_diet_no},
-					dataType: 'json',
-					type: 'get',
-					success : function(response) {
-						console.log(real_diet_no);
-					  $('.comments').empty();
-					  for(i=0; i<response.length; i++) {
-						  $('.comments').append(
-							  '<div>'
-							  + '<input type="text" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
-							  + '<textarea class="hide_comment" style="display: none;">' + response[i].diet_comment + '</textarea>'
-							  + '<input type="text" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
-							  + '<a href="#" class="updateComment">[수정]</a>'
-							  + '<a href="#" class="updateComment2" style="display: none;">[수정]</a>'
-							  + '<a href="#" class="deleteComment">[삭제]</a><br><br>'
-							  + '</div>'
-						  );
-					  }
-					  
-				  },
-					error: function() {
-						alert('ERROR');
-				  }
-				}); // 댓글조회 아작스
-					// 식단 내용이 null 일 때
-				  //} else {
-				//	  $('.comments').hide();
-				  //}
-				 // 로우 자체가 없다면(=식단번호가 없으면)
-				if(result.age == '0') {
-					$.ajax({
-						url : 'currentDay',
-						data : {cnt : cnt},
-						dataType: 'json',
-						success: function(e) {
-							console.log(e.sysdate);
-							$('input:text[name=dates]').val(e.sysdate);
-							$('#real_diet_no1').val('');
-							
-							console.log($('.contentBtn').children().hide());
-							$('.contentBtn').children().hide()
-							
-							var weight = $('input:text[name="weight"]').val(); // = 몸무게
-							var total = weight * 12 * 1.5;
-							var arr =[]; 
-							arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-						
-							    arr.push(['', 0, total]);
-							
-							  var data = google.visualization.arrayToDataTable(arr);
-							
-							  var options = {
-									  width : '300',
-							          vAxis: { viewWindow: { max: 3000 } },
-							          seriesType: 'bars' };
-							
-							  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-							
-							  chart.draw(data, options);
-							
-						}
-					});
-			  
-				// 로우 값이 있다면(식단 내용이 있고 댓글이 없을 때)
-				} else {
-					$('.contentBtn').children().show() // 수정, 삭제 버튼을 show
-					$('input:text[name="calorie_total"]').val(result.calorie);
-					$('input:text[name=dates]').val(today);
-					$('#real_diet_no1').val(result.real_diet_no);
-					
-					var weight = $('input:text[name="weight"]').val(); // = 몸무게
-					var total = weight * 12 * 1.5;
-					var arr =[]; 
-					arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-				
-					arr.push([today, parseInt(calorie), total]);
-					
-					  var data = google.visualization.arrayToDataTable(arr);
-					
-					  var options = {
-							  width : '300',
-					          vAxis: { viewWindow: { max: 3000 } },
-					          seriesType: 'bars' };
-					
-					  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-					
-					  chart.draw(data, options);
-				}
-				
-					
-					 
-			} // 아작스 success
-		});
-		
-		$('.insertFood').hide();
-	}
-	
-	function after() {
-	cnt += 1;
-	$.ajax({
-		url: 'getDay',
-		data : { id : $('input:text[name="id"]').val(),
-		    	cnt : cnt 	    	
-		},
-		dataType: 'json',
-		type: 'get',
-		success: function drawChart(result) {
 			
 			if(result.real_diet_no == null) {
 				$('.insertFood').show();
+				$('.contentBtn').find('button').remove();
+			}
+			
+			$('input:text[name="total_calorie1"]').val(result.calorie);
+
+			if(result.detail_content != null) {
+				var contents = result.detail_content.split("/");
+				$('.foods').remove();
+			for(i=0; i<contents.length; i++) {
+				var contents2 = contents[i].split(",");
+				
+				$('.frm1').append(
+					'<div class="foods">'
+					+ '<div class="each_food">'
+					+ '<input type="text" name="detail_food" value="' + contents2[0] + '">'
+					+ '<input type="text" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
+					+ '<input type="text" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
+					+ '<button type="button" class="deleteFood">-</button>'
+					+ '</div>'
+					+ '</div>'
+				);
+				
+			}
+				
+		} else {
+			$('.foods').remove();
+		}
+			
+			var today = result.take_date;
+			var calorie = result.calorie;
+			  $('.food_contents').html(result.diet_content);
+			  $('input:text[name="calorie_total"]').val(calorie);
+			  
+			 var real_diet_no = result.real_diet_no;
+
+			$.ajax({
+				url:'getComment',
+				data:{real_diet_no : real_diet_no},
+				dataType: 'json',
+				type: 'get',
+				success : function(response) {
+				
+				  $('.comments').empty();
+				  for(i=0; i<response.length; i++) {
+					  $('.comments').append(
+						  '<div>'
+						  + '<input type="text" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
+						  + '<textarea class="hide_comment" style="display: none;">' + response[i].diet_comment + '</textarea>'
+						  + '<input type="text" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
+						  + '<a href="#" class="updateComment">[수정]</a>'
+						  + '<a href="#" class="updateComment2" style="display: none;">[수정]</a>'
+						  + '<a href="#" class="deleteComment">[삭제]</a><br><br>'
+						  + '</div>'
+					  );
+				  }
+				  
+			  },
+				error: function() {
+					alert('ERROR');
+			  }
+			}); // 댓글조회 아작스
+				
+			 // 로우 자체가 없다면(=식단번호가 없으면)
+			if(result.age == '0') {
+				$.ajax({
+					url : 'currentDay',
+					data : {cnt : cnt},
+					dataType: 'json',
+					success: function(e) {
+						$('.contentBtn').find('button').remove();
+						$('input:text[name=dates]').val(e.sysdate);
+						$('#real_diet_no1').val('');
+						
+						var height = $('input:text[name="height"]').val();
+						var weight = (height-100) * 0.9; // = 몸무게
+						var total = weight * 30;
+						var arr =[]; 
+						arr.push( ['섭취날짜', '실제섭취량', '권장량']);
+					
+						    arr.push([e.sysdate, 0, total]);
+						
+						  var data = google.visualization.arrayToDataTable(arr);
+						
+						  var options = {
+								  width : '300',
+						          vAxis: { viewWindow: { max: 3000 } },
+						          seriesType: 'bars' };
+						
+						  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
+						
+						  chart.draw(data, options);
+						
+					}
+				});
+		  
+			// 로우 값이 있다면(식단 내용이 있고 댓글이 없을 때)
+			} else {
+				
+				$('input:text[name="calorie_total"]').val(result.calorie);
+				$('input:text[name=dates]').val(today);
+				$('#real_diet_no1').val(result.real_diet_no);
+				$('.contentBtn').find('button').remove();
+				if($('#real_diet_no1').val() != '') {
+					
+					$('.contentBtn').append(
+							  '<button type="button" class="contentUpd">수정</button>'
+							+ '<button type="button" class="contentDel">삭제</button>'
+						);
+				}
+				
+				var height = $('input:text[name="height"]').val();
+				var weight = (height-100) * 0.9; // = 몸무게
+				var total = weight * 30;
+				var arr =[]; 
+				arr.push( ['섭취날짜', '실제섭취량', '권장량']);
+			
+				arr.push([today, parseInt(calorie), total]);
+				
+				  var data = google.visualization.arrayToDataTable(arr);
+				
+				  var options = {
+						  width : '300',
+				          vAxis: { viewWindow: { max: 3000 } },
+				          seriesType: 'bars' };
+				
+				  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
+				
+				  chart.draw(data, options);
+			}
+			
+				
+				 
+		} // 아작스 success
+	});
+		
+		$('.insertFood').hide();
+		$('#Loadingmodal').modal('hide'); //모달 숨기기
+	}
+	
+	function after() {
+		loadingModal();
+		$('#Loadingmodal').modal('show');
+		cnt += 1;
+		$.ajax({
+			url: 'getDay',
+			data : { id : $('input:text[name="id"]').val(),
+			    	cnt : cnt 	    	
+			},
+			dataType: 'json',
+			type: 'get',
+			success: function drawChart(result) {
+			
+			if(result.real_diet_no == null) {
+				$('.insertFood').show();
+				$('.contentBtn').find('button').remove();
 			}
 			$('input:text[name="total_calorie1"]').val(result.calorie);
-			
-			console.log(result.detail_content);
+
 			if(result.detail_content != null) {
 				var contents = result.detail_content.split("/");
 			$('.foods').remove();
 			for(i=0; i<contents.length; i++) {
 				var contents2 = contents[i].split(",");
-				console.log(contents2[2]);
+				
 				$('.frm1').append(
 					'<div class="foods">'
 					+ '<div class="each_food">'
@@ -681,14 +672,14 @@ location.reload();}
 			  // 식단 내용이 있고 댓글이 출력 될 때
 			//if(result.diet_content != null) {
 			 var real_diet_no = result.real_diet_no;
-			 console.log(real_diet_no);
+
 			$.ajax({
 				url:'getComment',
 				data:{real_diet_no : real_diet_no},
 				dataType: 'json',
 				type: 'get',
 				success : function(response) {
-					console.log(real_diet_no);
+				
 				  $('.comments').empty();
 				  for(i=0; i<response.length; i++) {
 					  $('.comments').append(
@@ -708,10 +699,7 @@ location.reload();}
 					alert('ERROR');
 			  }
 			}); // 댓글조회 아작스
-				// 식단 내용이 null 일 때
-			  //} else {
-			//	  $('.comments').hide();
-			  //}
+				
 			 // 로우 자체가 없다면(=식단번호가 없으면)
 			if(result.age == '0') {
 				$.ajax({
@@ -719,19 +707,17 @@ location.reload();}
 					data : {cnt : cnt},
 					dataType: 'json',
 					success: function(e) {
-						console.log(e.sysdate);
+						$('.contentBtn').find('button').remove();
 						$('input:text[name=dates]').val(e.sysdate);
 						$('#real_diet_no1').val('');
 						
-						console.log($('.contentBtn').children().hide());
-						$('.contentBtn').children().hide()
-						
-						var weight = $('input:text[name="weight"]').val(); // = 몸무게
-						var total = weight * 12 * 1.5;
+						var height = $('input:text[name="height"]').val();
+						var weight = (height-100) * 0.9; // = 몸무게
+						var total = weight * 30;
 						var arr =[]; 
 						arr.push( ['섭취날짜', '실제섭취량', '권장량']);
 					
-						    arr.push(['', 0, total]);
+						    arr.push([e.sysdate, 0, total]);
 						
 						  var data = google.visualization.arrayToDataTable(arr);
 						
@@ -749,13 +735,23 @@ location.reload();}
 		  
 			// 로우 값이 있다면(식단 내용이 있고 댓글이 없을 때)
 			} else {
-				$('.contentBtn').children().show() // 수정, 삭제 버튼을 show
+				//$('.contentBtn').children().show() // 수정, 삭제 버튼을 show
 				$('input:text[name="calorie_total"]').val(result.calorie);
 				$('input:text[name=dates]').val(today);
 				$('#real_diet_no1').val(result.real_diet_no);
+				$('.contentBtn').find('button').remove();
+				if($('#real_diet_no1').val() != '') {
+					
+					$('.contentBtn').append(
+							  '<button type="button" class="contentUpd">수정</button>'
+							+ '<button type="button" class="contentDel">삭제</button>'
+						);
+				}
 				
-				var weight = $('input:text[name="weight"]').val(); // = 몸무게
-				var total = weight * 12 * 1.5;
+				
+				var height = $('input:text[name="height"]').val();
+				var weight = (height-100) * 0.9; // = 몸무게
+				var total = weight * 30;
 				var arr =[]; 
 				arr.push( ['섭취날짜', '실제섭취량', '권장량']);
 			
@@ -778,6 +774,7 @@ location.reload();}
 		} // 아작스 success
 	});
 	$('.insertFood').hide();
+	$('#Loadingmodal').modal('hide'); //모달 숨기기
 }
 	
 	// 댓글 등록
@@ -797,9 +794,7 @@ location.reload();}
 			success: function(response) {
 				console.log(response.comment_no);
 				alert('성공!');
-				
-				
-			
+
 				$('.comments').append(
 				 	  '<div>'
 					+ '<input type="text" name="comment_upd" value="'+ response.diet_comment +'">'
@@ -823,12 +818,8 @@ location.reload();}
 	
 	// 댓글 수정
 	$(document).ready(function() {
-		$(document).on('click', '.updateComment', function(e) {/* 
-			console.log($(this).closest('div').children('input').eq(0));
-				console.log($(this).closest('div').children('input').eq(0));	 */	
-				console.log($(this).closest('div').children('input').val() + "====> 해당 input 값")
+		$(document).on('click', '.updateComment', function(e) {
 				$(this).closest('div').children('input').hide();
-				console.log($(this).closest('div').children('a.updateComment').hide() + "======");
 				$(this).closest('div').children('a.updateComment').hide();
 				$(this).closest('div').children('a.updateComment2').show();
 				$(this).closest('div').children('textarea').show();
@@ -839,9 +830,8 @@ location.reload();}
 	$(document).ready(function() {
 		$(document).on('click', '.updateComment2', function(e) {
 			
-			console.log($(this).closest('div'));
-			
 			if(confirm('수정하시겠습니까?')) {
+			$(this).closest('div').hide();
 				
 			$.ajax({
 				url: 'updateComment',
@@ -850,9 +840,18 @@ location.reload();}
 				},
 				dataType: 'json',
 				type: 'post',
-				success : function() {
+				success : function(e) {
 					alert('성공');
-					location.reload();
+					$('.comments').append(
+							  '<div>'
+							+ '<input type="text" name="comment_upd" value="'+ e.diet_comment +'">'
+							+ '<input type="text" value="' + e.comment_no + '" name="comment_no" hidden="hidden">'
+							+ '<textarea class="hide_comment" style="display: none;">' + e.diet_comment + '</textarea>'
+							+ '<a href="#" class="updateComment">[수정]</a>'
+							+ '<a href="#" class="updateComment2" style="display: none;">[수정]</a>'
+							+ '<a href="#" class="deleteComment">[삭제]</a>'
+							+ '</div>'
+						);
 				},
 				error: function() {
 					alert('ERROR!');
@@ -868,7 +867,7 @@ location.reload();}
 	$(document).ready(function() {
 		$(document).on('click', '.deleteComment', function(e) {
 			if(confirm('삭제하시겠습니까?')) {
-				
+				$(this).closest('div').remove();
 			 $.ajax({
 				url: 'deleteComment',
 				data: { comment_no : $(this).closest('div').children('input')[1].value }, // no , comment
@@ -876,7 +875,6 @@ location.reload();}
 				type: 'post',
 				success : function() {
 					alert('성공');
-					location.reload();
 				},
 				error: function() {
 					alert('ERROR!');
@@ -918,15 +916,14 @@ location.reload();}
 		$.ajax({
 			url : 'foodUpdate',
 			type: 'post',
-			data: {diet_content : $("textarea#summernote_upd").val(),
+			data: {diet_content : $("textarea#summernote").val(),
 				real_diet_no : $('#real_diet_no1').val()
 			},
 			dataType : 'json',
 			success : function(response) {
-				console.log(response + "------------------->");
 				
 				alert('SUCCESS!');
-				$('#exampleModal3').modal('hide');
+				$('#exampleModal').modal('hide');
 				location.reload();
 				
 			},
@@ -961,15 +958,23 @@ location.reload();}
 	// 칼로리 계산하기 폼(Modal)
 	$(document).ready(function() {
 		$(document).on('click', '#calorieBtn', function(e) {
-			e.preventDefault();
-			$('#exampleModal2').modal("show");
+			
+			if($('#real_diet_no1').val() == '') {
+				alert('아직 작성한 식단이 없습니다.');
+			} else {
+				e.preventDefault();
+				$('#exampleModal2').modal("show");
+			}
 		});
 	});
 	 	 
 </script>
+<script src="/spring/resources/assets/dist/js/function.js"></script>
 <!-- summer note -->
 <script>
-$(document).ready(function() {
+
+
+	$(document).ready(function() {
 	      $('#summernote').summernote({
 	    	  callbacks : {
 					onImageUpload : function(files, editor, welEditable) {
@@ -978,7 +983,6 @@ $(document).ready(function() {
 						}
 					}
 				},
-	        placeholder: 'Hello stand alone ui',
 	        tabsize: 2,
 	        height: 500,
 	        toolbar: [
@@ -995,66 +999,59 @@ $(document).ready(function() {
 	     
 
 	    	function sendFile(file, el) {
-	    		var form_data = new FormData();
-	    		form_data.append('file', file);
-	    		$.ajax({
-	    			data : form_data,
-	    			type : "POST",
-	    			url : "/spring/files/upload",
-	    			cache : false,
-	    			contentType : false,
-	    			enctype : 'multipart/form-data',
-	    			processData : false,
-	    			success : function(img_name) {
-	    				$('#summernote').summernote('editor.insertImage', img_name);
-	    			}
-	    		});
-	    	}
+	    		let jslink;
+	    		let jsid;
+	    		let json;
+	    		
+	    		var imgSize=file;
+	    		if (imgSize.size<10000000){
+	    			
+	    			var myHeaders = new Headers();
+	    			myHeaders.append("Authorization", "Client-ID 52d00d8257f11ed");
+
+	    			var formdata = new FormData();
+	    			formdata.append("image", file, "[PROXY]");
+
+	    			var requestOptions = {
+	    					  method: 'POST',
+	    					  headers: myHeaders,
+	    					  body: formdata,
+	    					  redirect: 'follow'
+	    					};
+
+	    		fetch("https://api.imgur.com/3/image", requestOptions)
+	    		  .then(response => response.json())
+	    		  .then(result => {
+	    			  json=result;
+	    			  jsid=json.data.id;
+	    			  jslink=json.data.link;
+	    			  
+	    		  }).then(
+	    			function(){
+	    				console.log(jslink);
+	    				var formdata=new URLSearchParams();
+	    				  formdata.append("fileName", jsid);
+	    				  formdata.append("pathName", jslink);
+	    				  fetch("/spring/files/upload", 
+	    					{method:'POST', headers:{"Content-Type":"application/x-www-form-urlencoded"}, 
+	    						body: formdata})
+	    				  .then(response=>response.text())
+	    				  .then(result=>{$('#summernote').summernote('editor.insertImage', result);})
+	    				  .catch(error=>console.log('error',error));
+
+	    			}	  
+	    		  
+	    		  )
+	    		  .catch(error => console.log('error', error));
+	    		}
+	    		else { alert('파일 용량이 10MB를 초과합니다.');
+	    		location.reload();}
+	    	
+	    	
+	    	
+	    	
+	    	}//function sendfile
 }) 
-
-	$(document).ready(function() {
-	      $('#summernote_upd').summernote({
-	    	  callbacks : {
-					onImageUpload : function(files, editor, welEditable) {
-						for (var i = files.length - 1; i >= 0; i--) {
-							sendFile(files[i], this);
-						}
-					}
-				},
-	        tabsize: 2,
-	        height: 500,
-	        toolbar: [
-	          ['style', ['style']],
-	          ['font', ['bold', 'underline', 'clear']],
-	          ['color', ['color']],
-	          ['para', ['ul', 'ol', 'paragraph']],
-	          ['table', ['table']],
-	          ['insert', [ 'picture']],
-	          ['view', [ 'codeview']]
-	        ]
-	      });
-	      
-	     
-
-	    	function sendFile(file, el) {
-	    		var form_data = new FormData();
-	    		form_data.append('file', file);
-	    		$.ajax({
-	    			data : form_data,
-	    			type : "POST",
-	    			url : "/spring/files/upload",
-	    			cache : false,
-	    			contentType : false,
-	    			enctype : 'multipart/form-data',
-	    			processData : false,
-	    			success : function(img_name) {
-	    				$('#summernote_upd').summernote('editor.insertImage', img_name);
-	    			}
-	    		});
-	    	}
-}) 
-
-
 
 	    </script>
 
