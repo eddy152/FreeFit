@@ -1,148 +1,237 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>getAppFoodForm.jsp</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<style>
+.right {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	vertical-align: top;
+	border: 0 10px;
+	margin: 0 10px;
+	padding: 0 10px;
+	list-style: none;
+}
 
+table {
+	width: 100%;
+}
+
+td {
+	padding: 15px;
+	text-align: center;
+}
+
+th {
+	padding: 15px;
+	text-align: center;
+}
+
+#t01 tr:nth-child(even) {
+	background-color: #eee;
+}
+
+#t01 tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+#t01 th {
+	background-color: black;
+	color: white;
+}
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-	
-	
-	// ÇØ´ç À½½Ä°ú °¹¼ö·Î ÀÎÇÑ Ä®·Î¸® °è»ê
+	// í•´ë‹¹ ìŒì‹ê³¼ ê°¯ìˆ˜ë¡œ ì¸í•œ ì¹¼ë¡œë¦¬ ê³„ì‚°
 	function TotalCalorie(a, b) {
-		// ÇØ´ç À½½ÄÀÇ 1. Ä®·Î¸®, 2. °¹¼ö
+		// í•´ë‹¹ ìŒì‹ì˜ 1. ì¹¼ë¡œë¦¬, 2. ê°¯ìˆ˜
 		var food_calorie = a;
 		var food_count = b;
-		var result = a * b;		
+		var result = a * b;
 		return result;
 	}
-	
-	// + Å¬¸¯ ½Ã ÇÏ´ÜÀÇ div ÅÂ±×¿¡ À½½Ä, ¼ö·® Ãß°¡
-	$(document).ready(function() {
-		$('.addFood').click(function() {
-			var selectFood = $('#foods option:selected').val();
-			var count = $('#Foodcount').val();
-			var selectFoodName = $('option:selected').text();
-			
-			console.log(selectFood + "-> selectFood");
-			
-			if( !selectFood || !count ) {
-				alert('À½½Ä°ú °¹¼ö¸¦ ¼±ÅÃÇÏ¼¼¿ä!');
-			} else {
-			
-			var food_calorie = $('#foods option:selected').val();
-			
-			var result = TotalCalorie(food_calorie, count); 
-			
-			$('.frm1').append(
-				'<div>' +
-				'<input type="text" name="food_name" value="' + selectFoodName + '">' + '<input type="text" name="food_calorie" hidden="hidden" value="' + selectFood + '">' +
-				'<input type="text" name="count" onchange="change(this)" value="' + count + '">' +
-				'°³'	 + '<button type="button" class="deleteFood">-</button>'
-				+ '</div>'
-			);
-			
-			var calorie = $('input:text[name="total_calorie1"]').val();
-			
-			console.log(calorie + ', ' + result);
-			if( !calorie ) {
-				$('input:text[name="total_calorie1"]').val(parseInt(result));
-			} else {
-				$('input:text[name="total_calorie1"]').val(parseInt(calorie) + parseInt(result));				
-			}
-			
-				$('select').val('');
-				$('#Foodcount').val('');
-			}
-			
-		});
-	});
-	
-	// - Å¬¸¯½Ã ÇØ´ç À½½Ä¸í, °¹¼ö input ÅÂ±×°¡ »èÁ¦µÊ
-	$(document).ready(function() {
-		$(document).on('click', '.deleteFood', function() {
-			var selectFood = $(this).siblings().eq(1).val(); // Ä®·Î¸®
-			var count = $(this).siblings().eq(2).val(); // °¹¼ö
-			
-			var result = TotalCalorie(selectFood, count); // Ä®·Î¸® * °¹¼ö
-			var calorie = $('input:text[name="total_calorie1"]').val(); // ÃÑ Ä®·Î¸®
-			$('input:text[name="total_calorie1"]').val(parseInt(calorie) - parseInt(result));				
-			
-			$(this).closest('div').remove();
-			
-		});
-	});
-	
-	
-	// µî·Ï ¹öÆ° Å¬¸¯½Ã ÇØ´ç form µ¥ÀÌÅÍ¸¦ °¡Áö°í recommended_diet Å×ÀÌºí¿¡ ÀúÀåÇÑ´Ù.
-	function Click(){
+
+	// + í´ë¦­ ì‹œ í•˜ë‹¨ì˜ div íƒœê·¸ì— ìŒì‹, ìˆ˜ëŸ‰ ì¶”ê°€
+	$(document)
+			.ready(
+					function() {
+						$('.addFood')
+								.click(
+										function() {
+											var selectFood = $(
+													'#foods option:selected')
+													.val();
+											var count = $('#Foodcount').val();
+											var selectFoodName = $(
+													'option:selected').text();
+
+											console.log(selectFood
+													+ "-> selectFood");
+
+											if (!selectFood || !count) {
+												alert('ìŒì‹ê³¼ ê°¯ìˆ˜ë¥¼ ì„ íƒí•˜ì„¸ìš”!');
+											} else {
+
+												var food_calorie = $(
+														'#foods option:selected')
+														.val();
+
+												var result = TotalCalorie(
+														food_calorie, count);
+
+												$('.frm1')
+														.append(
+																'<div>'
+																		+ '<input type="text" name="food_name" value="' + selectFoodName + '">'
+																		+ '<input type="text" name="food_calorie" hidden="hidden" value="' + selectFood + '">'
+																		+ '<input type="text" name="count" onchange="change(this)" value="'
+																		+ count
+																		+ '">'
+																		+ 'ê°œ'
+																		+ '<button type="button" class="deleteFood">-</button>'
+																		+ '</div>');
+
+												var calorie = $(
+														'input:text[name="total_calorie1"]')
+														.val();
+
+												console.log(calorie + ', '
+														+ result);
+												if (!calorie) {
+													$(
+															'input:text[name="total_calorie1"]')
+															.val(
+																	parseInt(result));
+												} else {
+													$(
+															'input:text[name="total_calorie1"]')
+															.val(
+																	parseInt(calorie)
+																			+ parseInt(result));
+												}
+
+												$('select').val('');
+												$('#Foodcount').val('');
+											}
+
+										});
+					});
+
+	// - í´ë¦­ì‹œ í•´ë‹¹ ìŒì‹ëª…, ê°¯ìˆ˜ input íƒœê·¸ê°€ ì‚­ì œë¨
+	$(document)
+			.ready(
+					function() {
+						$(document)
+								.on(
+										'click',
+										'.deleteFood',
+										function() {
+											var selectFood = $(this).siblings()
+													.eq(1).val(); // ì¹¼ë¡œë¦¬
+											var count = $(this).siblings()
+													.eq(2).val(); // ê°¯ìˆ˜
+
+											var result = TotalCalorie(
+													selectFood, count); // ì¹¼ë¡œë¦¬ * ê°¯ìˆ˜
+											var calorie = $(
+													'input:text[name="total_calorie1"]')
+													.val(); // ì´ ì¹¼ë¡œë¦¬
+											$(
+													'input:text[name="total_calorie1"]')
+													.val(
+															parseInt(calorie)
+																	- parseInt(result));
+
+											$(this).closest('div').remove();
+
+										});
+					});
+
+	// ë“±ë¡ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ form ë°ì´í„°ë¥¼ ê°€ì§€ê³  recommended_diet í…Œì´ë¸”ì— ì €ì¥í•œë‹¤.
+	function Click() {
 		console.log($('.frm1').serialize());
 		var size = $('input:text[name="food_name"]').length;
 		var foods = '';
-		
-			for(i=0; i<size; i++) {
-				var food = $('input:text[name="food_name"]').eq(i).attr("value");
-				var count = $('input:text[name="count"]').eq(i).attr("value");
-				alert(food + '´Â(Àº) ' + count + '°³');
-				console.log("iÀÇ ÇöÀç°¹¼ö : " +i);
-				if(i == 0) {
-					foods = food + '/' + count;
-				} else {
-					foods = ' ' + food+ '/' + count;
-				}
-				console.log(foods);
-				$('.frm').append(
-					'<input type="text" name="diet_content" value="'+ foods +'">'
-				)	
+
+		for (i = 0; i < size; i++) {
+			var food = $('input:text[name="food_name"]').eq(i).attr("value");
+			var count = $('input:text[name="count"]').eq(i).attr("value");
+			alert(food + 'ëŠ”(ì€) ' + count + 'ê°œ');
+			console.log("iì˜ í˜„ì¬ê°¯ìˆ˜ : " + i);
+			if (i == 0) {
+				foods = food + '/' + count;
+			} else {
+				foods = ' ' + food + '/' + count;
 			}
-			
-			$('input:text[name="diet_title"]').val($('#diet_title1').val());
-			$('input:text[name="trainer_id"]').val($('#trainer_id1').val());
-			$('input:text[name="total_calorie"]').val($('input:text[name="total_calorie1"]').val());
-			
-			$('.frm').submit();
+			console.log(foods);
+			$('.frm')
+					.append(
+							'<input type="text" name="diet_content" value="'+ foods +'">')
+		}
+
+		$('input:text[name="diet_title"]').val($('#diet_title1').val());
+		$('input:text[name="trainer_id"]').val($('#trainer_id1').val());
+		$('input:text[name="total_calorie"]').val(
+				$('input:text[name="total_calorie1"]').val());
+
+		$('.frm').submit();
 	}
-	
+
 	function change(obj) {
-		var total_foods = 0; 
-		
+		var total_foods = 0;
+
 		var size = $('.frm1').find('div').length;
-		for(i=0; i<size; i++) {
+		for (i = 0; i < size; i++) {
 			var calorie = $('.frm1').find('div')[i].children[1].value;
 			var count = $('.frm1').find('div')[i].children[2].value;
 			total_foods += (calorie * count);
 			$('input:text[name="total_calorie1"]').val(total_foods);
 		}
 	}
-	
 </script>
-<div>
+<body>
+	<div class="col-md-9 pr-30 padding-top-40">
+		<div align="center">
+			<h1>ì‹ë‹¨ ì¶”ê°€í•˜ê¸°</h1>
 
-	<h1>½Ä´Ü Ãß°¡ÇÏ±â</h1>
-	Á¦¸ñ : <input type="text" id="diet_title1"><br>
-	ÀÛ¼ºÀÚ : <input type="text" id="trainer_id1"><br>
-	À½½Ä : <div class="addFoodInput">
-			<select id="foods">
-				<option value="">¼±ÅÃ</option>
-				<c:forEach var="food" items="${foodList }">
-					<option value="${food.calorie}">${food.food_name }</option>
-				</c:forEach>
-			</select>
-			<input type="text" id="Foodcount"> °³
-		 </div>
-		<button type="button" class="addFood">+</button>
-	<hr>
-	<div class="frm1">
-	À½½Ä¸í : 
+			<label>ì œëª© :</label> <input type="text" id="diet_title1"><br>
+			<label>ì‘ì„±ì :</label> <input type="text" id="trainer_id1"><br>
+			<label>ìŒì‹</label> 
+			<div class="addFoodInput">
+				<select id="foods">
+					<option value="">ì„ íƒ</option>
+					<c:forEach var="food" items="${foodList }">
+						<option value="${food.calorie}">${food.food_name }</option>
+					</c:forEach>
+				</select> <input type="text" id="Foodcount"> ê°œ
+				<button type="button" class="btn btn-primary" class="addFood">+</button>
+			</div>
+			<hr>
+			<div class="frm1">ìŒì‹ëª…</div>
+			<label>ì´ ì¹¼ë¡œë¦¬ :</label> <input type="text" name="total_calorie1">
+			<button type="button" class="btn btn-primary" onclick="Click()">ë“±ë¡</button>
+
+			<form action="insertFood" method="post" class="frm">
+				<input type="text" hidden="hidden" class="btn btn-primary"
+					name="diet_title"><br> <input type="text"
+					hidden="hidden" class="btn btn-primary" name="trainer_id"><br>
+				<input type="text" hidden="hidden" class="btn btn-primary"
+					name="total_calorie">
+			</form>
+			<div>
+				<button type="button" class="btn btn-primary"
+					onclick="location.href='getAppFoodList'">ë’¤ë¡œê°€ê¸°</button>
+			</div>
+		</div>
 	</div>
-		ÃÑ Ä®·Î¸® : <input type="text" name="total_calorie1">
-		<br>
-		<button type="button" onclick="Click()">µî·Ï</button>
-		
-		<form action="insertFood" method="post" class="frm">
-			<input type="text" hidden="hidden" name="diet_title"><br>
-			<input type="text" hidden="hidden" name="trainer_id"><br>
-			<input type="text" hidden="hidden" name="total_calorie">
-		</form>
-	<div>
-		<button type="button" onclick="location.href='getAppFoodList'">µÚ·Î°¡±â</button>
-	</div>
-</div>
+</body>
+<
