@@ -64,19 +64,13 @@ public class FoodController_kdh {
 		return service.getDate(vo);
 	}
 
-	// 날짜 조회(-)
-	@RequestMapping("/getBeforeDate")
-	@ResponseBody
-	public List<FoodVO> getBeforeDate(FoodVO vo, Model model) {
-		return service.getBeforeDate(vo);
-	}
-
 	// 추천별 식단 리스트(앱)
 	@RequestMapping("/getAppFoodList")
 	public String getAppFoodList(FoodVO vo, Model model) {
 		model.addAttribute("list", service.getAppFoodList(vo));
+		System.out.println("list ---->" + service.getAppFoodList(vo));
 		return "app/Food/getAppFoodList";
-	}
+	}      
 
 	// 추천별 식단 단건 조회(앱)
 	@RequestMapping("/getAppFood")
@@ -173,10 +167,19 @@ public class FoodController_kdh {
 		} else {
 			vo.setTake_date("sysdate");
 			model.addAttribute("list", service.getRealFood(vo));
-
 		}
 		model.addAttribute("food", service.getFood(vo));
+		model.addAttribute("week", service.getFoodWeek(vo)); // 주간별 회원 식단 조회
+		vo.setCnt("0");
+		model.addAttribute("day", service.getWeeks(vo));
 		return "app/Food/getMemberFoodList";
+	}
+	
+	@RequestMapping("/getBeforeDate")
+	@ResponseBody
+	public List<FoodVO> getBeforeDate(FoodVO vo) {
+		List<FoodVO> list = service.getWeeks(vo);
+		return list;
 	}
 
 	// 해당 회원의 실제 섭취 식단 상세 및 작성 폼(앱)
@@ -196,12 +199,16 @@ public class FoodController_kdh {
 		model.addAttribute("comment", service.getComment(vo));
 		} else { 
 		rvo.setCnt("0");
+		rvo.setCalorie("0");
 		model.addAttribute("comment", fake); 
 		model.addAttribute("date", service.current(rvo.getCnt()));
+		model.addAttribute("food", rvo);
+		System.out.println("calorie : " + rvo.getCalorie());
 		System.out.println(rvo.getReal_diet_no() +"널값인");
 		
 		}
 		model.addAttribute("oneDay", service.getFoodOne(vo)); // 일별 회원 식단 조회
+		
 
 
 		if (rvo != null) {

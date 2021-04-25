@@ -76,13 +76,22 @@
 				<td>추천별 식단</td>
 				<td>총 칼로리</td>
 			</tr>
-		<c:forEach var="food" items="${list }">
+		<c:choose>
+		<c:when test="${list eq '[]'}">
+			<tr>
+				<td colspan="3">현재 등록된 게시글이 없습니다.</td>
+			</tr>		
+		</c:when>
+		<c:otherwise>
+			<c:forEach var="food" items="${list }">
 			<tr class="tr">
 				<td id="td">${food.diet_no }</td>
 				<td>${food.diet_title }</td>
 				<td>${food.total_calorie }</td>
 			</tr>
 		</c:forEach>
+		</c:otherwise>
+		</c:choose>	
 		</table>
 	</div>
 	<br>

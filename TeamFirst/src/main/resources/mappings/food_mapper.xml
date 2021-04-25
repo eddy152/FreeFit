@@ -34,10 +34,9 @@
 		calorie, to_char(sysdate, 'yyyy-MM-dd') as "sysdate", to_char(sysdate, 'yyyy-MM-w') as week from real_diet
 		<where>
 		 user_id = #{id}
-		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
-
+		 and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
 		</where>
-
+		order by take_date
 	</select>
 
 	<select id="getDate" resultType="FoodVO" parameterType="FoodVO">
@@ -51,16 +50,15 @@
 		order by take_date
 	</select>
 
-	<select id="getBeforeDate" resultType="FoodVO"
-		parameterType="FoodVO">
-		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie,
-		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
-		from real_diet
-		where
-		user_id = #{id}
-		and to_char(take_date, 'yyyy-MM-w') =
-		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
-		order by take_date
+	<select id="getBeforeDate" resultType="FoodVO" parameterType="FoodVO">
+		select to_char(sysdate+#{cnt}, 'yyyy-MM-w') week from dual
+	</select>
+	
+	<select id="getWeeks" resultType="FoodVO" parameterType="FoodVO">
+		select to_char(sysdate+#{cnt} + level, 'yyyy-MM-dd') day, to_char(sysdate+#{cnt}, 'yyyy-MM-w') week
+		from dual
+		connect by level &lt; 8 
+		order by day
 	</select>
 
 	<!-- 추천별 식단 전체 리스트 -->
@@ -92,8 +90,7 @@
 	<insert id="insertFood" parameterType="FoodVO">
 		insert into recommended_diet (diet_no, trainer_id, diet_title, diet_content,
 		total_calorie)
-		values(food_seq.nextval, #{trainer_id}, #{diet_title},
-		#{diet_content}, #{total_calorie})
+		values(food_seq.nextval, #{trainer_id}, #{diet_title}, #{diet_content}, #{total_calorie})
 	</insert>
 
 	<!-- 추천별 식단 수정 -->
@@ -179,6 +176,14 @@
 		delete from real_diet
 		where real_diet_no = #{real_diet_no}
 	</delete>
+	
+	<!-- 주별 회원 식단 -->
+	<select id="getFoodWeek" parameterType="FoodVO" resultType="FoodVO">
+		select  real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, to_char(sysdate, 'yyyy-MM-w') "sysdate" 
+		from real_diet
+		where user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
+	</select>
 	
 	<!-- 일별 회원 식단 -->
 	<select id="getFoodOne" parameterType="FoodVO" resultType="FoodVO">

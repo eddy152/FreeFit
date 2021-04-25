@@ -22,34 +22,65 @@
 			var selectFoodName = $('option:selected').text();
 			
 			console.log(selectFood + "-> selectFood");
-			
+			var calorie = $('input:text[name="total_calorie1"]').val();
 			if( !selectFood || !count ) {
 				alert('음식과 갯수를 선택하세요!');
 			} else {
-			
-			var food_calorie = $('#foods option:selected').val();
-			
-			var result = TotalCalorie(food_calorie, count); 
-			
-			$('.frm1').append(
-				'<div>' +
-				'<input type="text" name="food_name" value="' + selectFoodName + '">' + '<input type="text" name="food_calorie" hidden="hidden" value="' + selectFood + '">' +
-				'<input type="text" name="count" onchange="change(this)" value="' + count + '">' +
-				'개'	 + '<button type="button" class="deleteFood">-</button>'
-				+ '</div>'
-			);
-			
-			var calorie = $('input:text[name="total_calorie1"]').val();
-			
-			console.log(calorie + ', ' + result);
-			if( !calorie ) {
-				$('input:text[name="total_calorie1"]').val(parseInt(result));
-			} else {
-				$('input:text[name="total_calorie1"]').val(parseInt(calorie) + parseInt(result));				
-			}
+				console.log(calorie);
+				if(calorie == '' || calorie == '0') {
+					$('.frm1').append(
+							'<div>' +
+							'<input type="text" name="food_name" value="' 
+							+ selectFoodName 
+							+ '">' 
+							+ '<input type="text" name="food_calorie" hidden="hidden" value="' 
+							+ selectFood 
+							+ '">' 
+							+ '<input type="text" name="count" onchange="change(this)" value="' 
+							+ count 
+							+ '">' 
+							+ '개'
+							+ '<button type="button" class="deleteFood">-</button>'
+							+ '</div>'
+						);
+					$('input:text[name="total_calorie1"]').val(TotalCalorie(selectFood, count));
+				} else {
+					console.log('dddd')
+				var length = $('.frm1').find('div').length;
+				for(i=0; i<length; i++) {
+					console.log($('input:text[name="food_name"]')[i]);
+					if($('input:text[name="food_name"]')[i].value == selectFoodName) {
+						alert('선택하신 음식이 이미 존재합니다.');
+						break;
+					} else {
+						if(i == length -1) {
+							$('.frm1').append(
+								'<div>' +
+								'<input type="text" name="food_name" value="' 
+								+ selectFoodName 
+								+ '">' 
+								+ '<input type="text" name="food_calorie" hidden="hidden" value="' 
+								+ selectFood 
+								+ '">' 
+								+ '<input type="text" name="count" onchange="change(this)" value="' 
+								+ count 
+								+ '">' 
+								+ '개'
+								+ '<button type="button" class="deleteFood">-</button>'
+								+ '</div>'
+							);
+							
+							var result = TotalCalorie(selectFood, count); 
+
+								$('input:text[name="total_calorie1"]').val(parseInt(calorie) + parseInt(result));				
+						}
+					}
+				}
+				
 			
 				$('select').val('');
 				$('#Foodcount').val('');
+				}
 			}
 			
 		});
@@ -73,21 +104,20 @@
 	
 	// 등록 버튼 클릭시 해당 form 데이터를 가지고 recommended_diet 테이블에 저장한다.
 	function Click(){
-		console.log($('.frm1').serialize());
+		//console.log($('.frm1').serialize());
 		var size = $('input:text[name="food_name"]').length;
 		var foods = '';
 		
 			for(i=0; i<size; i++) {
 				var food = $('input:text[name="food_name"]').eq(i).attr("value");
-				var count = $('input:text[name="count"]').eq(i).attr("value");
-				alert(food + '는(은) ' + count + '개');
-				console.log("i의 현재갯수 : " +i);
+				var count = $('input:text[name="count"]')[i].value;
+				//alert(food + '는(은) ' + count + '개');
 				if(i == 0) {
 					foods = food + '/' + count;
 				} else {
 					foods = ' ' + food+ '/' + count;
 				}
-				console.log(foods);
+				//console.log(foods);
 				$('.frm').append(
 					'<input type="text" name="diet_content" value="'+ foods +'">'
 				)	
@@ -102,15 +132,15 @@
 	}
 	
 	function change(obj) {
-		var total_foods = 0; 
-		
+		var total_foods = 0;
 		var size = $('.frm1').find('div').length;
 		for(i=0; i<size; i++) {
-			var calorie = $('.frm1').find('div')[i].children[1].value;
-			var count = $('.frm1').find('div')[i].children[2].value;
-			total_foods += (calorie * count);
-			$('input:text[name="total_calorie1"]').val(total_foods);
+		 	var count = $('.frm1').find('div')[i].children[2].value;
+	     	var calorie = $('.frm1').find('div')[i].children[1].value;
+			total_foods += (calorie * count);			
+			$('input:text[name="count"]')[i].value=count;
 		}
+			$('input:text[name="total_calorie1"]').val(total_foods);
 	}
 
 </script>
@@ -136,12 +166,12 @@
 		<c:forEach var="content" items="${arr}">
 			<div>
 				<input type="text" value="${content.food_name }" name="food_name">
-				<input type="text" value="${content.food_cnt }" name="count" onchange="change(this)">개
 					<c:forEach var="food" items="${list }">
-					<c:if test="${food.food_name eq content.food_name}">
-						<input type="text" value="${food.calorie }" name="food_calorie">
-					</c:if>
+						<c:if test="${food.food_name eq content.food_name}">
+							<input type="text" value="${food.calorie }" name="food_calorie" hidden="hidden">
+						</c:if>
 					</c:forEach>
+				<input type="text" value="${content.food_cnt }" name="count" onchange="change(this)">개
 				<button type="button" class="deleteFood">-</button>
 			</div>
 		</c:forEach>
@@ -151,10 +181,10 @@
 		<button type="button" onclick="Click()">등록</button>
 		
 		<form action="updateFood" method="post" class="frm">
-			<input type="text" name="diet_title"><br>
-			<input type="text" name="trainer_id"><br>
-			<input type="text" name="total_calorie"><br>
-			<input type="text" name="diet_no">
+			<input type="text" name="diet_title" hidden="hidden"><br>
+			<input type="text" name="trainer_id" hidden="hidden"><br>
+			<input type="text" name="total_calorie" hidden="hidden"><br>
+			<input type="text" name="diet_no" hidden="hidden">
 		</form>
 	<div>
 		<button type="button" onclick="location.href='getAppFoodList'">뒤로가기</button>

@@ -3,11 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
- -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 
@@ -29,32 +25,44 @@
 
 	// 회원 상세보기 응답
 	function userSelect(user) {
-		console.log(user.name + ", " + user.user_id);
+		console.log(user.name + ", " + user.each_lock_no);
 		$('input:text[name="lock_no"]').val(user.lock_no);
-		$('input:text[name="broken_locker"]').val(user.broken_locker);
+		$('input:text[name="each_no"]').val(user.each_lock_no);
+		//$('input:text[name="broken_locker"]').val(user.broken_locker);
 		$('input[name="first_date"]').val(user.first_date);
 		$('input[name="final_date"]').val(user.final_date);
 		$('input:text[name="user_id"]').val(user.user_id);
 		$('input:text[name="room_no"]').val(user.room_no);
 		$('input:text[name="user_name"]').val(user.name);
+		if(user.broken_locker == "1") {
+			$('input[name="broken_locker"]')[0].checked = false
+			$('input[name="broken_locker"]')[1].checked = true
+		} else {
+			$('input[name="broken_locker"]')[1].checked = false
+			$('input[name="broken_locker"]')[0].checked = true
+		}
 	}
 
 	// 락커 등록
 	$(document).ready(function() {
 		$('#btnInsert').click(function() {
-			$.ajax({
-				url : 'insertLocker',
-				method : 'Post',
-				data : $('#form1').serialize(),
-				dataType : 'json',
-				success : function() {
-					alert('등록 성공!!');
-					location.reload();
-				},
-				error : function() {
-					alert('등록 실패!!');
-				}
-			})
+			if($('input[name="broken_locker"]')[1].checked == true) {
+				alert('락커를 사용할 수 없습니다.');
+			} else {	
+				$.ajax({
+					url : 'insertLocker',
+					method : 'Post',
+					data : $('#form1').serialize(),
+					dataType : 'json',
+					success : function() {
+						alert('등록 성공!!');
+						location.reload();
+					},
+					error : function() {
+						alert('등록 실패!!');
+					}
+				})	
+			}
 		})
 	})
 
@@ -68,8 +76,7 @@
 				method : "Post",
 				data : $('#form1').serialize(),
 				dataType : 'json',
-				success : function(response) {
-					console.log(response.user_id);
+				success : function(response) {				
 					alert('수정완료');
 					location.reload();
 
@@ -147,6 +154,14 @@
 		$('input:text[name="gender"]').val(room.gender);
 		$('input:text[name="lock_width"]').val(room.lock_width);
 		$('input:text[name="lock_sum"]').val(room.lock_sum);
+		
+		if(room.gender == '1') {
+			$('input:text[name="gender"]').val(room.gender);
+			$('input[name="radio_gender"]')[0].checked=true;
+		} else {
+			$('input:text[name="gender"]').val(room.gender);
+			$('input[name="radio_gender"]')[1].checked=true;
+		}
 	}
 	
 	// 락커룸 삭제하기
@@ -291,8 +306,8 @@
 	<div>
 		<h3>락커관리</h3>
 		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
-		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
-		<button onclick="location.href='http://localhost/spring/getSearchLocker?gender=2'">여자</button>
+		<button onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
+		<button onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=2'">여자</button>
 	</div>
 
 	<hr>
@@ -302,10 +317,13 @@
 		<tr>
 			<c:set var="j" value="${list[0].lock_width}" />
 			<c:forEach var="locker" items="${list }">
-				<c:if test='${locker.user_id ne null}'>
+				<c:if test='${locker.user_id ne null && locker.broken_locker eq "0"}'>
 					<td style="background-color: gray;"><button type="button" class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
-				<c:if test="${locker.user_id eq null}">
+				<c:if test="${locker.broken_locker eq '1'}">
+					<td style="background-color: red;"><button class="btn"  type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+				</c:if>
+				<c:if test="${locker.user_id eq null && locker.broken_locker eq '0'}">
 					<td><button class="btn"  type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.each_lock_no % j == 0}">			
@@ -320,16 +338,20 @@
 	<h3>락커 상세보기</h3>
 	<br>
 	<div>
-		<form id="form1"">
+		<form id="form1">
 			<table border="1">
 				<tr>
 					<td>락커 번호</td>
-					<td><input type="text" id="lock_no" name="lock_no"
-						readonly="readonly"></td>
+					<td><input type="text" id="lock_no" name="lock_no" readonly="readonly" hidden="hidden">
+						<input type="text" name="each_no" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<td>고장 여부</td>
-					<td><input type="text" name="broken_locker"></td>
+					<td>
+						<input type="radio" name="broken_locker" value="0">고장안남
+						<input type="radio" name="broken_locker" value="1">고장&nbsp;
+					</td>
 				</tr>
 				<tr>
 					<td>첫사용일자</td>
@@ -355,9 +377,11 @@
 				</tr>
 			</table>
 		</form>
-		<input type="button" id="btnInsert" value="추가">&nbsp; 
-		<input type="button" value="수정" id="btnUpdate">&nbsp; 
-		<input type="button" value="삭제" id="btnDelete">&nbsp;
+		<div>
+			<input type="button" id="btnInsert" value="추가">&nbsp; 
+			<input type="button" value="수정" id="btnUpdate">&nbsp; 
+			<input type="button" value="삭제" id="btnDelete">&nbsp;
+		</div>
 	</div>
 
 	<!-- Modal -->
@@ -386,7 +410,12 @@
 							<tr class="roomTr">
 								<td>${room.room_no }<input class="roomNO" type="hidden" value="${room.room_no }">
 								</td>
-								<td>${room.gender }</td>
+								<c:if test="${room.gender eq '1'}">
+									<td>남</td>
+								</c:if>
+								<c:if test="${room.gender eq '2'}">
+									<td>여</td>
+								</c:if>
 								<td>${room.lock_width }</td>
 								<td>${room.lock_sum }</td>
 							</tr>
@@ -400,7 +429,11 @@
 						</tr>
 						<tr>
 							<td>성별</td>
-							<td><input type="text" name="gender"></td>
+							<td>
+								<input type="text" name="gender" hidden="hidden">
+								<input type="radio" name="radio_gender">남자&nbsp;
+								<input type="radio" name="radio_gender">여자
+							</td> 
 						</tr>
 						<tr>
 							<td>가로락카수</td>
@@ -415,7 +448,7 @@
 				</div>
 				<div class="modal-footer">
 					<input type="button" name="manageBtn" value="등록하기">
-					<input type="button" name="deleteBtn" value="삭제하기">
+					<!-- <input type="button" name="deleteBtn" value="삭제하기"> -->
 				</div>
 			</div>
 		</div>

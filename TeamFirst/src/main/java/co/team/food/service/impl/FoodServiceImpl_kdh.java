@@ -160,7 +160,23 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	}
 
 	@Override
+	// 주간별 회원 식단 조회
+	public List<FoodVO> getFoodWeek(FoodVO vo) {
+		FoodVO nvo = new FoodVO();
+		List<FoodVO> avo = dao.getFoodWeek(vo);
+		if(avo == null) {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-w");
+			Date week = new Date();
+			nvo.setSysdate(formatter.format(week));
+			avo.add(nvo);
+			return avo;
+		}
+		
+		return avo;
+	}
+	
 	// 일별 회원 식단 조회
+	@Override
 	public FoodVO getFoodOne(FoodVO vo) {
 		FoodVO nvo=new FoodVO();
 		vo=dao.getFoodOne(vo);
@@ -190,6 +206,13 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	public FoodVO getDescComment(FoodVO vo) {
 		return dao.getDescComment(vo);
 	}
+
+	@Override
+	// TODO Auto-generated method stub
+	public List<FoodVO> getWeeks(FoodVO vo) {
+		return dao.getWeeks(vo);
+	}
+
 
 
 

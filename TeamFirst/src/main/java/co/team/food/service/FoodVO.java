@@ -32,6 +32,7 @@ public class FoodVO {
 	private String mem_reg_id;
 	
 	private String dat;
+	private String day;
 	private String week;
 	private String sysdate;
 	private String cnt;
