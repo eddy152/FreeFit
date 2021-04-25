@@ -165,7 +165,7 @@
 					<option value="${food.calorie}">${food.food_name }</option>
 				</c:forEach>
 			</select>
-			<input type="text" id="Foodcount" class="form-control"  placeholder="갯수를 입력하세요">
+			<input type="text" id="Foodcount" class="form-control" placeholder="갯수를 입력하세요">
 		</div>
 		<button type="button" id="addFood" class="btn btn-outline-info">+</button>
 		</form>

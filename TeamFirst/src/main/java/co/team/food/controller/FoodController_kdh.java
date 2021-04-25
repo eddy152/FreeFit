@@ -170,12 +170,14 @@ public class FoodController_kdh {
 		}
 		model.addAttribute("food", service.getFood(vo));
 		model.addAttribute("week", service.getFoodWeek(vo)); // 주간별 회원 식단 조회
+		System.out.println("week ---" + service.getFoodWeek(vo));
 		vo.setCnt("0");
 		model.addAttribute("day", service.getWeeks(vo));
+		System.out.println("day  ----  " + service.getWeeks(vo));
 		return "app/Food/getMemberFoodList";
 	}
 	
-	@RequestMapping("/getBeforeDate")
+	@RequestMapping("/getWeeks")
 	@ResponseBody
 	public List<FoodVO> getBeforeDate(FoodVO vo) {
 		List<FoodVO> list = service.getWeeks(vo);
