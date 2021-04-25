@@ -15,6 +15,10 @@
 	function list() {
 		location = "getGymList"
 	}
+	function search() {
+		window.open("http://map.naver.com", "프리핏헬스장검색",
+                    "width=500,height=1000");
+	}
 
 </script>
 <title>getGym</title>
@@ -43,7 +47,8 @@
 									</tr>
 									<tr>
 										<th>매장주소</th>
-										<td><input value="${gym.address.concat(' ').concat(gym.address_detail)}" readonly="readonly"></td>
+										<td><input value="${gym.address.concat(' ').concat(gym.address_detail)}" readonly="readonly">
+										<input type="button" value="위치찾기" onclick="search()"></td>
 									</tr>
 									<tr>
 										<th>연락처</th>
