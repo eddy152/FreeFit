@@ -46,6 +46,11 @@ public interface FoodService_kdh {
 	// 실제 섭취 식단 추가
 	public int getMemberFoodInsert(FoodVO vo);
 
+	// 실제 섭취 식단(주)
+	public List<FoodVO> getFoodWeek(FoodVO vo);
+	
+	public List<FoodVO> getWeeks(FoodVO vo);
+
 	// 실제 섭취 식단(오늘)
 	public FoodVO getRealFoodMember(FoodVO vo);
 
@@ -54,7 +59,7 @@ public interface FoodService_kdh {
 
 	// 댓글 추가
 	public void addComment(FoodVO vo);
-	
+
 	// 최신 댓글 조회
 	public FoodVO getDescComment(FoodVO vo);
 
@@ -74,12 +79,12 @@ public interface FoodService_kdh {
 	public void foodDel(FoodVO vo);
 
 	// 일별 회원 식단 조회
-	public List<FoodVO> getFoodOne(FoodVO vo);
+	public FoodVO getFoodOne(FoodVO vo);
 
 	// 일별 단건 조회
 	public FoodVO getDay(FoodVO vo);
-	
-	public FoodVO current(FoodVO vo);
+
+	public FoodVO current(String string);
 
 	// 총칼로리 저장
 	public void updateCalorie(FoodVO vo);
