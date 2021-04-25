@@ -1,6 +1,7 @@
 package co.team.exercise.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class ExerciseController {
 	@Autowired
 	ExerciseService service;
 
-	SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
 
 	// EXERCISE_LIST start
 	// 리스트 조회
@@ -286,6 +287,14 @@ public class ExerciseController {
 	public List<ExerciseRecordVO> getSearchExerciseRecordOneDay(ExerciseRecordVO vo) {
 		return service.getSearchExerciseRecordOneDay(vo);
 	}
+	
+	// 프로그램 운동 리스트 조회
+	@PostMapping("/getSearchExerciseRecordList")
+	public String getSearchExerciseRecordList(ExerciseRecordVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExerciseRecordList(vo));
+		return "program/exercise/doExer";
+	}
+	
 
 	// 단건 조회
 	@ResponseBody
@@ -296,12 +305,22 @@ public class ExerciseController {
 
 	// 단건 등록
 	@PostMapping("/insertExerciseRecord")
-	@ResponseBody
-	public boolean insertExerciseRecord(@RequestBody Map<String, Object> params) throws Exception {
+	public String insertExerciseRecord(@RequestBody Map<String, Object> params) throws Exception {
+		ExerciseRecordVO vo = new ExerciseRecordVO();
+		String user_id = "";
+		int exep_no = 0;
 		for (String key : params.keySet()) {
+			Map map2 = (Map)params.get(key);
+			user_id = (String)map2.get("user_id");
+			exep_no = (int)map2.get("exep_no");
 			service.insertExerciseRecord((Map<String, Object>) params.get(key));
 		}
-		return true;
+		vo.setUser_id(user_id);
+		vo.setExep_no(exep_no);
+		
+		service.getSearchExerciseRecordList(vo);
+		System.out.println(service.getSearchExerciseRecordList(vo));
+		return "program/exercise/doExerciseProgram";
 	}
 
 	// 단건 수정

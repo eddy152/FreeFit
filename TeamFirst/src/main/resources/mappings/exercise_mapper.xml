@@ -411,7 +411,28 @@
 		ORDER BY e.exer_end_date
 	</select>
 	
-	
+	<select id="getSearchExerciseRecordList" resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">
+		SELECT
+		      e.exer_no,
+		      e.user_id,
+		      e.exer_count,
+		      e.exer_date,
+		      e.exer_end_date,
+		      e.exer_weight,
+		      e.exer_do_count,
+		      e.exep_no,
+		      e.exe_no,
+		      e.epd_set,
+		      e.exer_do_set,
+		      l.exe_name,
+              l.exe_part
+		FROM exercise_record e, exercise_list l
+		WHERE user_id = #{user_id}
+		AND e.exep_no = #{exep_no}
+		AND e.exe_no = l.exe_no
+		AND to_char(e.exer_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')
+		ORDER BY e.exer_end_date DESC
+	</select>
 	
 	<!-- EXERCISE_RECORD part count -->
 	<select id="getExerciseRecordPartCount"  resultType="ExerciseRecordVO" parameterType="ExerciseRecordVO">

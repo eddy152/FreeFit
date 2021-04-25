@@ -17,8 +17,10 @@ public class ExerciseRecordVO {
 	int exer_no;
 	String user_id;
 	int exer_count;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	Date exer_date;
+	/*
+	 * @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date exer_date;
+	 */
+	String exer_date;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	Date exer_end_date;
 	int exer_weight;
