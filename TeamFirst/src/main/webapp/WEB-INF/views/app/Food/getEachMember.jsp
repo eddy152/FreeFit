@@ -1,41 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <div>
 	<div>
-		<h1>È¸¿ø ½Ä´Ü</h1>
-		<input type="text" name="id" hidden="hidden" value="${food.id }">
-		<button type="button" onclick="location.href='getMemberFoodInsert?id=${food.id}'">»ó¼¼º¸±â</button>
+		<h1>íšŒì› ì‹ë‹¨</h1>
+		<input type="text" name="id" hidden="hidden" value="${user.id }">
+		<button type="button" onclick="location.href='getMemberFoodInsert?id=${user.id}'">ìƒì„¸ë³´ê¸°</button>
 		<table border="1">
 			<tr>
 
-				<td>ÀÌ¸§</td>
-				<td>${food.name }<input name="name" value="${food.id }" hidden="hidden">
+				<td>ì´ë¦„</td>
+				<td>${user.name }<input name="name" value="${user.id }" hidden="hidden">
 				</td>
 			</tr>
 			<tr>
-				<td>³ªÀÌ</td>
-				<td>${food.age }</td>
+				<td>ë‚˜ì´</td>
+				<td>${user.age }</td>
 			</tr>
 			<tr>
-				<td>¼ºº°</td>
-				<td>${food.gender }</td>
+				<td>ì„±ë³„</td>
+				<td>${user.gender }</td>
 			</tr>
 			<tr>
-				<td>Å°</td>
-				<td>${food.height }</td>
+				<td>í‚¤</td>
+				<td>${user.height }</td>
 			</tr>
 			<tr>
-				<td>¸ö¹«°Ô</td>
-				<td>${food.weight }<input type="text" hidden="hidden" name="weight" value="${food.weight }">
+				<td>ëª¸ë¬´ê²Œ</td>
+				<td>${user.weight }<input type="text" hidden="hidden" name="weight" value="${user.weight }">
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" style="width: 200px;"><textarea>Æ¯ÀÌ»çÇ×</textarea>
+				<td colspan="3" style="width: 200px;"><textarea>íŠ¹ì´ì‚¬í•­</textarea>
 				</td>
 			</tr>
 		</table>
@@ -45,8 +44,8 @@
 	</div><br>
 	<div>
 		<button type="button" onclick="moveDate(-7)"><</button>
-		<input type="text" name="dates" value="${week[0].sysdate}">ÁÖÂ°
-		<input type="text" hidden="hidden" id="date" value="${list[0].sysdate}">
+		<input type="text" name="dates" value="${week[0].sysdate}">ì£¼ì§¸
+		<input type="text" hidden="hidden" id="date" value="">
 		<button type="button" onclick="moveDate(7)">></button>
 	</div>
 	<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
@@ -64,10 +63,10 @@
 	var cnt = 0;
 	function moveDate(count) {
 		cnt += count
-		var weight = $('input:text[name="weight"]').val(); // = ¸ö¹«°Ô
+		var weight = $('input:text[name="weight"]').val(); // = ëª¸ë¬´ê²Œ
 		var count = weight * 12 * 1.5;
 		var arr = [];
-		arr.push([ '¼·Ãë³¯Â¥', '½ÇÁ¦¼·Ãë·®', '±ÇÀå·®' ]);
+		arr.push([ 'ì„­ì·¨ë‚ ì§œ', 'ì‹¤ì œì„­ì·¨ëŸ‰', 'ê¶Œì¥ëŸ‰' ]);
 		$.ajax({
 			url: 'getWeeks',
 			data : { id : $('input:text[name="name"]').val(),
@@ -85,7 +84,7 @@
 							var data = google.visualization.arrayToDataTable(arr);
 
 							var options = {
-								width: '300',
+								width: '200',
 								height : '500',
 								vAxis : { viewWindow : { max : 3000 }
 								},

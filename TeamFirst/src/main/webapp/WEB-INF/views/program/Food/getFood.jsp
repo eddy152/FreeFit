@@ -75,33 +75,18 @@ th {
 		var arr = [];
 		arr.push([ '섭취날짜', '실제섭취량', '권장량' ]);
 		$.ajax({
-			url: 'getDate',
+			url: 'getWeeks',
 			data : { id : $('input:text[name="name"]').val(),
 			    	cnt : cnt},
 			dataType: 'json',
 			type: 'get',
 			success : function(result) { // === dual
-
 			$('input:text[name="dates"]').val(result[0].week);
-				
-					$.ajax({
-						url: 'getWeeks',
-						data: {cnt : cnt},
-						dataType: 'json',
-						success : function(e) {
-							
-							/* if(e.length == 0) {
-								return;
-							}
-							for(i=0; i<e.length; i++) {
-								if(result[i]) {
-									console.log(result[i]);
-									arr.push([result[i].take_date, parseInt(result[i].calorie), count]);
-								} else if(!result[i]) {
-									arr.push([e[i].day, 0, count]);
-								}
-							} */
-							
+					
+					for(i=0; i<result.length; i++) {
+						
+						arr.push([result[i].take_date, parseInt(result[i].calorie), count])
+					}	
 							
 							var data = google.visualization.arrayToDataTable(arr);
 
@@ -115,16 +100,11 @@ th {
 
 							};
 
-							var chart = new google.visualization.ComboChart(document
-									.getElementById('columnchart_material'));
+							var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
 
 							chart.draw(data, options);
 						}
 			
-
-				} // else
-			} // succes
-
 		});// ajax
 		
 	}
@@ -169,12 +149,10 @@ th {
 						</tr>
 					</table>
 					<div align="center">
-						<input type="button" class="btn btn-secondary"
-							onclick="moveDate(-7)" value="<"> <input type="text"
-							name="dates" style="width: 100px;" value="${calories[0].week}">주째
-						<input type="text" hidden="hidden" id="date"
-							value="${calories[0].sysdate}"> <input type="button"
-							class="btn btn-secondary" value=">" onclick="moveDate(7)">
+						<input type="button" class="btn btn-secondary" onclick="moveDate(-7)" value="<"> 
+						<input type="text" name="dates" style="width: 100px;" value="${calories[0].week}">주째
+						<input type="text" hidden="hidden" id="date" value="${calories[0].sysdate}">
+						<input type="button" class="btn btn-secondary" value=">" onclick="moveDate(7)">
 						<br> <br>
 					</div>
 					<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
