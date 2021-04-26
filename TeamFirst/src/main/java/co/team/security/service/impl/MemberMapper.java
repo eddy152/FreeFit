@@ -11,4 +11,5 @@ public interface MemberMapper {
 	public MemberVO getAllBy(MemberVO vo);
 	public int getMax();
 	public int setPassword(MemberVO vo);
+	
 }

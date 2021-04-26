@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.team.admin.service.AdminVO;
 import co.team.admin.service.impl.AdminMapper;
+import co.team.security.service.KakaoPayApprovalVO;
 import co.team.security.service.MemberRoleVO;
 import co.team.security.service.MemberService;
 import co.team.security.service.MemberVO;
@@ -190,6 +191,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public AdminVO selectedMembership(AdminVO member) {
 		return adminMapper.selectedMembership(member);
+	}
+
+	@Override
+	public int getPayment(String admin_id) {
+		
+		return adminMapper.getPayment(admin_id);
+	}
+
+	@Override
+	public void newPayment(KakaoPayApprovalVO vo) {
+		adminMapper.newPayment(vo);
+		
 	}
 
 }
