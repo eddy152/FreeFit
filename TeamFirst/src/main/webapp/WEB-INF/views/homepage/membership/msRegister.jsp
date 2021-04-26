@@ -6,159 +6,190 @@
 
 
 
-<div class="container">
-	<div class="py-3 text-center">
-		<img class="d-block mx-auto mb-sm-1"
-			src="https://images.velog.io/images/heyon26/post/86ff3fdb-758f-48c6-b33b-b3cfb9664078/logo_transparent.png"
-			alt="" width="172" height="172">
+<div class="container justify-content-center">
+	<div class="py-3 px-3 text-center">
+		<h4 class="mb-3">주문/결제</h4>
 	</div>
+	<form action="kakaoPay" method="post">
+		<div class="row mx-lg-5 ">
+			<div class="col-md-5 order-md-2 mb-4">
+				<label for="paydetail">결제상세</label>
 
-	<div class="row">
-		<div class="col-md-4 order-md-2 mb-4">
-			<h4 class="d-flex justify-content-between align-items-center mb-3">
-				<span class="text-muted">결제상세</span> <span
-					class="badge badge-secondary badge-pill">3</span>
-			</h4>
-			<ul class="list-group mb-3">
-				<li
-					class="list-group-item d-flex justify-content-between lh-condensed">
-					<div>
-						<h6 class="my-0">상품금액</h6>
-						<small class="text-muted"></small>
-					</div> <span class="text-muted"></span>
-				</li>
-				<li
-					class="list-group-item d-flex justify-content-between lh-condensed">
-					<div>
-						<h6 class="my-0">포인트</h6>
-						<small class="text-muted"></small>
-					</div> <span class="text-muted"></span>
-				</li>
+				<ul class="list-group mb-3" id="paydetail">
 
-				<li class="list-group-item d-flex justify-content-between"
-					id="total_amount" name="total_amount"><span>총액(원)</span> <strong></strong></li>
-			</ul>
+					<li class="list-group-item d-flex justify-content-between"><span>상품금액(원)</span><input
+						type="text" class="form-control col-md-5 border-0 text-right "
+						id="pre_amount" name="pre_amount"  min="0"></li>
+
+					<li class="list-group-item d-flex justify-content-between"><span>포인트(원)</span><input
+						type="text" class="form-control col-md-5 border-0 text-right"
+						id="all_point" name="all_point" value="0" readonly="readonly"
+						min="0"></li>
 
 
-		</div>
-		<div class="col-md-8 order-md-1">
-			<h4 class="mb-3">주문/결제</h4>
-			<form class="needs-validation" novalidate>
+
+					<li class="list-group-item d-flex justify-content-between"><span>총액(원)</span><input
+						type="text" class="form-control col-md-5 border-0 text-right"
+						id="total_amount" name="total_amount" readonly="readonly" min="0"></li>
+				</ul>
+
+				<hr class="mb-4">
+				<button class="btn btn-primary btn-lg btn-block" type="submit">카카오 결제</button>
+			</div>
+			<div class="col-md-7 order-md-1">
+
+
 				<div class="form-group">
-					<label for="exampleFormControlSelect">피트니스</label> <select multiple
-						class="form-control" id="exampleFormControlSelect"
-						style="overflow: hidden;">
+					<label for="exampleFormControlSelect">피트니스</label> <select 
+						class="form-control" id="fitness_id" name="fitness_id">
 						<c:if test="${fitnesses ne null }">
 							<c:forEach items="${fitnesses}" var="fitness">
-								<option>${fitness.fitness_name}</option>
+								<option value="${fitness.fitness_id}">${fitness.fitness_name}</option>
 							</c:forEach>
 						</c:if>
 					</select>
+				
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="exampleFormControlSelect2">등급</label> <select multiple
-							class="form-control" id="exampleFormControlSelect2"
-							name="membership_no" style="overflow: hidden;">
+						<label for="item_name">등급</label> <select
+							class="form-control changepay " id="item_name" name="item_name"
+							style="overflow: hidden;">
 
-							<option value="2">골드</option>
-							<option value="3">플래티넘</option>
+							<option value="gold">골드</option>
+							<option value="platinum">플래티넘</option>
 
 						</select>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="inputPassword6">개월</label> <input type="number"
-							id="inputPassword6" class="form-control"
-							aria-describedby="passwordHelpInline" value="1">
-					<div class="row justify-content-end pr-3"><small
-							id="passwordHelpInline" class="text-muted">
-							3개월 이상 10% 할인 </small></div>
-					</div>
-				</div>
-
-
-				<hr class="mb-4">
-				<div class="custom-control custom-checkbox">
-					<input type="checkbox" class="custom-control-input"
-						id="same-address"> <label class="custom-control-label"
-						for="same-address">Shipping address is the same as my
-						billing address</label>
-				</div>
-				<div class="custom-control custom-checkbox">
-					<input type="checkbox" class="custom-control-input" id="save-info">
-					<label class="custom-control-label" for="save-info">Save
-						this information for next time</label>
-				</div>
-				<hr class="mb-4">
-
-				<h4 class="mb-3">Payment</h4>
-
-				<div class="d-block my-3">
-					<div class="custom-control custom-radio">
-						<input id="credit" name="paymentMethod" type="radio"
-							class="custom-control-input" checked required> <label
-							class="custom-control-label" for="credit">Credit card</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input id="debit" name="paymentMethod" type="radio"
-							class="custom-control-input" required> <label
-							class="custom-control-label" for="debit">Debit card</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input id="paypal" name="paymentMethod" type="radio"
-							class="custom-control-input" required> <label
-							class="custom-control-label" for="paypal">PayPal</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 mb-3">
-						<label for="cc-name">Name on card</label> <input type="text"
-							class="form-control" id="cc-name" placeholder="" required>
-						<small class="text-muted">Full name as displayed on card</small>
-						<div class="invalid-feedback">Name on card is required</div>
-					</div>
-					<div class="col-md-6 mb-3">
-						<label for="cc-number">Credit card number</label> <input
-							type="text" class="form-control" id="cc-number" placeholder=""
-							required>
-						<div class="invalid-feedback">Credit card number is required
+						<label for="quantity">개월</label> <input type="number"
+							id="quantity" name="quantity" class="form-control changepay"
+							aria-describedby="passwordHelpInline" value="1" min="0">
+						<div class="row justify-content-end pr-3">
+							<!-- <small id="passwordHelpInline" class="text-muted"> 3개월 이상
+								10% 할인 </small> -->
 						</div>
 					</div>
 				</div>
+
+				<hr class="mb-4">
+
+
 				<div class="row">
-					<div class="col-md-3 mb-3">
-						<label for="cc-expiration">Expiration</label> <input type="text"
-							class="form-control" id="cc-expiration" placeholder="" required>
-						<div class="invalid-feedback">Expiration date required</div>
+					<div class="col-md-6 mb-3">
+						<label for="cc-name">현재 포인트</label> <input type="number"
+							class="form-control" id="nowPoint" min="0" placeholder=""
+							value="${point}" readonly="readonly">
+
 					</div>
-					<div class="col-md-3 mb-3">
-						<label for="cc-cvv">CVV</label> <input type="text"
-							class="form-control" id="cc-cvv" placeholder="" required>
-						<div class="invalid-feedback">Security code required</div>
+					<div class="col-md-6 mb-3 ">
+						<label for="all_point">사용 포인트</label>
+						<div class="input-group">
+							<input type="number" min="0" max="${point }" class="form-control"
+								id="usingPoint" placeholder="" value="0">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button"
+									id="pointAllUse">전부사용</button>
+							</div>
+						</div>
 					</div>
 				</div>
-				<hr class="mb-4">
-				<button class="btn btn-primary btn-lg btn-block" type="submit">Continue
-					to checkout</button>
-			</form>
+			</div>
 		</div>
-	</div>
-
+	</form>
 </div>
 
 
 
-<link href="/spring/resources/assets/dist/js/form-validation.css"
-	rel="stylesheet">
+
+
 
 
 
 
 <script>
+
+
+window.onload = function() {
+	let price; //가격
+	let quantity=1; //양
+	let point=0; //포인트
 	//해야하는것- grade 값 받아서 초기 grade 설정
-	//등급, 개월 바뀔때 상품금액 변경되도록
+	if (window.location.search.split("=")[1] == 'platinum') {
+		document.querySelector("#item_name").options[1].selected = true;
+	}
+	
+	if(document.querySelector("#item_name").selectedOptions[0].value=='gold')
+		{
+	document.querySelector("#pre_amount").value=9999;
+	document.querySelector("#total_amount").value=9999;
+	price=9999;
+		}
+	else{document.querySelector("#pre_amount").value=99999;
+	document.querySelector("#total_amount").value=99999;
+	price=99999;}
+	
+	
+
+	
+	//가격이나 양이 변하면 최종가격변경
+	function changeAmount(e){
+ 		let target = e.target;
+	
+		if(target.name=="item_name"){
+			if(target.selectedOptions[0].value=="gold"){
+
+				price = 9999;
+			}		
+			else
+			{price=99999;}
+		}
+		else if (target.name="quantity")  {
+			quantity = document.querySelector("#quantity").value;
+		}
+		else {};
+		
+		
+		document.querySelector("#pre_amount").value=price*quantity;
+		document.querySelector("#total_amount").value=document.querySelector("#pre_amount").value-point;
+		 
+	}//////
+	//포인트변경
+	function changePoint(e){
+		if(e.target.type=="button"){
+			document.getElementById("usingPoint").value=
+				document.getElementById("nowPoint").value;			
+		}
+
+			document.getElementById("all_point").value=
+				document.getElementById("usingPoint").value;
+			point=document.getElementById("all_point").value;
+			changeAmount(event);
+			}
+		
 	//포인트 값 받아와서 전부사용하기 버튼.
+	document.querySelector("#pointAllUse").addEventListener("click",changePoint);
 	//포인트 변경될때마다 적용하기
+	document.querySelector("#usingPoint").addEventListener("change",changePoint);
+	document.querySelector("#fitness_id").addEventListener("change",function(){
+		document.getElementById('fitness_name').value=document.querySelector('#fitness_id').selectedOptions[0].innerText;
+		
+	});
+		//등급, 개월 바뀔때 상품금액 변경되도록
+		const changepay = document.querySelectorAll('.changepay');
+		changepay.forEach(changepay=>{changepay.addEventListener('change', changeAmount)});
+
+
+		
+		
+		
+
 	
 	
+	
+	
+	
+	
+	
+	}
 </script>
