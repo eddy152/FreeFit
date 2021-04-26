@@ -163,6 +163,13 @@ public class FoodController_kdh {
 		return "app/Food/Test";
 	}
 
+	// 회원 리스트
+	@RequestMapping("/getEachMember")
+	public String getEachMember(FoodVO vo, Model model) {
+		model.addAttribute("user", service.getFood(vo));
+		return "app/Food/getEachMember";
+	}
+	
 	// 해당 회원의 실제 섭취 식단 통계 (앱)
 	@RequestMapping("/getMemberFoodList")
 	public String getMemberFoodList(FoodVO vo, Model model) {
@@ -186,7 +193,7 @@ public class FoodController_kdh {
 	
 	@RequestMapping("/getWeeks")
 	@ResponseBody
-	public List<FoodVO> getBeforeDate(FoodVO vo) {
+	public List<FoodVO> getWeeks(FoodVO vo) {
 		List<FoodVO> list = service.getWeeks(vo);
 		return list;
 	}
@@ -384,4 +391,6 @@ public class FoodController_kdh {
 
 	}
 
+
+	
 }

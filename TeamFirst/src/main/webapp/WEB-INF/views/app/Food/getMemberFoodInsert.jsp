@@ -12,9 +12,18 @@
 	#columnchart_material {
 		float: left;
 	}
+	
+	.form-control {
+		width: 200px;
+	}
+	
+	div.each_food > input {
+		width: 100px;
+	}
 </style>
 
-<div>
+<div class="whole">
+<div class="html">
 
 	<h1>회원의 식단</h1>
 	<div class="insertFood" <c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
@@ -76,7 +85,7 @@
 		<div class="comments">
 			<c:forEach items="${comment }" var="comm">
 				<div>
-					<input type="text" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" class="form-control"> 
+					<input type="text" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" class="form-control" style="width: 200px;"> 
 					<textarea class="hide_comment" style="display: none;" rows="3">${comm.diet_comment }</textarea>
 					<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden" class="form-control">
 					<button id="updateComment" class="btn btn-primary">수정</button>
@@ -234,9 +243,8 @@
 									<button type="button" class="deleteFood">-</button><br>
 								</div>
 							 </c:forEach>
-							</div>			
+							</div>
 						</c:if>
-						
 				</div>
 				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"><br>
 
@@ -251,6 +259,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <!-- Modal end -->
 <script type="text/javascript"
@@ -396,7 +405,7 @@ var nowData='${food.diet_content}';
 			success: function() {
 				alert('SUCCESS!');
 				$('#exampleModal2').hide();
-				location.reload();
+				
 			},
 			error: function() {
 				alert('ERROR!');
@@ -469,6 +478,31 @@ var nowData='${food.diet_content}';
 		var data = google.visualization.arrayToDataTable(arr);
 	 
 	  var options = {
+			  width: '300',
+			  height : '500',
+	          vAxis: { viewWindow: { max: 3000 } },
+	          seriesType: 'bars' };
+	
+	  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
+	
+	  chart.draw(data, options);
+	}
+	
+	function drawChart_re(e) {
+		var height = $('input:text[name="height"]').val();
+		var weight = (height-100) * 0.9; // = 몸무게
+		var total = weight * 30;
+		var arr =[]; 
+		arr.push(['섭취날짜', '실제섭취량', '권쟝량']); 		   				
+		var dates = $('input:text[name="dates"]').val()
+		console.log($('input:text[name="dates"]').val());
+		
+		arr.push([dates, e, total]);
+		
+		var data = google.visualization.arrayToDataTable(arr);
+	 
+	  var options = {
+			  width: '300',
 			  height : '500',
 	          vAxis: { viewWindow: { max: 3000 } },
 	          seriesType: 'bars' };
@@ -497,12 +531,11 @@ var nowData='${food.diet_content}';
 				$('.insertFood').show();
 				$('.contentBtn').find('button').remove();
 			}
-			
 			$('input:text[name="total_calorie1"]').val(result.calorie);
 
 			if(result.detail_content != null) {
 				var contents = result.detail_content.split("/");
-				$('.foods').remove();
+			$('.foods').remove();
 			for(i=0; i<contents.length; i++) {
 				var contents2 = contents[i].split(",");
 				
@@ -528,6 +561,8 @@ var nowData='${food.diet_content}';
 			  $('.food_contents').html(result.diet_content);
 			  $('input:text[name="calorie_total"]').val(calorie);
 			  
+			  // 식단 내용이 있고 댓글이 출력 될 때
+			//if(result.diet_content != null) {
 			 var real_diet_no = result.real_diet_no;
 
 			$.ajax({
@@ -541,9 +576,9 @@ var nowData='${food.diet_content}';
 				  for(i=0; i<response.length; i++) {
 					  $('.comments').append(
 						  '<div>'
-						  + '<input type="text" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly" class="form-control">'
+						  + '<input type="text" class="form-control" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
 						  + '<textarea class="hide_comment" style="display: none;" rows="3">' + response[i].diet_comment + '</textarea>'
-						  + '<input type="text" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden" class="form-control">'
+						  + '<input type="text" class="form-control" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
 						  + '<button id="updateComment" class="btn btn-primary">수정</button>'
 						  + '<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>'
 						  + '<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>'
@@ -579,7 +614,8 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
-								  height : '500',
+								  width: '300',
+								  height: '500',
 						          vAxis: { viewWindow: { max: 3000 } },
 						          seriesType: 'bars' };
 						
@@ -592,7 +628,7 @@ var nowData='${food.diet_content}';
 		  
 			// 로우 값이 있다면(식단 내용이 있고 댓글이 없을 때)
 			} else {
-				
+				//$('.contentBtn').children().show() // 수정, 삭제 버튼을 show
 				$('input:text[name="calorie_total"]').val(result.calorie);
 				$('input:text[name=dates]').val(today);
 				$('#real_diet_no1').val(result.real_diet_no);
@@ -605,6 +641,7 @@ var nowData='${food.diet_content}';
 						);
 				}
 				
+				
 				var height = $('input:text[name="height"]').val();
 				var weight = (height-100) * 0.9; // = 몸무게
 				var total = weight * 30;
@@ -616,10 +653,9 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
-						
-				          vAxis: { 
-				          height : '500',
-				          viewWindow: { max: 3000 } },
+						  width: '300',
+						  height: '500',
+				          vAxis: { viewWindow: { max: 3000 } },
 				          seriesType: 'bars' };
 				
 				  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
@@ -736,6 +772,7 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
+								  width: '300',
 								  height: '500',
 						          vAxis: { viewWindow: { max: 3000 } },
 						          seriesType: 'bars' };
@@ -774,6 +811,7 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
+						  width: '300',
 						  height: '500',
 				          vAxis: { viewWindow: { max: 3000 } },
 				          seriesType: 'bars' };
@@ -935,10 +973,10 @@ var nowData='${food.diet_content}';
 			},
 			dataType : 'json',
 			success : function(response) {
-				
+				console.log(response);
 				alert('SUCCESS!');
 				$('#exampleModal').modal('hide');
-				location.reload();
+				$('.food_contents').html(response.diet_content);
 				
 			},
 			error: function() {
@@ -957,9 +995,17 @@ var nowData='${food.diet_content}';
 					url: 'foodDel',
 					data: {real_diet_no : $('#real_diet_no1').val()},
 					dataType: 'json',
-					success: function() {
+					success: function(res) {
+						console.log(res);
 						alert('삭제가 완료되었습니다.');
-						location.reload();
+						$('.food_contents').html('');
+						$('.contentBtn').remove();
+						$('.comments').remove();
+						$('.real_diet_no1').val('');
+						$('input:text[name="calorie_total"]').val('');
+						$('#real_diet_no1').val('')
+						drawChart_re(0);
+		
 					},
 					error: function() {
 						alert('ERROR!');

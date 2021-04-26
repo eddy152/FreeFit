@@ -21,9 +21,6 @@ public interface FoodMapper_kdh {
 
 	// 날짜 조회
 	public List<FoodVO> getDate(FoodVO vo);
-
-	// 날짜 조회(-)
-	public List<FoodVO> getBeforeDate(FoodVO vo);
 	
 	public List<FoodVO> getWeeks(FoodVO vo);
 	
