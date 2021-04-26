@@ -20,14 +20,11 @@
 	crossorigin="anonymous"></script>
 <script>
 var calendar
-
 /*      날짜or버튼 클릭시 페이지화면 입력기능      
  *   	입력시 빨간글씨로 입력값이 나온다. 새로고침하면 글씨바탕색이 사라진다. 
  */
 function form_ajax(){
-
-	var date = new Date( $('#day').val() +'T15:00:00');
-	 timeZone: 'UTC'
+	var date = new Date( $('#day').val() +'T00:00:00');
 	var content = $('[name=content]').val();
 	var queryString = $("form[name=calForm]").serialize();
 	$.ajax({
@@ -42,17 +39,10 @@ function form_ajax(){
 				allDay : true,
 				color : 'red',
 				textcolor : 'yellow'
-			})
-			
-		}
-	})
-} 
-
-//function form_ajax(){
-	
-//}
-
-
+			})// addEvent
+		}// function data
+	})// ajax
+} // form_ajax
 /*   일정입력  date 포맷      */	
 function date_to_str(format)
 {
@@ -64,11 +54,16 @@ function date_to_str(format)
   
     return year + "-" + month + "-" + date;
 }
-
 /*      날짜or버튼 클릭시 DB에 내용 입력기능      */
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-		
+    var today = new Date();
+    
+    var year = today.getFullYear();
+    var month = ('00' + (today.getMonth() + 1)).slice(-2);
+    var date = today.getDate();
+ 	
+    
      calendar = new FullCalendar.Calendar(calendarEl, {
     	 
     	headerToolbar: {
@@ -79,14 +74,12 @@ function date_to_str(format)
       },
       
       locale : 'ko',
-      initialDate: '2021-04-10',
+      initialView:'timeGridWeek',
+      initialDate: year+'-'+month+'-'+date,
       
      navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
-
-      /* */
-      
       /*  삭제 */
       eventClick: function(arg) {
     	  console.log(arg)
@@ -105,11 +98,7 @@ function date_to_str(format)
         
       
       navLinkDayClick: function(date, jsEvent) {
-    	    console.dir(date);
-    	    console.dir(jsEvent);
-    	    console.log('coords', jsEvent.pageX, jsEvent.pageY);
     	   var today = date_to_str(date);
-    	   console.log(today);
     	 
     	    $("#day").val(today);
     		$('#exampleModal').modal('show');
@@ -120,12 +109,11 @@ function date_to_str(format)
       events:
     	  [
     		  <c:forEach items="${list}" var="calendar">
-
-
         {
           id : '${calendar.reservation_no}',
           title: '${calendar.content}' ,
           start: '${calendar.reservation_date}'
+        	  
         },
         
     		  </c:forEach>
@@ -134,7 +122,6 @@ function date_to_str(format)
     
     calendar.render();
   });
-
 </script>
 
 
@@ -154,14 +141,17 @@ body {
 </head>
 
 <body>
-<div align="center">
-	<h2>일정관리</h2><br><br>
-	<div id='calendar'></div>
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target="#exampleModal">클릭하면 일정입력</button>
-</div>
-
+	<div align="center">
+		<h2>트레이너 스케줄</h2>
+		<br>
+		<br>
+		<div id='calendar'></div>
+		<br>
+		<br>
+		<!-- Button trigger modal -->
+		<input type="button" class="btn btn-primary" data-toggle="modal"
+			data-target="#exampleModal" value="클릭하면 일정입력">
+	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">

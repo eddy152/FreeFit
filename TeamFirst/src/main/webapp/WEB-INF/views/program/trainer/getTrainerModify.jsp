@@ -6,12 +6,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+.right {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	vertical-align: top;
+	border: 0 10px;
+	margin: 0 10px;
+	padding: 0 10px;
+	list-style: none;
+}
+
+table {
+	width: 70%;
+}
+
+td {
+	padding: 15px;
+	text-align: center;
+}
+
+th {
+	padding: 15px;
+	text-align: center;
+}
+
+#t01 tr:nth-child(even) {
+	background-color: #eee;
+}
+
+#t01 tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+#t01 th {
+	background-color: black;
+	color: white;
+}
+</style>
 <title>트레이너 상세조회</title>
 <script type="text/javascript">
 	function cancel() {
@@ -22,12 +62,10 @@
 <body>
 	<div class="page-wrapper">
 		<div class="container-fluid">
-			<div class="row row-2">
-				<!--게시판 넓이 -->
-				<div class="col-lg-15">
-					<h1 class="page-header">트레이너 상세조회</h1>
+			<div class="col-lg-15">
+				<div align="center">
+					<h1 class="page-header">트레이너 수정페이지</h1>
 				</div>
-				<div class="row"></div>
 				<div class="panel panel-default">
 					<div class="panel-heading">Free Fit</div>
 					<form class="needs-validation" method="post" action="updateTrainer"
@@ -35,7 +73,7 @@
 						<div align="center" class="panel-body">
 							<table class="table table-hover">
 								<thead>
-									<tr>
+									<tr class="dataRow">
 										<th>멤버쉽</th>
 										<td><input name="fitness_id" value="${emp.fitness_id}"
 											readonly="readonly"></td>
@@ -64,9 +102,11 @@
 											readonly="readonly"></td>
 									</tr>
 							</table>
+							<br>
+							<button class="btn btn-primary" type="submit">저장</button>
+							<button class="btn btn-primary" type="button"
+								onclick="javascript:cancel()">취소</button>
 						</div>
-						<button type="submit">저장</button>
-						<button type="button" onclick="javascript:cancel()">취소</button>
 					</form>
 				</div>
 			</div>

@@ -30,24 +30,6 @@
 			form.submit();
 		})
 		
-		$("#btnExe").on("click", function(){
-			var form = document.createElement('form');
-			var objs;
-			
-			objs = document.createElement('input');
-			objs.setAttribute('type', 'hidden');
-			objs.setAttribute('name', 'id');
-			objs.setAttribute('value', "${list.id}");
-			
-			form.appendChild(objs);
-			form.setAttribute('method', 'post');
-			form.setAttribute('action', "getSearchExerciseProgramBasic");
-			
-			document.body.appendChild(form);
-			
-			form.submit();
-		})
-		
 		$("#btnPro").on("click", function(){
 			var form = document.createElement('form');
 			var objs;
@@ -67,11 +49,13 @@
 		})
 	});
 </script>
-<title>Insert title here</title>
+<title>getFFUserProc</title>
 </head>
 <body>
-	<div align="center">
-		<table border="1" style="text-align: center;">
+		<div class="col-md-9 pr-30 padding-top-40">
+		<div align="center">
+			<h2>회원 운동관리 상세페이지</h2>
+		<table class="table">
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
@@ -163,10 +147,10 @@
 				</c:if>
 			</tr>
 		</table>
-		<button onclick="history.back()">뒤로 가기</button>
-		<button id="btnExe">운동등록</button>
-		<button id="btnRsv">운동기록</button>
-		<button id="btnPro">프로그램</button>
+		<button  class="btn btn-primary"  onclick="history.back()">뒤로 가기</button>
+		<button  class="btn btn-primary" id="btnRsv">운동기록</button>
+		<button  class="btn btn-primary"  id="btnPro">프로그램</button>
+	</div>
 	</div>
 </body>
 </html>

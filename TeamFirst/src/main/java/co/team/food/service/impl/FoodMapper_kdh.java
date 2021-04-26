@@ -25,6 +25,8 @@ public interface FoodMapper_kdh {
 	// 날짜 조회(-)
 	public List<FoodVO> getBeforeDate(FoodVO vo);
 	
+	public List<FoodVO> getWeeks(FoodVO vo);
+	
 	// 추천식단 리스트
 	public List<FoodVO> getAppFoodList(FoodVO vo);
 	
@@ -48,6 +50,9 @@ public interface FoodMapper_kdh {
 	
 	// 실제 섭취 식단 추가
 	public int getMemberFoodInsert(FoodVO vo);
+	
+	// 실제 섭취 식단(주)
+	public List<FoodVO> getFoodWeek(FoodVO vo);
 	
 	// 실제 섭취 식단(오늘)
 	public FoodVO getRealFoodMember(FoodVO vo);
@@ -77,12 +82,12 @@ public interface FoodMapper_kdh {
 	public void foodDel(FoodVO vo);
 	
 	// 일별 회원 식단 조회
-	public List<FoodVO> getFoodOne(FoodVO vo);
+	public FoodVO getFoodOne(FoodVO vo);
 	
 	// 일별 단건 조회
 	public FoodVO getDay(FoodVO vo);
 	
-	public FoodVO current(FoodVO vo);
+	public FoodVO current(String vo);
 	
 	// 총칼로리 저장
 	public void updateCalorie(FoodVO vo);

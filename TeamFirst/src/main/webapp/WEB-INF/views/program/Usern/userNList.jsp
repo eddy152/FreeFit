@@ -54,8 +54,8 @@ th {
 		<div class="container-fluid">
 			<div class="row row-2">
 				<!-- 게시판 col-lg-* 1200px이하에서 세로로 표시 시작-->
-				<div class="col-sm-5">
-					<h1 class="page-header">오너 공지사항</h1>
+				<div align="center">
+					<h1>오너 공지사항</h1>
 				</div>
 				<div class="table-responsive">
 						<table class="table table">
