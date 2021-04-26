@@ -424,6 +424,7 @@
 		      e.exe_no,
 		      e.epd_set,
 		      e.exer_do_set,
+		      e.exer_url,
 		      l.exe_name,
               l.exe_part
 		FROM exercise_record e, exercise_list l
