@@ -84,6 +84,7 @@
 				method: 'POST',
 				data: "user_id=" + user_id + "&exep_no=" + exep_no,
 				success: function(result) {
+					
 					for(rs of result){
 						var exeName = rs.exe_name;
 						var epdSet = rs.epd_set;
@@ -98,17 +99,40 @@
 					
 					var exeStartNow = confirm( '운동을 시작하시겠습니까?' );
 					if(exeStartNow) {
-						var result = JSON.stringify(arr);
+						var arrExe = JSON.stringify(arr);
 							
 						$.ajax({
 							url: "insertExerciseRecord", 
 							method: 'POST',
-							data: result,
+							data: arrExe,
 							traditional: true,
 							dataType:'json',
 							contentType : 'application/json',
-							success: function(result) {
+							success: function(rs) {
 								alert("등록성공");
+								
+								var form = document.createElement('form');
+								var objs;
+								var objs2;
+
+								objs = document.createElement('input');
+								objs.setAttribute('type', 'hidden');
+								objs.setAttribute('name', 'user_id');
+								objs.setAttribute('value', user_id);
+
+								objs2 = document.createElement('input');
+								objs2.setAttribute('type', 'hidden');
+								objs2.setAttribute('name', 'exep_no');
+								objs2.setAttribute('value', exep_no);
+
+								form.appendChild(objs);
+								form.appendChild(objs2);
+								form.setAttribute('method', 'post');
+								form.setAttribute('action', "getSearchExerciseRecordList");
+
+								document.body.appendChild(form);
+
+								form.submit();
 							}
 						})  // End of ajax
 					} else {

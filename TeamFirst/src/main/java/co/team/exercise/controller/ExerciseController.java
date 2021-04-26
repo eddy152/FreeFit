@@ -287,14 +287,6 @@ public class ExerciseController {
 	public List<ExerciseRecordVO> getSearchExerciseRecordOneDay(ExerciseRecordVO vo) {
 		return service.getSearchExerciseRecordOneDay(vo);
 	}
-	
-	// 프로그램 운동 리스트 조회
-	@PostMapping("/getSearchExerciseRecordList")
-	public String getSearchExerciseRecordList(ExerciseRecordVO vo, Model model) {
-		model.addAttribute("list", service.getSearchExerciseRecordList(vo));
-		return "program/exercise/doExer";
-	}
-	
 
 	// 단건 조회
 	@ResponseBody
@@ -305,24 +297,22 @@ public class ExerciseController {
 
 	// 단건 등록
 	@PostMapping("/insertExerciseRecord")
-	public String insertExerciseRecord(@RequestBody Map<String, Object> params) throws Exception {
-		ExerciseRecordVO vo = new ExerciseRecordVO();
-		String user_id = "";
-		int exep_no = 0;
+	@ResponseBody
+	public boolean insertExerciseRecord(@RequestBody Map<String, Object> params, Model model) throws Exception {
 		for (String key : params.keySet()) {
 			Map map2 = (Map)params.get(key);
-			user_id = (String)map2.get("user_id");
-			exep_no = (int)map2.get("exep_no");
 			service.insertExerciseRecord((Map<String, Object>) params.get(key));
 		}
-		vo.setUser_id(user_id);
-		vo.setExep_no(exep_no);
-		
-		service.getSearchExerciseRecordList(vo);
-		System.out.println(service.getSearchExerciseRecordList(vo));
+		return true;
+	}
+	
+	// 운동 시작 페이지
+	@PostMapping("/getSearchExerciseRecordList")
+	public String getSearchExerciseRecordList(ExerciseRecordVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExerciseRecordList(vo));
 		return "program/exercise/doExerciseProgram";
 	}
-
+	
 	// 단건 수정
 	@GetMapping("/updateExerciseRecord")
 	public String updateExerciseRecord(ExerciseRecordVO vo) {

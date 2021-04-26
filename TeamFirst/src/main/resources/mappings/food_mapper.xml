@@ -43,10 +43,8 @@
 		select real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie,
 		to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		from real_diet
-		where
-		user_id = #{id}
-		and to_char(take_date, 'yyyy-MM-w') =
-		to_char(sysdate+#{cnt}, 'yyyy-MM-w')
+		where user_id = #{id}
+		and to_char(take_date, 'yyyy-MM-iw') = to_char(sysdate+#{cnt}, 'yyyy-MM-iw')
 		order by take_date
 	</select>
 
@@ -182,7 +180,8 @@
 		select  real_diet_no, user_id, to_char(take_date, 'yyyy-MM-dd') take_date, diet_content, calorie, to_char(sysdate, 'yyyy-MM-w') "sysdate" 
 		from real_diet
 		where user_id = #{id}
-		and to_char(take_date, 'yyyy-MM-w') = to_char(sysdate, 'yyyy-MM-w')
+		and to_char(take_date, 'yyyy-MM-iw') = to_char(sysdate, 'yyyy-MM-iw')
+        order by take_date
 	</select>
 	
 	<!-- 일별 회원 식단 -->

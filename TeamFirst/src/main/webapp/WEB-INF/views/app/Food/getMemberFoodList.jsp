@@ -95,25 +95,21 @@ th {
 	</div>
 	<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 </div>
+
 <script type="text/javascript">
 
 	google.charts.load('visualization','1', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 	
 	function drawChart() {
-		var weight = $('input:text[name="weight"]').val(); // = ¸ö¹«°Ô
+		var weight = $('input:text[name="weight"]').val();  // = ¸ö¹«°Ô
 		var result = weight * 12 * 1.5;
 		var arr =[]; 
 		arr.push( ['¼·Ãë³¯Â¥', '½ÇÁ¦¼·Ãë·®', '±ÇÀå·®']);
 		
 	  	<c:forEach var="week" items="${week }">
-	  		<c:if test="${week.take_date ne '' || week.take_date ne null}">
 		    	arr.push(['${week.take_date}', parseInt(${week.calorie }), result]);
-	  		</c:if>
 		 </c:forEach>
-	  	 <c:forEach var="day" items="${day}">
-	  		arr.push(['${day.day}', 0, result]);
-	  	 </c:forEach>
 		
 	  var data = google.visualization.arrayToDataTable(arr);
 	
@@ -139,23 +135,21 @@ th {
 			dataType: 'json',
 			type: 'get',
 			success: function drawChart(result) {
-				var today = result.take_date;
-				var calorie = result.calorie;
-				console.log(result)
+				
 				if(result.length != 0) {
 					var weight = $('input:text[name="weight"]').val(); // = ¸ö¹«°Ô
-					var result = weight * 12 * 1.5;
+					var total = weight * 12 * 1.5;
 					var arr =[]; 
 					arr.push( ['¼·Ãë³¯Â¥', '½ÇÁ¦¼·Ãë·®', '±ÇÀå·®']);
 					
-				  	<c:forEach var="week" items="${week }">
-				  		<c:if test="${week.take_date ne '' || week.take_date ne null}">
-					    	arr.push(['${week.take_date}', parseInt(${week.calorie }), result]);
-				  		</c:if>
-					 </c:forEach>
-				  	 <c:forEach var="day" items="${day}">
-				  		arr.push(['${day.day}', 0, result]);
-				  	 </c:forEach>
+					$('input:text[name="dates"]').val(result[0].week);
+					
+					for(i=0; i<result.length; i++) {
+						var today = result[i].take_date;
+						var calorie = result[i].calorie;
+						
+						arr.push([today, parseInt(calorie), total]);
+					}
 					
 				  var data = google.visualization.arrayToDataTable(arr);
 				
@@ -170,7 +164,7 @@ th {
 				  chart.draw(data, options);
 				} else {
 					$.ajax({
-						url: 'getBeforeDate',
+						url: 'getWeeks',
 						data: {cnt:cnt},
 						dataType: 'json',
 						success: function(result) {
@@ -223,18 +217,21 @@ th {
 					console.log(result)
 					if(result.length != 0) {
 						var weight = $('input:text[name="weight"]').val(); // = ¸ö¹«°Ô
-						var result = weight * 12 * 1.5;
+						var total = weight * 12 * 1.5;
 						var arr =[]; 
 						arr.push( ['¼·Ãë³¯Â¥', '½ÇÁ¦¼·Ãë·®', '±ÇÀå·®']);
 						
-					  	<c:forEach var="week" items="${week }">
-					  		<c:if test="${week.take_date ne '' || week.take_date ne null}">
-						    	arr.push(['${week.take_date}', parseInt(${week.calorie }), result]);
-					  		</c:if>
-						 </c:forEach>
-					  	 <c:forEach var="day" items="${day}">
-					  		arr.push(['${day.day}', 0, result]);
-					  	 </c:forEach>
+						console.log(result);
+						$('input:text[name="dates"]').val(result[0].week);
+						
+						for(i=0; i<result.length; i++) {
+							console.log(result[0].week);
+							var today = result[i].take_date;
+							var calorie = result[i].calorie;
+							
+							console.log(today + ", " + calorie);
+							arr.push([today, parseInt(calorie), total]);
+						}
 						
 					  var data = google.visualization.arrayToDataTable(arr);
 					
@@ -249,10 +246,11 @@ th {
 					  chart.draw(data, options);
 					} else {
 						$.ajax({
-							url: 'getBeforeDate',
+							url: 'getWeeks',
 							data: {cnt:cnt},
 							dataType: 'json',
 							success: function(result) {
+								console.log(result[0].week + "dd");
 								$('input:text[name=dates]').val(result[0].week);
 								$('#real_diet_no1').val(result.real_diet_no);
 								var weight = $('input:text[name="weight"]').val(); // = ¸ö¹«°Ô

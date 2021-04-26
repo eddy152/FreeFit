@@ -5,14 +5,14 @@
 
 <div>
 
-<table border="1">
+<table class="table">
 		<tr>
-			<td>아이디</td>
-			<td>이름</td>
-			<td>나이</td>
-			<td>성별</td>
-			<td>전화번호</td>
-			<td>식단상세</td>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>나이</th>
+			<th>성별</th>
+			<th>전화번호</th>
+			<th>식단상세</th>
 		</tr>
 		<c:forEach var="list" items="${list }">
 		<tr>
@@ -21,7 +21,7 @@
 			<td>${list.age }</td>
 			<td>${list.gender }</td>
 			<td>${list.phone_number }</td>
-			<td><button type="button" onclick="location.href='getMemberFoodList?id=${list.id}'">식단상세</button></td>
+			<td><button type="button" class="btn btn-outline-primary" onclick="location.href='getMemberFoodList?id=${list.id}'">식단상세</button></td>
 		</tr>
 		</c:forEach>
 	</table><br>
