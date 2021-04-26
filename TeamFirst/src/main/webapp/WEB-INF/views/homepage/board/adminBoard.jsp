@@ -61,12 +61,12 @@
 </script>
 </head>
 <body>
+	<div class="col-lg-12" style="color:white; background-color:#01DFD7; padding:20px;">
 	<h2 style="text-align: center;">글 작성</h2>
-	<br>
-	<br>
-	<br>
+	</div>
 	<div style="width: 60%; margin: auto;">
 		<form method="post" action="insertAdminNoticeBoard">
+		 	 <br>
 		 	 제목 :  <input type="text" name="title" style="width: 40%;" placeholder="제목" /><br>
 			<label for="category">카테고리 : </label>
 			<select id="category" name="category">

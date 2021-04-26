@@ -58,9 +58,9 @@ textarea {width: 100%;}
 		
 		<input id="subBtn" type="button" value="수정하기" style="float: right;" 
 			   onclick="location.href='updateAdminNoticeBoard?board_no=${board.board_no}';"/><!--"goModify(this.form)"  -->
-		<input type="button" value="삭제" style="float: right;" onclick="del(${board.board_no})">
-		<input type="button" value="목록으로" style="float: right;"
+		<input type="button" value="목록" style="float: right;"
 			   onclick="location.href='getAdminNoticeBoardList';">
+		<input type="button" value="삭제" style="float: right;" onclick="del(${board.board_no})">
 	</form>
 </div>
 </body>

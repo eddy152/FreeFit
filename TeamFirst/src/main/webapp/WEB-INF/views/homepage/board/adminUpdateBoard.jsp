@@ -57,8 +57,8 @@ function goModify(frm) {
 		제목 : <input type="text" name="title" style="width: 30%;" placeholder="제목" value="${board.title}"/>
 		<br><br> 
 		<textarea id="summernote" name="content"></textarea>
-		<input id="subBtn" type="button" value="글수정" style="float: right;" onclick="goModify(this.form)"/>
-		<input type="button" value="목록으로" style="float: right;"
+		<input id="subBtn" type="button" value="수정완료" style="float: right;" onclick="goModify(this.form)"/>
+		<input type="button" value="목록" style="float: right;"
 			   onclick="location.href='getAdminNoticeBoardList';">
 	</form>																		
 </div>

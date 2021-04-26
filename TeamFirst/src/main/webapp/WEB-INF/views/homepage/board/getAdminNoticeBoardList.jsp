@@ -24,35 +24,51 @@
 			location = "getAdminNoticeBoardList?search="+$("#search_text").val();
 	}
 	</script>
+
+<style>
+	div#divTag1 {
+    right: -180px;
+    margin-right: ;
+	}
+
+	.button {
+  	background-color: #01DFD7;
+  	border: none;
+  	color: white;
+	padding: 10px 20px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 13px;
+  	margin: 3px 1px;
+  	cursor: pointer;
+	}
 	
+</style>
 </head>
 <body>
-	<div class="page-wrapper">
-		<div class="container-fluid">
-			<div class="col-lg-8">
+	<div  class="page-wrapper">
+		<div  class="container-fluid">
+			<div align="right" class="col-lg-8" id="divTag1">
 				<!--게시판 넓이 -->
-				<div class="col-lg-12">
-					<h1 class="page-header">프리핏 관리자 공지사항</h1>
+				<div class="col-lg-12" style="color:white; background-color:#01DFD7; padding:20px;">
+					<h1 align="center" class="page-header">프리핏 관리자 공지사항</h1>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="text" id="search_text" style="width: 300px;" value="${search}"/>
-						<input type="button" value="검색"
+						<input type="button" value="제목으로 검색"
 							   onclick="search()">
 					</div> 
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<!--<button type="button"
-							  -class="btn btn-outline btn-primary pull-right">
-							<i class="fa fa-edit fa-fw"></i> 공지사항 작성-->
-						<input type="button" value="작성하기" style="float: right;"
-							onclick="location.href='adminBoard';">
+					<!-- 원래자리 -->
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">Free Fit</div>
-					<div align="center" class="panel-body">
+					<div  class="panel-body">
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -79,6 +95,7 @@
 						</table>
 					</div>
 				</div>
+				<input type="button" class="button" value="작성하기" onclick="location.href='adminBoard';"><!--style="float: right;"  -->
 			</div>
 		</div>
 	</div>
@@ -112,7 +129,7 @@
 			test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
 			<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
 		</c:if>
-	</div>
+	 </div>
 	<div> 총 게시글 수 : ${pagination.listCnt } 
 		/ 총 페이지 수 :${pagination.pageCnt } 
 		/ 현재 페이지 : ${pagination.curPage } 

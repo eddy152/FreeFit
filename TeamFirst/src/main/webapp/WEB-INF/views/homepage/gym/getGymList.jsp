@@ -25,19 +25,25 @@
 	}
 </script>
 	
+<style>
+	div#divTag1 {
+	right : -200px;
+	margin-right: ;
+	}
+</style>
 </head>
 <body>
 	<div class="page-wrapper">
 		<div class="container-fluid">
-			<div class="col-lg-8">
+			<div class="col-lg-8" id="divTag1">
 				<!--게시판 넓이 -->
-				<div class="col-lg-12">
-					<h1 class="page-header">헬스장 리스트</h1>
+				<div class="col-lg-12" style="color:white; background-color:#01DFD7; padding:20px;"align="center">
+					<h1 class="page-header">프리핏 이용 헬스장</h1>
 				</div>
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-12" align="right">
 						<input type="text" id="search_text" style="width: 300px;" value="${search}"/>
-						<input type="button" value="검색"
+						<input type="button" value="헬스장 이름으로 검색"
 							   onclick="search()">
 						<!--  </button>-->
 					</div>
