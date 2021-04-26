@@ -68,7 +68,7 @@
 									</tr>
 							</table>
 						</div>
-				<button onClick="javascript:list()">목록</button>
+				<button onClick="javascript:list()">목록으로</button>
 			</div>
 		</div>
 	</div>

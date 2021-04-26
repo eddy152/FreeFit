@@ -72,9 +72,6 @@
 			</div>
 		</div>
 		
-		
-		
-		
 		<!-- 페이징 -->
 	<div align="center">
 		<c:if test="${pagination.curPage ne 1 }">
@@ -105,7 +102,6 @@
 			<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
 		</c:if>
 	</div>
-	
 	<div>	총 게시글 수 : ${pagination.listCnt } 
 			/ 총 페이지 수 :${pagination.pageCnt } 
 			/ 현재 페이지 : ${pagination.curPage } 
