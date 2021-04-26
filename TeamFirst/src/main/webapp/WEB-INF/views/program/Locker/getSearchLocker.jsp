@@ -4,6 +4,96 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
+<style type="text/css">
+	
+	
+	#button4 {
+		background-color: white;
+  		color: black;
+  		border: 2px solid #e7e7e7;
+  		margin: 10px;
+	}
+	
+	#button4:hover {background-color: #e7e7e7;}
+	
+	#button_group {
+		float:left;
+		position: static;
+	}
+	
+	#left_div {
+		display: inline-block;
+		margin-left: 100px;
+	}
+	
+	#right_div {
+		display: inline-block;
+		margin-left: 100px;
+	}
+	
+	#using_locker {
+		background-color: #87CEEB;
+	}
+	
+	#broken_btn {
+		background-color: #C8C8C8;
+	}
+	
+	#button4, #using_locker, #broken_btn {
+		font-size: 20px; padding: 10px 20px; margin: 10px;
+	}
+	
+	#male {
+		border-radius: 4px;
+		font-size: 20px;
+  		margin: 4px 2px;
+  		padding: 5px;
+  		border: none;
+	}
+	
+	#female {
+		border-radius: 4px;
+		font-size: 20px;
+  		margin: 4px 2px;
+  		padding: 5px;
+  		border: none;
+	}
+	
+	#btn-primary {
+		font-size: 20px;
+  		margin: 4px 2px;
+  		padding: 5px;
+  		border: none;
+	}
+	
+	
+	.add_btn {
+		background-color: white;
+		border-color: red;
+		border-radius: 4px;
+	}
+	
+	.add_btn:hover {
+		background-color: #f44336;
+		color: white;
+}
+
+	.del_btn {
+		background-color: white;
+		border-color: DodgerBlue;
+		border-radius: 4px;
+	}
+	
+	.del_btn:hover {
+		background-color: DodgerBlue;
+		color: white;
+	}
+	
+	.right_button {
+		float: right;
+	}
+	
+</style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 
@@ -301,15 +391,18 @@
 	
 	
 </script>
-
-<div>
+<div id="button_group">
 	<div>
-		<h3>락커관리</h3>
 		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
-		<button onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
-		<button onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=2'">여자</button>
+		<button id="male" onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
+		<button id="female" onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=2'">여자</button>
 	</div>
+</div>
 
+<br>
+<div id="left_div">
+
+<h3>락커관리</h3>
 	<hr>
 	<!-- start 락카버튼 -->
 	<form id="form2">
@@ -318,13 +411,13 @@
 			<c:set var="j" value="${list[0].lock_width}" />
 			<c:forEach var="locker" items="${list }">
 				<c:if test='${locker.user_id ne null && locker.broken_locker eq "0"}'>
-					<td style="background-color: gray;"><button type="button" class="btn" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button type="button" class="btn" id="using_locker" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.broken_locker eq '1'}">
-					<td style="background-color: red;"><button class="btn"  type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button class="btn" id="broken_btn" type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.user_id eq null && locker.broken_locker eq '0'}">
-					<td><button class="btn"  type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button class="btn" id="button4" type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.each_lock_no % j == 0}">			
 					</tr>
@@ -333,13 +426,14 @@
 			</c:forEach>
 	</table>
 	</form>
+</div>
 	<!-- end 락카버튼 -->
-
+<div id="right_div">
 	<h3>락커 상세보기</h3>
 	<br>
 	<div>
 		<form id="form1">
-			<table border="1">
+			<table class="table">
 				<tr>
 					<td>락커 번호</td>
 					<td><input type="text" id="lock_no" name="lock_no" readonly="readonly" hidden="hidden">
@@ -360,8 +454,8 @@
 				<tr>
 					<td>종료일</td>
 					<td><input type="date" name="final_date" id="final_date">
-						<button type="button" id="addDate" onclick="">+</button>
-						<button type="button" id="delDate" onclick="">-</button>
+						<button type="button" id="addDate" onclick="addDate()" class="add_btn">+</button>
+						<button type="button" id="delDate" onclick="delDate()" class="del_btn">-</button>
 					</td>
 				</tr>
 				<tr>
@@ -377,13 +471,13 @@
 				</tr>
 			</table>
 		</form>
-		<div>
-			<input type="button" id="btnInsert" value="추가">&nbsp; 
-			<input type="button" value="수정" id="btnUpdate">&nbsp; 
-			<input type="button" value="삭제" id="btnDelete">&nbsp;
+		<div class="right_button">
+			<input type="button" style="background-color: DodgerBlue;" id="btnInsert" value="추가">&nbsp; 
+			<input type="button" style="background-color: MediumSeaGreen;" value="수정" id="btnUpdate">&nbsp; 
+			<input type="button" style="background-color: Tomato;" value="삭제" id="btnDelete">&nbsp;
 		</div>
 	</div>
-
+</div>
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
@@ -391,15 +485,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+					<h4 class="modal-title" id="staticBackdropLabel">수정하기</h4>
 					 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 				</div>
 				<div class="modal-body">
-					<h1>수정하기</h1>
 
-					<table border="1">
+					<table class="table">
 						<tr>
 							<td>락커룸번호</td>
 							<td>성별</td>
@@ -422,32 +515,32 @@
 						</c:forEach>
 					</table>
 					<br>
-					<table border="1">
+					<table class="table">
 						<tr>
 							<td>락커룸번호</td>
-							<td><input type="text" name="room_no"></td>
+							<td><input type="text" name="room_no" class="form-control" ></td>
 						</tr>
 						<tr>
 							<td>성별</td>
 							<td>
 								<input type="text" name="gender" hidden="hidden">
-								<input type="radio" name="radio_gender">남자&nbsp;
-								<input type="radio" name="radio_gender">여자
+								<input type="radio" name="radio_gender">&nbsp;남자&nbsp;
+								<input type="radio" name="radio_gender">&nbsp;여자
 							</td> 
 						</tr>
 						<tr>
 							<td>가로락카수</td>
-							<td><input type="text" name="lock_width"></td>
+							<td><input type="text" name="lock_width" class="form-control" ></td>
 						</tr>
 						<tr>
 							<td>락카 수</td>
-							<td><input type="text" name="lock_sum"></td>
+							<td><input type="text" name="lock_sum" class="form-control" ></td>
 						</tr>
 					</table>
 
 				</div>
 				<div class="modal-footer">
-					<input type="button" name="manageBtn" value="등록하기">
+					<input type="button" name="manageBtn" style="background-color: DodgerBlue;" value="등록하기">
 					<!-- <input type="button" name="deleteBtn" value="삭제하기"> -->
 				</div>
 			</div>
@@ -461,13 +554,13 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+					<h5 class="modal-title" id="staticBackdropLabel">회원 조회</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close">X</button>
 				</div>
 				<div class="modal-body">
 					
-						<table border="1">
+						<table class="table">
 							<tr>
 								<td>회원이름</td>
 								<td>나이</td>
@@ -490,5 +583,3 @@
 			</div>
 		</div>
 	</div>
-
-</div>
