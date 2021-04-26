@@ -81,7 +81,7 @@ th {
 			dataType: 'json',
 			type: 'get',
 			success : function(result) { // === dual
-				if(result.length < 7) {
+
 			$('input:text[name="dates"]').val(result[0].week);
 				
 					$.ajax({
@@ -89,6 +89,10 @@ th {
 						data: {cnt : cnt},
 						dataType: 'json',
 						success : function(e) {
+							
+							/* if(e.length == 0) {
+								return;
+							}
 							for(i=0; i<e.length; i++) {
 								if(result[i]) {
 									console.log(result[i]);
@@ -96,23 +100,17 @@ th {
 								} else if(!result[i]) {
 									arr.push([e[i].day, 0, count]);
 								}
-							}
+							} */
 							
 							
 							var data = google.visualization.arrayToDataTable(arr);
 
 							var options = {
 								width : '1000',
-								vAxis : {
-									viewWindow : {
-										max : 3000
-									}
+								vAxis : { viewWindow : { max : 3000 }
 								},
 								seriesType : 'bars',
-								series : {
-									1 : {
-										type : 'line'
-									}
+								series : { 1 : { type : 'line' }
 								}
 
 							};
@@ -122,34 +120,7 @@ th {
 
 							chart.draw(data, options);
 						}
-					});
-				} else {		
-					$('input:text[name="dates"]').val(result[0].week);
-					for(i=0; i<result.length; i++) {
-					arr.push([result[i].take_date, result[i].calorie, count]);
-					}
-					var data = google.visualization.arrayToDataTable(arr);
-
-					var options = {
-						width : '1000',
-						vAxis : {
-							viewWindow : {
-								max : 3000
-							}
-						},
-						seriesType : 'bars',
-						series : {
-							1 : {
-								type : 'line'
-							}
-						}
-
-					};
-
-					var chart = new google.visualization.ComboChart(document
-							.getElementById('columnchart_material'));
-
-					chart.draw(data, options);
+			
 
 				} // else
 			} // succes
