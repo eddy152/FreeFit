@@ -81,6 +81,7 @@ th {
 			dataType: 'json',
 			type: 'get',
 			success : function(result) { // === dual
+<<<<<<< HEAD
 				if(result.length < 7) {
 			$('input:text[name="dates"]').val(result[0].week);
 				
@@ -100,7 +101,10 @@ th {
 							
 							
 							var data = google.visualization.arrayToDataTable(arr);
+=======
+>>>>>>> refs/heads/KDH
 
+<<<<<<< HEAD
 							var options = {
 								width : '1000',
 								vAxis : {
@@ -114,14 +118,59 @@ th {
 										type : 'line'
 									}
 								}
+=======
+			$('input:text[name="dates"]').val(result[0].week);
+				
+					$.ajax({
+						url: 'getWeeks',
+						data: {cnt : cnt},
+						dataType: 'json',
+						success : function(e) {
+							
+							/* if(e.length == 0) {
+								return;
+							}
+							for(i=0; i<e.length; i++) {
+								if(result[i]) {
+									console.log(result[i]);
+									arr.push([result[i].take_date, parseInt(result[i].calorie), count]);
+								} else if(!result[i]) {
+									arr.push([e[i].day, 0, count]);
+								}
+							} */
+							
+							
+							var data = google.visualization.arrayToDataTable(arr);
+>>>>>>> refs/heads/KDH
 
+<<<<<<< HEAD
 							};
+=======
+							var options = {
+								width : '1000',
+								vAxis : { viewWindow : { max : 3000 }
+								},
+								seriesType : 'bars',
+								series : { 1 : { type : 'line' }
+								}
+>>>>>>> refs/heads/KDH
 
+<<<<<<< HEAD
+							var chart = new google.visualization.ComboChart(document
+									.getElementById('columnchart_material'));
+=======
+							};
+>>>>>>> refs/heads/KDH
+
+<<<<<<< HEAD
+=======
 							var chart = new google.visualization.ComboChart(document
 									.getElementById('columnchart_material'));
 
+>>>>>>> refs/heads/KDH
 							chart.draw(data, options);
 						}
+<<<<<<< HEAD
 					});
 				} else {		
 					$('input:text[name="dates"]').val(result[0].week);
@@ -129,7 +178,11 @@ th {
 					arr.push([result[i].take_date, result[i].calorie, count]);
 					}
 					var data = google.visualization.arrayToDataTable(arr);
+=======
+			
+>>>>>>> refs/heads/KDH
 
+<<<<<<< HEAD
 					var options = {
 						width : '1000',
 						vAxis : {
@@ -143,7 +196,12 @@ th {
 								type : 'line'
 							}
 						}
+=======
+				} // else
+			} // succes
+>>>>>>> refs/heads/KDH
 
+<<<<<<< HEAD
 					};
 
 					var chart = new google.visualization.ComboChart(document
@@ -154,6 +212,8 @@ th {
 				} // else
 			} // succes
 
+=======
+>>>>>>> refs/heads/KDH
 		});// ajax
 		
 	}
