@@ -58,7 +58,24 @@
 				//}
 				frm.submit();
 			}
+			
 </script>
+<style>
+
+	.button {
+  	background-color: #01DFD7;
+  	border: none;
+  	color: white;
+	padding: 10px 20px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 13px;
+  	margin: 3px 1px;
+  	cursor: pointer;
+	}
+	
+</style>
 </head>
 <body>
 	<div class="col-lg-12" style="color:white; background-color:#01DFD7; padding:20px;">
@@ -78,7 +95,6 @@
 	
 		<input id="subBtn" type="button" value="글작성" style="float: right;"
 				onclick="goWrite(this.form)">
-		<!-- 목록으로 -->
       	<input type="button" value="목록으로" style="float: right;"
 			   onclick="location.href='getAdminNoticeBoardList';">
 		</form>
