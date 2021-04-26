@@ -5,7 +5,7 @@
 	<div class="sidebar-sticky pt-3">
 		<ul class="nav flex-column">
 			<li class="nav-item"><a class="nav-link active"
-				href="/spring/tilesTestProgram"> <span data-feather="home"></span>
+				href="/spring/"> <span data-feather="home"></span>
 					메인(임시) <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/spring/calendar">
@@ -44,6 +44,10 @@
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/productManagement"> <span data-feather="thumbs-up"></span>
 					owner 강습등록
+			</a></li>
+				<li class="nav-item"><a class="nav-link"
+				href="/spring/manageList"> <span
+					data-feather="user-check"></span> 수강회원 목록
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/tilesTestHomepage"> <span
