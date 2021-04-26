@@ -44,7 +44,7 @@ public class GymController {
 		   
 		   		model.addAttribute("pagination", pagination);
 		   		
-		   return "gym/getGymList";
+		   return "homepage/gym/getGymList";
 	}
 	
 	//단건조회
@@ -52,7 +52,7 @@ public class GymController {
 		public String getGym(Model model, @RequestParam("id") String id) {
 		
 			   model.addAttribute("gym", gymService.getGym(id));
-			   return "gym/getGym";
+			   return "homepage/gym/getGym";
 	}
 	
 }

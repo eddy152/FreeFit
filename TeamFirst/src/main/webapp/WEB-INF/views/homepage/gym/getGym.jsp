@@ -17,7 +17,7 @@
 	}
 	function search() {
 		window.open("http://map.naver.com", "프리핏헬스장검색",
-                    "width=500,height=1000");
+                    "width=700,height=500");
 	}
 
 </script>
