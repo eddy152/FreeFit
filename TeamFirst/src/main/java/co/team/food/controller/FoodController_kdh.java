@@ -39,6 +39,11 @@ public class FoodController_kdh {
 		model.addAttribute("food", service.getFood(vo));
 		List<FoodVO> foodList = service.getRealFood(vo);
 		model.addAttribute("calories", foodList);
+		System.out.println("foodList ==> " + foodList);
+
+		model.addAttribute("day", service.getWeeks(vo));
+		System.out.println("day  ----  " + service.getWeeks(vo));
+		
 		return "program/Food/getFood";
 	}
 

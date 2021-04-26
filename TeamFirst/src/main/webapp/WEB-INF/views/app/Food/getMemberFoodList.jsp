@@ -53,7 +53,7 @@
 </div>
 
 <script type="text/javascript">
-
+var cnt = 0;
 	google.charts.load('visualization','1', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 	
@@ -63,9 +63,55 @@
 		var arr =[]; 
 		arr.push( ['섭취날짜', '실제섭취량', '권장량']);
 		
-	  	<c:forEach var="week" items="${week }">
-		    	arr.push(['${week.take_date}', parseInt(${week.calorie }), result]);
+		
+		var ary = [];
+
+		
+		<c:forEach var="week" items="${week }">
+		    <c:if test="${week.take_date ne null}">
+				arr.push(['${week.take_date}', parseInt(${week.calorie }), result]);
+			</c:if>	
 		 </c:forEach>
+		
+	  if(ary.length == 0) {
+		  cnt = 0;
+		  $.ajax({
+				url: 'getWeeks',
+				data: {cnt:cnt},
+				dataType: 'json',
+				success: function(result) {
+					
+					console.log(result[0].real_diet_no);
+					$('input:text[name=dates]').val(result[0].week);
+					
+					var weight = $('input:text[name="weight"]').val(); // = 몸무게
+					var total = weight * 12 * 1.5;
+					var arr =[]; 
+					arr.push( ['섭취날짜', '실제섭취량', '권장량']);
+					console.log(result[0].week + "  " + result[0].day);
+					for(i=0; i<result.length; i++) {
+						console.log(result[i].day);
+						arr.push([result[i].day, 0, total]);
+					}
+					
+					  var data = google.visualization.arrayToDataTable(arr);
+					
+					  var options = {
+							  width : '1000',
+					          vAxis: { viewWindow: { max: 3000 } },
+					          seriesType: 'bars',
+					          series: {1: {type: 'line'}} };
+					
+					  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
+					
+					  chart.draw(data, options);
+					
+				}, error: function(e) {
+					alert('ERROR!');
+				}
+			}); // ajax
+	  }
+
 		
 	  var data = google.visualization.arrayToDataTable(arr);
 	
@@ -80,7 +126,7 @@
 	  chart.draw(data, options);
 	
 		}
-	var cnt = 0;
+
 	
 	function before() {
 		cnt += (-7);
@@ -119,6 +165,7 @@
 				
 				  chart.draw(data, options);
 				} else {
+					
 					$.ajax({
 						url: 'getWeeks',
 						data: {cnt:cnt},
