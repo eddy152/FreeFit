@@ -14,7 +14,7 @@
 			<tr>
 
 				<td>이름</td>
-				<td>${food.name }<input name="name" value="${food.name }" hidden="hidden">
+				<td>${food.name }<input name="name" value="${food.id }" hidden="hidden">
 				</td>
 			</tr>
 			<tr>
@@ -44,249 +44,102 @@
 		
 	</div><br>
 	<div>
-		<button type="button" onclick="before()"><</button>
+		<button type="button" onclick="moveDate(-7)"><</button>
 		<input type="text" name="dates" value="${week[0].sysdate}">주째
 		<input type="text" hidden="hidden" id="date" value="${list[0].sysdate}">
-		<button type="button" onclick="after()">></button>
+		<button type="button" onclick="moveDate(7)">></button>
 	</div>
 	<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 </div>
 
 <script type="text/javascript">
-var cnt = 0;
-	google.charts.load('visualization','1', {'packages':['corechart']});
+	google.charts.load('visualization', '1', {
+		'packages' : [ 'corechart' ]
+	});
 	google.charts.setOnLoadCallback(drawChart);
-	
 	function drawChart() {
-		var weight = $('input:text[name="weight"]').val();  // = 몸무게
-		var result = weight * 12 * 1.5;
-		var arr =[]; 
-		arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-		
-		
-		var ary = [];
-
-		
-		<c:forEach var="week" items="${week }">
-		    <c:if test="${week.take_date ne null}">
-				arr.push(['${week.take_date}', parseInt(${week.calorie }), result]);
-			</c:if>	
-		 </c:forEach>
-		
-	  if(ary.length == 0) {
-		  cnt = 0;
-		  $.ajax({
-				url: 'getWeeks',
-				data: {cnt:cnt},
-				dataType: 'json',
-				success: function(result) {
-					
-					console.log(result[0].real_diet_no);
-					$('input:text[name=dates]').val(result[0].week);
-					
-					var weight = $('input:text[name="weight"]').val(); // = 몸무게
-					var total = weight * 12 * 1.5;
-					var arr =[]; 
-					arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-					console.log(result[0].week + "  " + result[0].day);
-					for(i=0; i<result.length; i++) {
-						console.log(result[i].day);
-						arr.push([result[i].day, 0, total]);
-					}
-					
-					  var data = google.visualization.arrayToDataTable(arr);
-					
-					  var options = {
-							  width : '1000',
-					          vAxis: { viewWindow: { max: 3000 } },
-					          seriesType: 'bars',
-					          series: {1: {type: 'line'}} };
-					
-					  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-					
-					  chart.draw(data, options);
-					
-				}, error: function(e) {
-					alert('ERROR!');
-				}
-			}); // ajax
-	  }
-
-		
-	  var data = google.visualization.arrayToDataTable(arr);
-	
-	  var options = {
-			  width : '1000',
-	          vAxis: { viewWindow: { max: 3000 } },			
-	          seriesType: 'bars',
-	          series: {1: {type: 'line'}} };
-	
-	  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-	
-	  chart.draw(data, options);
-	
-		}
-
-	
-	function before() {
-		cnt += (-7);
+		moveDate(0);
+	}
+	var cnt = 0;
+	function moveDate(count) {
+		cnt += count
+		console.log("cnt ---> " + cnt)
+		var weight = $('input:text[name="weight"]').val(); // = 몸무게
+		var count = weight * 12 * 1.5;
+		var arr = [];
+		arr.push([ '섭취날짜', '실제섭취량', '권장량' ]);
 		$.ajax({
 			url: 'getDate',
-			data : { id : $('input:text[name="id"]').val(),
+			data : { id : $('input:text[name="name"]').val(),
 			    	cnt : cnt},
 			dataType: 'json',
 			type: 'get',
-			success: function drawChart(result) {
-				
-				if(result.length != 0) {
-					var weight = $('input:text[name="weight"]').val(); // = 몸무게
-					var total = weight * 12 * 1.5;
-					var arr =[]; 
-					arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-					
+			success : function(result) { // === dual
+				console.log(result);
+				if(result.length < 7) {
 					$('input:text[name="dates"]').val(result[0].week);
-					
-					for(i=0; i<result.length; i++) {
-						var today = result[i].take_date;
-						var calorie = result[i].calorie;
-						
-						arr.push([today, parseInt(calorie), total]);
-					}
-					
-				  var data = google.visualization.arrayToDataTable(arr);
 				
-				  var options = {
-						  width : '1000',
-				          vAxis: { viewWindow: { max: 3000 } },			
-				          seriesType: 'bars',
-				          series: {1: {type: 'line'}} };
-				
-				  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-				
-				  chart.draw(data, options);
-				} else {
-					
 					$.ajax({
 						url: 'getWeeks',
-						data: {cnt:cnt},
+						data: {cnt : cnt},
 						dataType: 'json',
-						success: function(result) {
-							$('input:text[name=dates]').val(result[0].week);
-							$('#real_diet_no1').val(result.real_diet_no);
-							var weight = $('input:text[name="weight"]').val(); // = 몸무게
-							var total = weight * 12 * 1.5;
-							var arr =[]; 
-							arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-							console.log(result[0].week + "  " + result[0].day);
-							for(i=0; i<result.length; i++) {
-								console.log(result[i].day);
-								arr.push([result[i].day, 0, total]);
-							}
-							
-							  var data = google.visualization.arrayToDataTable(arr);
-							
-							  var options = {
-									  width : '1000',
-							          vAxis: { viewWindow: { max: 3000 } },
-							          seriesType: 'bars',
-							          series: {1: {type: 'line'}} };
-							
-							  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-							
-							  chart.draw(data, options);
-							
-						}, error: function(e) {
-							alert('ERROR!');
-						}
-					}); // ajax
-					
-				} 
-				
-			}
-		})
-	}
-	
-	function after() {
-		 cnt += 7;
-		 $.ajax({
-				url: 'getDate',
-				data : { id : $('input:text[name="id"]').val(),
-				    	cnt : cnt},
-				dataType: 'json',
-				type: 'get',
-				success: function drawChart(result) {
-					var today = result.take_date;
-					var calorie = result.calorie;
-					console.log(result)
-					if(result.length != 0) {
-						var weight = $('input:text[name="weight"]').val(); // = 몸무게
-						var total = weight * 12 * 1.5;
-						var arr =[]; 
-						arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-						
-						console.log(result);
-						$('input:text[name="dates"]').val(result[0].week);
-						
-						for(i=0; i<result.length; i++) {
-							console.log(result[0].week);
-							var today = result[i].take_date;
-							var calorie = result[i].calorie;
-							
-							console.log(today + ", " + calorie);
-							arr.push([today, parseInt(calorie), total]);
-						}
-						
-					  var data = google.visualization.arrayToDataTable(arr);
-					
-					  var options = {
-							  width : '1000',
-					          vAxis: { viewWindow: { max: 3000 } },			
-					          seriesType: 'bars',
-					          series: {1: {type: 'line'}} };
-					
-					  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-					
-					  chart.draw(data, options);
-					} else {
-						$.ajax({
-							url: 'getWeeks',
-							data: {cnt:cnt},
-							dataType: 'json',
-							success: function(result) {
-								console.log(result[0].week + "dd");
-								$('input:text[name=dates]').val(result[0].week);
-								$('#real_diet_no1').val(result.real_diet_no);
-								var weight = $('input:text[name="weight"]').val(); // = 몸무게
-								var total = weight * 12 * 1.5;
-								var arr =[]; 
-								arr.push( ['섭취날짜', '실제섭취량', '권장량']);
-								console.log(result[0].week + "  " + result[0].day);
-								for(i=0; i<result.length; i++) {
-									console.log(result[i].day);
-									arr.push([result[i].day, 0, total]);
+						success : function(e) {
+							for(i=0; i<e.length; i++) {
+								if(result[i]) {
+									console.log(result[i]);
+									arr.push([result[i].take_date, parseInt(result[i].calorie), count]);
+								} else if(!result[i]) {
+									arr.push([e[i].day, 0, count]);
 								}
-								
-								  var data = google.visualization.arrayToDataTable(arr);
-								
-								  var options = {
-										  width : '1000',
-								          vAxis: { viewWindow: { max: 3000 } },
-								          seriesType: 'bars',
-								          series: {1: {type: 'line'}} };
-								
-								  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
-								
-								  chart.draw(data, options);
-								
-							}, error: function(e) {
-								alert('ERROR!');
 							}
-						}); // ajax
-						
-					} 
-					
-				}
-			})
-}
-
+							
+							
+							var data = google.visualization.arrayToDataTable(arr);
+							var options = {
+								width : '1000',
+								vAxis : {
+									viewWindow : {
+										max : 3000
+									}
+								},
+								seriesType : 'bars',
+								series : {
+									1 : {
+										type : 'line'
+									}
+								}
+							};
+							var chart = new google.visualization.ComboChart(document
+									.getElementById('columnchart_material'));
+							chart.draw(data, options);
+						}
+					});
+				} else {		
+					$('input:text[name="dates"]').val(result[0].week);
+					for(i=0; i<result.length; i++) {
+					arr.push([result[i].take_date, result[i].calorie, count]);
+					}
+					var data = google.visualization.arrayToDataTable(arr);
+					var options = {
+						width : '1000',
+						vAxis : {
+							viewWindow : {
+								max : 3000
+							}
+						},
+						seriesType : 'bars',
+						series : {
+							1 : {
+								type : 'line'
+							}
+						}
+					};
+					var chart = new google.visualization.ComboChart(document
+							.getElementById('columnchart_material'));
+					chart.draw(data, options);
+				} // else
+			} // succes
+		});// ajax
+		
+	}
 </script>

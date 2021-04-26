@@ -469,8 +469,7 @@ var nowData='${food.diet_content}';
 		var data = google.visualization.arrayToDataTable(arr);
 	 
 	  var options = {
-			  width : '600',
-			  height: '500',
+			  height : '500',
 	          vAxis: { viewWindow: { max: 3000 } },
 	          seriesType: 'bars' };
 	
@@ -580,8 +579,7 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
-								  width : '600',
-								  height: '500',
+								  height : '500',
 						          vAxis: { viewWindow: { max: 3000 } },
 						          seriesType: 'bars' };
 						
@@ -618,9 +616,10 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
-						  width : '600',
-						  height: '500',
-				          vAxis: { viewWindow: { max: 3000 } },
+						
+				          vAxis: { 
+				          height : '500',
+				          viewWindow: { max: 3000 } },
 				          seriesType: 'bars' };
 				
 				  var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
@@ -737,7 +736,6 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
-								  width : '600',
 								  height: '500',
 						          vAxis: { viewWindow: { max: 3000 } },
 						          seriesType: 'bars' };
@@ -776,7 +774,6 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
-						  width : '600',
 						  height: '500',
 				          vAxis: { viewWindow: { max: 3000 } },
 				          seriesType: 'bars' };
