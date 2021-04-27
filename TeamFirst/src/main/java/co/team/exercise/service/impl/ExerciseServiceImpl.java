@@ -203,7 +203,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 
 	@Override
-	public int updateExerciseRecord(ExerciseRecordVO vo) {
+	public int updateExerciseRecord(Map<String, Object> vo) {
 		dao.updateExerciseRecord(vo);
 		return 0;
 	}

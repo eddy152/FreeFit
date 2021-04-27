@@ -13,8 +13,8 @@ var arr = {};
 $(function() {
 	var part = '가슴';
 	var exeName = '';
-	var exepNo = 0;
-	var userId = '';
+	var exepNo = $('.exep_no').val();
+	var userId = $('.user_id').val();
 	
 	//상단 메뉴바 클릭
 	$(".menuLink").on("click", function() {
@@ -136,6 +136,22 @@ $(function() {
 				contentType : 'application/json',
 				success: function(result) {
 					alert("등록성공");
+					
+					var form = document.createElement('form');
+					var objs;
+
+					objs = document.createElement('input');
+					objs.setAttribute('type', 'hidden');
+					objs.setAttribute('name', 'user_id');
+					objs.setAttribute('value', userId);
+					
+					form.appendChild(objs);
+					form.setAttribute('method', 'post');
+					form.setAttribute('action', "getSearchExerciseProgramPersonal");
+
+					document.body.appendChild(form);
+
+					form.submit();
 				}
 			})  // End of ajax
 		}
@@ -326,8 +342,8 @@ ul.sub li:hover {
 			<div id="divThird" style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
 				<form action="" id="exeSetCount">
 					<table border="1" id="exeSet"></table>
-					프로그램 번호<br><input type="text" name="exep_no" value="${ffUser1}"><br>
-					유저 아이디<br><input type="text" name="user_id" value="${ffUser.id }"><br>
+					<br><input type="hidden" name="exep_no" value="${ffUser1}"><br>
+					<br><input type="hidden" name="user_id" value="${ffUser.id }"><br>
 				</form>
 				<form name="popForm">
 					<input type="hidden" name="user_id" value="${ffUser.id }" />
