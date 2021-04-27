@@ -70,7 +70,7 @@ public class MemberServiceImpl implements MemberService {
 		adminMapper.addOwnerMember(member);
 		String memberId = adminMapper.getOwnerId(member);
 		memberRoleMapper.addGuestRole(memberId);
-
+		memberRoleMapper.addOwnerRole(memberId);
 	}
 
 	@Override
@@ -203,6 +203,12 @@ public class MemberServiceImpl implements MemberService {
 	public void newPayment(KakaoPayApprovalVO vo) {
 		adminMapper.newPayment(vo);
 		
+	}
+
+	@Override
+	public List<AdminVO> ownerPayments(String id) {
+		// TODO Auto-generated method stub
+		return adminMapper.ownerPayments(id);
 	}
 
 }

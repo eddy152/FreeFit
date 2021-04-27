@@ -49,13 +49,13 @@ public class MembershipController {
 		String id = (String) session.getAttribute("id");
 		AdminVO member = new AdminVO();
 		member.setId(id);
-		int allPoint = memberService.getProfileInfo(id).getAll_point();
 		// 피트니스 찾기
 		List<AdminVO> fitnesses = memberService.ownerFitnesses(member);
-		if (fitnesses == null) {
-			return "homepage/members/profile#fitness-reg";
+		if (fitnesses.isEmpty()) {
+			return "redirect:/members/profile#fitness-reg";
 		}
 		// 피트니스 있으면 정보 담아서 보내기
+		int allPoint = memberService.getProfileInfo(id).getAll_point();
 		model.addAttribute("fitnesses", fitnesses);
 		model.addAttribute("grade", grade);
 		model.addAttribute("point", allPoint);
@@ -73,10 +73,12 @@ public class MembershipController {
 			int payNo = memberService.getPayment(admin_id);
 			kakaoVo.setPartner_order_id(admin_id + "_" + kakaoVo.getFitness_name() + "_" + payNo);
 			kakaoVo.setPartner_user_id(admin_id);
-			
 
-			System.out.println("kakaoVo: "+kakaoVo);
-			return "redirect:" + kakaopay.kakaoPayReady(kakaoVo, request);
+			KakaoPayReadyVO kakaoPayReadyVO=kakaopay.kakaoPayReady(kakaoVo, request);
+			System.out.println("kakaoVo: " + kakaoVo);
+			kakaoVo.setTid(kakaoPayReadyVO.getTid());
+			session.setAttribute("kakaoVo", kakaoVo);
+			return "redirect:" + kakaoPayReadyVO.getNext_redirect_pc_url() ;
 		} else
 			return "redirect:/membership/msRegister";
 	}
@@ -92,11 +94,20 @@ public class MembershipController {
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session) {
 		System.out.println("kakaoPaySuccess get............................................");
 		System.out.println("kakaoPaySuccess pg_token : " + pg_token);
-		KakaoPayApprovalVO approvalvo = kakaopay.kakaoPayInfo(pg_token);
-		System.out.println("approvalvo: "+approvalvo);
-		//memberService.newPayment(approvalvo);
-
+		KakaoNeedInfoVO kakaoVo = (KakaoNeedInfoVO) session.getAttribute("kakaoVo");
+		KakaoPayApprovalVO approvalvo = kakaopay.kakaoPayInfo(pg_token, kakaoVo);
+		approvalvo.setTax_free_amount(approvalvo.getAmount().getTotal());
+		;
+		approvalvo.setP_fitness_id(kakaoVo.getFitness_id());
+		if (kakaoVo.getItem_name().equals("gold")) {
+			approvalvo.setP_membership_no(2);
+		} else
+			approvalvo.setP_membership_no(3);
+		approvalvo.setP_all_point(kakaoVo.getAll_point());
+		System.out.println("approvalvo: " + approvalvo);
 		// 포인트, 어드민(allpoint), 결제내역,멤버십등록현황, 오너 멤버쉽권한,
+		memberService.newPayment(approvalvo);
+		
 
 		// 정보 담아서 리턴
 		model.addAttribute("info", approvalvo);
