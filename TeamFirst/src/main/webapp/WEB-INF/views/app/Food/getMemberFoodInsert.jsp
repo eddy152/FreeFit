@@ -20,18 +20,51 @@
 	div.each_food > input {
 		width: 100px;
 	}
+	
+	.cent {
+ 		margin: auto;
+ 	}
+ 	
+ 	.cent2 {
+ 		margin: auto;
+ 	}
+ 	
+ 	.cent-contents {
+ 		margin: auto;
+ 	}
+ 	.form-cent2 {
+ 	 	margin: auto;
+ 	}
+ 	
+ 	#insertBtn {
+ 		float: right;
+ 	}
+ 	
+ 	#input-comment {
+ 	  padding: 5px 5px;
+	  border: 3px solid #ccc;
+	  transition: 0.5s;
+	  outline: none;
+ 	}
+ 	
+ 	#input-comment:focus {
+ 		border: 3px solid #555;
+ 	}
+ 	
 </style>
 
 
 <div class="cent2">
 	<h1>${user.id } 회원님의 식단</h1>
 </div>
-	<div class="insertFood" <c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
+	<div class="insertFood" id="insertBtn"<c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
 		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
-	</div>
+</div>
 	<br>
-	<div>
+	<div class="row">
 		<input type="text" name="id" value="${user.id }" hidden="hidden">
+	</div>
+	<div>
 		<table style="display: none;">
 			<tr>
 
@@ -67,10 +100,12 @@
 		</table>
 	</div>
 	<br>
-	<div>
-	<label for="inputEmail4">식단번호</label>
-	<input type="text" value="${food.real_diet_no }" id="real_diet_no1" class="form-control">
-			<div>
+	<div class="row">
+	<p class="form-control border-0">식단번호</p>
+	<input type="text" value="${food.real_diet_no }" id="real_diet_no1" class="form-control border-0">
+	</div>
+	<div class="form-cent2">
+			<div class="cent-contents">
 				<div class="food_contents">${food.diet_content }</div>
 				<div class="contentBtn">
 					<c:if test="${food.real_diet_no ne null}">
@@ -79,29 +114,25 @@
 					</c:if>
 				</div>
 			</div>
-
-		<hr>
-		
-		<div class="comments">
-			<c:forEach items="${comment }" var="comm">
-				<div>
-					<input type="text" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" class="form-control" style="width: 200px;"> 
-					<textarea class="hide_comment" style="display: none;" rows="3">${comm.diet_comment }</textarea>
-					<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden" class="form-control">
-					<button id="updateComment" class="btn btn-primary">수정</button>
-					<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>
-					<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>
-				</div>
-			</c:forEach>
-		</div>	
-<hr>
-		<div>
-			<h6>댓글 남기기</h6>
-			<input type="text" name="diet_comment" class="form-control"><br>
-			<button type="button" onclick="comment()" class="btn btn-outline-warning">댓글 남기기</button>
-		</div>
-		<hr>
-		<div>
+</div>
+	
+<br>
+<div class="cent">
+<form class="form-inline">
+		<button type="button" onclick="before()" class="btn btn-light"><</button>&nbsp;
+		<div class="form-group mx-sm-3 mb-2">
+		<input type="text" name="dates" value="${oneDay.sysdate}" class="form-control">
+		</div>&nbsp;
+		<button type="button" onclick="after()" class="btn btn-light">></button>
+</form>
+</div>
+<br>
+<div>
+	<div id="columnchart_material"></div>
+	
+</div>
+<div class="cent2">
+		<div class="form-inline">
 		<c:choose>
 			<c:when test="${food.calorie ne null }">
 				<input type="text" value="${food.calorie }" class="form-control" readonly="readonly" name="calorie_total">
@@ -110,23 +141,31 @@
 				<input type="text" value="0" class="form-control" readonly="readonly">
 			</c:otherwise>
 		</c:choose>
-			<br><button type="button" id="calorieBtn" class="btn btn-outline-primary">칼로리 등록</button>
+			<button type="button" id="calorieBtn" class="btn btn-outline-primary">등록</button>
 		</div>
-
+</div>	
+<hr>
+	<div>
+		<div class="comments">
+			<c:forEach items="${comment }" var="comm">
+				<div class="form-inline">
+					<input type="text" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" style="width: 200px;"> 
+					<textarea class="hide_comment" style="display: none;" rows="3">${comm.diet_comment }</textarea>
+					<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden">
+					<button id="updateComment" class="btn btn-primary">수정</button>
+					<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>
+					<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>
+				</div>
+			</c:forEach>
+		</div>	
 	</div>
-
-<div>
-<form class="form-inline">
-	<div id="buttons">
-		<button type="button" onclick="before()" class="btn btn-light"><</button>
-		<input type="text" name="dates" value="${oneDay.sysdate}" class="form-control">
-		<button type="button" onclick="after()" class="btn btn-light">></button>
-	</div> 
+<hr>
+<form>
+	<div class="form-inline">
+		<input type="text" name="diet_comment" id="input-comment">
+		<button type="button" onclick="comment()">댓글</button><!--  class="btn btn-outline-warning" -->
+	</div>
 </form>
-	<div id="columnchart_material"></div>
-	
-</div>
-
 
 <!-- 식단 작성하기 Modal start -->
 <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -478,6 +517,7 @@ var nowData='${food.diet_content}';
 		var data = google.visualization.arrayToDataTable(arr);
 	 
 	  var options = {
+			  legend: 'bottom',
 			  width: '400',
 			  height : '500',
 	          vAxis: { viewWindow: { max: 3000 } },
@@ -502,6 +542,7 @@ var nowData='${food.diet_content}';
 		var data = google.visualization.arrayToDataTable(arr);
 	 
 	  var options = {
+			  legend: 'bottom',
 			  width: '400',
 			  height : '500',
 	          vAxis: { viewWindow: { max: 3000 } },
@@ -575,7 +616,7 @@ var nowData='${food.diet_content}';
 				  $('.comments').empty();
 				  for(i=0; i<response.length; i++) {
 					  $('.comments').append(
-						  '<div>'
+						  '<div class="form-inline">'
 						  + '<input type="text" class="form-control" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
 						  + '<textarea class="hide_comment" style="display: none;" rows="3">' + response[i].diet_comment + '</textarea>'
 						  + '<input type="text" class="form-control" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
@@ -614,6 +655,7 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
+								  legend: 'bottom',
 								  width: '400',
 								  height: '500',
 						          vAxis: { viewWindow: { max: 3000 } },
@@ -653,6 +695,7 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
+						  legend: 'bottom',
 						  width: '400',
 						  height: '500',
 				          vAxis: { viewWindow: { max: 3000 } },
@@ -733,7 +776,7 @@ var nowData='${food.diet_content}';
 				  $('.comments').empty();
 				  for(i=0; i<response.length; i++) {
 					  $('.comments').append(
-						  '<div>'
+						  '<div class="form-inline">'
 						  + '<input type="text" class="form-control" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
 						  + '<textarea class="hide_comment" style="display: none;" rows="3">' + response[i].diet_comment + '</textarea>'
 						  + '<input type="text" class="form-control" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
@@ -772,6 +815,7 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
+								  legend: 'bottom',
 								  width: '400',
 								  height: '500',
 						          vAxis: { viewWindow: { max: 3000 } },
@@ -811,6 +855,7 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
+						  legend: 'bottom',
 						  width: '400',
 						  height: '500',
 				          vAxis: { viewWindow: { max: 3000 } },
@@ -848,7 +893,7 @@ var nowData='${food.diet_content}';
 				alert('성공!');
 
 				$('.comments').append(
-				 	  '<div>'
+				 	  '<div class="form-inline">'
 					+ '<input type="text" class="form-control" name="comment_upd" value="'+ response.diet_comment +'">'
 					+ '<input type="text" class="form-control" value="' + response.comment_no + '" name="comment_no" hidden="hidden">'
 					+ '<textarea class="hide_comment" style="display: none;" rows="3">' + response.diet_comment + '</textarea>'
@@ -895,7 +940,7 @@ var nowData='${food.diet_content}';
 				success : function(e) {
 					alert('성공');
 					$('.comments').append(
-							  '<div>'
+							  '<div class="form-inline">'
 							+ '<input type="text" class="form-control" name="comment_upd" value="'+ e.diet_comment +'">'
 							+ '<input type="text" class="form-control" value="' + e.comment_no + '" name="comment_no" hidden="hidden">'
 							+ '<textarea class="hide_comment" style="display: none;" rows="3">' + e.diet_comment + '</textarea>'

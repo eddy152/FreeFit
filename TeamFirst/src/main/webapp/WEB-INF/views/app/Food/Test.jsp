@@ -3,23 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-<div>
-
+<div class="row mb-5">
 <h2>회원 식단 리스트</h2>
+</div>
+<div class="row">
+
 <br>
 <c:forEach var="list" items="${list }">
-	<div class="card" style="width: 18rem;">
+	<div class="card" style="width: 100%;">
 	  <div class="card-body">
-	    <h5 class="card-title">${list.name }</h5>
+	    <a href="getMemberFoodList?id=${list.id}" class="card-link">${list.name }</a>
 	  </div>
-	  <ul class="list-group list-group-flush">
-	    <li class="list-group-item">${list.name }</li>
-	    <li class="list-group-item">${list.gender }</li>
-	    <li class="list-group-item">${list.phone_number }</li>
-	  </ul>
-	  <div class="card-body">
-	    <a href="getMemberFoodList?id=${list.id}" class="card-link">식단상세</a>
-	  </div>
+	  
 	</div>
 	<br>
 </c:forEach>
