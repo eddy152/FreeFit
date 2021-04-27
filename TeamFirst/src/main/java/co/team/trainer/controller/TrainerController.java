@@ -37,6 +37,14 @@ public class TrainerController {
     model.addAttribute("emp", service.getTrainer(id));
     return "program/trainer/getTrainer";
   }
+  @RequestMapping("/selectTrainer")
+  public String selectTrainer(TrainerVO vo, Model model, HttpSession session) throws Exception {
+	vo.setFitness_id(Integer.parseInt((String)session.getAttribute("fitness_id")));
+	model.addAttribute("train", service.getTrainerList(vo));
+	return "app/userNotice/selectTrainer";
+  }
+  
+  
   
   @GetMapping("/getTrainerModify")
   public String getTrainerModify( Model model, @RequestParam("id") String id) {
