@@ -62,6 +62,11 @@
 </script>
 <style>
 
+	div#divTag1 {
+    right: -390px;
+    margin-right: ;
+	}
+	
 	.button {
   	background-color: #01DFD7;
   	border: none;
@@ -78,8 +83,8 @@
 </style>
 </head>
 <body>
-	<div class="col-lg-12" style="color:white; background-color:#01DFD7; padding:20px;">
-	<h2 style="text-align: center;">글 작성</h2>
+	<div id="divTag1" class="col-lg-7" style="color:white; background-color:#01DFD7; padding:20px;">
+	<h2 style="text-align: center;">공지사항 작성</h2>
 	</div>
 	<div style="width: 60%; margin: auto;">
 		<form method="post" action="insertAdminNoticeBoard">
@@ -93,9 +98,9 @@
 			<br>
 			<textarea id="summernote" name="content"></textarea>
 	
-		<input id="subBtn" type="button" value="글작성" style="float: right;"
-				onclick="goWrite(this.form)">
-      	<input type="button" value="목록으로" style="float: right;"
+		<input class="btn btn-primary" type="button" value="글작성" style="float: right;"
+			   onclick="goWrite(this.form)">
+      	<input class="btn btn-primary" type="button" value="목록으로" style="float: right;"
 			   onclick="location.href='getAdminNoticeBoardList';">
 		</form>
 	</div>

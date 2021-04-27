@@ -27,7 +27,7 @@
 	
 <style>
 	div#divTag1 {
-	right : -200px;
+	right : -300px;
 	margin-right: ;
 	}
 </style>

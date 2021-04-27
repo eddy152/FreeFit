@@ -47,8 +47,8 @@
 </style>
 </head>
 <body>
-	<div  class="page-wrapper">
-		<div  class="container-fluid">
+	<div class="page-wrapper">
+		<div class="container-fluid">
 			<div align="right" class="col-lg-8" id="divTag1">
 				<!--게시판 넓이 -->
 				<div class="col-lg-12" style="color:white; background-color:#01DFD7; padding:20px;">
@@ -95,7 +95,7 @@
 						</table>
 					</div>
 				</div>
-				<input type="button" class="button" value="작성하기" onclick="location.href='adminBoard';"><!--style="float: right;"  -->
+				<input type="button" class="btn btn-primary" value="작성하기" onclick="location.href='adminBoard';"><!--style="float: right;"  -->
 			</div>
 		</div>
 	</div>

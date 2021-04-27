@@ -45,22 +45,53 @@ function goModify(frm) {
 }
 </script>
 </head>
+<style>
+
+	div#divTag1 {
+	right: -390px;
+	margin-right: ;
+	}
+
+	.button {
+  	background-color: #01DFD7;
+  	border: none;
+  	color: white;
+	padding: 10px 20px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 13px;
+  	margin: 3px 1px;
+  	cursor: pointer;
+	}
+	
+	table {width: 100%;}
+	textarea {width: 100%;}
+	#outter {display: block;
+		 width: 30%;
+		 margin: auto; 	
+</style>
+
 <body>
-<h2 style="text-align: center;">수정 페이지</h2><br><br><br>
-<div style="width: 60%; margin: auto;">
-	<form method="post" action="updateAdminNoticeBoard" >
-		<label for="category">카테고리 : </label>
-			<select id="category" name="category">
-				<option value="공지">공지</option>
-				<option value="이벤트">이벤트</option></select><br>
-		게시물번호 : <input readonly="readonly" type="text" name="board_no" value="${board.board_no}"><br>
-		제목 : <input type="text" name="title" style="width: 30%;" placeholder="제목" value="${board.title}"/>
-		<br><br> 
-		<textarea id="summernote" name="content"></textarea>
-		<input id="subBtn" type="button" value="수정완료" style="float: right;" onclick="goModify(this.form)"/>
-		<input type="button" value="목록" style="float: right;"
-			   onclick="location.href='getAdminNoticeBoardList';">
-	</form>																		
-</div>
+	<div class="container-fluid">
+		<div id="divTag1" class="col-lg-6">
+				<div style="color:white; background-color:#01DFD7; padding:20px;">
+					<h2 align="center" class="page-header">공지사항 수정</h2>
+				</div>
+		
+			<form method="post" action="updateAdminNoticeBoard" >
+				<label for="category">카테고리 : </label>
+					<select id="category" name="category">
+						<option value="공지">공지</option>
+						<option value="이벤트">이벤트</option></select><br>
+						게시물번호 : <input readonly="readonly" type="text" name="board_no" value="${board.board_no}"><br>
+						제목 : <input type="text" name="title" style="width: 30%;" placeholder="제목" value="${board.title}"/>
+						<br><br> 
+					   <textarea id="summernote" name="content"></textarea>
+		       		   <input class="button" id="subBtn" type="button" value="수정완료" style="float: right;" onclick="goModify(this.form)"/>
+	       		       <input class="button" type="button" value="목록" style="float: right;" onclick="location.href='getAdminNoticeBoardList';">
+	  		 </form>																		
+		</div>
+	</div>
 </body>
 </html>
