@@ -1,5 +1,5 @@
 //login 관련 기능
-(function () {
+window.onload=function () {
 
     // 로그인 상태에서 loginForm 들어오면 경고창 띄우고 뒤로가기
     
@@ -24,9 +24,9 @@
                 profile.text = "마이페이지";                
                 profile.onclick=function(){
                 location.href="/spring/members/profile";
-                
-                loginBtn.parentNode.prepend(profile);              
+                console.log('aa');
                 };
+                loginBtn.parentNode.prepend(profile);              
                 }
             }
 
@@ -127,7 +127,7 @@ $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}
 }
 
 
-})()
+}
 
 
 //부트스트랩 로딩모달 html
