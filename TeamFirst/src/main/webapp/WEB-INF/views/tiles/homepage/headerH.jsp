@@ -5,6 +5,7 @@
   <nav class="my-0 my-md-0 mr-md-3">
     <a class="p-2 text-dark" href="#">freefit?(작성 필요)</a>
     <a class="p-2 text-dark" href="#">피라미드핏설명(작성필요)</a>
+    <a class="p-2 text-dark" href="/spring/getGymList">가맹점</a>
     <a class="p-2 text-dark" href="/spring/membership/pricing">요금제</a>
     <a class="p-2 text-dark" href="/spring/getAdminNoticeBoardList">공지(404)</a>
   </nav>
