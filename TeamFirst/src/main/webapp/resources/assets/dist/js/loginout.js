@@ -1,5 +1,5 @@
 //login 관련 기능
-(function () {
+window.onload=function () {
 
     // 로그인 상태에서 loginForm 들어오면 경고창 띄우고 뒤로가기
     
@@ -24,12 +24,16 @@
                 profile.text = "마이페이지";                
                 profile.onclick=function(){
                 location.href="/spring/members/profile";
-                
+<<<<<<< HEAD
+                console.log('aa');
                 };
+=======
+                
+>>>>>>> refs/heads/KDH
                 loginBtn.parentNode.prepend(profile);              
+                };
                 }
             }
-
         }
         //클릭시 로그인/로그아웃 확인 -> 로그인폼 / 로그아웃
         loginBtn.onclick = function () {
@@ -45,9 +49,7 @@
         }
         
         
-
     }
-
     //회원가입 버튼. 로그인 상태에서는 안보이도록
     if (typeof joinBtn !== "undefined") {
         //클릭시 가입폼으로
@@ -59,9 +61,7 @@
                 joinBtn.remove();
             }
         }
-
     }
-
     //로그인폼 login 버튼 클릭 이벤트
     if (typeof formLogin !== "undefined") {
 		
@@ -127,7 +127,7 @@ $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}
 }
 
 
-})()
+}
 
 
 //부트스트랩 로딩모달 html
