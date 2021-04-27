@@ -53,12 +53,7 @@
 	</select>
 	
 	<select id="getWeeks" resultType="FoodVO" parameterType="FoodVO">
-		<!-- select to_char(sysdate+#{cnt} + level, 'yyyy-MM-dd') day, to_char(sysdate+#{cnt}, 'yyyy-MM-w') week
-		from dual
-		connect by level &lt; 8 
-		order by day -->
-		
-		  select take_date, week, sum(calorie) from ( 
+		  select take_date, week, sum(calorie) calorie from ( 
       	  select 'd' tp, to_char(take_date, 'yyyy-MM-dd') take_date , calorie,
 		  to_char(sysdate+#{cnt}, 'yyyy-MM-w') as week
 		  from real_diet
@@ -70,6 +65,7 @@
 		  from dual
 		  connect by level &lt; 8)
           group by take_date, week
+          order by take_date
 	</select>
 
 	<!-- 추천별 식단 전체 리스트 -->

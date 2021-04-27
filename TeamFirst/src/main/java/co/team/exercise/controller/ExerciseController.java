@@ -314,7 +314,7 @@ public class ExerciseController {
 	}
 	
 	// 단건 수정
-	@GetMapping("/updateExerciseRecord")
+	@PostMapping("/updateExerciseRecord")
 	public String updateExerciseRecord(ExerciseRecordVO vo) {
 		service.updateExerciseRecord(vo);
 		return "redirect:/getSearchExerciseRecord";

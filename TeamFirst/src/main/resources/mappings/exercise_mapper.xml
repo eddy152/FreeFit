@@ -504,7 +504,9 @@
 			epd_set = #{epd_set},
 			exer_do_set = #{exer_do_set}
 		WHERE exer_no = #{exer_no}
+		AND exe_no = #{exe_no}
 		AND user_id = #{user_id}
+		AND to_char(exer_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')
 	</update>
 	
 	<!-- EXERCISE_RECORD delete -->

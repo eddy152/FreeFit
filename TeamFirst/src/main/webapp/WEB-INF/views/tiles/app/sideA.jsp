@@ -30,12 +30,11 @@
 				</a>
 				<a class="nav-link" href="/spring/Test">
 							<span data-feather="user-check"></span> 회원식단관리(트레이너용)
-				</a> 
-				<a class="nav-link" href="/spring/selectTrainer">
-							<span data-feather="user-check"></span> 트레이너 목록
 				</a>
-				
-				<a class="nav-link" href="#">
+				<a class="nav-link" href="/spring/selectTrainer">
+							<span data-feather="user-check"></span> 트레이너 선택
+				</a>
+				<a class="nav-link" href="/spring/getEachMemer">
 							<span data-feather="user-check"></span> 식단관리(개인용,없음)
 				</a>
 				<c:choose>
@@ -45,7 +44,7 @@
 						</a>
 					</c:when>
 					<c:when test="">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="/spring/getEachMemer">
 							<span data-feather="user-check"></span> 식단관리(개인용,없음)
 						</a>
 					</c:when>

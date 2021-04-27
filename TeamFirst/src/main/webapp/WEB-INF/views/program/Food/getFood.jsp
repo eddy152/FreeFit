@@ -26,23 +26,29 @@
 	padding: 0 10px;
 	list-style: none;
 }
+
 table {
 	width: 70%;
 }
+
 td {
 	padding: 15px;
 	text-align: center;
 }
+
 th {
 	padding: 15px;
 	text-align: center;
 }
+
 #t01 tr:nth-child(even) {
 	background-color: #eee;
 }
+
 #t01 tr:nth-child(odd) {
 	background-color: #fff;
 }
+
 #t01 th {
 	background-color: black;
 	color: white;
@@ -56,6 +62,7 @@ th {
 		'packages' : [ 'corechart' ]
 	});
 	google.charts.setOnLoadCallback(drawChart);
+
 	function drawChart() {
 		moveDate(0);
 	}
@@ -68,34 +75,21 @@ th {
 		var arr = [];
 		arr.push([ '섭취날짜', '실제섭취량', '권장량' ]);
 		$.ajax({
-			url: 'getDate',
+			url: 'getWeeks',
 			data : { id : $('input:text[name="name"]').val(),
 			    	cnt : cnt},
 			dataType: 'json',
 			type: 'get',
 			success : function(result) { // === dual
 			$('input:text[name="dates"]').val(result[0].week);
-				
-					$.ajax({
-						url: 'getWeeks',
-						data: {cnt : cnt},
-						dataType: 'json',
-						success : function(e) {
-							
-							/* if(e.length == 0) {
-								return;
-							}
-							for(i=0; i<e.length; i++) {
-								if(result[i]) {
-									console.log(result[i]);
-									arr.push([result[i].take_date, parseInt(result[i].calorie), count]);
-								} else if(!result[i]) {
-									arr.push([e[i].day, 0, count]);
-								}
-							} */
-							
+					
+					for(i=0; i<result.length; i++) {
+						
+						arr.push([result[i].take_date, parseInt(result[i].calorie), count])
+					}	
 							
 							var data = google.visualization.arrayToDataTable(arr);
+
 							var options = {
 								width : '1000',
 								vAxis : { viewWindow : { max : 3000 }
@@ -103,14 +97,14 @@ th {
 								seriesType : 'bars',
 								series : { 1 : { type : 'line' }
 								}
+
 							};
-							var chart = new google.visualization.ComboChart(document
-									.getElementById('columnchart_material'));
+
+							var chart = new google.visualization.ComboChart(document.getElementById('columnchart_material'));
+
 							chart.draw(data, options);
 						}
 			
-				} // else
-			} // succes
 		});// ajax
 		
 	}
@@ -155,12 +149,10 @@ th {
 						</tr>
 					</table>
 					<div align="center">
-						<input type="button" class="btn btn-secondary"
-							onclick="moveDate(-7)" value="<"> <input type="text"
-							name="dates" style="width: 100px;" value="${calories[0].week}">주째
-						<input type="text" hidden="hidden" id="date"
-							value="${calories[0].sysdate}"> <input type="button"
-							class="btn btn-secondary" value=">" onclick="moveDate(7)">
+						<input type="button" class="btn btn-secondary" onclick="moveDate(-7)" value="<"> 
+						<input type="text" name="dates" style="width: 100px;" value="${calories[0].week}">주째
+						<input type="text" hidden="hidden" id="date" value="${calories[0].sysdate}">
+						<input type="button" class="btn btn-secondary" value=">" onclick="moveDate(7)">
 						<br> <br>
 					</div>
 					<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
