@@ -75,6 +75,20 @@
 		var obValueView = document.getElementById("slider_view6");
 		obValueView.innerHTML = sVal
 	} // 운동 횟수
+	
+	//버튼 클릭 이벤트(등록하기)
+	$(document).on("click", ".btn", function() {
+		var user_id = $('[name=user_id]').val()
+		var exep_no = $('[name=exep_no]').val()
+		var exe_no 
+		var exer_do_set
+		var exer_do_count
+		
+		//console.log($(this).parent('div').children('div')[1].children('input'))
+		console.log($(this).parent('div').children('div')[1])
+		console.log($('[name=exep_no]').val())
+		//alert($(this)[0].innerText);
+	})
 </script>
 <style type="text/css">
 ul {display: table;}
@@ -87,146 +101,134 @@ li {list-style-type: none; margin-left: 5px; margin-bottom: 5px; display: table-
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
 			<c:set value="0" var="num" />
 			<c:set value="0" var="num1" />
-			<ol class="carousel-indicators">
-				<c:forEach items="${list}" var="list">
-					<c:choose>
-						<c:when test="${num eq 0}">
-							<li data-target="#carouselExampleIndicators" data-slide-to="${num }" class="active"></li>
-						</c:when>
-						<c:otherwise>
-							<li data-target="#carouselExampleIndicators" data-slide-to="${num }"></li>
-						</c:otherwise>
-					</c:choose>
-					<c:set value="${num + 1}" var="num" />
-				</c:forEach>
-			</ol>
 			<div class="carousel-inner">
 				<c:forEach items="${list}" var="list">
 					<c:choose>
 						<c:when test="${num1 eq 0}">
 							<div class="carousel-item active">
-								<form action="updateExerciseRecord" method="post">
-									<div class="box">
-										<iframe width="800" height="400" src="https://www.youtube.com/embed/${list.exer_url }"?rel=0&amp;autoplay=1&mute=1&amp;loop=1;playlist=${list.exer_url }" frameborder="0"></iframe>
-									</div><p>
-									<ul>
-										<li>- ${list.exe_part} 운동 -
-											<input type="hidden" name="exe_part" value="${list.exe_part}">
-										</li>
-									</ul>
-									<ul>
-										<li>${list.exe_name }
-											<input type="hidden" name="exe_name" value="${list.exe_name}">
-											<input type="hidden" name="user_id" value="${list.user_id}">	
-										</li>
-									</ul>
-									<ul>
-										<li>
-											설정 세트 : ${list.epd_set } 세트
-											<input type="hidden" name="epd_set" value="${list.epd_set}">
-										</li>
-									</ul>
-									<ul>
-										<li>
-											설정 횟수 : ${list.exer_count } 회
-											<input type="hidden" name="exer_count" value="${list.exer_count }">
-										</li>
-									</ul>
-									<c:choose>
-										<c:when test="${list.exer_weight eq null || list.exer_weight eq 0}">
-											<input type="hidden" name="exer_weight" value=0>
-										</c:when>
-										<c:otherwise>
-											<ul>
-												<li>
-													운동 무게 : ${list.exer_weight} kg
-													<input type="hidden" name="exer_weight" value="${list.exer_weight}">
-												</li>
-											</ul>										
-										</c:otherwise>
-									</c:choose>
+								<div class="box">
+									<iframe width="800" height="400" src="https://www.youtube.com/embed/${list.exer_url }"?rel=0&amp;autoplay=1&mute=1&amp;loop=1;playlist=${list.exer_url }" frameborder="0"></iframe>
+								</div><p>
+								<ul>
+									<li>- ${list.exe_part} 운동 -
+										<input type="hidden" name="exe_part" value="${list.exe_part}">
+									</li>
+								</ul>
+								<ul>
+									<li>${list.exe_name }
+										<input type="hidden" name="exe_name" value="${list.exe_name}">
+										<input type="hidden" name="user_id" value="${list.user_id}">	
+									</li>
+								</ul>
+								<ul>
+									<li>
+										설정 세트 : ${list.epd_set } 세트
+										<input type="hidden" name="epd_set" value="${list.epd_set}">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										설정 횟수 : ${list.exer_count } 회
+										<input type="hidden" name="exer_count" value="${list.exer_count }">
+									</li>
+								</ul>
+								<c:choose>
+									<c:when test="${list.exer_weight eq null || list.exer_weight eq 0}">
+										<input type="hidden" name="exer_weight" value=0>
+									</c:when>
+									<c:otherwise>
+										<ul>
+											<li>
+												운동 무게 : ${list.exer_weight} kg
+												<input type="hidden" name="exer_weight" value="${list.exer_weight}">
+											</li>
+										</ul>										
+									</c:otherwise>
+								</c:choose>
+								<div>
 									<ul>
 										<li>실행 세트 : 
 										<font id="slider_value_view">0</font>	
-										<input oninput='ShowSliderValue(this.value)'  type = "range" min='0' max='10' value='0' name="exer_do_set">
+										<input oninput='ShowSliderValue(this.value)'  type = "range" min='0' max='10' value='0' name="exer_do_set" class="val">
 									</ul>
 									<ul>
 										<li>실행 횟수 : 
 										<font id="slider_value_view1">0</font>	
-										<input oninput='ShowSliderValue1(this.value)'  type = "range" min='0' max='30' value='0' name="exer_do_count">
+										<input oninput='ShowSliderValue1(this.value)'  type = "range" min='0' max='30' value='0' name="exer_do_count" class="val">
+										<input type="hidden" name="exe_no" value="${list.exe_no}" class="val">
 									</ul>
-									<ul>
-										<li>
-											<input type="hidden" name="exer_do_count" value="${list.exer_do_count}">
-											<input type="hidden" name="exep_no" value="${list.exep_no}">
-											<input type="hidden" name="exe_no" value="${list.exe_no}">
-										</li>
-									</ul>
-									<button type="submit">${list.exe_name} 종료</button>
-								</form>
+								</div>
+								<ul>
+									<li>
+										<input type="hidden" name="exer_do_count" value="${list.exer_do_count}">
+										<input type="hidden" name="exep_no" value="${list.exep_no}">
+										
+									</li>
+								</ul>
+								<button type="button" class="btn">${list.exe_name} 종료</button>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="carousel-item">
-								<form action="updateExerciseRecord" method="post">
-									<div class="box">
-										<iframe width="800" height="400" src="https://www.youtube.com/embed/${list.exer_url }"?rel=0&amp;autoplay=1&mute=1&amp;loop=1;playlist=${list.exer_url }" frameborder="0"></iframe>
-									</div><p>
-									<ul>
-										<li>- ${list.exe_part} 운동 -
-											<input type="hidden" name="exe_part" value="${list.exe_part}">
-										</li>
-									</ul>
-									<ul>
-										<li>${list.exe_name }
-											<input type="hidden" name="exe_name" value="${list.exe_name}">
-											<input type="hidden" name="user_id" value="${list.user_id}">	
-										</li>
-									</ul>
-									<ul>
-										<li>
-											설정 세트 : ${list.epd_set } 세트
-											<input type="hidden" name="epd_set" value="${list.epd_set}">
-										</li>
-									</ul>
-									<ul>
-										<li>
-											설정 횟수 : ${list.exer_count } 회
-											<input type="hidden" name="exer_count" value="${list.exer_count }">
-										</li>
-									</ul>
-									<c:choose>
-										<c:when test="${list.exer_weight eq null || list.exer_weight eq 0}">
-											<input type="hidden" name="exer_weight" value=0>
-										</c:when>
-										<c:otherwise>
-											<ul>
-												<li>
-													운동 무게 : ${list.exer_weight} kg
-													<input type="hidden" name="exer_weight" value="${list.exer_weight}">
-												</li>
-											</ul>										
-										</c:otherwise>
-									</c:choose>
+								<div class="box">
+									<iframe width="800" height="400" src="https://www.youtube.com/embed/${list.exer_url }"?rel=0&amp;autoplay=1&mute=1&amp;loop=1;playlist=${list.exer_url }" frameborder="0"></iframe>
+								</div><p>
+								<ul>
+									<li>- ${list.exe_part} 운동 -
+										<input type="hidden" name="exe_part" value="${list.exe_part}">
+									</li>
+								</ul>
+								<ul>
+									<li>${list.exe_name }
+										<input type="hidden" name="exe_name" value="${list.exe_name}">
+										<input type="hidden" name="user_id" value="${list.user_id}">	
+									</li>
+								</ul>
+								<ul>
+									<li>
+										설정 세트 : ${list.epd_set } 세트
+										<input type="hidden" name="epd_set" value="${list.epd_set}">
+									</li>
+								</ul>
+								<ul>
+									<li>
+										설정 횟수 : ${list.exer_count } 회
+										<input type="hidden" name="exer_count" value="${list.exer_count }">
+									</li>
+								</ul>
+								<c:choose>
+									<c:when test="${list.exer_weight eq null || list.exer_weight eq 0}">
+										<input type="hidden" name="exer_weight" value=0>
+									</c:when>
+									<c:otherwise>
+										<ul>
+											<li>
+												운동 무게 : ${list.exer_weight} kg
+												<input type="hidden" name="exer_weight" value="${list.exer_weight}">
+											</li>
+										</ul>										
+									</c:otherwise>
+								</c:choose>
+								<div>
 									<ul>
 										<li>실행 세트 : 
-										<font id="slider_value${num1}">0</font>	
-										<input oninput='SliderValue${num1}(this.value)'  type = "range" min='0' max='10' value='0' name="exer_do_set">
+										<font id="slider_value_view">0</font>	
+										<input oninput='ShowSliderValue(this.value)'  type = "range" min='0' max='10' value='0' name="exer_do_set" class="val">
 									</ul>
 									<ul>
 										<li>실행 횟수 : 
-										<font id="slider_view${num1}">0</font>	
-										<input oninput='ShowValue${num1}(this.value)'  type = "range" min='0' max='30' value='0' name="exer_do_count">
+										<font id="slider_value_view1">0</font>	
+										<input oninput='ShowSliderValue1(this.value)'  type = "range" min='0' max='30' value='0' name="exer_do_count" class="val">
+										<input type="hidden" name="exe_no" value="${list.exe_no}" class="val">
 									</ul>
-																	<ul>
-										<li>
-											<input type="hidden" name="exer_do_count" value="${list.exer_do_count}">
-											<input type="hidden" name="exep_no" value="${list.exep_no}">
-											<input type="hidden" name="exe_no" value="${list.exe_no}">
-										</li>
-									</ul>
-									<button type="submit">${list.exe_name} 종료</button>
-								</form>
+								</div>
+								<ul>
+									<li>
+										<input type="hidden" name="exer_do_count" value="${list.exer_do_count}">
+										<input type="hidden" name="exep_no" value="${list.exep_no}">
+									</li>
+								</ul>
+								<button type="button" class="btn">${list.exe_name} 종료</button>
 							</div>
 						</c:otherwise>
 					</c:choose>

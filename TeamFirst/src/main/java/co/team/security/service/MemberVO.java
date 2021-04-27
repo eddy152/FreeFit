@@ -11,4 +11,10 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private String tblName;
+	private String age;
+	private String height;
+	private String user_id;
+	private String weight;
+	private String gender;
+	private String role_name;
 }

@@ -52,7 +52,7 @@ public class MembershipController {
 		// 피트니스 찾기
 		List<AdminVO> fitnesses = memberService.ownerFitnesses(member);
 		if (fitnesses.isEmpty()) {
-			return "redirect:/members/profile#fitness-reg";
+			return "redirect:/members/profile#fitness";
 		}
 		// 피트니스 있으면 정보 담아서 보내기
 		int allPoint = memberService.getProfileInfo(id).getAll_point();

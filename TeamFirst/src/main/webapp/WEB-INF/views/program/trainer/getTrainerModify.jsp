@@ -24,29 +24,23 @@
 	padding: 0 10px;
 	list-style: none;
 }
-
 table {
 	width: 70%;
 }
-
 td {
 	padding: 15px;
 	text-align: center;
 }
-
 th {
 	padding: 15px;
 	text-align: center;
 }
-
 #t01 tr:nth-child(even) {
 	background-color: #eee;
 }
-
 #t01 tr:nth-child(odd) {
 	background-color: #fff;
 }
-
 #t01 th {
 	background-color: black;
 	color: white;
@@ -73,7 +67,7 @@ th {
 						<div align="center" class="panel-body">
 							<table class="table table-hover">
 								<thead>
-									<tr class="dataRow">
+									<tr>
 										<th>피트니스ID</th>
 										<td><input name="fitness_id" value="${emp.fitness_id}"
 											readonly="readonly"></td>

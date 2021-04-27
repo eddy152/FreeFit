@@ -23,6 +23,7 @@
 			focus : true,
 			lang : 'ko-KR'
 		});
+		
 		$("#summernote").summernote('code',  '${board.content}');
 		$('#summernote').next().find(".note-editable").attr("contenteditable", false);
 });
@@ -37,31 +38,72 @@
 </script>
 </head>
 <style>
-h2 {text-align: center;}
-table {width: 100%;}
-textarea {width: 100%;}
-#outter {display: block;
-		 width: 30%;
-		 margin: auto; }
-</style>
-	<body>
-	<body>
-<h2 style="text-align: center;">상세보기 페이지</h2><br><br><br>
 
-<div style="width: 60%; margin: auto;">
-	<form method="post" action="updateAdminNoticeBoard" >
-		카테고리 : <input readonly="readonly" type="text" name="category" value="${board.category}"><br>
-		게시물번호 : <input readonly="readonly" type="text" name="board_no" value="${board.board_no}"><br>
-		제목 : <input readonly="readonly" type="text" name="title" style="width: 30%;" placeholder="제목" value="${board.title}"/>
-		
+	div#divTag1 {
+    right: -100px;
+    margin-right: ;
+	}
+	
+	.button {
+  	background-color: #01DFD7;
+  	border: none;
+  	color: white;
+	padding: 10px 20px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 13px;
+  	margin: 3px 1px;
+  	cursor: pointer;
+	}
+
+	table {width: 100%;}
+	textarea {width: 100%;}
+	#outter {display: block;
+		 width: 30%;
+		 margin: auto; 	
+</style>
+
+<body>
+	<div class="row">
+    <div class="col-xs-2 col-md-2"></div>
+    <div class="col-xs-8 col-md-8">
+    <h2 class="text-center">게시글 보기</h2><p>&nbsp;</p>
+    <div class="table table-responsive">
+        <table class="table">
+  
+        <tbody>
+         <tr>
+           	 <th>글번호</th>
+             <td>${board.board_no}
+             <th>조회수</th>
+             <td>${board.hit }</td>
+        </tr>
+            <tr>
+              <th>제목</th>
+              <td>${board.title}</td>
+              <th>카테고리</th>
+              <td>${board.category}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+		<div id="divTag1" class=col-lg-6>
+		<form method="post" action="updateAdminNoticeBoard" >
 		<textarea readonly="readonly" id="summernote" name="content"></textarea>
-		
-		<input id="subBtn" type="button" value="수정하기" style="float: right;" 
+		<div class="input-group mb-3">
+		<input class="btn btn-primary" type="button" value="수정하기" style="float: right;" 
 			   onclick="location.href='updateAdminNoticeBoard?board_no=${board.board_no}';"/><!--"goModify(this.form)"  -->
-		<input type="button" value="삭제" style="float: right;" onclick="del(${board.board_no})">
-		<input type="button" value="목록으로" style="float: right;"
+	
+		<input type="button" value="목록" style="float: right;"
+			   class="btn btn-primary"
 			   onclick="location.href='getAdminNoticeBoardList';">
-	</form>
-</div>
+	
+		<input class="btn btn-primary" type="button" value="삭제" style="float: right;" onclick="del(${board.board_no})">
+		</div>
+		</form>
+		</div>
 </body>
 </html>

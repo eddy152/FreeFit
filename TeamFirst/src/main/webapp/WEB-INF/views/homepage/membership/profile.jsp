@@ -64,16 +64,23 @@
 								<h6>잔여 포인트 : ${admin.all_point }</h6>
 
 							</div>
-							<div class="row exp-row">
+							<div class="row exp-row justify-content-center">
 								<c:if test="${fitList ne null}">
 									<div class="row">
 										<c:forEach var="fitness" items="${fitList}" varStatus="status">
-											<div class="card" style="width: 18rem;">
+											<div class="card m-2" style="width: 18rem;">
 												<div class="card-header">${fitness.fitness_name}</div>
 												<div class="card-body">
-													<a
-														href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}"
-														class="btn btn-primary d-flex">피트니스 홈</a>
+												<c:choose>
+													<c:when test="${fitness.active eq '1'}">
+													<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}"
+														class="btn btn-primary d-flex">피트니스 홈</a></c:when>
+													<c:when test="${fitness.active eq '0'}">
+													<a href="/spring/membership/pricing"
+														class="btn btn-primary d-flex">멤버십 등록</a>
+													</c:when>
+													</c:choose>
+													
 													<!--  -->
 												</div>
 											</div>
@@ -177,8 +184,8 @@
 						aria-labelledby="fitness-tab">
 
 
-						<ul class="nav nav-tabs justify-content-between" id="pills-tab"
-							role="tablist">
+						<ul class="nav nav-pills justify-content-between exp-row"
+							id="pills-tab" role="tablist">
 							<li class="nav-item" role="presentation"><a
 								class="nav-link active" id="pills-home-tab" data-toggle="pill"
 								href="#pills-home" role="tab" aria-controls="pills-home"
@@ -191,21 +198,40 @@
 								class="nav-link" id="fit-contact-tab" data-toggle="pill"
 								href="#pills-contact" role="tab" aria-controls="pills-contact"
 								aria-selected="false">피트니스 상세</a></li>
+
 						</ul>
 
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-home"
 								role="tabpanel" aria-labelledby="pills-home-tab">
 								<c:if test="${fitList ne null}">
-									<div class="row">
+									<div class="row justify-content-center">
 										<c:forEach var="fitness" items="${fitList}" varStatus="status">
-											<div class="card" style="width: 16rem; margin: 5px">
+										<c:choose>
+										<c:when test="${fitness.active eq '1'}">
+										<div class="card border-primary" style="width: 16rem; margin: 5px">
 												<div class="card-header">${fitness.fitness_name}</div>
 												<div class="card-body">
+													<p class="btn btn-light d-flex">멤버십 적용중</p>
 													<a name="${status.index}"
-														class="btn btn-primary d-flex p-5 mb-2 text-align toFitnessDetail">상세페이지로</a>
+														class="btn btn-primary d-flex py-2 px-5 mb-2 text-align toFitnessDetail">상세페이지</a>
 												</div>
 											</div>
+										</c:when>
+											 
+												<c:when test="${fitness.active eq '0'}">
+												<div class="card" style="width: 16rem; margin: 5px">
+												<div class="card-header">${fitness.fitness_name}</div>
+												<div class="card-body">
+													<a href="/spring/membership/pricing"
+														class="btn btn-light d-flex">멤버십 등록</a>
+													<a name="${status.index}"
+														class="btn btn-primary d-flex py-2 px-5 mb-2 text-align toFitnessDetail">상세페이지</a>
+												</div>
+											</div>
+												</c:when>
+</c:choose>
+												
 										</c:forEach>
 									</div>
 								</c:if>
@@ -345,10 +371,9 @@ fitness_id.push('${fitness.fitness_id}');
 
 
 
-
 window.onload=function(){
-	
 
+	
 
 //피트니스 등록수정폼
 var fitform='<div class="form-group row justify-content-between"><label for="fitness_name"class="col-form-label text-left">피트니스명</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="fitness_name"name="fitness_name"placeholder="피트니스명"required="required"></div></div><div class="form-group row justify-content-between"><label for="tel_number"class="col-form-label text-left">전화번호</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="tel_number"name="tel_number"placeholder="전화번호"required="required"></div></div><div class="form-group row justify-content-between"><label for="zipcode"class="col-form-label text-left">우편번호</label><div class="col-8 mb-md-2"><div class="input-group"style="margin-bottom: 20px;"><input type="number"class="form-control"id="zipcode"name="zipcode"placeholder="우편번호"required="required"><div class="input-group-append"><input class="btn btn-primary"type="button"id="execPostCode"value="우편번호 찾기"></div></div><div class="invalid-feedback">우편번호를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address"class="col-form-label text-left">주소</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address"name="address"placeholder="헬스클럽 주소"required="required"><div class="invalid-feedback">헬스클럽주소를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address_detail"class="col-form-label text-left">주소상세<span class="text-muted">(Optional)</span></label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address_detail"name="address_detail"placeholder="주소 상세"></div></div><input type="text" name="fitness_id" id="fitness_id" hidden="hidden">';
@@ -470,29 +495,34 @@ function formClick(){
 	if
 	(typeof execPostCode !=="undefined" && typeof execPostCode !=="zipcode" && typeof address !=="undefined")
 	{
-		
+	console.log('포스트코드발견');	
 	document.getElementById('execPostCode').addEventListener("click",
 			getPostcode);
 	document.getElementById('zipcode').addEventListener("click", getPostcode);
 	document.getElementById('address').addEventListener("click", getPostcode);
 	}
+	else console.log('포스트코드발견못함');	
 
 }
 
 
 
-if(window.location.hash==='#fitness-reg'){
-	document.getElementById('fit-profile-tab').click();
-	document.getElementById('fitness-tab').click();
-	document.getElementById('fit-profile-tab').click();
+</script>
+<script>
+$(document).ready(function() {
+	console.log('www');
+	if(window.location.hash=='#fitness'){
+		document.getElementById('fitness-tab').click();
+		document.getElementById('fitness-tab').click();
+		document.getElementById('fitness-tab').click();
+	console.log('www');
+	}else{console.log('bbb');}
+	});
 
-}	
+
 	
 
-
-}
 </script>
-
 <script src="/spring/resources/assets/dist/js/form-validation.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

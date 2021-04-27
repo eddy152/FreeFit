@@ -58,15 +58,37 @@
 				//}
 				frm.submit();
 			}
+			
 </script>
+<style>
+
+	div#divTag1 {
+    right: -390px;
+    margin-right: ;
+	}
+	
+	.button {
+  	background-color: #01DFD7;
+  	border: none;
+  	color: white;
+	padding: 10px 20px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 13px;
+  	margin: 3px 1px;
+  	cursor: pointer;
+	}
+	
+</style>
 </head>
 <body>
-	<h2 style="text-align: center;">글 작성</h2>
-	<br>
-	<br>
-	<br>
+	<div id="divTag1" class="col-lg-7" style="color:white; background-color:#01DFD7; padding:20px;">
+	<h2 style="text-align: center;">공지사항 작성</h2>
+	</div>
 	<div style="width: 60%; margin: auto;">
 		<form method="post" action="insertAdminNoticeBoard">
+		 	 <br>
 		 	 제목 :  <input type="text" name="title" style="width: 40%;" placeholder="제목" /><br>
 			<label for="category">카테고리 : </label>
 			<select id="category" name="category">
@@ -76,10 +98,9 @@
 			<br>
 			<textarea id="summernote" name="content"></textarea>
 	
-		<input id="subBtn" type="button" value="글작성" style="float: right;"
-				onclick="goWrite(this.form)">
-		<!-- 목록으로 -->
-      	<input type="button" value="목록으로" style="float: right;"
+		<input class="btn btn-primary" type="button" value="글작성" style="float: right;"
+			   onclick="goWrite(this.form)">
+      	<input class="btn btn-primary" type="button" value="목록으로" style="float: right;"
 			   onclick="location.href='getAdminNoticeBoardList';">
 		</form>
 	</div>

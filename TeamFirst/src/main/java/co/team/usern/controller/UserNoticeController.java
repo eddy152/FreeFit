@@ -32,7 +32,9 @@ public class UserNoticeController {
 	public String appuserNList(@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "search", required = false) String search, Model model, HttpSession session) throws Exception {
 		UserNSearch c = new UserNSearch();
-		c.setFitness_id((String) session.getAttribute("fitness_id"));
+		//c.setFitness_id((String) session.getAttribute("fitness_id"));
+		
+		c.setFitness_id(String.valueOf(session.getAttribute("fitness_id")));
 		
 		c.setPage(page - 1);
 		c.setSearch(StringUtils.isNotBlank(search) ? ("%" + StringUtils.trim(search) + "%") : null);

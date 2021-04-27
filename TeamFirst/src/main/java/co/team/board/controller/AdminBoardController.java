@@ -33,7 +33,7 @@ public class AdminBoardController {
   //섬머노트 글작성
   @GetMapping("/adminBoard")
   public String boardWrite() {
-    return "board/adminBoard";
+    return "homepage/board/adminBoard";
   }
 
   //전체조회
@@ -61,7 +61,7 @@ public class AdminBoardController {
     		    pagination.setEndPage(Math.min(pagination.getPageCnt(), page+3));
 
     		    model.addAttribute("pagination", pagination);
-    		    return "board/getAdminNoticeBoardList";
+    		    return "homepage/board/getAdminNoticeBoardList";
   }
 
   //등록
@@ -76,14 +76,14 @@ public class AdminBoardController {
   	public String getAdminNoticeBoard(Model model, @RequestParam("board_no") int board_no) {
 	  model.addAttribute("board", service.getAdminNoticeBoard(board_no));
 	  service.adminNoticeBoardHit(board_no);
-	  return "board/getAdminNoticeBoard";
+	  return "homepage/board/getAdminNoticeBoard";
   }
 
   //수정
   @GetMapping("/updateAdminNoticeBoard")
   	public String updateAdminNoticeBoard(@RequestParam("board_no") int board_no, Model model) {
 	  model.addAttribute("board", service.getAdminNoticeBoard(board_no));
-	  return "board/adminUpdateBoard";
+	  return "homepage/board/adminUpdateBoard";
   }
 
   @PostMapping("/updateAdminNoticeBoard")
