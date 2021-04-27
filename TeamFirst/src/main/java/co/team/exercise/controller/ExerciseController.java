@@ -315,9 +315,9 @@ public class ExerciseController {
 	
 	// 단건 수정
 	@PostMapping("/updateExerciseRecord")
-	public String updateExerciseRecord(ExerciseRecordVO vo) {
+	public boolean updateExerciseRecord(ExerciseRecordVO vo) {
 		service.updateExerciseRecord(vo);
-		return "redirect:/getSearchExerciseRecord";
+		return true;
 	}
 
 	// 단건 삭제

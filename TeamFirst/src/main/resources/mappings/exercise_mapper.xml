@@ -494,16 +494,10 @@
 	<!-- EXERCISE_RECORD update -->
 	<update id="updateExerciseRecord" parameterType="ExerciseRecordVO">
 		UPDATE exercise_record
-		SET exer_count = #{exer_count},
-			exer_date = #{exer_date},
-			exer_end_date = #{exer_end_date},
-			exer_weight = #{exer_weight},
+		SET exer_end_date = sysdate,
 			exer_do_count = #{exer_do_count},
-			exep_no = #{exep_no},
-			exe_no = #{exe_no},
-			epd_set = #{epd_set},
 			exer_do_set = #{exer_do_set}
-		WHERE exer_no = #{exer_no}
+		WHERE exep_no = #{exep_no}
 		AND exe_no = #{exe_no}
 		AND user_id = #{user_id}
 		AND to_char(exer_date, 'yyyy-mm-dd') = to_char(sysdate, 'yyyy-mm-dd')
