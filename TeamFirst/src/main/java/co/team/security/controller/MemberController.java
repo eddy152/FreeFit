@@ -107,7 +107,7 @@ public class MemberController {
 			
 			//오너가 아니면 로그인할때 fitness_id 값을 세션저장한다
 			if(!hasOwnerRole) {
-			session.setAttribute("fitness_id", vo.getFitness_id());}
+			session.setAttribute("fitness_id", vo.getFitness_id()); }
 			session.setAttribute("id", vo.getId());
 			return "setSession";
 		}

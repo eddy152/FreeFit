@@ -8,6 +8,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.team.food.service.FoodService_kdh;
 import co.team.food.service.FoodVO;
+import co.team.security.service.MemberVO;
 
 @Controller
 public class FoodController_kdh {
@@ -44,14 +47,6 @@ public class FoodController_kdh {
 		System.out.println("week ---" + service.getFoodWeek(vo));
 		return "program/Food/getFood";
 	}
-
-	/*
-	 * // 식단 권장량 조회(단건)
-	 * 
-	 * @RequestMapping("/getRecommendFood") public String getRecommendFood(FoodVO
-	 * vo, Model model) { model.addAttribute("rec", service.getRecommendFood(vo));
-	 * return "program/Food/getFood"; }
-	 */
 
 	// 식단 통계 조회(단건)
 	@RequestMapping("/getFoodSelect")
@@ -158,15 +153,24 @@ public class FoodController_kdh {
 
 	@RequestMapping("/Test")
 	// @ResponseBody
-	public String Test(FoodVO vo, Model model) {
+	public String Test(FoodVO vo, Model model, HttpSession session) {
+		//String id = (String) session.getAttribute("id");
+		//MemberVO user = new MemberVO();
+		//user.setId(id);
+		//user.setFitness_id(Integer.parseInt((String)session.getAttribute("fitness_id")));
+		//model.addAttribute("user", service.getEachMember(user));
+		
 		model.addAttribute("list", service.getSearchFood(vo));
 		return "app/Food/Test";
 	}
 
 	// 회원 리스트
 	@RequestMapping("/getEachMember")
-	public String getEachMember(FoodVO vo, Model model) {
-		model.addAttribute("user", service.getFood(vo));
+	public String getEachMember(FoodVO vo, Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		MemberVO user = new MemberVO();
+		user.setId(id); 
+		model.addAttribute("user", service.getEachMember(user));
 		return "app/Food/getEachMember";
 	}
 	

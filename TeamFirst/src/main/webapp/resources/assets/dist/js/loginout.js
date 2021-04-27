@@ -24,9 +24,14 @@ window.onload=function () {
                 profile.text = "마이페이지";                
                 profile.onclick=function(){
                 location.href="/spring/members/profile";
+<<<<<<< HEAD
                 console.log('aa');
                 };
+=======
+                
+>>>>>>> refs/heads/KDH
                 loginBtn.parentNode.prepend(profile);              
+                };
                 }
             }
 
