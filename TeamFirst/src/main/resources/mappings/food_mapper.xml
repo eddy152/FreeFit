@@ -18,6 +18,15 @@
 		where u.id = w.user_id(+)
 		and u.id = #{id}
 	</select>
+	
+	<!-- 해당 회원의 session -->
+	<select id="getEachMember" resultType="MemberVO" parameterType="MemberVO">
+		select u.id, u.password, u.phone_number, u.name, u.age, u.height, u.gender, u.fitness_id, u.email, w.weight, r.role_name
+		from ff_user u, user_weight w, role r
+		where u.id = w.user_id(+)
+    	and u.id = r.member_id
+		and u.id = #{id}
+	</select>
 
 	<!-- Food 식단 권장량 조회(= 각 회원 기준 권장 칼로리) -->
 	<select id="getRecommendFood" resultType="FoodVO"
@@ -92,6 +101,8 @@
 		select food_no, food_name, calorie, category, gram from food_info
 		order by food_no
 	</select>
+
+
 
 	<!-- 추천별 식단 추가 -->
 	<insert id="insertFood" parameterType="FoodVO">

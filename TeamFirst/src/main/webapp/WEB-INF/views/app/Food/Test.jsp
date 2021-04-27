@@ -5,24 +5,22 @@
 
 <div>
 
-<table class="table">
-		<tr>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>나이</th>
-			<th>성별</th>
-			<th>전화번호</th>
-			<th>식단상세</th>
-		</tr>
-		<c:forEach var="list" items="${list }">
-		<tr>
-			<td id="id">${list.id }</td>
-			<td>${list.name }</td>
-			<td>${list.age }</td>
-			<td>${list.gender }</td>
-			<td>${list.phone_number }</td>
-			<td><button type="button" class="btn btn-outline-primary" onclick="location.href='getMemberFoodList?id=${list.id}'">식단상세</button></td>
-		</tr>
-		</c:forEach>
-	</table><br>
+<h2>회원 식단 리스트</h2>
+<br>
+<c:forEach var="list" items="${list }">
+	<div class="card" style="width: 18rem;">
+	  <div class="card-body">
+	    <h5 class="card-title">${list.name }</h5>
+	  </div>
+	  <ul class="list-group list-group-flush">
+	    <li class="list-group-item">${list.name }</li>
+	    <li class="list-group-item">${list.gender }</li>
+	    <li class="list-group-item">${list.phone_number }</li>
+	  </ul>
+	  <div class="card-body">
+	    <a href="getMemberFoodList?id=${list.id}" class="card-link">식단상세</a>
+	  </div>
+	</div>
+	<br>
+</c:forEach>
 </div>

@@ -83,8 +83,8 @@
 		<table class="table table-striped">
 			<thead>
 			<tr>
-				<th scope="col" style="width:150px;">식단 번호</th>
-				<th scope="col" style="width:700px;">추천별 식단</th>
+				<th scope="col">식단 번호</th>
+				<th scope="col">추천별 식단</th>
 				<th scope="col">총 칼로리</th>
 			</tr>
 			</thead>
@@ -133,7 +133,7 @@
    		<table class="table table-striped">
    			<tr>
    				<td>식단번호</td>
-   				<td style="width:20%;">제목</td>
+   				<td>제목</td>
    				<td>식단내용</td>
    				<td>총 칼로리</td>
    			</tr>

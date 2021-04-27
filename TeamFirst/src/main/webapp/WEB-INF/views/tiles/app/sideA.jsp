@@ -21,18 +21,14 @@
 					<a class="dropdown-item" href="#">식단관리(개인용,없음)</a>
 				</div>
 			</li>  -->
+			
+			
 			<li class="nav-item">
 				<a class="nav-link" href="/spring/appNoticeList">
 					<span data-feather="user-check"></span> 유저 공지사항
 				</a>
 				<a class="nav-link" href="/spring/getAppFoodList">
 					<span data-feather="user-check"></span> 추천식단리스트
-				</a>
-				<a class="nav-link" href="/spring/Test">
-							<span data-feather="user-check"></span> 회원식단관리(트레이너용)
-				</a>
-				<a class="nav-link" href="/spring/getEachMemer">
-							<span data-feather="user-check"></span> 식단관리(개인용,없음)
 				</a>
 				<c:choose>
 					<c:when test="">
@@ -41,12 +37,19 @@
 						</a>
 					</c:when>
 					<c:when test="">
-						<a class="nav-link" href="/spring/getEachMemer">
-							<span data-feather="user-check"></span> 식단관리(개인용,없음)
+						<a class="nav-link" href="/spring/getEachMember">
+							<span data-feather="user-check"></span> 식단관리(개인용)
 						</a>
 					</c:when>
 				</c:choose>
+				<a class="nav-link" href="/spring/Test">
+					<span data-feather="user-check"></span> 회원식단관리(트레이너용)
+				</a>
+				<a class="nav-link" href="/spring/getEachMember">
+					<span data-feather="user-check"></span> 식단관리(개인용)
+				</a>
 			</li>
+			
 			<li class="nav-item">
 				<a class="nav-link" href="/spring/getSearchFFUser">
 					<span data-feather="file"></span> 회원 운동 관리(트레이너용)

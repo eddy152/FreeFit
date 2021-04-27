@@ -2,6 +2,9 @@ package co.team.food.service;
 
 import java.util.List;
 
+import co.team.security.service.MemberVO;
+import co.team.security.service.MemberVO;
+
 public interface FoodService_kdh {
 
 	// 식단 전체 리스트
@@ -9,6 +12,9 @@ public interface FoodService_kdh {
 
 	// 회원 단건 조회
 	public FoodVO getFood(FoodVO vo);
+	
+	// session 회원 단건조회
+	public MemberVO getEachMember(MemberVO vo);
 
 	// 식단 단건 조회(권장량)
 	public FoodVO getRecommendFood(FoodVO vo);

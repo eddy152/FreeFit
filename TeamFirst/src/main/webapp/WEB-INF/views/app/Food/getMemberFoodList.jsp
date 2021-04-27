@@ -7,38 +7,53 @@
 
 <div>
 	<div>
-		<h1>회원 식단</h1>
-		<input type="text" name="id" hidden="hidden" value="${food.id }">
-		<button type="button" onclick="location.href='getMemberFoodInsert?id=${food.id}'">상세보기</button>
-		<table border="1">
-			<tr>
-
-				<td>이름</td>
-				<td>${food.name }<input name="name" value="${food.id }" hidden="hidden">
-				</td>
-			</tr>
-			<tr>
-				<td>나이</td>
-				<td>${food.age }</td>
-			</tr>
-			<tr>
-				<td>성별</td>
-				<td>${food.gender }</td>
-			</tr>
-			<tr>
-				<td>키</td>
-				<td>${food.height }</td>
-			</tr>
-			<tr>
-				<td>몸무게</td>
-				<td>${food.weight }<input type="text" hidden="hidden" name="weight" value="${food.weight }">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3" style="width: 200px;"><textarea>특이사항</textarea>
-				</td>
-			</tr>
-		</table>
+		<h1>${food.name } 회원님의 식단</h1>
+		<input type="text" name="id" hidden="hidden" value="${food.id }"><br>
+		<div>
+			<button type="button" class="btn btn-outline-secondary" onclick="location.href='getMemberFoodInsert?id=${food.id}'">상세보기</button>
+		</div>
+		<br>
+		
+		<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
+		<div class="row">
+		  <div class="col">
+		    <div class="collapse multi-collapse" id="multiCollapseExample1">
+		      <div class="card card-body">      		
+				  <table class="table">
+					<tr>
+		
+						<td>이름</td>
+						<td>${food.name }<input name="name" value="${food.id }" hidden="hidden">
+						</td>
+					</tr>
+					<tr>
+						<td>나이</td>
+						<td>${food.age }</td>
+					</tr>
+					<tr>
+						<td>성별</td>
+						<td>${food.gender }</td>
+					</tr>
+					<tr>
+						<td>키</td>
+						<td>${food.height }</td>
+					</tr>
+					<tr>
+						<td>몸무게</td>
+						<td>${food.weight }<input type="text" hidden="hidden" name="weight" value="${food.weight }">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="width: 200px;"><textarea>특이사항</textarea>
+						</td>
+					</tr>
+				</table> 
+		      </div>
+		    </div>
+		  </div>
+		 </div>
+		
+		
 		
 		
 		

@@ -25,7 +25,7 @@
 <div class="whole">
 <div class="html">
 
-	<h1>회원의 식단</h1>
+	<h1>${user.id } 회원님의 식단</h1>
 	<div class="insertFood" <c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
 		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
 	</div>
@@ -478,7 +478,7 @@ var nowData='${food.diet_content}';
 		var data = google.visualization.arrayToDataTable(arr);
 	 
 	  var options = {
-			  width: '300',
+			  width: '400',
 			  height : '500',
 	          vAxis: { viewWindow: { max: 3000 } },
 	          seriesType: 'bars' };
@@ -502,7 +502,7 @@ var nowData='${food.diet_content}';
 		var data = google.visualization.arrayToDataTable(arr);
 	 
 	  var options = {
-			  width: '300',
+			  width: '400',
 			  height : '500',
 	          vAxis: { viewWindow: { max: 3000 } },
 	          seriesType: 'bars' };
@@ -614,7 +614,7 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
-								  width: '300',
+								  width: '400',
 								  height: '500',
 						          vAxis: { viewWindow: { max: 3000 } },
 						          seriesType: 'bars' };
@@ -653,7 +653,7 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
-						  width: '300',
+						  width: '400',
 						  height: '500',
 				          vAxis: { viewWindow: { max: 3000 } },
 				          seriesType: 'bars' };
@@ -772,7 +772,7 @@ var nowData='${food.diet_content}';
 						  var data = google.visualization.arrayToDataTable(arr);
 						
 						  var options = {
-								  width: '300',
+								  width: '400',
 								  height: '500',
 						          vAxis: { viewWindow: { max: 3000 } },
 						          seriesType: 'bars' };
@@ -811,7 +811,7 @@ var nowData='${food.diet_content}';
 				  var data = google.visualization.arrayToDataTable(arr);
 				
 				  var options = {
-						  width: '300',
+						  width: '400',
 						  height: '500',
 				          vAxis: { viewWindow: { max: 3000 } },
 				          seriesType: 'bars' };

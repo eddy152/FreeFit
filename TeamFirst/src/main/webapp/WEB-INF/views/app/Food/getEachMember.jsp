@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <div>
-	<div>
+	<div>${user }
 		<h1>회원 식단</h1>
 		<input type="text" name="id" hidden="hidden" value="${user.id }">
 		<button type="button" onclick="location.href='getMemberFoodInsert?id=${user.id}'">상세보기</button>
