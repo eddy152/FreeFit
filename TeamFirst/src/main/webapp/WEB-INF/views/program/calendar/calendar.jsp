@@ -3,21 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false"%>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset='utf-8' />
 <link href='./resources/Fullcalendar/main.css' rel='stylesheet' />
 <script src='./resources/Fullcalendar/main.js'></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-	crossorigin="anonymous"></script>
 <script>
 var calendar
 /*      날짜or버튼 클릭시 페이지화면 입력기능      
@@ -123,24 +111,6 @@ function date_to_str(format)
     calendar.render();
   });
 </script>
-
-
-<style>
-body {
-	margin: 40px 10px;
-	padding: 0;
-	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-	font-size: 14px;
-}
-
-#calendar {
-	max-width: 100%;
-	margin: 0 auto;
-}
-</style>
-</head>
-
-<body>
 	<div align="center">
 		<h2>트레이너 스케줄</h2>
 		<br>
@@ -181,5 +151,3 @@ body {
 			</div>
 		</div>
 	</div>
-</body>
-</html>

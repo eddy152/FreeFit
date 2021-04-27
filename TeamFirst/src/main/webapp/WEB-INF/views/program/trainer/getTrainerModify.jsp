@@ -74,7 +74,7 @@ th {
 							<table class="table table-hover">
 								<thead>
 									<tr class="dataRow">
-										<th>멤버쉽</th>
+										<th>피트니스ID</th>
 										<td><input name="fitness_id" value="${emp.fitness_id}"
 											readonly="readonly"></td>
 									</tr>

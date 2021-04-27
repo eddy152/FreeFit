@@ -57,7 +57,7 @@ public class UserNoticeController {
 		return "app/userNotice/appNoticeList";
 	}
 
-	// 단건 + 조회수
+	// 상세조회
 	@GetMapping("/appNoticeUserh")
 	public String appNoticeUserh(Model model, @RequestParam("board_no") int board_no) {
 		model.addAttribute("us", userNoticeService.appNoticeUserh(board_no));

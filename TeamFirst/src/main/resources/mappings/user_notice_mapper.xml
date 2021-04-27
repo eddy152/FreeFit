@@ -58,9 +58,9 @@
 			
 	</select>
 	
-		<select id="appNoticeUserh" parameterType="UserNoticeBoardVO" resultType="UserNoticeBoardVO">
+		<select id="appNoticeUserh" parameterType="int" resultType="UserNoticeBoardVO">
  		select * from user_notice_board
- 		where id=#{id}
+ 		where board_no=#{board_no}
 		</select>
 	
 	<select id="" 
