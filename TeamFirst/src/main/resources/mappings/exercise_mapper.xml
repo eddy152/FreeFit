@@ -10,7 +10,8 @@
 		SELECT  exe_part, 
 				exe_no,
 				exe_kinds, 
-				exe_name
+				exe_name,
+				exe_url
 		FROM exercise_list
 		WHERE exe_kinds = #{exe_kinds}
 		AND exe_part = #{exe_part}
@@ -21,7 +22,8 @@
 		SELECT  exe_part, 
 				exe_no,
 				exe_kinds, 
-				exe_name
+				exe_name,
+				exe_url
 		FROM exercise_list
 		WHERE  exe_part = #{exe_part}
 		ORDER BY exe_part
@@ -32,7 +34,8 @@
 		SELECT  exe_part, 
 				exe_no,
 				exe_kinds, 
-				exe_name
+				exe_name,
+				exe_url
 		FROM exercise_list
 		WHERE exe_no = #{exe_no}
 	</select>

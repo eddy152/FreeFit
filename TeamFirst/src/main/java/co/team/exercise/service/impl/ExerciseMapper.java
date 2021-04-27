@@ -51,7 +51,7 @@ public interface ExerciseMapper {
 	public List<ExerciseRecordVO> getSearchExerciseRecordList(ExerciseRecordVO vo);
 	public ExerciseRecordVO getExerciseRecordProc(ExerciseRecordVO vo);
 	public int insertExerciseRecord(Map<String, Object> vo);
-	public int updateExerciseRecord(ExerciseRecordVO vo);
+	public int updateExerciseRecord(Map<String, Object> vo);
 	public int deleteExerciseRecord(ExerciseRecordVO vo);
 	
 	public List<FFUserVO> getSearchFFUser(FFUserVO vo);

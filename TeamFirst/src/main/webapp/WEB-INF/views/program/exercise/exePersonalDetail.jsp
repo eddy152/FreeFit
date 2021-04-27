@@ -56,7 +56,7 @@ $(function() {
 		+ '<tr><td id="3set">3set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
 		+ '<tr><td id="4set">4set</td><td><input type="number" id=' + exeName + 'Count></td></tr>'
 		+ '<tr><td id="5set">5set</td><td><input type="number" id=' + exeName + 'Count></td></tr>');
-	})// End of set 세트수 tr, form에 보내는 방식 수정 필요
+	})// End of set
 });
 </script>
 <style type="text/css">
