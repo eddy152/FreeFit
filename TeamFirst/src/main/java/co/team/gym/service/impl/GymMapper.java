@@ -11,5 +11,5 @@ public interface GymMapper {
 	
 	public int countGymList(GymListSearch vo);
 	
-	public GymVO getGym(String id);
+	public GymVO getGym(String fitness_id);
 }

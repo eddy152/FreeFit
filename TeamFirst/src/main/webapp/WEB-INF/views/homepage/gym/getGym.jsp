@@ -59,23 +59,23 @@
 						<thead>
 						<tr>
 							<th>이름</th>
-							<td><input value="${gym.name}" readonly="readonly"></td>
+							<td>${gym.name}</td>
 						</tr>
 						<tr>
 							<th>사업자번호</th>
-							<td><input value="${gym.business_number}" readonly="readonly"></td>
+							<td>${gym.business_number}</td>
 						</tr>
 						<tr>
 							<th>매장주소</th>
-							<td><input type="text" style="width:300px; height:20px; font-size:14px;"value="${gym.address.concat(' ').concat(gym.address_detail)}" readonly="readonly"></td>
+							<td>${gym.address.concat(' ').concat(gym.address_detail)}</td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td><input value="${gym.tel_number}" readonly="readonly"></td>
+							<td>${gym.tel_number}</td>
 						</tr>
 						<tr>
 							<th>멤버십등급</th>
-							<td><input value="${gym.membership_name}" readonly="readonly"></td>
+							<td>${gym.membership_name}</td>
 						</tr>
 						<tr>
 							<th>영업시간</th>
