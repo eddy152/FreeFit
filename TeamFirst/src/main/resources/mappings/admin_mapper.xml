@@ -4,6 +4,23 @@
 <!-- users_mapper.xml -->
 <mapper namespace="co.team.admin.service.impl.AdminMapper">
 
+
+	<!-- 결제 리스트조회(admin_id/fitness_id로거름) -->
+	<select id="ownerPayments" resultType="adminVO"
+		parameterType="String">
+		select payment_number, item_name, 
+		to_char(payment_date,'YYYY-MM-DD HH24:MI:SS') as payment_date, amount, admin_id from payment
+
+		<where>
+			admin_id=#{admin_id}
+		</where>
+
+	</select>
+
+
+
+
+
 	<!-- ADMIN select 리스트 -->
 	<select id="getAdmin" resultType="adminVO"
 		parameterType="adminVO">
@@ -13,6 +30,10 @@
 	</select>
 
 
+	<select id="getPayment" resultType="int" parameterType="String">
+		select
+		count(admin_id) from payment where admin_id=#{admin_id}
+	</select>
 
 	<!-- 어드민 정보 단건조회 -->
 	<select id="getProfileInfo" resultType="adminVO"
@@ -53,7 +74,7 @@
 		select * from membership_dday
 
 		<where>
-			
+
 			<if test="admin_id !=null and admin_id !=''">
 				and admin_id=#{admin_id}
 			</if>
@@ -66,7 +87,8 @@
 	<!-- 멤버쉽 단건조회(mem_reg_id로거름) -->
 	<select id="selectedMembership" resultType="adminVO"
 		parameterType="adminVO">
-		select * from membership_reg m, fitness f where m.fitness_id=f.fitness_id
+		select * from membership_reg m, fitness f where
+		m.fitness_id=f.fitness_id
 		and m.mem_reg_id=#{mem_reg_id}
 	</select>
 
@@ -112,11 +134,14 @@
 	<insert id="addFitness" parameterType="adminVO">
 		insert into
 		fitness(fitness_id, id, tel_number, zipcode,
-		address, address_detail, fitness_name) values
+		address, address_detail,
+		fitness_name) values
 		(
 		(SELECT NVL(MAX(fitness_id)+1, 1) FROM
-		fitness), #{id}, #{tel_number}, #{zipcode},
-		#{address}, #{address_detail}, #{fitness_name}
+		fitness),
+		#{id}, #{tel_number}, #{zipcode},
+		#{address}, #{address_detail},
+		#{fitness_name}
 		)
 
 	</insert>
@@ -148,6 +173,34 @@
 
 
 	<delete id="deleteFitness" parameterType="adminVO">
-		delete from fitness where fitness_id=#{fitness_id}
+		delete from fitness
+		where fitness_id=#{fitness_id}
 	</delete>
+
+
+
+
+	<insert id="newPayment" statementType="CALLABLE"
+		parameterType="kakaoPayApprovalVO">
+		{call NEWPAYMENT
+		(
+		#{p_all_point},
+		#{partner_user_id},
+		#{partner_order_id},
+		#{tid},
+		#{tax_free_amount},
+		#{p_membership_no},
+		#{quantity},
+
+		#{p_fitness_id}
+
+
+		)}
+	</insert>
+
+
+
+
+
+
 </mapper>

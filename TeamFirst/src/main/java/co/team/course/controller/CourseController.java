@@ -36,8 +36,8 @@ public class CourseController {
 
 	// 강습등록폼
 	@GetMapping("/productWrite")
-	public String productWriteForm(Course_Info_VO vo, Model model, Course_TuitionVO vo1, TrainerVO vo2) {
-
+	public String productWriteForm(Course_Info_VO vo, Model model, Course_TuitionVO vo1, TrainerVO vo2, HttpSession session) {
+		vo2.setFitness_id(Integer.parseInt((String)session.getAttribute("fitness_id")));
 		model.addAttribute("tuit", courseService.getCourse_Tuition(vo1));
 		model.addAttribute("train", trService.getTrainerList(vo2));
 		return "program/product/productWrite";

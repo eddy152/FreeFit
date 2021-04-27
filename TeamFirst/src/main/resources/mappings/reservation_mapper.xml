@@ -41,6 +41,21 @@
 			#{content}
 		)
 	</insert>
-
+	
+	
+<!-- insertappTrainer -->	
+	<insert id="insertappTrainer" parameterType="ReservationVO">
+		INSERT INTO reservation
+		(
+			trainer_id,
+			reservation_date,
+			content
+		)
+		VALUES
+		(
+			#{trainer_id},
+			#{reservation_date}
+		)
+	</insert>
 
 </mapper> 	

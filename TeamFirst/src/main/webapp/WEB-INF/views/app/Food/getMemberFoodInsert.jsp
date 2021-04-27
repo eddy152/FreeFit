@@ -22,10 +22,10 @@
 	}
 </style>
 
-<div class="whole">
-<div class="html">
 
+<div class="cent2">
 	<h1>${user.id } 회원님의 식단</h1>
+</div>
 	<div class="insertFood" <c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
 		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
 	</div>
@@ -114,7 +114,7 @@
 		</div>
 
 	</div>
-</div>
+
 <div>
 <form class="form-inline">
 	<div id="buttons">
@@ -260,7 +260,7 @@
 		</div>
 	</div>
 </div>
-</div>
+
 <!-- Modal end -->
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>

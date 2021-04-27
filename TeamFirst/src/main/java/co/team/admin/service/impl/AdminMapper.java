@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import co.team.admin.service.AdminVO;
+import co.team.security.service.KakaoPayApprovalVO;
 
 @Repository
 public interface AdminMapper {
@@ -31,8 +32,13 @@ public interface AdminMapper {
 	public Integer updateFitness(AdminVO member); // 피트니스 업데이트
 
 	public Integer deleteFitness(AdminVO member); // 피트니스 삭제
-	
-	public List<AdminVO> ownerMemberships(AdminVO member); //멤버쉽 id로 거름
-	public AdminVO selectedMembership(AdminVO member); //멤버십 mem_reg_id 로 거름
 
+	public List<AdminVO> ownerMemberships(AdminVO member); // 멤버쉽 id로 거름
+	public List<AdminVO> ownerPayments(String id); // 멤버쉽 id로 거름
+	public AdminVO selectedMembership(AdminVO member); // 멤버십 mem_reg_id 로 거름
+
+	public int getPayment(String admin_id);
+
+	public void newPayment(KakaoPayApprovalVO vo);
+	
 }

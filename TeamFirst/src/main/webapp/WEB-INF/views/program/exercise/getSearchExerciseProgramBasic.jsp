@@ -111,6 +111,10 @@ $(function() {
 		
 		exepNo = Number($("input[name=exep_no]")[0].value);
 		userId = $("input[name=user_id]")[0].value;
+		
+		if($("#warmingUp").val() != null) {
+			arr["준비운동"] = {"epd_set":1 , "epd_count":Number($("#warmingUp").val()) , "epd_weight":0, "exe_no":0, "exep_no":exepNo, "user_id":userId };
+		}
 
 		arr[exeName] = {"epd_set":epdSet , "epd_count":epdCount , "epd_weight":epdWeight, "exe_no":exeNo, "exep_no":exepNo, "user_id":userId };
 		$("#" + exeName + "set").html("세트수 : " + epdSet + " / 설정횟수 : " + epdCount + " / 설정무게 : " + epdWeight);
@@ -120,9 +124,6 @@ $(function() {
 	
 	//버튼 클릭 이벤트(등록하기)
 	$(document).on("click", "#setExePr", function() {
-		if($("#warmingUp").val() != null) {
-			arr["준비운동"] = {"epd_set":1 , "epd_count":Number($("#warmingUp").val()) , "epd_weight":0, "exe_no":0, "exep_no":exepNo, "user_id":userId };
-		}
 			
 		if(confirm("등록하시겠습니까?")){
 			var result = JSON.stringify(arr);

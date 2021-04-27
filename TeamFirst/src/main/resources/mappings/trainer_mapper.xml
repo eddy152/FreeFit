@@ -4,6 +4,16 @@
 <!-- trainer_mapper.xml -->
 <mapper namespace="co.team.trainer.service.impl.TrainerMapper">
 
+	<select id="selectTrainer" resultType="TrainerVO"
+		    parameterType="TrainerVO">
+	
+			SELECT 
+					NAME
+					,GENDER
+			FROM 	TRAINER
+			WHERE 	FITNESS_ID = #{fitness_id}
+	</select>
+
 	<select id="getTrainerList" resultType="TrainerVO"
 		    parameterType="TrainerVO">
 	

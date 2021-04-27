@@ -13,7 +13,7 @@
 
 		<div class="row justify-content-lg-left w-100">
 
-			<div class="col-2">
+			<div class="col-2" style="height: 700px;">
 
 				<div>
 					<img class="mb-2" src="/spring/resources/images/gym.png">
@@ -66,19 +66,21 @@
 							</div>
 							<div class="row exp-row">
 								<c:if test="${fitList ne null}">
-							<div class="row">
-							<c:forEach var="fitness" items="${fitList}" varStatus="status">
-							<div class="card" style="width: 18rem;">
-									<div class="card-header"> ${fitness.fitness_name}</div>
-									<div class="card-body">
-										<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}" class="btn btn-primary d-flex">피트니스 홈</a>
-										<!--  -->
+									<div class="row">
+										<c:forEach var="fitness" items="${fitList}" varStatus="status">
+											<div class="card" style="width: 18rem;">
+												<div class="card-header">${fitness.fitness_name}</div>
+												<div class="card-body">
+													<a
+														href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}"
+														class="btn btn-primary d-flex">피트니스 홈</a>
+													<!--  -->
+												</div>
+											</div>
+										</c:forEach>
 									</div>
-								</div>
-							</c:forEach>
-								</div>	
-						</c:if>
-						<c:if test="${fitList eq null}"> 피트니스를 등록해주세요. </c:if>
+								</c:if>
+								<c:if test="${fitList eq null}"> 피트니스를 등록해주세요. </c:if>
 							</div>
 
 						</div>
@@ -173,87 +175,91 @@
 
 					<div class="tab-pane fade exp-cover" id="fitness" role="tabpanel"
 						aria-labelledby="fitness-tab">
-						
-						
-						<ul class="nav nav-tabs justify-content-between" id="pills-tab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">피트니스 목록</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="fit-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">피트니스 등록</a>
-  </li>
-  <li class="nav-item" role="presentation" hidden="hidden">
-    <a class="nav-link" id="fit-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">피트니스 상세</a>
-  </li>
-</ul>
 
-<div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-						<c:if test="${fitList ne null}">
-							<div class="row">
-							<c:forEach var="fitness" items="${fitList}" varStatus="status">
-							<div class="card" style="width: 16rem; margin: 5px">
-									<div class="card-header"> ${fitness.fitness_name}</div>
-									<div class="card-body">
-										<a name="${status.index}" class="btn btn-primary d-flex p-5 mb-2 text-align toFitnessDetail" >상세페이지로</a>
+
+						<ul class="nav nav-tabs justify-content-between" id="pills-tab"
+							role="tablist">
+							<li class="nav-item" role="presentation"><a
+								class="nav-link active" id="pills-home-tab" data-toggle="pill"
+								href="#pills-home" role="tab" aria-controls="pills-home"
+								aria-selected="true">피트니스 목록</a></li>
+							<li class="nav-item" role="presentation"><a class="nav-link"
+								id="fit-profile-tab" data-toggle="pill" href="#pills-profile"
+								role="tab" aria-controls="pills-profile" aria-selected="false">피트니스
+									등록</a></li>
+							<li class="nav-item" role="presentation" hidden="hidden"><a
+								class="nav-link" id="fit-contact-tab" data-toggle="pill"
+								href="#pills-contact" role="tab" aria-controls="pills-contact"
+								aria-selected="false">피트니스 상세</a></li>
+						</ul>
+
+						<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pills-home"
+								role="tabpanel" aria-labelledby="pills-home-tab">
+								<c:if test="${fitList ne null}">
+									<div class="row">
+										<c:forEach var="fitness" items="${fitList}" varStatus="status">
+											<div class="card" style="width: 16rem; margin: 5px">
+												<div class="card-header">${fitness.fitness_name}</div>
+												<div class="card-body">
+													<a name="${status.index}"
+														class="btn btn-primary d-flex p-5 mb-2 text-align toFitnessDetail">상세페이지로</a>
+												</div>
+											</div>
+										</c:forEach>
 									</div>
-								</div>
-							</c:forEach>
-								</div>	
-						</c:if>
-						<c:if test="${fitList eq null}"> 피트니스를 등록해주세요. </c:if>
-  </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-  
-  <form method="post" action="/spring/members/addFitness">
-							<div class="row justify-content-center">
-								<h4 class="ltitle">피트니스 등록</h4>
-
+								</c:if>
+								<c:if test="${fitList eq null}"> 피트니스를 등록해주세요. </c:if>
 							</div>
-							<div
-								class="row no-margin fitness-det justify-content-center align-items-center fitnessAdd"
-								style="min-height: 550px;">
-								
+							<div class="tab-pane fade" id="pills-profile" role="tabpanel"
+								aria-labelledby="pills-profile-tab">
+
+								<form method="post" action="/spring/members/addFitness">
+									<div class="row justify-content-center">
+										<h4 class="ltitle">피트니스 등록</h4>
+
+									</div>
+									<div
+										class="row no-margin fitness-det justify-content-center align-items-center fitnessAdd"
+										style="min-height: 550px;"></div>
+									<div class="row justify-content-center">
+
+										<div class="col-6 mt-5">
+											<button class="btn btn-primary btn-lg btn-block postFormBtn"
+												type="button">등록</button>
+										</div>
+
+
+									</div>
+								</form>
 							</div>
-							<div class="row justify-content-center">
+							<div class="tab-pane fade" id="pills-contact" role="tabpanel"
+								aria-labelledby="pills-contact-tab">
 
-								<div class="col-6 mt-5">
-									<button class="btn btn-primary btn-lg btn-block postFormBtn"
-										type="button">등록</button>
-								</div>
+								<form method="post" action="/spring/members/addFitness">
+									<div class="row justify-content-center">
+										<h4 class="ltitle">피트니스 수정</h4>
+
+									</div>
+									<div
+										class="row no-margin fitness-det justify-content-center align-items-center fitnessUpdate"
+										style="min-height: 550px;"></div>
+									<div class="row justify-content-center">
+
+										<div class="col-6 mt-5">
+											<button class="btn btn-primary btn-lg btn-block postFormBtn"
+												type="button">등록</button>
+										</div>
 
 
+									</div>
+								</form>
 							</div>
-						</form>
-  </div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-  
-  <form method="post" action="/spring/members/addFitness">
-							<div class="row justify-content-center">
-								<h4 class="ltitle">피트니스 수정</h4>
-
-							</div>
-							<div
-								class="row no-margin fitness-det justify-content-center align-items-center fitnessUpdate"
-								style="min-height: 550px;">
-								
-							</div>
-							<div class="row justify-content-center">
-
-								<div class="col-6 mt-5">
-									<button class="btn btn-primary btn-lg btn-block postFormBtn"
-										type="button">등록</button>
-								</div>
+						</div>
 
 
-							</div>
-						</form>
-  </div>
-</div>
-						
-						
-				
-						
+
+
 					</div>
 
 
@@ -262,79 +268,54 @@
 						role="tabpanel" aria-labelledby="membership-tab">
 						<div class="data-box">
 							<c:if test="${memList ne null }">
-							<table>
-							<tr><th>멤버십 번호</th><th>멤버십 등급</th><th>피트니스 번호</th><th>피트니스 이름</th>
-							<th>멤버십 시작일</th><th>멤버십 종료일</th><th>남은 날짜</th>
-							</tr>
-							<c:forEach var="mem" items="${memList}">
-							<tr>
-							<td>${mem.mem_reg_id}</td>
-							<td>${mem.membership_name }</td>
-							<td>${mem.fitness_id}</td>
-							<td>${mem.fitness_name}</td>
-							<td>${mem.membership_start }</td>
-							<td>${mem.membership_end }</td>
-							<td>${mem.dday }</td>
-							</tr>
-							</c:forEach>							
-							</table>
+								<table>
+									<tr>
+										<th>멤버십 번호</th>
+										<th>멤버십 등급</th>
+										<th>피트니스 번호</th>
+										<th>피트니스 이름</th>
+										<th>멤버십 시작일</th>
+										<th>멤버십 종료일</th>
+										<th>남은 날짜</th>
+									</tr>
+									<c:forEach var="mem" items="${memList}">
+										<tr>
+											<td>${mem.mem_reg_id}</td>
+											<td>${mem.membership_name }</td>
+											<td>${mem.fitness_id}</td>
+											<td>${mem.fitness_name}</td>
+											<td>${mem.membership_start }</td>
+											<td>${mem.membership_end }</td>
+											<td>${mem.dday }</td>
+										</tr>
+									</c:forEach>
+								</table>
 							</c:if>
 						</div>
 					</div>
 
 					<div class="tab-pane fade exp-cover" id="resume" role="tabpanel"
 						aria-labelledby="contact-tab">
-						<div class="sec-title">
-							<h2>Education Details</h2>
+						<div class="data-box">
+							<c:if test="${memList ne null }">
+								<table>
+									<tr>
+										<th>결제 번호</th>
+										<th>결제 금액</th>
+										<th>결제일</th>
+									</tr>
+									<c:forEach var="payment" items="${payments}">
+										<tr>
+											<td>${payment.payment_number}</td>
+											<td>${payment.amount}</td>
+											<td>${payment.payment_date}</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</c:if>
+
 						</div>
-						<div class="service no-margin row">
-							<div class="col-sm-3 resume-dat serv-logo">
-								<h6>2013-2015</h6>
-								<p>Master Degree</p>
-							</div>
-							<div class="col-sm-9 rgbf">
-								<h5>Cambridg University</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.</p>
-							</div>
-						</div>
-						<div class="service no-margin row">
-							<div class="col-sm-3 resume-dat serv-logo">
-								<h6>2013-2015</h6>
-								<p>Bacholers Degree</p>
-							</div>
-							<div class="col-sm-9 rgbf">
-								<h5>Anna University</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.</p>
-							</div>
-						</div>
-						<div class="service no-margin row">
-							<div class="col-sm-3 resume-dat serv-logo">
-								<h6>2013-2015</h6>
-								<p>High School</p>
-							</div>
-							<div class="col-sm-9 rgbf">
-								<h5>A.M.H.S.S</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.</p>
-							</div>
-						</div>
-						<div class="service no-margin row">
-							<div class="col-sm-3 resume-dat serv-logo">
-								<h6>2013-2015</h6>
-								<p>School</p>
-							</div>
-							<div class="col-sm-9 rgbf">
-								<h5>Anna University</h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.</p>
-							</div>
-						</div>
+
 					</div>
 
 				</div>

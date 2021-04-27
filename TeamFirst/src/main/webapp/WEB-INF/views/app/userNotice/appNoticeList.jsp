@@ -11,9 +11,38 @@
 	<div class="page-wrapper">
 		<div class="container-fluid">
 			<div class="col-lg-15">
-				<div class="col-lg-15">
-					<h2 class="page-header">앱  공지사항</h2>
-				</div>
+				
+				
+				  <div class="card card-cascade narrower">
+
+                    <!--Card header-->
+                    <div class="view view-cascade py-3 gradient-card-header info-color-dark mx-4 d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fa fa-th-large mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fa fa-columns mt-0"></i>
+                            </button>
+                        </div>
+
+                        <a href="" class="white-text mx-3">앱  공지사항</a>
+
+                        <div>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+																<i class="fas fa-pencil-alt mt-0"></i>                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-times mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fa fa-info-circle mt-0"></i>
+                            </button>
+                        </div>
+
+                    </div>
+				
+				
 								<c:forEach items="${uList}" var="us">
 							 	<span class="subject-add">
 							 		<span class="subjectin">제목 ${us.title}</span>
@@ -68,7 +97,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 </body>
 <script type="text/javascript">
 	$(function() {

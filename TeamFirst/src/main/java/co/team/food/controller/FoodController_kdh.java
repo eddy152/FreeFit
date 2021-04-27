@@ -59,7 +59,11 @@ public class FoodController_kdh {
 	@RequestMapping("/getDate")
 	@ResponseBody
 	public List<FoodVO> getDate(FoodVO vo, Model model) {
-		return service.getDate(vo);
+		List<FoodVO> list = service.getFoodWeek(vo);
+		System.out.println("list 1 ---> " + service.getFoodWeek(vo));
+		list = service.getDate(vo);
+		System.out.println("list 2 --->" + service.getDate(vo));
+		return list;
 	}
 
 	// 추천별 식단 리스트(앱)
@@ -150,10 +154,11 @@ public class FoodController_kdh {
 	@RequestMapping("/Test")
 	// @ResponseBody
 	public String Test(FoodVO vo, Model model, HttpSession session) {
-		String id = (String) session.getAttribute("id");
-		MemberVO user = new MemberVO();
-		user.setId(id);
-		model.addAttribute("user", service.getEachMember(user));
+		//String id = (String) session.getAttribute("id");
+		//MemberVO user = new MemberVO();
+		//user.setId(id);
+		//user.setFitness_id(Integer.parseInt((String)session.getAttribute("fitness_id")));
+		//model.addAttribute("user", service.getEachMember(user));
 		
 		model.addAttribute("list", service.getSearchFood(vo));
 		return "app/Food/Test";
