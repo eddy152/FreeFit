@@ -64,16 +64,23 @@
 								<h6>잔여 포인트 : ${admin.all_point }</h6>
 
 							</div>
-							<div class="row exp-row">
+							<div class="row exp-row justify-content-center">
 								<c:if test="${fitList ne null}">
 									<div class="row">
 										<c:forEach var="fitness" items="${fitList}" varStatus="status">
-											<div class="card" style="width: 18rem;">
+											<div class="card m-2" style="width: 18rem;">
 												<div class="card-header">${fitness.fitness_name}</div>
 												<div class="card-body">
-													<a
-														href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}"
-														class="btn btn-primary d-flex">피트니스 홈</a>
+												<c:choose>
+													<c:when test="${fitness.active eq '1'}">
+													<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}"
+														class="btn btn-primary d-flex">피트니스 홈</a></c:when>
+													<c:when test="${fitness.active eq '0'}">
+													<a href="/spring/membership/pricing"
+														class="btn btn-primary d-flex">멤버십 등록</a>
+													</c:when>
+													</c:choose>
+													
 													<!--  -->
 												</div>
 											</div>
@@ -177,8 +184,8 @@
 						aria-labelledby="fitness-tab">
 
 
-						<ul class="nav nav-tabs justify-content-between" id="pills-tab"
-							role="tablist">
+						<ul class="nav nav-pills justify-content-between exp-row"
+							id="pills-tab" role="tablist">
 							<li class="nav-item" role="presentation"><a
 								class="nav-link active" id="pills-home-tab" data-toggle="pill"
 								href="#pills-home" role="tab" aria-controls="pills-home"
@@ -191,21 +198,40 @@
 								class="nav-link" id="fit-contact-tab" data-toggle="pill"
 								href="#pills-contact" role="tab" aria-controls="pills-contact"
 								aria-selected="false">피트니스 상세</a></li>
+
 						</ul>
 
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-home"
 								role="tabpanel" aria-labelledby="pills-home-tab">
 								<c:if test="${fitList ne null}">
-									<div class="row">
+									<div class="row justify-content-center">
 										<c:forEach var="fitness" items="${fitList}" varStatus="status">
-											<div class="card" style="width: 16rem; margin: 5px">
+										<c:choose>
+										<c:when test="${fitness.active eq '1'}">
+										<div class="card border-primary" style="width: 16rem; margin: 5px">
 												<div class="card-header">${fitness.fitness_name}</div>
 												<div class="card-body">
+													<p class="btn btn-light d-flex">멤버십 적용중</p>
 													<a name="${status.index}"
-														class="btn btn-primary d-flex p-5 mb-2 text-align toFitnessDetail">상세페이지로</a>
+														class="btn btn-primary d-flex py-2 px-5 mb-2 text-align toFitnessDetail">상세페이지</a>
 												</div>
 											</div>
+										</c:when>
+											 
+												<c:when test="${fitness.active eq '0'}">
+												<div class="card" style="width: 16rem; margin: 5px">
+												<div class="card-header">${fitness.fitness_name}</div>
+												<div class="card-body">
+													<a href="/spring/membership/pricing"
+														class="btn btn-light d-flex">멤버십 등록</a>
+													<a name="${status.index}"
+														class="btn btn-primary d-flex py-2 px-5 mb-2 text-align toFitnessDetail">상세페이지</a>
+												</div>
+											</div>
+												</c:when>
+</c:choose>
+												
 										</c:forEach>
 									</div>
 								</c:if>
@@ -470,12 +496,13 @@ function formClick(){
 	if
 	(typeof execPostCode !=="undefined" && typeof execPostCode !=="zipcode" && typeof address !=="undefined")
 	{
-		
+	console.log('포스트코드발견');	
 	document.getElementById('execPostCode').addEventListener("click",
 			getPostcode);
 	document.getElementById('zipcode').addEventListener("click", getPostcode);
 	document.getElementById('address').addEventListener("click", getPostcode);
 	}
+	else console.log('포스트코드발견못함');	
 
 }
 
