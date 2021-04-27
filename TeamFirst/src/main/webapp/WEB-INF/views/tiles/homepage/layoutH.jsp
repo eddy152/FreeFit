@@ -22,6 +22,11 @@
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/spring/resources/assets/dist/css/pricing.css" rel="stylesheet">
 
+<style>
+{
+body{overflow: scroll;
+}
+</style>
 <!-- Custom styles for this template -->
 <!-- <link href="pricing.css" rel="stylesheet"> -->
 </head>

@@ -5,7 +5,17 @@
 <mapper namespace="co.team.admin.service.impl.AdminMapper">
 
 
+	<!-- 결제 리스트조회(admin_id/fitness_id로거름) -->
+	<select id="ownerPayments" resultType="adminVO"
+		parameterType="String">
+		select payment_number, item_name, 
+		to_char(payment_date,'YYYY-MM-DD HH24:MI:SS') as payment_date, amount, admin_id from payment
 
+		<where>
+			admin_id=#{admin_id}
+		</where>
+
+	</select>
 
 
 
@@ -21,7 +31,8 @@
 
 
 	<select id="getPayment" resultType="int" parameterType="String">
-		select count(admin_id) from payment where admin_id=#{admin_id}
+		select
+		count(admin_id) from payment where admin_id=#{admin_id}
 	</select>
 
 	<!-- 어드민 정보 단건조회 -->
@@ -173,19 +184,21 @@
 		parameterType="kakaoPayApprovalVO">
 		{call NEWPAYMENT
 		(
-#{p_all_point},
+		#{p_all_point},
 		#{partner_user_id},
 		#{partner_order_id},
 		#{tid},
 		#{tax_free_amount},
 		#{p_membership_no},
 		#{quantity},
-		
+
 		#{p_fitness_id}
 
 
 		)}
 	</insert>
+
+
 
 
 

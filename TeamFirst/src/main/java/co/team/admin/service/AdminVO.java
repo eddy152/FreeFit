@@ -45,6 +45,10 @@ public class AdminVO {
 	private Integer dday; //멤버쉽남은시간
 	private String membership_price;
 	
+	private Integer payment_number;
+	private String item_name;
+	private String payment_date;
+	private Integer amount;
 	
 	
 }

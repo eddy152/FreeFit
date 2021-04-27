@@ -25,8 +25,9 @@
                 profile.onclick=function(){
                 location.href="/spring/members/profile";
                 
-                };}
-                loginBtn.parentNode.prepend(profile);
+                };
+                loginBtn.parentNode.prepend(profile);              
+                }
             }
 
         }
