@@ -371,10 +371,9 @@ fitness_id.push('${fitness.fitness_id}');
 
 
 
-
 window.onload=function(){
-	
 
+	
 
 //피트니스 등록수정폼
 var fitform='<div class="form-group row justify-content-between"><label for="fitness_name"class="col-form-label text-left">피트니스명</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="fitness_name"name="fitness_name"placeholder="피트니스명"required="required"></div></div><div class="form-group row justify-content-between"><label for="tel_number"class="col-form-label text-left">전화번호</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="tel_number"name="tel_number"placeholder="전화번호"required="required"></div></div><div class="form-group row justify-content-between"><label for="zipcode"class="col-form-label text-left">우편번호</label><div class="col-8 mb-md-2"><div class="input-group"style="margin-bottom: 20px;"><input type="number"class="form-control"id="zipcode"name="zipcode"placeholder="우편번호"required="required"><div class="input-group-append"><input class="btn btn-primary"type="button"id="execPostCode"value="우편번호 찾기"></div></div><div class="invalid-feedback">우편번호를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address"class="col-form-label text-left">주소</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address"name="address"placeholder="헬스클럽 주소"required="required"><div class="invalid-feedback">헬스클럽주소를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address_detail"class="col-form-label text-left">주소상세<span class="text-muted">(Optional)</span></label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address_detail"name="address_detail"placeholder="주소 상세"></div></div><input type="text" name="fitness_id" id="fitness_id" hidden="hidden">';
@@ -508,18 +507,22 @@ function formClick(){
 
 
 
-if(window.location.hash==='#fitness-reg'){
-	document.getElementById('fit-profile-tab').click();
-	document.getElementById('fitness-tab').click();
-	document.getElementById('fit-profile-tab').click();
+</script>
+<script>
+$(document).ready(function() {
+	console.log('www');
+	if(window.location.hash=='#fitness'){
+		document.getElementById('fitness-tab').click();
+		document.getElementById('fitness-tab').click();
+		document.getElementById('fitness-tab').click();
+	console.log('www');
+	}else{console.log('bbb');}
+	});
 
-}	
+
 	
 
-
-}
 </script>
-
 <script src="/spring/resources/assets/dist/js/form-validation.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
