@@ -37,7 +37,6 @@ public class GymController {
 		   		pagination.setPageCnt(count / 10 + (0 < count % 10 ? 1 : 0)); // 10=페이지사이즈
 		   		pagination.setPrevPage(page-1);
 		   		pagination.setNextPage(page+1);
-		   		
 		   	 // 화면에 페이지 몇개 선택가능하게 처리할지에 따라 숫자 조정 3값)
 		   		pagination.setStartPage(Math.max(1, page-3));
 		   		pagination.setEndPage(Math.min(pagination.getPageCnt(), page+3));
