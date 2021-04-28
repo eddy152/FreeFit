@@ -23,23 +23,30 @@
 <link href="/spring/resources/assets/dist/css/pricing.css" rel="stylesheet">
 
 <style>
-{
-body{overflow: scroll;
+
+body{overflow: hidden;
+margin:0;
+width:100%;
+min-height: 1000px;
+}
+main{
+margin-top:document.getElementsByTagName('header')[0].offsetHeight;
 }
 </style>
 <!-- Custom styles for this template -->
 <!-- <link href="pricing.css" rel="stylesheet"> -->
 </head>
-<body class="d-flex flex-column h-100"> 
+<body>
 
-	<div class="container-fluid">
+
 			<tiles:insertAttribute name="header" />
 
-	<div style="margin-bottom: 120px"></div>
-			<tiles:insertAttribute name="content" />
-	<div style="margin-bottom: 120px"></div>	 	
 
-	</div>
+	<main role="main" class="main pt-xl-5">
+			<tiles:insertAttribute name="content" />	 	
+	</main>
+
+	
 			<tiles:insertAttribute name="footer" />
 
 
