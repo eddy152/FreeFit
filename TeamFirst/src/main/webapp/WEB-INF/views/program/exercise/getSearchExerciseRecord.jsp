@@ -173,7 +173,6 @@
 					 		
 					
 							var options = {
-								      height: 370,
 						    	      animation: {
 						    	        duration: 1000,
 						    	        easing: 'in'

@@ -5,6 +5,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+<style>
+	.cent {
+		margin: 45px;
+	}
+
+</style>
+
 <div>
 	<div>
 		<h1>${food.name } 회원님의 식단</h1>
@@ -14,7 +21,7 @@
 		</div>
 		<br>
 		
-		<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
+		<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">회원정보</a>
 		<div class="row">
 		  <div class="col">
 		    <div class="collapse multi-collapse" id="multiCollapseExample1">
@@ -53,19 +60,22 @@
 		  </div>
 		 </div>
 		
-		
-		
-		
-		
 	</div><br>
-	<div>
-		<button type="button" onclick="moveDate(-7)"><</button>
-		<input type="text" name="dates" value="${week[0].sysdate}">주째
-		<input type="text" hidden="hidden" id="date" value="${list[0].sysdate}">
-		<button type="button" onclick="moveDate(7)">></button>
 	</div>
+<div class="cent">
+	<form class="form-inline">
+		<button type="button" class="btn btn-light" onclick="moveDate(-7)"><</button>
+		<div class="form-group mx-sm-3 mb-2">
+		<input type="text" class="form-control" name="dates" value="${week[0].sysdate}">
+		</div>
+		<input type="text" hidden="hidden" id="date" value="${list[0].sysdate}">
+		<button type="button" onclick="moveDate(7)" class="btn btn-light">></button>
+	</form>
+</div>
+<div>
 	<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 </div>
+
 
 <script type="text/javascript">
 	google.charts.load('visualization', '1', {
@@ -100,7 +110,8 @@
 							var data = google.visualization.arrayToDataTable(arr);
 
 							var options = {
-								width: '300',
+								legend: 'bottom',
+								 width: '400',
 								height : '500',
 								vAxis : { viewWindow : { max : 3000 }
 								},

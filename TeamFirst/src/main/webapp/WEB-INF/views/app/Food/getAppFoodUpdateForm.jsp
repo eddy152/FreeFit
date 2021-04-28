@@ -159,17 +159,21 @@
 	<label for="inputEmail4">음식</label>
 	
 	<form class="form-inline">
-	<div class="addFoodInput">
+		<div class="addFoodInput">
 			<select id="foods" class="form-control">
 				<option value="">선택</option>
-				<c:forEach var="food" items="${list }">
+				<c:forEach var="food" items="${foodList }">
 					<option value="${food.calorie}">${food.food_name }</option>
 				</c:forEach>
 			</select>
+		</div>
+		<div>
 			<input type="text" id="Foodcount" class="form-control" placeholder="갯수를 입력하세요">
-		 </div>
+		</div>
+		<div>
 		<button type="button" id="addFood" class="btn btn-outline-info">+</button>
-		 </form>
+		</div>
+		</form>
 	<hr>
 	<label for="inputEmail4">음식명</label>
 	<form class="form-inline">
