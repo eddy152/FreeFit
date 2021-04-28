@@ -68,9 +68,12 @@ public class FoodController_kdh {
 
 	// 추천별 식단 리스트(앱)
 	@RequestMapping("/getAppFoodList")
-	public String getAppFoodList(FoodVO vo, Model model) {
+	public String getAppFoodList(FoodVO vo, Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		MemberVO user = new MemberVO();
+		user.setId(id); 
+		model.addAttribute("member", service.getEachMember(user));
 		model.addAttribute("list", service.getAppFoodList(vo));
-		System.out.println("list ---->" + service.getAppFoodList(vo));
 		return "app/Food/getAppFoodList";
 	}      
 
@@ -102,7 +105,9 @@ public class FoodController_kdh {
 
 	// 추천별 식단 추가 게시판(앱)
 	@GetMapping("/insertFood")
-	public String getAppFoodForm(FoodVO vo, Model model) {
+	public String getAppFoodForm(FoodVO vo, Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		model.addAttribute("id", id);
 		model.addAttribute("foodList", service.getFoodList(vo));
 		return "app/Food/getAppFoodForm";
 	}
@@ -204,7 +209,12 @@ public class FoodController_kdh {
 
 	// 해당 회원의 실제 섭취 식단 상세 및 작성 폼(앱)
 	@GetMapping("/getMemberFoodInsert")
-	public String getMemberFoodInsertForm(FoodVO vo, Model model) {
+	public String getMemberFoodInsertForm(FoodVO vo, Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		MemberVO user = new MemberVO();
+		user.setId(id); 
+		model.addAttribute("member", service.getEachMember(user));
+		
 		vo.setTake_date("sysdate");
 		List<FoodVO> fake = new ArrayList<FoodVO>();
 		FoodVO rvo= new FoodVO();
@@ -298,6 +308,7 @@ public class FoodController_kdh {
 	@RequestMapping("/updateComment")
 	@ResponseBody
 	public FoodVO updateComment(FoodVO vo) {
+		System.out.println("vo ---> " + vo);
 		service.updateComment(vo);
 		return vo;
 	}
