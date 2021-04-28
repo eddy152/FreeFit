@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 		<link rel="stylesheet" href="/spring/resources/assets/dist/css/fontawsom-all.min.css">
-		<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
+		
 
 
 
@@ -13,9 +15,11 @@
 					<div class="col-2" style="height: 700px;">
 
 						<div>
+<div class="bg-white p-2 my-2 border border-white rounded">  
 							<img class="mb-2" src="/spring/resources/images/gym.png">
-
-							<div class="mb-4">${admin.id}님</div>
+										<h6>${admin.name} 님</h6>
+										<h6>포인트 : ${admin.all_point }</h6>
+</div>
 
 
 						</div>
@@ -43,27 +47,19 @@
 
 						<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade exp-cover show active" id="profile" role="tabpanel"
-								aria-labelledby="profile-tab">
-								<div class="data-box">
-									<c:if test="${memList ne null}">
-										<c:forEach var="membership" items="${memList}">
-											<!-- select m.mem_reg_id, m.membership_no, m.membership_start,
-		m.membership_end , f.fitness_id , m.admin_id, f.fitness_name,
-		f.tel_number, f.zipcode, f.address, F.ADDRESS_DETAIL -->
-										</c:forEach>
-									</c:if>
-
-
-
-									<div class="row exp-row">
-										<h6>잔여 포인트 : ${admin.all_point }</h6>
-
+								aria-labelledby="profile-tab"  style="min-height: 600px;">
+<div class="row justify-content-center">
+										<h4 class="ltitle">메인</h4>
 									</div>
+
+								<div class="data-box">
+
+									
 									<div class="row exp-row justify-content-center">
 										<c:if test="${not empty fitList}">
-											<div class="row">
+											<div class="row"">
 												<c:forEach var="fitness" items="${fitList}" varStatus="status">
-													<div class="card m-2" style="width: 18rem;">
+													<div class="card col-4">
 														<div class="card-header">${fitness.fitness_name}</div>
 														<div class="card-body">
 															<c:choose>
@@ -83,7 +79,7 @@
 												</c:forEach>
 											</div>
 										</c:if>
-										<c:if test="${empty fitList}"> 피트니스를 등록해주세요. </c:if>
+										<c:if test="${empty fitList}"> 피트니스정보에서 피트니스를 등록해주세요. </c:if>
 									</div>
 
 								</div>
@@ -91,7 +87,7 @@
 
 
 
-							<div class="tab-pane fade exp-cover" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<div class="tab-pane fade exp-cover" id="home" role="tabpanel" aria-labelledby="home-tab"  style="min-height: 600px;">
 
 								<form method="post" action="/spring/members/updateOwner">
 									<div class="row justify-content-center">
@@ -175,8 +171,10 @@
 
 
 							<div class="tab-pane fade exp-cover" id="fitness" role="tabpanel"
-								aria-labelledby="fitness-tab">
-
+								aria-labelledby="fitness-tab"  style="min-height: 600px;">
+<div class="row justify-content-center">
+										<h4 class="ltitle">피트니스정보</h4>
+									</div>
 
 								<ul class="nav nav-pills justify-content-between exp-row" id="pills-tab" role="tablist">
 									<li class="nav-item" role="presentation"><a class="nav-link active"
@@ -196,12 +194,11 @@
 									<div class="tab-pane fade show active" id="pills-home" role="tabpanel"
 										aria-labelledby="pills-home-tab">
 										<c:if test="${fitList ne null}">
-											<div class="row justify-content-center">
+											<div class="row"> 
 												<c:forEach var="fitness" items="${fitList}" varStatus="status">
 													<c:choose>
 														<c:when test="${fitness.active eq '1'}">
-															<div class="card border-primary"
-																style="width: 16rem; margin: 5px">
+															<div class="card border-primary col-4">
 																<div class="card-header">${fitness.fitness_name}</div>
 																<div class="card-body">
 																	<p class="btn btn-light d-flex">멤버십 적용중</p>
@@ -212,7 +209,7 @@
 														</c:when>
 
 														<c:when test="${fitness.active eq '0'}">
-															<div class="card" style="width: 16rem; margin: 5px">
+															<div class="card col-4">
 																<div class="card-header">${fitness.fitness_name}</div>
 																<div class="card-body">
 																	<a href="/spring/membership/pricing"
@@ -281,28 +278,31 @@
 
 
 							<div class="tab-pane fade exp-cover" id="membership" role="tabpanel"
-								aria-labelledby="membership-tab">
-								<div class="data-box">
+								aria-labelledby="membership-tab"  style="min-height: 600px;">
+								<div class="row justify-content-center">
+										<h4 class="ltitle">멤버십내역</h4>
+									</div>
+								<div class="data-box py-lg-5">
 									<c:if test="${memList ne null }">
-										<table class="table">
+										<table class="table justify-content-center text-center">
 											<tr>
-												<th>멤버십 번호</th>
-												<th>멤버십 등급</th>
+												<th>no</th>
+												<th>등급</th>
 												<th>피트니스 번호</th>
 												<th>피트니스 이름</th>
-												<th>멤버십 시작일</th>
-												<th>멤버십 종료일</th>
-												<th>남은 날짜</th>
+												<th>시작일</th>
+												<th>종료일</th>
+												<th>남은날짜</th>
 											</tr>
-											<c:forEach var="mem" items="${memList}">
+											<c:forEach var="mem" items="${memList}" varStatus="status">
 												<tr>
-													<td>${mem.mem_reg_id}</td>
+													<td>${fn:length(memList) - status.index}</td>
 													<td>${mem.membership_name }</td>
 													<td>${mem.fitness_id}</td>
 													<td>${mem.fitness_name}</td>
 													<td>${mem.membership_start }</td>
 													<td>${mem.membership_end }</td>
-													<td>${mem.dday }</td>
+													<td>${mem.dday }일</td>
 												</tr>
 											</c:forEach>
 										</table>
@@ -311,19 +311,24 @@
 							</div>
 
 							<div class="tab-pane fade exp-cover" id="resume" role="tabpanel"
-								aria-labelledby="contact-tab">
-								<div class="data-box">
+								aria-labelledby="contact-tab" style="min-height: 600px;">
+								<div class="row justify-content-center">
+										<h4 class="ltitle">결제내역</h4>
+									</div>
+								<div class="data-box py-lg-5">
+								
 									<c:if test="${memList ne null }">
-										<table>
+										<table class="table justify-content-center text-center">
 											<tr>
-												<th>결제 번호</th>
-												<th>결제 금액</th>
+												
+												<th>no</th>
+												<th style="text-align: right !important;">결제금액(원)</th>
 												<th>결제일</th>
 											</tr>
-											<c:forEach var="payment" items="${payments}">
+											<c:forEach var="payment" items="${payments}" varStatus="status">
 												<tr>
-													<td>${payment.payment_number}</td>
-													<td>${payment.amount}</td>
+													<td>${fn:length(payments) - status.index}</td>
+													<td align="right"><fmt:formatNumber value="${payment.amount}" pattern="#,###" /></td>
 													<td>${payment.payment_date}</td>
 												</tr>
 											</c:forEach>

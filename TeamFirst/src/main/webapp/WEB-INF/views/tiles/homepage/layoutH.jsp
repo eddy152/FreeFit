@@ -17,10 +17,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <link href="/spring/resources/assets/dist/css/form-validation.css" rel="stylesheet">
 
-
 <!-- Bootstrap core CSS -->
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/spring/resources/assets/dist/css/pricing.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 
 <style>
 
