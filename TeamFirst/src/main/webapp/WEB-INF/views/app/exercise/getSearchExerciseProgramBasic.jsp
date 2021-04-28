@@ -83,7 +83,7 @@ $(function() {
 		
 		$("#exeSet").append('<input type="hidden" name=exe_no value=' + exeNo + '>');
 		$("#exeSetCount").append('<button type="button" name="setDel">삭제하기</button>'
-												+ '<button type="button" name="setSub">추가하기</button>');
+							   + '<button type="button" name="setSub">추가하기</button>');
 	})// End of set
 	
 	//버튼 클릭 이벤트(운동 목록 삭제)
@@ -264,24 +264,29 @@ ul.sub li a {
 ul.sub li:hover {
 	background: #cf0;
 }
+input {
+	border: none; 
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 	<div align="center">
 		<div style="height: 800px; width: 800px;">
-			<div id="div1" style="border: 1px solid red; float: left; padding: 10px;">
+			<div id="div1" style="float: left; padding: 10px;">
 						<nav id="topMenu">
 							<ul>
 								<li><a class="menuLink" id="가슴">가슴</a></li>
 								<li><a class="menuLink" id="등">등</a></li>
 								<li><a class="menuLink" id="이두">이두</a></li>
+							</ul>
+							<ul>
 								<li><a class="menuLink" id="삼두">삼두</a></li>
 								<li><a class="menuLink" id="하체">하체</a></li>
 								<li><a class="menuLink" id="복근">복근</a></li>
 							</ul>
 						</nav>
-				<table id="tbl1" border="1" style="height: 150px; width: 800px;">
+				<table id="tbl1" style="height: 150px; width: 800px;">
 					<tr>
 						<td>
 							<div style="float: left; width: 150px; padding: 10px;">
@@ -318,36 +323,38 @@ ul.sub li:hover {
 					</tr>
 				</table>
 			</div>
-			<div style="border: 1px solid yellow; float: left; width: 30%; padding: 10px;">
-				<table border="1">
-					<tr>
-						<th>준비 운동</th>
-					</tr>
-					<tr>
-						<td><input type="number" id="warmingUp" name="0" min="0" max="50">회
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div style="border: 1px solid red; float: left; width: 30%; padding: 10px;">
-				<form action="insertExercisePersonalDetail" id=insertExercisePersonalDetail>
-					<table border="1" id="exeNameTbl">
+			<div style="border: 1px solid;">
+				<div style="float: left; width: 30%; padding: 10px;">
+					<table border="1">
 						<tr>
-							<td>운동 목록</td><td>설정 횟수</td>
+							<th>준비 운동</th>
+						</tr>
+						<tr>
+							<td><input type="number" id="warmingUp" name="0" min="0" max="50">회
+							</td>
 						</tr>
 					</table>
-					<button type="button" id="setExePr" style="display: none;">등록하기</button>
-				</form>
-			</div>
-			<div id="divThird" style="border: 1px solid blue; float: left; width: 30%; padding: 10px;">
-				<form action="" id="exeSetCount">
-					<table border="1" id="exeSet"></table>
-					<br><input type="hidden" name="exep_no" value="${ffUser1}"><br>
-					<br><input type="hidden" name="user_id" value="${ffUser.id }"><br>
-				</form>
-				<form name="popForm">
-					<input type="hidden" name="user_id" value="${ffUser.id }" />
-				</form>
+				</div>
+				<div style="float: left; width: 30%; padding: 10px;">
+					<form action="insertExercisePersonalDetail" id=insertExercisePersonalDetail>
+						<table border="1" id="exeNameTbl">
+							<tr>
+								<td>운동 목록</td><td>설정 횟수</td>
+							</tr>
+						</table>
+						<button type="button" id="setExePr" style="display: none;">등록하기</button>
+					</form>
+				</div>
+				<div id="divThird" style="float: left; width: 30%; padding: 10px;">
+					<form action="" id="exeSetCount">
+						<table border="1" id="exeSet"></table>
+						<br><input type="hidden" name="exep_no" value="${ffUser1}"><br>
+						<br><input type="hidden" name="user_id" value="${ffUser.id }"><br>
+					</form>
+					<form name="popForm">
+						<input type="hidden" name="user_id" value="${ffUser.id }" />
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

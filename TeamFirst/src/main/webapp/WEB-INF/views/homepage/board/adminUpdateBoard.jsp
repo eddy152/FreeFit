@@ -88,9 +88,11 @@ function goModify(frm) {
 						제목 : <input type="text" name="title" style="width: 30%;" placeholder="제목" value="${board.title}"/>
 						<br><br> 
 					   <textarea id="summernote" name="content"></textarea>
-		       		   <input class="button" id="subBtn" type="button" value="수정완료" style="float: right;" onclick="goModify(this.form)"/>
-	       		       <input class="button" type="button" value="목록" style="float: right;" onclick="location.href='getAdminNoticeBoardList';">
 	  		 </form>																		
+		       		   <div>
+		       		   <input class="btn btn-primary" id="subBtn" type="button" value="수정완료" style="float: right;" onclick="goModify(this.form)"/>
+	       		       <input class="btn btn-primary" type="button" value="목록" style="float: right;" onclick="location.href='getAdminNoticeBoardList';">
+						</div>
 		</div>
 	</div>
 </body>

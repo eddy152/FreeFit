@@ -94,8 +94,9 @@
 						var exeNo = rs.exe_no;
 						var exepNo = rs.exep_no;
 						var userId = rs.user_id;
+						var exeUrl = rs.exe_url;
 						
-						arr[exeName] = {"epd_set":epdSet , "exer_count":epdCount , "exer_weight":epdWeight, "exe_no":exeNo, "exep_no":exepNo, "user_id":userId };
+						arr[exeName] = {"epd_set":epdSet , "exer_count":epdCount , "exer_weight":epdWeight, "exe_no":exeNo, "exep_no":exepNo, "user_id":userId, "exe_url":exeUrl };
 					}
 					
 					var exeStartNow = confirm( '운동을 시작하시겠습니까?' );
@@ -179,7 +180,7 @@
 					window.name = "parentForm";
 					var myForm = document.popForm;
 			        window.open("", "popForm"
-			                	, "childForm", "width=800", "height=500", "resizable = no", "scrollbars = no");
+			                	, "childForm", "width=500", "height=500", "resizable = no", "scrollbars = no");
 					myForm.action = "insertExerciseProgramPersonalForm";
 					myForm.method = "post";
 					myForm.target = "popForm";
@@ -211,6 +212,32 @@
 			
 			form.submit();
 		})
+		
+		$(document).on("click", "#goToBack", function() {
+			var form = document.createElement('form');
+			user_id = $(".user_id").val();
+			var objs;
+			var objs2;
+			
+			objs = document.createElement('input');
+			objs.setAttribute('type', 'hidden');
+			objs.setAttribute('name', 'id');
+			objs.setAttribute('value', user_id);
+			
+			objs2 = document.createElement('input');
+			objs2.setAttribute('type', 'hidden');
+			objs2.setAttribute('name', 'user_id');
+			objs2.setAttribute('value', user_id);
+			
+			form.appendChild(objs);
+			form.appendChild(objs2);
+			form.setAttribute('method', 'post');
+			form.setAttribute('action', "getFFUserProc");
+			
+			document.body.appendChild(form);
+			
+			form.submit();
+		})
 	})
 </script>
 <style type="text/css">
@@ -220,7 +247,7 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 </head>
 <body>
 	<div align="center">
-		<div id="accordion">
+		<div id="accordion" align="center">
 			<ul>
 				<li>프로그램명</li>
 				<li>유저아이디</li>
@@ -228,7 +255,6 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 				<li>등록일</li>
 				<li>열기</li>
 			</ul>
-			
 			<c:forEach items="${list}" var="list">
 				<div>
 					<ul class="exeProgram">
@@ -258,8 +284,8 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 			<form name="popForm">
 			</form>
 		</div>
-		<button onclick="history.back()">뒤로 가기</button>
-		<button type="button" id="prAdd">추가하기</button>
+		<button type="button" class="btn btn-primary" id="goToBack">뒤로 가기</button>
+		<button type="button" class="btn btn-primary" id="prAdd">추가하기</button>
 	</div>
 </body>
 </html>

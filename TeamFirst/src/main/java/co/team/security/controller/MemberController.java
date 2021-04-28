@@ -102,14 +102,18 @@ public class MemberController {
 			//오너 권한 있는지 확인
 			boolean hasOwnerRole = auth.getAuthorities().stream()
 			          .anyMatch(r -> r.getAuthority().equals("ROLE_OWNER"));
-				
+
 			MemberVO vo = mapper.getMemberById(username);
 			
 			//오너가 아니면 로그인할때 fitness_id 값을 세션저장한다
-			if(!hasOwnerRole) {
-			session.setAttribute("fitness_id", vo.getFitness_id()); }
 			session.setAttribute("id", vo.getId());
-			return "setSession";
+			if(!hasOwnerRole) {
+			session.setAttribute("fitness_id", vo.getFitness_id());
+
+			return "users";
+			
+			}
+			return "owner";
 		}
 
 	}

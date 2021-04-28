@@ -18,7 +18,12 @@
                     "width=700,height=500");
 	}
 
+	function openMap(){  
+	    window.open("https://map.naver.com/", "네이버지도", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+		}  
+
 </script>
+
 <style>
 
 	div#divTag1 {
@@ -38,7 +43,7 @@
   	margin: 3px 1px;
   	cursor: pointer;
 	}
-
+	
 </style>
 <title>getGym</title>
 </head>
@@ -59,23 +64,23 @@
 						<thead>
 						<tr>
 							<th>이름</th>
-							<td><input value="${gym.name}" readonly="readonly"></td>
+							<td>${gym.name}</td>
 						</tr>
 						<tr>
 							<th>사업자번호</th>
-							<td><input value="${gym.business_number}" readonly="readonly"></td>
+							<td>${gym.business_number}</td>
 						</tr>
 						<tr>
 							<th>매장주소</th>
-							<td><input type="text" style="width:300px; height:20px; font-size:14px;"value="${gym.address.concat(' ').concat(gym.address_detail)}" readonly="readonly"></td>
+							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type=button value="위치찾기" onclick="javascript:openMap();"></td> 
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td><input value="${gym.tel_number}" readonly="readonly"></td>
+							<td>${gym.tel_number}</td>
 						</tr>
 						<tr>
 							<th>멤버십등급</th>
-							<td><input value="${gym.membership_name}" readonly="readonly"></td>
+							<td>${gym.membership_name}</td>
 						</tr>
 						<tr>
 							<th>영업시간</th>

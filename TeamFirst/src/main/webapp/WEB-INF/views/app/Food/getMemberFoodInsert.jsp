@@ -37,7 +37,7 @@
  	 	margin-left: 0px;
  	}
  	
- 	.form-cent3 {
+ 	.contentBtn {
  		margin: auto;
  	}
  	
@@ -76,6 +76,22 @@
  	p {
  		margin: 0px;
  	}
+ 	
+ 	.deleteFood {
+ 		background-color: white;
+ 		color: #f44336;
+ 		border-radius: 4px;
+ 		border: 1px solid #f44336;
+ 		padding: 5px 10px 5px 10px;
+ 		transition-duration: 0.4s;
+ 	}
+ 	
+ 	.deleteFood:hover {
+ 		background-color: #f44336;
+ 		
+ 		
+ 	}
+ 	
 </style>
 
 
@@ -85,7 +101,13 @@
 </div>
 
 <div class="insertBtn">
-<div class="insertFood" <c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
+<c:if test="${food.diet_content eq null && member.role_name eq 'ROLE_USER'}">
+<div class="insertFood">
+		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
+</div>
+</c:if>
+
+<div class="insertFood" style="display: none;">
 		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
 </div>
 </div>
@@ -131,17 +153,17 @@
 	<p class="form-control border-0">식단번호</p>
 	<input type="text" value="${food.real_diet_no }" id="real_diet_no1" class="form-control border-0">
 	</div>
-	<div class="form-cent2">
-	<c:if test="${food.real_diet_no ne null}">
+	
+	<div class="cent-contents">
+		<div class="food_contents">${food.diet_content }</div>
+	</div>
+	<div class="contentBtn">
+	<c:if test="${food.real_diet_no ne null && member.role_name eq 'ROLE_USER'}">
 			<button type="button" id="contentUpd" class="btn btn-primary">수정</button>
 			<button type="button" id="contentDel" class="btn btn-danger">삭제</button>
 	</c:if>
 	</div>
-	<div class="form-cent3">
-			<div class="cent-contents">
-				<div class="food_contents">${food.diet_content }</div>
-	</div>
-</div>
+
 	
 <br>
 <div class="cent">
@@ -179,25 +201,26 @@
 		<div class="comments">
 			<c:forEach items="${comment }" var="comm">
 				<div class="form-inline">
-					<input type="text" class="border-0" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" style="width: 200px;">
 					<input style="display: none;" value="${comm.diet_comment }" class="hide_comment">
 					<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden">
-					<button id="updateComment" class="userCantSeeBtn">수정</button>
-					<button id="updateComment2" style="display: none;" class="userCantSeeBtn">수정</button>
-					<button id="deleteComment" class="userCantSeeBtn">삭제</button><hr><br>
+					<input type="text" class="border-0" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" style="width: 200px;">
+					<button id="updateComment" class="btn btn-primary btn-sm">수정</button>
+					<button id="updateComment2" style="display: none;" class="btn btn-primary btn-sm">수정</button>
+					<button id="deleteComment" class="btn btn-danger btn-sm">삭제</button><hr><br>
 				</div>
 			</c:forEach>
 		</div>	
 	</div>
 </c:if>
 
+<c:if test="${member.role_name eq 'ROLE_USER'}">
 <div class="user_comments">
 <c:choose>
 <c:when test="${comment ne '[]'}">
 <c:forEach items="${comment }" var="comm">
 	<div class="form-inline">
-	<input type="text" class="form-control" style="width:60px;" value="${comm.diet_comment }">
-	<input type="text" class="form-control border-0" value="${comm.comment_no }">
+	<input type="text" class="form-control" style="width:60px;" value="${comm.comment_no }">
+	<input type="text" class="form-control border-0" value="${comm.diet_comment }">
 	</div>
 	<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>	
 </c:forEach>
@@ -207,6 +230,7 @@
 </c:otherwise>
 </c:choose>
 </div>
+</c:if>
 
 <c:if test="${member.role_name ne 'ROLE_USER'}">
 <hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>
@@ -312,32 +336,43 @@
 			<div class="modal-body">
 
 
-				음식 :
-				<div class="addFoodInput">
-					<select id="foods">
-						<option value="">선택</option>
-						<c:forEach var="food" items="${foodList }">
-							<option value="${food.calorie}">${food.food_name }</option>
-						</c:forEach>
-					</select> <input type="text" id="Foodcount" value="1" readonly="readonly">개
-				</div>
-				<button type="button" class="addFood">+</button>
+		<label for="exampleFormControlInput1">음식</label>
+		<form class="form-inline">
+		<div class="addFoodInput">
+			<select id="foods" class="form-control">
+				<option value="">선택</option>
+				<c:forEach var="food" items="${foodList }">
+					<option value="${food.calorie}">${food.food_name }</option>
+				</c:forEach>
+			</select>
+		</div>&nbsp;
+		<div>
+			<input type="text" id="Foodcount" style="width: 50px;" value="1" class="form-control">
+		</div>
+		<div>
+		<button type="button" id="addFood" class="btn btn-outline-info">+</button>
+		</div>
+		</form>
 				<hr>
-				<div class="frm1">음식명 :
+				<label for="exampleFormControlInput1">음식명</label>
+				<div class="frm1">
+				<form class="form-inline my-2 my-lg-0">
 						<c:if test="${detail ne null }">
 							 <div class="foods">
 							 <c:forEach items="${detail}" var="detail">
 								<div class="each_food">
-									<input type="text" name="detail_food" value="${detail.detail_food}">
-									<input type="text" name="detail_calorie" value="${detail.detail_calorie}" hidden="hidden">
-									<input type="text" name="detail_count" onchange="change(this)" value="${detail.detail_count}">개
+									<input type="text" class="form-control mr-sm-2" name="detail_food" value="${detail.detail_food}">
+									<input type="text" class="form-control mr-sm-2" name="detail_calorie" value="${detail.detail_calorie}" hidden="hidden">
+									<input type="text" class="form-control mr-sm-2" name="detail_count" onchange="change(this)" value="${detail.detail_count}">
 									<button type="button" class="deleteFood">-</button><br>
 								</div>
 							 </c:forEach>
 							</div>
 						</c:if>
+				</form>
 				</div>
-				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"><br>
+				<label for="exampleFormControlInput1">총 칼로리</label>
+				<input type="text" name="total_calorie1" value="${food.calorie }" class="form-control"><br>
 
 				<form action="updateCalorie" method="post" class="frm">
 					<input type="text" name="total_calorie" hidden="hidden">
@@ -386,7 +421,7 @@ window.onload= function() {
 	
 	// + 클릭 시 하단의 div 태그에 음식, 수량 추가
 	$(document).ready(function() {
-		$('.addFood').click(function() {
+		$('#addFood').click(function() {
 			var selectFood = $('#foods option:selected').val();
 			var count = $('#Foodcount').val();
 			var selectFoodName = $('option:selected').text();
@@ -469,14 +504,17 @@ window.onload= function() {
 	$(document).ready(function() {
 		$(document).on('click', '.deleteFood', function() {
 			var selectFood = $(this).siblings().eq(1).val(); // 칼로리
-			//console.log($(this).siblings().eq(2).val());
+			console.log($(this).siblings().eq(2).val());
 			var count = $(this).siblings().eq(2).val(); // 갯수
-			
+			console.log(count);
 			var result = TotalCalorie(selectFood, count); // 칼로리 * 갯수
+			console.log(result);
 			var calorie = $('input:text[name="total_calorie1"]').val(); // 총 칼로리
+			console.log(calorie);
 			$('input:text[name="total_calorie1"]').val(parseInt(calorie) - parseInt(result));				
 			
-			$(this).closest('div.foods').remove();
+			//$(this).closest('div.foods').remove();
+			console.log($(this).closest('div.each_food').remove());
 			
 		});
 	});
@@ -634,7 +672,7 @@ window.onload= function() {
 			type: 'get',
 			success: function drawChart(result) {
 			
-			if(result.real_diet_no == null) {
+			if(result.real_diet_no == null && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 				$('.insertFood').show();
 				$('.contentBtn').find('button').remove();
 			}
@@ -642,7 +680,7 @@ window.onload= function() {
 
 			if(result.detail_content != null) {
 				var contents = result.detail_content.split("/");
-			$('.foods').remove();
+				$('.foods').remove();
 			for(i=0; i<contents.length; i++) {
 				var contents2 = contents[i].split(",");
 				
@@ -678,11 +716,12 @@ window.onload= function() {
 				dataType: 'json',
 				type: 'get',
 				success : function(response) {
-				console.log(response.length);
+				console.log(response)
 				  $('.comments').empty();
 				  $('.user_comments').empty();
 				  if(response.length == 0) {
-						console.log(response.length);
+						console.log(response.length)
+					
 						$('.user_comments').append(
 							'<div>' +'댓글이 없습니다.' + '</div>'
 						);
@@ -821,7 +860,7 @@ window.onload= function() {
 			type: 'get',
 			success: function drawChart(result) {
 			
-			if(result.real_diet_no == null) {
+			if(result.real_diet_no == null && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 				$('.insertFood').show();
 				$('.contentBtn').find('button').remove();
 			}
@@ -829,7 +868,7 @@ window.onload= function() {
 
 			if(result.detail_content != null) {
 				var contents = result.detail_content.split("/");
-			$('.foods').remove();
+				$('.foods').remove();
 			for(i=0; i<contents.length; i++) {
 				var contents2 = contents[i].split(",");
 				

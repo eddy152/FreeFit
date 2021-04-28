@@ -20,13 +20,13 @@
 	<select id="rememberId" resultType="memberVO"
 		parameterType="memberVO">
 
-		select id from allid where name =#{name} and phone_number=#{phone_number}
+		select id from (select id,rownum from allid where name =#{name} and phone_number=#{phone_number}) where rownum=1
 
 	</select>
 	<select id="getAllBy" resultType="memberVO"
 		parameterType="memberVO">
 
-		select * from allid 
+		select * from(select tblname, id, password, phone_number,name, email, fitness_id, rownum from allid 
 		<where>
 		<if test="name !=null and name !='' and !name.equals('undefined')">
 		and name =#{name}
@@ -37,7 +37,8 @@
 		<if test="phone_number !=null and phone_number !='' and !phone_number.equals('undefined')">
 		and phone_number =#{phone_number}
 		</if>
-		</where>
+		</where>) where rownum=1
+		
 
 	</select>
 	

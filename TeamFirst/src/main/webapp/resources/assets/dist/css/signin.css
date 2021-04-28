@@ -42,7 +42,7 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-
+/* 
 .btn-primary{color:#e8f2a7;background-color:#74d2ff;border-color:#d2ebb8}
 .btn-primary:hover{color:#74d2ff;background-color:#f4ffaf;border-color:#74d2ff}
 
@@ -68,3 +68,4 @@ body {
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus,
 .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
 .show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem #cceca9}
+ */

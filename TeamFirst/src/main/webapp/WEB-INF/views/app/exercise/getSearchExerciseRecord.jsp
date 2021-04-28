@@ -16,6 +16,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
+	var user_id = $("#user_id").val();
+
 	var today = new Date();   
 	
 	var year = today.getFullYear(); // 년도
@@ -27,6 +29,8 @@
 	drawChart();
 	
 	$(function () {
+		user_id = $("#user_id").val();
+		
 		$("#datepicker").datepicker({ onSelect: function(dateText) {  
 				selDate = dateText;
 				drawChart();
@@ -73,7 +77,7 @@
 					var arr = [];
 					
 					$.ajax({
-			        	url: "getExerciseRecordPartCount?user_id=lee&selDate=" + selDate,
+			        	url: "getExerciseRecordPartCount?user_id=" + user_id + "&selDate=" + selDate,
 			        	success: function(result) {
 				 			for(o of result) {
 				 					arr.push( { "direction":o.exe_part, "value":o.exe_part_count } );
@@ -91,8 +95,8 @@
 					series.dataFields.valueY = "value";
 					series.dataFields.categoryX = "direction";
 					series.name = "Wind direction";
-					series.strokeWidth = 3;
-					series.fillOpacity = 0.2;
+					//series.strokeWidth = 3;
+					//series.fillOpacity = 0.2;
 				}); // end drawChart2	
 				
 				am4core.ready(function() {
@@ -107,7 +111,7 @@
 					var acRate = 0;
 					
 					$.ajax({
-				    	url: "getSearchExerciseRecordBetween?user_id=lee&selDate=" + selDate,
+				    	url: "getSearchExerciseRecordBetween?user_id=" + user_id + "&selDate=" + selDate,
 				      	success: function(result) {
 							for(o of result) {
 									setExe = o.exer_count * o.epd_set;
@@ -166,7 +170,7 @@
 					var arr = [];
 			        
 			        $.ajax({
-			        	url: "getSearchExerciseRecordOneDay?user_id=lee&selDate=" + selDate,
+			        	url: "getSearchExerciseRecordOneDay?user_id=" + user_id + "&selDate=" + selDate,
 			        	success: function(result) {
 				 			for(o of result) {
 					 			arr.push( [ o.exe_name, o.exe_time ] );
@@ -243,7 +247,7 @@
 					var arr = [];
 					        
 			        $.ajax({
-			        	url: "getSearchExerciseRecordOneDay?user_id=lee&selDate=" + selDate,
+			        	url: "getSearchExerciseRecordOneDay?user_id=" + user_id + "&selDate=" + selDate,
 			        	success: function(result) {
 				 			for(o of result) {
 				 				arr.push( { "exeName":o.exe_name, "운동 시간(분)":o.exe_time, "운동 시간(분)":o.exe_time } );
@@ -324,7 +328,7 @@
 					var acRate = 0;
 					
 					$.ajax({
-				    	url: "getSearchExerciseRecordOneDay?user_id=lee&selDate=" + selDate,
+				    	url: "getSearchExerciseRecordOneDay?user_id=" + user_id + "&selDate=" + selDate,
 				      	success: function(result) {
 							for(o of result) {
 								setExe = o.exer_count * o.epd_set;
@@ -376,7 +380,30 @@
 					circle.strokeWidth = 3;
 				}); //end drawChart6
 			}
-	    
+	$(document).on("click", "#backBtn", function() {
+		var form = document.createElement('form');
+		var objs;
+		var objs2;
+		
+		objs = document.createElement('input');
+		objs.setAttribute('type', 'hidden');
+		objs.setAttribute('name', 'id');
+		objs.setAttribute('value', user_id);
+		
+		objs2 = document.createElement('input');
+		objs2.setAttribute('type', 'hidden');
+		objs2.setAttribute('name', 'user_id');
+		objs2.setAttribute('value', user_id);
+		
+		form.appendChild(objs);
+		form.appendChild(objs2);
+		form.setAttribute('method', 'post');
+		form.setAttribute('action', "getFFUserProc");
+		
+		document.body.appendChild(form);
+		
+		form.submit();
+	})
 </script>
 <style type="text/css">
 	html,body {width:100%;margin:0px;padding:0px;font-family:sans-serif;}
@@ -396,6 +423,7 @@
 			<li>
 				<div id="wrap">
 					<h6>${id}님의 운동 기록입니다.</h6>
+					<input type="hidden" id="user_id" value="${id}">
 					<div id="datepicker" style="display: inline-block;" class="box"></div>
 				</div>
 			</li>
@@ -435,6 +463,7 @@
 				</div>
 			</li>
 		</ul>
+		<button type="button" class="btn btn-primary" id="backBtn">뒤로 가기</button>
 	</div>
 </body>
 </html>
