@@ -65,11 +65,10 @@ public class MembershipController {
 
 	@PostMapping("/kakaoPay")
 	public String kakaoPayget(KakaoNeedInfoVO kakaoVo, HttpServletRequest request, HttpSession session) {
-
-		if (memberService.getProfileInfo((String) session.getAttribute("id")).getAll_point() >= kakaoVo
+		String admin_id = (String) session.getAttribute("id");
+		if (memberService.getProfileInfo(admin_id).getAll_point() >= kakaoVo
 				.getAll_point()) {
-			System.out.println(kakaoVo);
-			String admin_id = (String) session.getAttribute("id");
+			
 			int payNo = memberService.getPayment(admin_id);
 			kakaoVo.setPartner_order_id(admin_id + "_" + kakaoVo.getFitness_name() + "_" + payNo);
 			kakaoVo.setPartner_user_id(admin_id);
@@ -111,7 +110,7 @@ public class MembershipController {
 
 		// 정보 담아서 리턴
 		model.addAttribute("info", approvalvo);
-		return "homepage/membership/kakaoPaySuccess";
+		return "popup/membership/kakaoPaySuccess";
 	}
 	// 결제후페이지
 
