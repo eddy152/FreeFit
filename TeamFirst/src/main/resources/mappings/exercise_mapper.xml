@@ -291,7 +291,8 @@
 				p.epd_count,
 				p.epd_weight,
 				p.user_id,
-				e.exe_name
+				e.exe_name,
+				e.exe_url
 		FROM exe_personal_detail p, exercise_list e
 		WHERE p.exe_no = e.exe_no
 		AND exep_no = #{exep_no}
@@ -427,7 +428,7 @@
 		      e.exe_no,
 		      e.epd_set,
 		      e.exer_do_set,
-		      e.exer_url,
+		      l.exe_url,
 		      l.exe_name,
               l.exe_part
 		FROM exercise_record e, exercise_list l
@@ -479,7 +480,8 @@
 			exer_weight,
 			exep_no,
 			exe_no,
-			epd_set
+			epd_set,
+			exe_url
 		)
 		VALUES
 		(
@@ -490,7 +492,8 @@
 			#{exer_weight},
 			#{exep_no},
 			#{exe_no},
-			#{epd_set}
+			#{epd_set},
+			#{exe_url}
 		)
 	</insert>
 	

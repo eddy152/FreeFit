@@ -34,5 +34,5 @@ public class ExerciseRecordVO {
 	int exe_part_count;
 	int exe_time;
 	String selDate;
-	String exer_url;
+	String exe_url;
 }

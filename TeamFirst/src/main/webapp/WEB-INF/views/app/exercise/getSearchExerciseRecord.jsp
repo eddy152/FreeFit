@@ -1,18 +1,20 @@
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<%@ page contentType="text/html;charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript">
 	var today = new Date();   
 	
@@ -376,66 +378,63 @@
 			}
 	    
 </script>
-<title>ExerciseRecord</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<style>
-.container {
-	display: grid;
-	grid-template-rows: 400px 400px 400px;
-	grid-template-columns: 500px 400px 400px;
-	grid-gap: 5px;
-}
-.ui-datepicker{ font-size: 20px; }
-#wrap{
-    width:100%;
-    height:100%;
-    position:relative;
-} 
-#wrap .box{ 
-    position:absolute;
-    left:50%;
-    top:50%;
-    margin-left:-200px;
-    margin-top:-130px;
-}
-
+<style type="text/css">
+	html,body {width:100%;margin:0px;padding:0px;font-family:sans-serif;}
+	ul, li{margin:0;padding:0;list-style:none} .container{width:100%;max-width:1400px;margin:0 auto;overflow:hidden;}
+	.gallery{margin:50px -20px;box-sizing:border-box;}
+	.gallery:after{content:"";display:block;clear:both;visibility: hidden;}
+	.gallery li{width:20%;float:left;box-sizing:border-box;padding:0 20px;margin:0 0 50px 0;}
+	@media (max-width:1200px){ .container .gallery li{width:100%;height: 100%;} }
+	@media (max-width:768px){ .container .gallery li{width:100%;height: 100%;} }
+	@media (max-width:560px){ .container .gallery li{width:100%;height: 100%;} }
+	@media (max-width:480px){ .container .gallery li{width:100%;height: 100%;} }
 </style>
 </head>
 <body>
 	<div class="container">
-		<div id="wrap">
-			<div id="datepicker" style="display: inline-block;" class="box"></div>
-		</div>
-		
-		<div>
-			<h3>월간 부위별 운동 분석(횟수)</h3>
-			<div id="drawChart2" style="height: 90%;"></div>
-		</div>
-		
-		<div>
-			<h3>주간 운동부위 상세</h3>
-			<div id="drawChart3" style="height: 90%;"></div>
-		</div>
-		
-		<div>
-			<h3>일간 운동 시간(분)</h3>
-			<div id="drawChart4"></div>
-			<div style="text-align: center;">
-				<button type="button" id="b1">Previous</button>
-				<button type="button" id="b2">Next</button>
-				<button type="button" id="b3">Change Zoom</button>
-			</div>
-		</div>
-		
-		<div>
-			<h3>일간 운동 시간(분)</h3>
-			<div id="drawChart5" style="height: 90%;"></div>
-		</div>
-		
-		<div>
-			<h3>일간 운동부위 상세</h3>
-			<div id="drawChart6" style="height: 90%;"></div>
-		</div>
+		<ul class="gallery">
+			<li>
+				<div id="wrap">
+					<h6>${id}님의 운동 기록입니다.</h6>
+					<div id="datepicker" style="display: inline-block;" class="box"></div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<h6>월간 부위별 운동 분석(횟수)</h6>
+					<div id="drawChart2" style="width: 100%;"></div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<h6>주간 운동부위 상세</h6>
+					<div id="drawChart3" style="width: 100%;"></div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<h6>일간 운동 시간(분)</h6>
+					<div id="drawChart4" style="width: 100%;"></div>
+					<div style="text-align: center;">
+						<button type="button" id="b1">Previous</button>
+						<button type="button" id="b2">Next</button>
+						<button type="button" id="b3">Change Zoom</button>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<h6>일간 운동 시간(분)</h6>
+					<div id="drawChart5" style="width: 100%;"></div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<h6>일간 운동부위 상세</h6>
+					<div id="drawChart6" style="width: 100%;"></div>
+				</div>
+			</li>
+		</ul>
 	</div>
 </body>
 </html>
