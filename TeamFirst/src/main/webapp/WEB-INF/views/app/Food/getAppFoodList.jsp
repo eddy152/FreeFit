@@ -11,6 +11,15 @@
 	btn.btn-primary.btn-lg {
 		right: 0;	
 	}
+	
+	.tbl-size {
+		width : 390px;
+	}
+	
+	.font-table {
+		font-size: 12px;
+		width : 390px;
+	}
 </style>
 <script type="text/javascript">
 
@@ -79,7 +88,7 @@
 <div>
 <h1>추천별 식단</h1>
 <br>
-	<div class="table">
+	<div class="tbl-size">
 		<table class="table table-striped">
 			<thead>
 			<tr>
@@ -109,9 +118,11 @@
 		</table>
 	</div>
 	<br>
+	<c:if test="${member.role_name ne 'ROLE_USER'}">
 	<div>
-		<button type="button" class="btn btn-primary btn-lg" onclick="location.href='insertFood'">추가하기</button>
+		<button type="button" class="btn btn-primary btn-md" onclick="location.href='insertFood'">추가하기</button>
 	</div>
+	</c:if>
 </div>
 <br>
 <div>
@@ -129,12 +140,12 @@
         </button>
       </div>
       <div class="modal-body">
-        
-   		<table class="table table-striped">
+        <div class="font-table">
+   		<table class="table">
    			<tr>
-   				<td>식단번호</td>
+   				<td>번호</td>
    				<td>제목</td>
-   				<td>식단내용</td>
+   				<td>내용</td>
    				<td>총 칼로리</td>
    			</tr>
    			<tr>
@@ -144,11 +155,14 @@
    				<td id="total_calorie"></td>
    			</tr>
    		</table>
+        </div>
         
       </div>
       <div class="modal-footer">
+      <c:if test="${member.role_name ne 'ROLE_USER'}">
         <button type="button" class="btn btn-primary" onclick="insertFoodForm()">수정하기</button>
         <button type="button" class="btn btn-danger" onclick="deleteFood()">삭제하기</button>
+      </c:if>
         <button class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>

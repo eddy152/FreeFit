@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <style type="text/css">
+
+	
 	#buttons {
 		float: right;	}
 		
@@ -22,7 +23,7 @@
 	}
 	
 	.cent {
- 		margin: auto;
+ 		margin: 45px;
  	}
  	
  	.cent2 {
@@ -33,11 +34,16 @@
  		margin: auto;
  	}
  	.form-cent2 {
- 	 	margin: auto;
+ 	 	margin-left: 0px;
  	}
  	
- 	#insertBtn {
- 		float: right;
+ 	.contentBtn {
+ 		margin: auto;
+ 	}
+ 	
+ 	.insertBtn {
+ 		margin-right: 0px;
+ 		margin-top: 30px;
  	}
  	
  	#input-comment {
@@ -51,15 +57,62 @@
  		border: 3px solid #555;
  	}
  	
+ 	#com_btn {
+ 		border-radius: 4px;
+ 		background-color: #f44336;
+ 		color : white;
+ 		border: 0px;
+ 		padding: 5px;
+ 	}
+ 	
+ 	.cent3 {
+ 		margin: 75px;
+ 	}
+ 	
+ 	.comments {
+ 		margin-left: 50px;
+ 	}
+ 	
+ 	p {
+ 		margin: 0px;
+ 	}
+ 	
+ 	.deleteFood {
+ 		background-color: white;
+ 		color: #f44336;
+ 		border-radius: 4px;
+ 		border: 1px solid #f44336;
+ 		padding: 5px 10px 5px 10px;
+ 		transition-duration: 0.4s;
+ 	}
+ 	
+ 	.deleteFood:hover {
+ 		background-color: #f44336;
+ 		
+ 		
+ 	}
+ 	
 </style>
 
 
 <div class="cent2">
 	<h1>${user.id } 회원님의 식단</h1>
+	<input type="text" name="role_exist" hidden="hidden" value="${member.role_name }">
 </div>
-	<div class="insertFood" id="insertBtn"<c:if test="${food.diet_content ne null }"> style="display: none;"</c:if> >
+
+<div class="insertBtn">
+<c:if test="${food.diet_content eq null && member.role_name eq 'ROLE_USER'}">
+<div class="insertFood">
 		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
 </div>
+</c:if>
+
+<div class="insertFood" style="display: none;">
+		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
+</div>
+</div>
+
+	
 	<br>
 	<div class="row">
 		<input type="text" name="id" value="${user.id }" hidden="hidden">
@@ -93,28 +146,24 @@
 					name="weight" value="${user.weight }">
 				</td>
 			</tr>
-			<tr>
-				<td colspan="3" style="width: 200px;"><textarea>특이사항</textarea>
-				</td>
-			</tr>
 		</table>
 	</div>
 	<br>
-	<div class="row">
+	<div class="row" style="display: none;">
 	<p class="form-control border-0">식단번호</p>
 	<input type="text" value="${food.real_diet_no }" id="real_diet_no1" class="form-control border-0">
 	</div>
-	<div class="form-cent2">
-			<div class="cent-contents">
-				<div class="food_contents">${food.diet_content }</div>
-				<div class="contentBtn">
-					<c:if test="${food.real_diet_no ne null}">
-						<button type="button" id="contentUpd" class="btn btn-primary">수정</button>
-						<button type="button" id="contentDel" class="btn btn-danger">삭제</button>
-					</c:if>
-				</div>
-			</div>
-</div>
+	
+	<div class="cent-contents">
+		<div class="food_contents">${food.diet_content }</div>
+	</div>
+	<div class="contentBtn">
+	<c:if test="${food.real_diet_no ne null && member.role_name eq 'ROLE_USER'}">
+			<button type="button" id="contentUpd" class="btn btn-primary">수정</button>
+			<button type="button" id="contentDel" class="btn btn-danger">삭제</button>
+	</c:if>
+	</div>
+
 	
 <br>
 <div class="cent">
@@ -131,8 +180,8 @@
 	<div id="columnchart_material"></div>
 	
 </div>
-<div class="cent2">
-		<div class="form-inline">
+<div class="cent3">
+		<div class="row">
 		<c:choose>
 			<c:when test="${food.calorie ne null }">
 				<input type="text" value="${food.calorie }" class="form-control" readonly="readonly" name="calorie_total">
@@ -144,28 +193,55 @@
 			<button type="button" id="calorieBtn" class="btn btn-outline-primary">등록</button>
 		</div>
 </div>	
-<hr>
+
+<p>댓글</p>
+<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>
+<c:if test="${member.role_name ne 'ROLE_USER'}">
 	<div>
 		<div class="comments">
 			<c:forEach items="${comment }" var="comm">
 				<div class="form-inline">
-					<input type="text" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" style="width: 200px;"> 
-					<textarea class="hide_comment" style="display: none;" rows="3">${comm.diet_comment }</textarea>
+					<input type="text" class="border-0" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" style="width: 200px;">
+					<input style="display: none;" value="${comm.diet_comment }" class="hide_comment">
 					<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden">
-					<button id="updateComment" class="btn btn-primary">수정</button>
-					<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>
-					<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>
+					<button id="updateComment" class="btn btn-primary btn-sm">수정</button>
+					<button id="updateComment2" style="display: none;" class="btn btn-primary btn-sm">수정</button>
+					<button id="deleteComment" class="btn btn-danger btn-sm">삭제</button><hr><br>
 				</div>
 			</c:forEach>
 		</div>	
 	</div>
-<hr>
-<form>
+</c:if>
+
+<c:if test="${member.role_name eq 'ROLE_USER'}">
+<div class="user_comments">
+<c:choose>
+<c:when test="${comment ne '[]'}">
+<c:forEach items="${comment }" var="comm">
 	<div class="form-inline">
-		<input type="text" name="diet_comment" id="input-comment">
-		<button type="button" onclick="comment()">댓글</button><!--  class="btn btn-outline-warning" -->
+	<input type="text" class="form-control" style="width:60px;" value="${comm.diet_comment }">
+	<input type="text" class="form-control border-0" value="${comm.comment_no }">
+	</div>
+	<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>	
+</c:forEach>
+</c:when>
+<c:otherwise>
+	댓글이 없습니다.
+</c:otherwise>
+</c:choose>
+</div>
+</c:if>
+
+<c:if test="${member.role_name ne 'ROLE_USER'}">
+<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>
+<form style="float: right;">
+	<div class="form-inline">
+		<input type="text" name="diet_comment" id="input-comment">&nbsp;
+		<button type="button" class="btn btn-primary btn-sm" onclick="comment()">post</button><!--  class="btn btn-outline-warning" -->
 	</div>
 </form>
+</c:if>
+
 
 <!-- 식단 작성하기 Modal start -->
 <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -260,32 +336,43 @@
 			<div class="modal-body">
 
 
-				음식 :
-				<div class="addFoodInput">
-					<select id="foods">
-						<option value="">선택</option>
-						<c:forEach var="food" items="${foodList }">
-							<option value="${food.calorie}">${food.food_name }</option>
-						</c:forEach>
-					</select> <input type="text" id="Foodcount" value="1" readonly="readonly">개
-				</div>
-				<button type="button" class="addFood">+</button>
+		<label for="exampleFormControlInput1">음식</label>
+		<form class="form-inline">
+		<div class="addFoodInput">
+			<select id="foods" class="form-control">
+				<option value="">선택</option>
+				<c:forEach var="food" items="${foodList }">
+					<option value="${food.calorie}">${food.food_name }</option>
+				</c:forEach>
+			</select>
+		</div>&nbsp;
+		<div>
+			<input type="text" id="Foodcount" style="width: 50px;" value="1" class="form-control">
+		</div>
+		<div>
+		<button type="button" id="addFood" class="btn btn-outline-info">+</button>
+		</div>
+		</form>
 				<hr>
-				<div class="frm1">음식명 :
+				<label for="exampleFormControlInput1">음식명</label>
+				<div class="frm1">
+				<form class="form-inline my-2 my-lg-0">
 						<c:if test="${detail ne null }">
 							 <div class="foods">
 							 <c:forEach items="${detail}" var="detail">
 								<div class="each_food">
-									<input type="text" name="detail_food" value="${detail.detail_food}">
-									<input type="text" name="detail_calorie" value="${detail.detail_calorie}" hidden="hidden">
-									<input type="text" name="detail_count" onchange="change(this)" value="${detail.detail_count}">개
+									<input type="text" class="form-control mr-sm-2" name="detail_food" value="${detail.detail_food}">
+									<input type="text" class="form-control mr-sm-2" name="detail_calorie" value="${detail.detail_calorie}" hidden="hidden">
+									<input type="text" class="form-control mr-sm-2" name="detail_count" onchange="change(this)" value="${detail.detail_count}">
 									<button type="button" class="deleteFood">-</button><br>
 								</div>
 							 </c:forEach>
 							</div>
 						</c:if>
+				</form>
 				</div>
-				총 칼로리 : <input type="text" name="total_calorie1" value="${food.calorie }"><br>
+				<label for="exampleFormControlInput1">총 칼로리</label>
+				<input type="text" name="total_calorie1" value="${food.calorie }" class="form-control"><br>
 
 				<form action="updateCalorie" method="post" class="frm">
 					<input type="text" name="total_calorie" hidden="hidden">
@@ -300,6 +387,8 @@
 	</div>
 </div>
 
+<sec:authorize></sec:authorize>
+
 <!-- Modal end -->
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
@@ -308,6 +397,18 @@
 
 <script type="text/javascript">
 var nowData='${food.diet_content}';
+	
+
+window.onload= function() {
+<sec:authorize access="hasRole('ROLE_USER')">
+	document.querySelectorAll('.userCantSeeBtn')
+		.forEach(function(r){
+			r.remove();
+			console.log(r);
+		})
+	</sec:authorize>
+}
+
 	
 	//해당 음식과 갯수로 인한 칼로리 계산
 	function TotalCalorie(a, b) {
@@ -320,7 +421,7 @@ var nowData='${food.diet_content}';
 	
 	// + 클릭 시 하단의 div 태그에 음식, 수량 추가
 	$(document).ready(function() {
-		$('.addFood').click(function() {
+		$('#addFood').click(function() {
 			var selectFood = $('#foods option:selected').val();
 			var count = $('#Foodcount').val();
 			var selectFoodName = $('option:selected').text();
@@ -403,14 +504,17 @@ var nowData='${food.diet_content}';
 	$(document).ready(function() {
 		$(document).on('click', '.deleteFood', function() {
 			var selectFood = $(this).siblings().eq(1).val(); // 칼로리
-			//console.log($(this).siblings().eq(2).val());
+			console.log($(this).siblings().eq(2).val());
 			var count = $(this).siblings().eq(2).val(); // 갯수
-			
+			console.log(count);
 			var result = TotalCalorie(selectFood, count); // 칼로리 * 갯수
+			console.log(result);
 			var calorie = $('input:text[name="total_calorie1"]').val(); // 총 칼로리
+			console.log(calorie);
 			$('input:text[name="total_calorie1"]').val(parseInt(calorie) - parseInt(result));				
 			
-			$(this).closest('div.foods').remove();
+			//$(this).closest('div.foods').remove();
+			console.log($(this).closest('div.each_food').remove());
 			
 		});
 	});
@@ -568,7 +672,7 @@ var nowData='${food.diet_content}';
 			type: 'get',
 			success: function drawChart(result) {
 			
-			if(result.real_diet_no == null) {
+			if(result.real_diet_no == null && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 				$('.insertFood').show();
 				$('.contentBtn').find('button').remove();
 			}
@@ -576,7 +680,7 @@ var nowData='${food.diet_content}';
 
 			if(result.detail_content != null) {
 				var contents = result.detail_content.split("/");
-			$('.foods').remove();
+				$('.foods').remove();
 			for(i=0; i<contents.length; i++) {
 				var contents2 = contents[i].split(",");
 				
@@ -612,22 +716,50 @@ var nowData='${food.diet_content}';
 				dataType: 'json',
 				type: 'get',
 				success : function(response) {
-				
+				console.log(response)
 				  $('.comments').empty();
+				  $('.user_comments').empty();
+				  if(response.length == 0) {
+						console.log(response.length)
+					
+						$('.user_comments').append(
+							'<div>' +'댓글이 없습니다.' + '</div>'
+						);
+					}
+				  if($('input:text[name="role_exist"]').val() == 'ROLE_USER') {
+					  for(i=0; i<response.length; i++) {
+						  
+						if(response.length != 0) {
+							console.log(response.length);					
+						  $('.user_comments').append(
+							'<div class="form-inline">'
+							+ '<input type="text" class="form-control" style="width:60px;" value="' + response[i].comment_no + '">'
+							+ '<input type="text" class="form-control border-0" value="' + response[i].diet_comment + '">'
+							+ '</div>'
+							+ '<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>'
+						  );
+						}
+					  }
+					  
+					  
+				  // ROLE_USER IF END
+				  } else {
+				
 				  for(i=0; i<response.length; i++) {
 					  $('.comments').append(
 						  '<div class="form-inline">'
-						  + '<input type="text" class="form-control" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
-						  + '<textarea class="hide_comment" style="display: none;" rows="3">' + response[i].diet_comment + '</textarea>'
+						  + '<input type="text" class="border-0" value="' + response[i].diet_comment + '" style="width: 200px;" name="comment_upd" readonly="readonly">'
+						  + '<input style="display: none;" value="' + response[i].diet_comment +'"class="hide_comment" style="width: 200px;">'
 						  + '<input type="text" class="form-control" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
-						  + '<button id="updateComment" class="btn btn-primary">수정</button>'
-						  + '<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>'
-						  + '<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>'
+						  + '<button id="updateComment" class="btn btn-primary btn-sm">수정</button>'
+						  + '<button id="updateComment2" style="display: none;" class="btn btn-primary btn-sm">수정</button>'
+						  + '<button id="deleteComment" class="btn btn-danger btn-sm">삭제</button><br><br>'
 						  + '</div>'
 					  );
-				  }
+				}
+			}
 				  
-			  },
+		  },
 				error: function() {
 					alert('ERROR');
 			  }
@@ -728,7 +860,7 @@ var nowData='${food.diet_content}';
 			type: 'get',
 			success: function drawChart(result) {
 			
-			if(result.real_diet_no == null) {
+			if(result.real_diet_no == null && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 				$('.insertFood').show();
 				$('.contentBtn').find('button').remove();
 			}
@@ -736,7 +868,7 @@ var nowData='${food.diet_content}';
 
 			if(result.detail_content != null) {
 				var contents = result.detail_content.split("/");
-			$('.foods').remove();
+				$('.foods').remove();
 			for(i=0; i<contents.length; i++) {
 				var contents2 = contents[i].split(",");
 				
@@ -772,22 +904,50 @@ var nowData='${food.diet_content}';
 				dataType: 'json',
 				type: 'get',
 				success : function(response) {
-				
+				console.log(response)
 				  $('.comments').empty();
+				  $('.user_comments').empty();
+				  if(response.length == 0) {
+						console.log(response.length)
+					
+						$('.user_comments').append(
+							'<div>' +'댓글이 없습니다.' + '</div>'
+						);
+					}
+				  if($('input:text[name="role_exist"]').val() == 'ROLE_USER') {
+					  for(i=0; i<response.length; i++) {
+						  
+						if(response.length != 0) {
+							console.log(response.length);					
+						  $('.user_comments').append(
+							'<div class="form-inline">'
+							+ '<input type="text" class="form-control" style="width:60px;" value="' + response[i].comment_no + '">'
+							+ '<input type="text" class="form-control border-0" value="' + response[i].diet_comment + '">'
+							+ '</div>'
+							+ '<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>'
+						  );
+						}
+					  }
+					  
+					  
+				  // ROLE_USER IF END
+				  } else {
+				
 				  for(i=0; i<response.length; i++) {
 					  $('.comments').append(
 						  '<div class="form-inline">'
-						  + '<input type="text" class="form-control" value="' + response[i].diet_comment + '" name="comment_upd" readonly="readonly">'
-						  + '<textarea class="hide_comment" style="display: none;" rows="3">' + response[i].diet_comment + '</textarea>'
+						  + '<input type="text" class="border-0" value="' + response[i].diet_comment + '" style="width: 200px;" name="comment_upd" readonly="readonly">'
+						  + '<input style="display: none;" value="' + response[i].diet_comment +'"class="hide_comment" style="width: 200px;">'
 						  + '<input type="text" class="form-control" value="' + response[i].comment_no + '" name="comment_no" hidden="hidden">'
-						  + '<button id="updateComment" class="btn btn-primary">수정</button>'
-						  + '<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>'
-						  + '<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>'
+						  + '<button id="updateComment" class="btn btn-primary btn-sm">수정</button>'
+						  + '<button id="updateComment2" style="display: none;" class="btn btn-primary btn-sm">수정</button>'
+						  + '<button id="deleteComment" class="btn btn-danger btn-sm">삭제</button><br><br>'
 						  + '</div>'
 					  );
-				  }
+				}
+			}
 				  
-			  },
+		  },
 				error: function() {
 					alert('ERROR');
 			  }
@@ -889,19 +1049,37 @@ var nowData='${food.diet_content}';
 			dataType: 'json',
 			type: 'post',
 			success: function(response) {
-				console.log(response.comment_no);
 				alert('성공!');
 
-				$('.comments').append(
-				 	  '<div class="form-inline">'
-					+ '<input type="text" class="form-control" name="comment_upd" value="'+ response.diet_comment +'">'
-					+ '<input type="text" class="form-control" value="' + response.comment_no + '" name="comment_no" hidden="hidden">'
-					+ '<textarea class="hide_comment" style="display: none;" rows="3">' + response.diet_comment + '</textarea>'
-					+ '<button id="updateComment" class="btn btn-primary">수정</button>'
-					+ '<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>'
-					+ '<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>'
-					+ '</div>'
-				);
+				if($('input:text[name="role_exist"]').val() == 'ROLE_USER') {
+						  
+					
+						  $('.user_comments').append(
+							'<div class="form-inline">'
+							+ '<input type="text" class="form-control" style="width:60px;" value="' + response.comment_no + '">'
+							+ '<input type="text" class="form-control border-0" value="' + response.diet_comment + '">'
+							+ '</div>'
+							+ '<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>'
+						  );
+
+					 
+				  // ROLE_USER IF END
+				  } else {
+	
+					  $('.comments').append(
+						  '<div class="form-inline">'
+						  + '<input type="text" class="border-0" value="' + response.diet_comment + '" style="width: 200px;" name="comment_upd" readonly="readonly">'
+						  + '<input style="display: none;" value="' + response.diet_comment +'"class="hide_comment" style="width: 200px;">'
+						  + '<input type="text" class="form-control" value="' + response.comment_no + '" name="comment_no" hidden="hidden">'
+						  + '<button id="updateComment" class="btn btn-primary btn-sm">수정</button>'
+						  + '<button id="updateComment2" style="display: none;" class="btn btn-primary btn-sm">수정</button>'
+						  + '<button id="deleteComment" class="btn btn-danger btn-sm">삭제</button><br><br>'
+						  + '</div>'
+					  );
+	
+			}
+
+				  
 				
 				$('input:text[name="diet_comment"]').val('');
 			},
@@ -919,36 +1097,53 @@ var nowData='${food.diet_content}';
 				$(this).closest('div').children('input').hide();
 				$(this).closest('div').children('#updateComment').hide();
 				$(this).closest('div').children('#updateComment2').show();
-				$(this).closest('div').children('textarea').show();
+				$(this).parent().find('.hide_comment').show();
+				console.log($(this).parent().find('.hide_comment').val());
 
 		});
 	});
 	
 	$(document).ready(function() {
 		$(document).on('click', '#updateComment2', function(e) {
-			
+			console.log($(this).closest('div').children('input')[2].value);
+			console.log($(this).parent().find('.hide_comment').val());
 			if(confirm('수정하시겠습니까?')) {
 			$(this).closest('div').hide();
 				
 			$.ajax({
 				url: 'updateComment',
-				data: { comment_no : $(this).closest('div').children('input')[1].value,
-						diet_comment : $(this).closest('div').children('textarea').val()
+				data: { comment_no : $(this).closest('div').children('input')[2].value,
+						diet_comment : $(this).parent().find('.hide_comment').val()
 				},
 				dataType: 'json',
 				type: 'post',
-				success : function(e) {
+				success : function(response) {
 					alert('성공');
-					$('.comments').append(
+					console.log(response.diet_comment);
+					if($('input:text[name="role_exist"]').val() == 'ROLE_USER') {
+					
+							  $('.user_comments').append(
+								'<div class="form-inline">'
+								+ '<input type="text" class="form-control" style="width:60px;" value="' + response.comment_no + '">'
+								+ '<input type="text" class="form-control border-0" value="' + response.diet_comment + '">'
+								+ '</div>'
+								+ '<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>'
+							  );				 
+					  // ROLE_USER IF END
+					  } else {
+
+						  $('.comments').append(
 							  '<div class="form-inline">'
-							+ '<input type="text" class="form-control" name="comment_upd" value="'+ e.diet_comment +'">'
-							+ '<input type="text" class="form-control" value="' + e.comment_no + '" name="comment_no" hidden="hidden">'
-							+ '<textarea class="hide_comment" style="display: none;" rows="3">' + e.diet_comment + '</textarea>'
-							+ '<button id="updateComment" class="btn btn-primary">수정</button>'
-							+ '<button id="updateComment2" style="display: none;" class="btn btn-outline-primary">수정</button>'
-							+ '<button id="deleteComment" class="btn btn-outline-danger">삭제</button><br><br>'
-							+ '</div>'
-						);
+							  + '<input type="text" class="border-0" value="' + response.diet_comment + '" style="width: 200px;" name="comment_upd" readonly="readonly">'
+							  + '<input style="display: none;" value="' + response.diet_comment +'"class="hide_comment" style="width: 200px;">'
+							  + '<input type="text" class="form-control" value="' + response.comment_no + '" name="comment_no" hidden="hidden">'
+							  + '<button id="updateComment" class="btn btn-primary btn-sm">수정</button>'
+							  + '<button id="updateComment2" style="display: none;" class="btn btn-primary btn-sm">수정</button>'
+							  + '<button id="deleteComment" class="btn btn-danger btn-sm">삭제</button><br><br>'
+							  + '</div>'
+						  );
+					}
+
 				},
 				error: function() {
 					alert('ERROR!');
@@ -967,7 +1162,7 @@ var nowData='${food.diet_content}';
 				$(this).closest('div').remove();
 			 $.ajax({
 				url: 'deleteComment',
-				data: { comment_no : $(this).closest('div').children('input')[1].value }, // no , comment
+				data: { comment_no : $(this).closest('div').children('input')[2].value }, // no , comment
 				dataType: 'json',
 				type: 'post',
 				success : function() {

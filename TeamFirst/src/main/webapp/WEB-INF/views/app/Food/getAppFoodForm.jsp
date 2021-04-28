@@ -12,6 +12,10 @@
 		width: 70px;
 	}
 	
+	.frm2 {
+	float:left
+	}
+	
 </style>
 <script type="text/javascript">
 	
@@ -39,7 +43,7 @@
 				console.log(calorie);
 				if(calorie == '' || calorie == '0') {
 					$('.frm1').append(
-							'<div>' +
+							'<div class="frm2">' +
 							'<input type="text" class="form-control" name="food_name" value="' 
 							+ selectFoodName 
 							+ '">' 
@@ -63,7 +67,7 @@
 					} else {
 						if(i == length -1) {
 							$('.frm1').append(
-								'<div>' +
+								'<div class="frm2">' +
 								'<input type="text" name="food_name" class="form-control"  value="' 
 								+ selectFoodName 
 								+ '">' 
@@ -94,7 +98,7 @@
 	
 	// - 클릭시 해당 음식명, 갯수 input 태그가 삭제됨
 	$(document).ready(function() {
-		$(document).on('click', '.deleteFood', function() {
+		$(document).on('click', '#deleteFood', function() {
 			var selectFood = $(this).siblings().eq(1).val(); // 칼로리
 			var count = $(this).siblings().eq(2).val(); // 갯수
 			
@@ -150,12 +154,11 @@
 	
 </script>
 <div>
-
 	<h1>식단 추가하기</h1>
 	<br><br>
 	<label for="inputEmail4">제목</label><input type="text" id="diet_title1" class="form-control"><br>
 	<label for="inputEmail4">작성자</label>
-	<input type="text" id="trainer_id1" class="form-control"><br>
+	<input type="text" id="trainer_id1" value="${id }" class="form-control"><br>
 	<label for="inputEmail4">음식</label>
 		<form class="form-inline">
 		<div class="addFoodInput">
@@ -165,9 +168,13 @@
 					<option value="${food.calorie}">${food.food_name }</option>
 				</c:forEach>
 			</select>
+		</div>
+		<div>
 			<input type="text" id="Foodcount" class="form-control" placeholder="갯수를 입력하세요">
 		</div>
+		<div>
 		<button type="button" id="addFood" class="btn btn-outline-info">+</button>
+		</div>
 		</form>
 	<hr>
 	<label for="inputEmail4">음식명</label>
@@ -177,7 +184,7 @@
 	</form>
  	<hr>
 		<label for="inputEmail4">총 칼로리</label>
-		<input type="text" name="total_calorie1" class="form-control">
+		<input type="text" name="total_calorie1" class="form-control" value="0">
 		<br>
 		<br>
 		<button type="button" onclick="Click()" class="btn btn-outline-primary">등록</button>&nbsp;
