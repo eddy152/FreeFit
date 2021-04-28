@@ -162,17 +162,20 @@ if (typeof id !== "undefined") {
     id.addEventListener('focusout', (event) => {
     
     if(event.target.value.length>4){
+    loadingModal(); 
+    $('#Loadingmodal').modal('show');
         console.log(event.target.value);
         let url = "/spring/members/checkId?";
         url += event.target.name + "=" + event.target.value;
         console.log(url);
         fetch(url, { method: 'GET' }).then(response => response.text()
             .then(function (text) {
+            $('#Loadingmodal').modal('hide');
 
                 if (text == document.querySelector("#id").value) {
                     document.getElementById('id').value = "";
                     alert("이미 존재하는 아이디입니다");
-                }
+                } else alert("사용할 수 있는 아이디입니다");
 
             }))
    }
