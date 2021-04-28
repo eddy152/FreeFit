@@ -180,7 +180,7 @@
 	<!-- 실제 섭취 식단 내용 등록 -->
 	<insert id="insertImg" parameterType="FoodVO">
 		insert into real_diet (real_diet_no, user_id, take_date, diet_content, calorie, detail_content)
-		values(REAL_FOOD.nextval, #{id}, #{take_date}, #{diet_content}, 0, '')
+		values(REAL_FOOD.nextval, #{id}, to_date(#{take_date}, 'yyyy-MM-dd'), #{diet_content}, 0, '')
 	</insert>
 	
 	<!-- 이미지 경로명 diet_content에 수정 -->
