@@ -51,16 +51,15 @@ th {
 </head>
 <body>
 	<div class="page-wrapper">
-		<div class="container-fluid">
-			<div class="col-lg-15">
-				<div align="center">
-					<h2>수강회원 리스트</h2>
+		<div class="row justify-content-center">
+			<div class="col-lg-10" id="divTag1">
+				<div class="col justify-content-center mb-4 text-center">
+					<h1 align="center" class="page-header">수강회원 리스트</h1>
 				</div>
-				<div class="panel panel-default">
-					<div align="center" class="panel-body">
+				<div class="row">
 						<table class="table table-hover">
 							<thead>
-								<tr class="dataRow">
+								<tr class="bg-secondary text-white text-center">
 									<th>수강번호</th>
 									<th>유저ID</th>
 									<th>강의번호</th>
@@ -72,9 +71,9 @@ th {
 							<tbody>
 								<c:forEach items="${memList}" var="mem">
 									<tr class="dataRow">
-										<td>${mem.course_reg_no}</td>
-										<td>${mem.user_id}</td>
-										<td>${mem.tuition_no}</td>
+										<td class="text-center">${mem.course_reg_no}</td>
+										<td class="text-center">${mem.user_id}</td>
+										<td class="text-center">${mem.tuition_no}</td>
 										<td><fmt:formatDate value="${mem.start_date}"
 												pattern="yyyy-MM-dd" /></td>
 										<td><fmt:formatDate value="${mem.end_date}"
@@ -86,12 +85,10 @@ th {
 						</table>
 					</div>
 				</div>
-				<div class="row">
 					<div class="col-lg-12">
 						<input type="button" value="수강회원 등록" style="float: right;"
-							class="btn btn-primary" onclick="location.href='#';">
+							class="btn btn-dark" onclick="location.href='#';">
 					</div>
-				</div>
 				<!--row 끝 -->
 			</div>
 		</div>

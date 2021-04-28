@@ -63,11 +63,18 @@ th {
 </style>
 </head>
 <body>
-	<div class="container my-3">
-		<h2>상품(강습정보) 페이지</h2>
+	<div class="page-wrapper">
+		<div class="row justify-content-center">
+			<div class="col-lg-10" id="divTag1">
+				<div class="col justify-content-center mb-4 text-center">
+					<h1 align="center" class="page-header">강습 페이지</h1>
+					<p class="text-center">상품(강습)등록페이지 입니다.</p>
+				</div>
+				
+				<div class="row">
 		<table class="table table-hover">
 			<thead>
-				<tr>
+				<tr class="bg-secondary text-white text-center">
 					<th>강습번호</th>
 					<th>강습명</th>
 					<th>강습시작일</th>
@@ -86,15 +93,17 @@ th {
 						<td><fmt:formatDate pattern="yyyy-MM-dd" type="BOTH" value="${cor.end_date}"/></td>
 						<td>${cor.trainer_id}</td>
 						<td>${cor.limit}</td>
-						<td align="left"><input class="btn btn-primary" type="button" value="강습수정" onclick="location.href='productUpdate?course_no=${cor.course_no}'" >
-										<input class="btn btn-primary" type="button" value="강습삭제" onclick="location.href='proDel?course_no=${cor.course_no}'" id="proDel" >
+						<td align="left"><input class="btn btn-dark" type="button" value="강습수정" onclick="location.href='productUpdate?course_no=${cor.course_no}'" >
+										<input class="btn btn-dark" type="button" value="강습삭제" onclick="location.href='proDel?course_no=${cor.course_no}'" id="proDel" >
 						</td>			
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		</div>
+		</div>
 		<!-- button -->
-		<input class="btn btn-primary" type="button" value="강습등록" onclick="location.href='productWrite' " style="float: right">
 	</div>
+		<input class="btn btn-dark" type="button" value="강습등록" onclick="location.href='productWrite' " style="float: right">
 </body>
 </html>
