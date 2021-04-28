@@ -40,7 +40,12 @@
 <style>
 
 	div#divTag1 {
-    right: -100px;
+    right: -500px;
+    margin-right: ;
+	}
+	
+	div#divTag2 {
+    right: -350px;
     margin-right: ;
 	}
 	
@@ -62,15 +67,17 @@
 	#outter {display: block;
 		 width: 30%;
 		 margin: auto; 	
+	}
+	
 </style>
 
 <body>
 	<div class="row">
-    <div class="col-xs-2 col-md-2"></div>
-    <div class="col-xs-8 col-md-8">
-    <h2 class="text-center">게시글 보기</h2><p>&nbsp;</p>
+    <div class="col-xs-2 col-md-1"></div>
+    <div id="divTag2" class="col-xs-8 col-md-6">
+    <!-- <h2 class="text-center">게시글상세보기</h2><p>&nbsp;</p> -->
     <div class="table table-responsive">
-        <table class="table">
+        <table class="table" style="color:white; background-color:#01DFD7; padding:20px;">
   
         <tbody>
          <tr>
@@ -79,12 +86,12 @@
              <th>조회수</th>
              <td>${board.hit }</td>
         </tr>
-            <tr>
+        <tr>
               <th>제목</th>
               <td>${board.title}</td>
               <th>카테고리</th>
               <td>${board.category}</td>
-            </tr>
+        </tr>
         </tbody>
     </table>
     </div>
@@ -92,7 +99,7 @@
     </div>
 		<div id="divTag1" class=col-lg-6>
 		<form method="post" action="updateAdminNoticeBoard" >
-		<textarea readonly="readonly" id="summernote" name="content"></textarea>
+		<div class="row" style="height: 600px; padding: 20PX;">${board.content}</div> 
 		<div class="input-group mb-3">
 		<input class="btn btn-primary" type="button" value="수정하기" style="float: right;" 
 			   onclick="location.href='updateAdminNoticeBoard?board_no=${board.board_no}';"/><!--"goModify(this.form)"  -->
