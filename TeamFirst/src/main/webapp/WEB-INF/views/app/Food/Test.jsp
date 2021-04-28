@@ -3,51 +3,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-<div class="row mb-5">
+<div>
 <h2>회원 식단 리스트</h2>
 </div>
-<div class="row">
-
 <br>
-<c:forEach var="list" items="${list }">
-	<div class="card" style="width: 100%;">
-	  <div class="card-body">
-	    <a href="getMemberFoodList?id=${list.id}" class="card-link">${list.name }</a>
-	  </div>
-	  
-	</div>
-	<br>
-</c:forEach>
 
-
+<div>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">이름</th>
+      <th scope="col">나이</th>
+      <th scope="col">성별</th>
+      <th scope="col">번호</th>
+      <th scope="col">상세</th>
     </tr>
   </thead>
   <tbody>
+  <c:forEach var="list" items="${list }">
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td>${list.name }</td>
+      <td>${list.age }</td>
+      <c:if test="${list.gender eq '1' }">
+      <td>남자</td>
+      </c:if>
+      <c:if test="${list.gender eq '2' }">
+      <td>여자</td>
+      </c:if>
+      <c:if test="${list.gender ne '2' && list.gender ne '1' }">
+      <td>X</td>
+      </c:if>
+      <td>${list.phone_number }</td>
+      <td><a href="getMemberFoodList?id=${list.id}">상세보기</a>
+      </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    </c:forEach>
   </tbody>
 </table>
 </div>

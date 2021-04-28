@@ -11,6 +11,15 @@
 	btn.btn-primary.btn-lg {
 		right: 0;	
 	}
+	
+	.tbl-size {
+		width : 390px;
+	}
+	
+	.font-table {
+		font-size: 12px;
+		width : 390px;
+	}
 </style>
 <script type="text/javascript">
 
@@ -79,7 +88,7 @@
 <div>
 <h1>추천별 식단</h1>
 <br>
-	<div class="table">
+	<div class="tbl-size">
 		<table class="table table-striped">
 			<thead>
 			<tr>
@@ -131,8 +140,8 @@
         </button>
       </div>
       <div class="modal-body">
-        
-   		<table class="table table-striped">
+        <div class="font-table">
+   		<table class="table">
    			<tr>
    				<td>번호</td>
    				<td>제목</td>
@@ -146,6 +155,7 @@
    				<td id="total_calorie"></td>
    			</tr>
    		</table>
+        </div>
         
       </div>
       <div class="modal-footer">
