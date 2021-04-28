@@ -69,7 +69,7 @@
 			<div class="row justify-content-center">
 
 				<!-- novalidate =<form> 태그의 novalidate 속성은 폼 데이터(form data)를 서버로 제출할 때 해당 데이터의 유효성을 검사하지 않음을 명시합니다. -->
-				<form class="needs-validation was-validated col-8" method="post" action="/spring/members/joinU" novalidate>
+				<form class="needs-validation col-8" method="post" action="/spring/members/joinU" novalidate>
 					<!-- action="/members/joinA" -->
 					
 						<div class="row justify-content-lg-center">

@@ -5,36 +5,30 @@
 	rel="stylesheet">
 
 
-
-<div class="container justify-content-center">
+<div class="container justify-content-center my-lg-4">
 	<div class="py-3 px-3 text-center">
-		<h4 class="mb-3">주문/결제</h4>
+		<h2 class="mb-3">주문/결제</h2>
 	</div>
-	<form action="kakaoPay" method="post">
+	<form action="kakaoPay" method="post" id="kakaoPayForm">
 		<div class="row mx-lg-5 ">
-			<div class="col-md-5 order-md-2 mb-4">
+			<div class="col-md-5 order-md-2">
 				<label for="paydetail">결제상세</label>
 
-				<ul class="list-group mb-3" id="paydetail">
+				<ul class="list-group " id="paydetail"> 
 
-					<li class="list-group-item d-flex justify-content-between"><span>상품금액(원)</span><input
-						type="text" class="form-control col-md-5 border-0 text-right "
+					<li class="list-group-item d-flex justify-content-between h-100"><span class="col-md-7 align-self-center text-left">상품금액(원)</span><input
+						type="text" class="form-control col-md-5 border-0 text-right pt-lg-2 mt-xl-2"
 						id="pre_amount" name="pre_amount"  min="0"></li>
-
-					<li class="list-group-item d-flex justify-content-between"><span>포인트(원)</span><input
-						type="text" class="form-control col-md-5 border-0 text-right"
+					<li class="list-group-item d-flex justify-content-between h-100"><span class="col-md-7 align-self-center text-left">포인트(원)</span><input
+						type="text" class="form-control col-md-5 border-0 text-right pt-lg-2 mt-xl-2"
 						id="all_point" name="all_point" value="0" readonly="readonly"
-						min="0"></li>
-
-
-
-					<li class="list-group-item d-flex justify-content-between"><span>총액(원)</span><input
-						type="text" class="form-control col-md-5 border-0 text-right"
+						min="0"></li> 
+ 
+					<li class="list-group-item d-flex justify-content-between h-100"><span class="col-md-7 align-self-center text-left">총액(원)</span><input
+						type="text" class="form-control col-md-5 border-0 text-right pt-lg-2 mt-xl-2"
 						id="total_amount" name="total_amount" readonly="readonly" min="0"></li>
 				</ul>
 
-				<hr class="mb-4">
-				<button class="btn btn-primary btn-lg btn-block" type="submit">카카오 결제</button>
 			</div>
 			<div class="col-md-7 order-md-1">
 
@@ -48,7 +42,7 @@
 							</c:forEach>
 						</c:if>
 					</select>
-				
+				<input type="text" id="fitness_name" hidden="hidden">
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -96,12 +90,13 @@
 				</div>
 			</div>
 		</div>
+		<div class="row justify-content-center">
+			<hr class="mb-4">
+			<button class="btn btn-warning btn-lg btn-block mx-lg-5 col-4" type="button"
+				onclick="goSubmit()">카카오 결제</button>
+		</div>
 	</form>
 </div>
-
-
-
-
 
 
 
@@ -156,15 +151,35 @@ window.onload = function() {
 	}//////
 	//포인트변경
 	function changePoint(e){
-		if(e.target.type=="button"){
-			document.getElementById("usingPoint").value=
-				document.getElementById("nowPoint").value;			
-		}
 
+		
+		if(e.target.type=="button"){
+			if(parseInt(document.getElementById("nowPoint").value)>parseInt(document.querySelector("#pre_amount").value))
+			{
+				document.getElementById("usingPoint").value=document.querySelector("#pre_amount").value;
+			}
+			else {document.getElementById("usingPoint").value=
+				document.getElementById("nowPoint").value;	}		
+		}
+if(parseInt(document.querySelector("#usingPoint").value)>=parseInt(document.querySelector("#nowPoint").value))
+
+{
+	document.querySelector("#usingPoint").value=document.querySelector("#nowPoint").value;
+}	
+	if(parseInt(document.getElementById("usingPoint").value)>parseInt(document.querySelector("#pre_amount").value))
+			
+			{
+				document.getElementById("usingPoint").value=document.querySelector("#pre_amount").value;	
+			}
 			document.getElementById("all_point").value=
 				document.getElementById("usingPoint").value;
+		
+			
 			point=document.getElementById("all_point").value;
 			changeAmount(event);
+
+
+
 			}
 		
 	//포인트 값 받아와서 전부사용하기 버튼.
@@ -178,18 +193,23 @@ window.onload = function() {
 		//등급, 개월 바뀔때 상품금액 변경되도록
 		const changepay = document.querySelectorAll('.changepay');
 		changepay.forEach(changepay=>{changepay.addEventListener('change', changeAmount)});
-
-
-		
-		
-		
-
 	
 	
 	
-	
-	
-	
-	
+	}//window onload
+	function goSubmit()
+	{
+		if (parseInt(document.querySelector("#total_amount").value)>0){
+			
+	    var gsWin = window.open("about:blank", "kakaoPayStart","top=10, left=10, width=400, height=600, status=no, menubar=no, toolbar=no, resizable=no");
+	    var frm = kakaoPayForm;
+	    frm.target="kakaoPayStart";
+	    frm.submit();
+		}
+		else {alert('결제할 수 없습니다.');}
 	}
+
+	
+	
+	
 </script>
