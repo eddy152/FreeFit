@@ -75,7 +75,7 @@ function goModify(frm) {
 <body>
 	<div class="container-fluid">
 		<div id="divTag1" class="col-lg-6">
-				<div style="color:white; background-color:#01DFD7; padding:20px;">
+				<div style="color:black; background-color:white; padding:20px;">
 					<h2 align="center" class="page-header">공지사항 수정</h2>
 				</div>
 		

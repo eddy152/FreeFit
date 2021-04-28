@@ -53,12 +53,12 @@
 	<div align="center" class="container-fluid">
 		<div id="divTag1" class="col-lg-5">
 			<!--게시판 넓이 -->
-			<div class="col-lg-15" style="color:white; background-color:#01DFD7; padding:20px;">
+			<div class="col-lg-15" style="color:black; background-color:white; padding:20px;">
 				<h1 class="page-header">헬스장 상세조회</h1>
 			</div>
 			<div class="row"></div>
 			<div class="panel panel-default">
-				<div class="panel-heading">Free Fit</div>
+				<div class="panel-heading" style="background-color:gray">Free Fit</div>
 				<div align="center" class="panel-body">
 					<table class="table table-hover">
 						<thead>
