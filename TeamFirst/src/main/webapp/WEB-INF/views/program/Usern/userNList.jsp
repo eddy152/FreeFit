@@ -48,19 +48,37 @@ th {
 
 </style>
 	<div class="page-wrapper">
-		<div class="container-fluid">
-			<div class="row row-2">
+		<div class="row justify-content-center">
+			<div class="col-lg-10"">
 				<!-- 게시판 col-lg-* 1200px이하에서 세로로 표시 시작-->
-				<div align="center">
-					<h1>오너 공지사항</h1>
+				<div class="col justify-content-center mb-4 text-center">
+				<h1 align="center" class="page-header">
+					오너 공지사항</h1>
+					<p class="text-center">프리핏의 오너공지를 안내해 드립니다.</p>
 				</div>
-				<div class="table-responsive">
+				
+				
+				<div class="row justify-content-center mb-3">
+				<div class="col-3 input-group border border-secondary">
+  <input type="text" id="search_text" class="form-control border-0" placeholder="검색" aria-label="Recipient's username" aria-describedby="button-addon2" value="${search}">
+  <div class="input-group-append">
+    <button class="btn" type="button" id="button-addon2" onclick="search()"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-search align-middle" viewBox="0 0 21 21">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg></button>
+  </div>
+  </div>
+</div>
+				
+				
+				
+				
+				<div class="row">
 						<table class="table table">
 							<thead>
-								<tr>
+								<tr class="bg-secondary text-white text-center">
 									<th>No</th>
 									<th>카테고리</th>
-									<th>제목</th>
+									<th class="w-50">제목</th>
 									<th>조회수</th>
 									<th>작성일</th>
 								</tr>
@@ -68,11 +86,11 @@ th {
 							<tbody>
 								<c:forEach items="${uList}" var="us">
 									<tr class="dataRow">
-										<td>${us.board_no}</td>
-										<td>${us.category}</td>
+										<td class="text-center">${us.board_no}</td>
+										<td class="text-center">${us.category}</td>
 										<td>${us.title}</td>
-										<td>${us.hit}</td>
-										<td><fmt:formatDate value="${us.reg_date}"
+										<td class="text-center">${us.hit}</td>
+										<td class="text-center"><fmt:formatDate value="${us.reg_date}"
 												pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>

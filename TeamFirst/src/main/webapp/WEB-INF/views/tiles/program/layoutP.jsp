@@ -18,6 +18,7 @@
 	href="https://getbootstrap.com/docs/4.6/examples/pricing/"> -->
 <!-- Bootstrap core CSS -->
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;

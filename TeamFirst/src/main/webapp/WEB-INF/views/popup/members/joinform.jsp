@@ -38,7 +38,7 @@
 
 <link href="/spring/resources/assets/dist/css/form-validation.css"
 	rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 <!--               -----------------------------------------                   -->
 <body>
 
@@ -138,7 +138,7 @@
 
 						<div class="row justify-content-center">
 							<div class="col mb-lg-5">
-								<input class="btn btn-primary btn-lg btn-block" name="JoinBtn" type="button" value="회원 등록">
+								<input class="btn btn-dark btn-lg btn-block" name="JoinBtn" type="button" value="회원 등록">
 							</div>
 						</div>
 				</form>
@@ -222,14 +222,12 @@
 					
 					<div class="row justify-content-center">
 						<div class="col mb-lg-5 my-lg-1">
-							<input class="btn btn-primary btn-lg btn-block" name="JoinBtn" type="button" value="트레이너 등록">
+							<input class="btn btn-dark btn-lg btn-block" name="JoinBtn" type="button" value="트레이너 등록">
 						</div>
 					</div>
 			</form>
 
 		</div>
-
-
 
 	</div>
 

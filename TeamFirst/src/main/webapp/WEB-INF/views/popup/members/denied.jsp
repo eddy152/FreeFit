@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 <script>
 window.onload=function(){
 	alert("접근할 수 있는 권한이 아닙니다.");

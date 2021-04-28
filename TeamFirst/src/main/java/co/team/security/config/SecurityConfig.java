@@ -101,12 +101,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinformP", "/members/joinformH"
                 		
-                		,"/members/joinT", "/members/joinU"
+                		,"/members/joinT", "/members/joinU", "/members/log"
                 	,"/**"	).permitAll()
                 
                 
                 //누구나 접근가능한 경로 ("/**" 로 전부 접근가능한 상태 )
-                .antMatchers("/members/profile").hasRole("OWNER") //로그인함 + 유저 롤만 접근가능
+                //.antMatchers("/members/profile").hasRole("OWNER") //로그인함 + 유저 롤만 접근가능
                 //.anyRequest().authenticated() // 그 외에는 인증해야만 접근 가능
                 
   
@@ -116,7 +116,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("userId")
                     .passwordParameter("password")
                     .loginProcessingUrl("/authenticate") // Security 에서 처리해주는 경로
-                    //.failureForwardUrl("/members/loginerror?login_error=1") // 작성해줘야 한다
+                    .failureForwardUrl("/members/loginform") // 작성해줘야 한다
                     .permitAll()
                 
                     .and()
@@ -127,7 +127,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                    
                     .and()
                     .exceptionHandling()
-                    .accessDeniedPage("/");
+                    .accessDeniedPage("/members/loginform");
 
 	}
 

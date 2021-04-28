@@ -53,9 +53,9 @@ public class HomeController {
 
 	
 	// 앱 타일즈
-	@RequestMapping("/tilesTestApp")
+	@RequestMapping("/appMain")
 	public String tilesTestApp(Model model) {
-		return "app/test/home";
+		return "app/main/home";
 	}
 
 	// 타일즈 적용을 원하지 않는 경우 (팝업 등)
