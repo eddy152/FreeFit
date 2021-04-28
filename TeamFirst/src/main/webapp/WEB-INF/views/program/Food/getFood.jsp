@@ -14,45 +14,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 </head>
 <style>
-.right {
-	display: inline-block;
-	text-align: center;
-	width: 100%;
-	vertical-align: top;
-	border: 0 10px;
-	margin: 0 10px;
-	padding: 0 10px;
-	list-style: none;
-}
-
-table {
-	width: 70%;
-}
-
-td {
-	padding: 15px;
-	text-align: center;
-}
-
-th {
-	padding: 15px;
-	text-align: center;
-}
-
-#t01 tr:nth-child(even) {
-	background-color: #eee;
-}
-
-#t01 tr:nth-child(odd) {
-	background-color: #fff;
-}
-
-#t01 th {
-	background-color: black;
-	color: white;
-}
+.jm{font-family: 'Jeju Myeongjo', serif;}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript"
@@ -111,14 +76,8 @@ th {
 </script>
 </head>
 <body>
-	<div class="page-wrapper">
-		<div class="container-fluid">
-			<div class="row row-2">
-				<div class="col-sm-5">
-					<h1 class="page-header">회원 상세정보</h1>
-				</div>
-				<div class="table-responsive">
-					<table class="table table">
+		<h1 class="jm">회원 상세정보</h1><br>
+					<table class="table" style="width: 50%; margin-left: 7%; text-align: center;">
 						<tr>
 							<td>이름</td>
 							<td>${food.name }<input name="name" value="${food.id }"
@@ -143,22 +102,18 @@ th {
 								name="weight" value="${food.weight }">
 							</td>
 						</tr>
-						<tr>
-							<td colspan="3" style="width: 100px;"><textarea>특이사항</textarea>
-							</td>
-						</tr>
 					</table>
-					<div align="center">
+					<br>
+					<div style="margin-left: 26%;">
+						<div class="row">
 						<input type="button" class="btn btn-secondary" onclick="moveDate(-7)" value="<"> 
-						<input type="text" name="dates" style="width: 100px;" value="${calories[0].week}">주째
+						<input type="text" name="dates" class="form-control" style="width: 150px;" value="${calories[0].week}">
 						<input type="text" hidden="hidden" id="date" value="${calories[0].sysdate}">
 						<input type="button" class="btn btn-secondary" value=">" onclick="moveDate(7)">
-						<br> <br>
+						</div>
 					</div>
-					<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+				
+					<div id="columnchart_material" style="width: 800px; height: 500px; margin-right: 70%;"></div>
+					
 </body>
 </html>

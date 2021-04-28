@@ -2,10 +2,16 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <style type="text/css">
-
+	.jm{font-family: 'Jeju Myeongjo', serif;}
+	
+	.food_input {
+		padding: .5em .5em;
+		border-radius: 4px;
+	}
 	
 	#buttons {
 		float: right;	}
@@ -27,7 +33,8 @@
  	}
  	
  	.cent2 {
- 		margin: auto;
+ 		margin-top: 10%;
+ 		margin-left: 40px;
  	}
  	
  	.cent-contents {
@@ -41,10 +48,7 @@
  		margin: auto;
  	}
  	
- 	.insertBtn {
- 		margin-right: 0px;
- 		margin-top: 30px;
- 	}
+ 	
  	
  	#input-comment {
  	  padding: 5px 5px;
@@ -94,15 +98,14 @@
  	
 </style>
 
-
 <div class="cent2">
-	<h1>${user.id } 회원님의 식단</h1>
+	<h2 class="jm">${user.name } 회원님의 식단</h2>
 	<input type="text" name="role_exist" hidden="hidden" value="${member.role_name }">
 </div>
 
-<div class="insertBtn">
+<div class="insertBtn" style="margin-left:37%; margin-top:10%;">
 <c:if test="${food.diet_content eq null && member.role_name eq 'ROLE_USER'}">
-<div class="insertFood">
+<div class="insertFood1">
 		<button id="insertForm" type="button" class="btn btn-outline-info">작성하기</button>
 </div>
 </c:if>
@@ -154,18 +157,9 @@
 	<input type="text" value="${food.real_diet_no }" id="real_diet_no1" class="form-control border-0">
 	</div>
 	
-	<div class="cent-contents">
-		<div class="food_contents">${food.diet_content }</div>
-	</div>
-	<div class="contentBtn">
-	<c:if test="${food.real_diet_no ne null && member.role_name eq 'ROLE_USER'}">
-			<button type="button" id="contentUpd" class="btn btn-primary">수정</button>
-			<button type="button" id="contentDel" class="btn btn-danger">삭제</button>
-	</c:if>
-	</div>
-
 	
-<br>
+
+
 <div class="cent">
 <form class="form-inline">
 		<button type="button" onclick="before()" class="btn btn-light"><</button>&nbsp;
@@ -175,7 +169,6 @@
 		<button type="button" onclick="after()" class="btn btn-light">></button>
 </form>
 </div>
-<br>
 <div>
 	<div id="columnchart_material"></div>
 	
@@ -194,6 +187,19 @@
 		</div>
 </div>	
 
+<div class="cent-contents">
+	<div class="food_contents">${food.diet_content }</div>
+</div>
+<div class="contentBtn">
+	<c:if test="${food.real_diet_no ne null && member.role_name eq 'ROLE_USER'}">
+			<button type="button" id="contentUpd" class="btn btn-primary">수정</button>
+			<button type="button" id="contentDel" class="btn btn-danger">삭제</button>
+	</c:if>
+</div>
+<br>
+
+<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>
+<div>
 <p>댓글</p>
 <hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>
 <c:if test="${member.role_name ne 'ROLE_USER'}">
@@ -213,10 +219,11 @@
 	</div>
 </c:if>
 
-<c:if test="${member.role_name eq 'ROLE_USER'}">
+
 <div class="user_comments">
 <c:choose>
 <c:when test="${comment ne '[]'}">
+<c:if test="${member.role_name eq 'ROLE_USER'}">
 <c:forEach items="${comment }" var="comm">
 	<div class="form-inline">
 	<input type="text" class="form-control" style="width:60px;" value="${comm.comment_no }">
@@ -224,19 +231,21 @@
 	</div>
 	<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>	
 </c:forEach>
+</c:if>
 </c:when>
 <c:otherwise>
-	댓글이 없습니다.
+	<div class="non_comment">댓글이 없습니다.</div>
 </c:otherwise>
 </c:choose>
 </div>
-</c:if>
+
+</div>
 
 <c:if test="${member.role_name ne 'ROLE_USER'}">
 <hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>
 <form style="float: right;">
 	<div class="form-inline">
-		<input type="text" name="diet_comment" id="input-comment">&nbsp;
+		<input type="text" name="diet_comment" style="width:300px;" id="input-comment">&nbsp;
 		<button type="button" class="btn btn-primary btn-sm" onclick="comment()">post</button><!--  class="btn btn-outline-warning" -->
 	</div>
 </form>
@@ -361,9 +370,9 @@
 							 <div class="foods">
 							 <c:forEach items="${detail}" var="detail">
 								<div class="each_food">
-									<input type="text" class="form-control mr-sm-2" name="detail_food" value="${detail.detail_food}">
-									<input type="text" class="form-control mr-sm-2" name="detail_calorie" value="${detail.detail_calorie}" hidden="hidden">
-									<input type="text" class="form-control mr-sm-2" name="detail_count" onchange="change(this)" value="${detail.detail_count}">
+									<input type="text" class="food_input" name="detail_food" value="${detail.detail_food}">
+									<input type="text" class="food_input" name="detail_calorie" value="${detail.detail_calorie}" hidden="hidden">
+									<input type="text" class="food_input" name="detail_count" onchange="change(this)" value="${detail.detail_count}">
 									<button type="button" class="deleteFood">-</button><br>
 								</div>
 							 </c:forEach>
@@ -371,6 +380,7 @@
 						</c:if>
 				</form>
 				</div>
+				<br>
 				<label for="exampleFormControlInput1">총 칼로리</label>
 				<input type="text" name="total_calorie1" value="${food.calorie }" class="form-control"><br>
 
@@ -438,13 +448,13 @@ window.onload= function() {
 				$('.frm1').append(
 					'<div class="foods">' 
 				  + '<div class="each_food">'
-				  + '<input type="text" class="form-control" name="detail_food" value="' 
+				  + '<input type="text" class="food_input" name="detail_food" value="' 
 				  + selectFoodName
 				  + '">'
-				  + '<input type="text" class="form-control" name="detail_calorie" hidden="hidden" value="'
+				  + '<input type="text" class="food_input" name="detail_calorie" hidden="hidden" value="'
 				  + selectFood
 				  + '">'
-				  + '<input type="text" class="form-control" name="detail_count" onchange="change(this)" value="'
+				  + '<input type="text" class="food_input" name="detail_count" onchange="change(this)" value="'
 				  + count
 				  + '">'
 				  + '<button type="button" class="deleteFood">-</button>'
@@ -467,13 +477,13 @@ window.onload= function() {
 					$('.frm1').append(
 						'<div class="foods">' 
 						+ '<div class="each_food">'
-						+ '<input type="text" class="form-control" name="detail_food" value="' 
+						+ '<input type="text" class="food_input" name="detail_food" value="' 
 						+ selectFoodName 
 						+ '">' 
-						+ '<input type="text" class="form-control" name="detail_calorie" hidden="hidden" value="' 
+						+ '<input type="text" class="food_input" name="detail_calorie" hidden="hidden" value="' 
 						+ selectFood 
 						+ '">' 
-						+ '<input type="text" class="form-control" name="detail_count" onchange="change(this)" value="' 
+						+ '<input type="text" class="food_input" name="detail_count" onchange="change(this)" value="' 
 						+ count 
 						+ '">' 
 						+ '<button type="button" class="deleteFood">-</button>'
@@ -515,6 +525,7 @@ window.onload= function() {
 			
 			//$(this).closest('div.foods').remove();
 			console.log($(this).closest('div.each_food').remove());
+			$(this).closest('div.foods').remove();
 			
 		});
 	});
@@ -530,12 +541,15 @@ window.onload= function() {
 			var name = $('input:text[name="detail_food"]').eq(i).val();
 			var cal = $('input:text[name="detail_calorie"]').eq(i).val();
 			var cnt = $('input:text[name="detail_count"]').eq(i).val();
-		console.log(name + ", " + cal + ", " + cnt);
-			foods +=  name + "," + cal + "," + cnt;
+			if(typeof food[i] != 'undefined') {
+				foods +=  name + "," + cal + "," + cnt;
+			}				
 			if(i < food.length-1) {				
 			foods += '/';
 			}
 		}
+		console.log(name + ", " + cal + ", " + cnt);
+		console.log($('#real_diet_no1').val() + ", " + $('input:text[name="total_calorie1"]').val() + ", " + foods)
 		
 		 $.ajax({
 			url: 'updateCalorie',
@@ -547,7 +561,7 @@ window.onload= function() {
 			type: 'post',
 			success: function() {
 				alert('SUCCESS!');
-				$('#exampleModal2').hide();
+				//$('#exampleModal2').hide();
 				
 			},
 			error: function() {
@@ -674,6 +688,7 @@ window.onload= function() {
 			
 			if(result.real_diet_no == null && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 				$('.insertFood').show();
+				$('.insertFood1').hide();
 				$('.contentBtn').find('button').remove();
 			}
 			$('input:text[name="total_calorie1"]').val(result.calorie);
@@ -687,9 +702,9 @@ window.onload= function() {
 				$('.frm1').append(
 					'<div class="foods">'
 					+ '<div class="each_food">'
-					+ '<input type="text" class="form-control" name="detail_food" value="' + contents2[0] + '">'
-					+ '<input type="text" class="form-control" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
-					+ '<input type="text" class="form-control" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
+					+ '<input type="text" class="food_input" name="detail_food" value="' + contents2[0] + '">'
+					+ '<input type="text" class="food_input" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
+					+ '<input type="text" class="food_input" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
 					+ '<button type="button" class="deleteFood">-</button>'
 					+ '</div>'
 					+ '</div>'
@@ -807,7 +822,7 @@ window.onload= function() {
 				$('input:text[name=dates]').val(today);
 				$('#real_diet_no1').val(result.real_diet_no);
 				$('.contentBtn').find('button').remove();
-				if($('#real_diet_no1').val() != '') {
+				if($('#real_diet_no1').val() != '' && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 					
 					$('.contentBtn').append(
 							  '<button type="button" id="contentUpd" class="btn btn-primary">수정</button>'
@@ -844,6 +859,7 @@ window.onload= function() {
 	});
 		
 		$('.insertFood').hide();
+		$('.insertFood1').hide();
 		$('#Loadingmodal').modal('hide'); //모달 숨기기
 	}
 	
@@ -862,6 +878,7 @@ window.onload= function() {
 			
 			if(result.real_diet_no == null && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 				$('.insertFood').show();
+				$('.insertFood1').hide();
 				$('.contentBtn').find('button').remove();
 			}
 			$('input:text[name="total_calorie1"]').val(result.calorie);
@@ -875,9 +892,9 @@ window.onload= function() {
 				$('.frm1').append(
 					'<div class="foods">'
 					+ '<div class="each_food">'
-					+ '<input type="text" class="form-control" name="detail_food" value="' + contents2[0] + '">'
-					+ '<input type="text" class="form-control" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
-					+ '<input type="text" class="form-control" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
+					+ '<input type="text" class="food_input" name="detail_food" value="' + contents2[0] + '">'
+					+ '<input type="text" class="food_input" name="detail_calorie" hidden="hidden" value="' + contents2[1] + '">'
+					+ '<input type="text" class="food_input" name="detail_count" onchange="change(this)" value="' + contents2[2] + '">'
 					+ '<button type="button" class="deleteFood">-</button>'
 					+ '</div>'
 					+ '</div>'
@@ -918,7 +935,9 @@ window.onload= function() {
 					  for(i=0; i<response.length; i++) {
 						  
 						if(response.length != 0) {
-							console.log(response.length);					
+							
+							
+						console.log(response.length);					
 						  $('.user_comments').append(
 							'<div class="form-inline">'
 							+ '<input type="text" class="form-control" style="width:60px;" value="' + response[i].comment_no + '">'
@@ -995,7 +1014,7 @@ window.onload= function() {
 				$('input:text[name=dates]').val(today);
 				$('#real_diet_no1').val(result.real_diet_no);
 				$('.contentBtn').find('button').remove();
-				if($('#real_diet_no1').val() != '') {
+				if($('#real_diet_no1').val() != '' && $('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 					
 					$('.contentBtn').append(
 							  '<button type="button" id="contentUpd" class="btn btn-primary">수정</button>'
@@ -1031,6 +1050,7 @@ window.onload= function() {
 		} // 아작스 success
 	});
 	$('.insertFood').hide();
+	$('.insertFood1').hide();
 	$('#Loadingmodal').modal('hide'); //모달 숨기기
 }
 	
@@ -1050,10 +1070,10 @@ window.onload= function() {
 			type: 'post',
 			success: function(response) {
 				alert('성공!');
-
 				if($('input:text[name="role_exist"]').val() == 'ROLE_USER') {
 						  
-					
+						  $('.user_comments').hide();
+						  $('.non_comment').hide();
 						  $('.user_comments').append(
 							'<div class="form-inline">'
 							+ '<input type="text" class="form-control" style="width:60px;" value="' + response.comment_no + '">'
@@ -1065,7 +1085,10 @@ window.onload= function() {
 					 
 				  // ROLE_USER IF END
 				  } else {
-	
+				console.log('성공?');
+					  
+					  $('.user_comments').hide();
+					  $('.non_comment').hide();
 					  $('.comments').append(
 						  '<div class="form-inline">'
 						  + '<input type="text" class="border-0" value="' + response.diet_comment + '" style="width: 200px;" name="comment_upd" readonly="readonly">'
@@ -1121,7 +1144,7 @@ window.onload= function() {
 					alert('성공');
 					console.log(response.diet_comment);
 					if($('input:text[name="role_exist"]').val() == 'ROLE_USER') {
-					
+						 $('.non_comment').hide();
 							  $('.user_comments').append(
 								'<div class="form-inline">'
 								+ '<input type="text" class="form-control" style="width:60px;" value="' + response.comment_no + '">'
@@ -1131,7 +1154,7 @@ window.onload= function() {
 							  );				 
 					  // ROLE_USER IF END
 					  } else {
-
+						  $('.non_comment').hide();
 						  $('.comments').append(
 							  '<div class="form-inline">'
 							  + '<input type="text" class="border-0" value="' + response.diet_comment + '" style="width: 200px;" name="comment_upd" readonly="readonly">'
@@ -1167,6 +1190,12 @@ window.onload= function() {
 				type: 'post',
 				success : function() {
 					alert('성공');
+					
+					if(document.querySelector('div.comments') == null) {
+						$('.user_comments').append( 
+							'<div>' + '댓글이 없습니다.' + '</div>'	
+						);
+					}
 				},
 				error: function() {
 					alert('ERROR!');

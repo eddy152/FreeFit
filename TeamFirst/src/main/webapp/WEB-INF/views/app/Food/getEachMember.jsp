@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 <style type="text/css">
+
+	.jm{font-family: 'Jeju Myeongjo', serif;}
  	.cent {
  		margin: auto;
  	}
@@ -22,9 +25,9 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+ 
 <div class="cent2">
-	<h2>${user.name } 회원님의 식단</h2>
+	<h2 class="jm">${user.name } 회원님의 식단</h2>
 </div>
 <input type="text" name="id" hidden="hidden" value="${user.id }"><br>
 

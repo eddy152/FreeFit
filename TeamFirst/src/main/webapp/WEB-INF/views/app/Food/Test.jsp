@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
+<style>
+	.jm{font-family: 'Jeju Myeongjo', serif;}
+	
+	.margin_tbl{
+		margin-top: 10%;
+	}
+	
+</style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
+<br>
 <div>
-<h2>회원 식단 리스트</h2>
+<h2 class="jm">회원 식단 리스트</h2>
 </div>
 <br>
-
-<div>
+<div class="margin_tbl">
 <table class="table">
   <thead>
     <tr>
@@ -40,4 +48,5 @@
     </c:forEach>
   </tbody>
 </table>
+
 </div>
