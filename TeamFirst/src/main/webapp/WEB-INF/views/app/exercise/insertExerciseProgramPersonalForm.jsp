@@ -20,6 +20,7 @@
 			data: "trainer_id=" + trainer_id + "&exep_name=" + exep_name + "&exep_trainer_id=" + exep_trainer_id + "&user_id=" + user_id,
 			success: function(result) {
 				alert("등록 성공");
+				opener.location.reload();
 				window.close();
 			}
 		})  // End of ajax

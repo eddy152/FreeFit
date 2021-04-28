@@ -180,7 +180,7 @@
 					window.name = "parentForm";
 					var myForm = document.popForm;
 			        window.open("", "popForm"
-			                	, "childForm", "width=800", "height=500", "resizable = no", "scrollbars = no");
+			                	, "childForm", "width=500", "height=500", "resizable = no", "scrollbars = no");
 					myForm.action = "insertExerciseProgramPersonalForm";
 					myForm.method = "post";
 					myForm.target = "popForm";
@@ -201,7 +201,7 @@
 			objs2 = document.createElement('input');
 			objs2.setAttribute('type', 'hidden');
 			objs2.setAttribute('name', 'exep_no');
-			objs2.setAttribute('value', user_id);
+			objs2.setAttribute('value', exep_no);
 			
 			form.appendChild(objs);
 			form.appendChild(objs2);
