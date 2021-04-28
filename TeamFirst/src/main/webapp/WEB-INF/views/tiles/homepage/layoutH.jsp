@@ -31,6 +31,7 @@ min-height: 1000px;
 }
 main{
 margin-top:document.getElementsByTagName('header')[0].offsetHeight;
+min-height: 80%;
 }
 </style>
 <!-- Custom styles for this template -->

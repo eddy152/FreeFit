@@ -19,7 +19,7 @@
                 
                 if (typeof homepageLogin!== "undefined"){
                 profile=document.createElement("a");
-                profile.setAttribute("class","btn btn-outline-primary");
+                profile.setAttribute("class","btn btn-outline-dark");
                 profile.setAttribute("id","profileBtn");
                 profile.text = "마이페이지";                
                 profile.onclick=function(){

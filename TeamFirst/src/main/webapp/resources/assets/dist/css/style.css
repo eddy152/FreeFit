@@ -97,9 +97,9 @@ strong {
   font-family: "mouse-500", Arial, Helvetica, sans-serif; }
 
 body {
-  background-color: #f7f7ff !important;
+
   font-family: "mouse-300", Arial, Helvetica, sans-serif;
-  color: #6A6A6A; }
+  color: #000b28; }
 
 .session-title {
   padding: 30px;
@@ -200,7 +200,7 @@ body {
 
 .form-control:focus {
   box-shadow: none;
-  border: 2px solid #0d7a40 !important; }
+  border: 2px solid #3cc4b3!important; }
 
 .form-control {
   background-color: #F8F8F8;
@@ -285,7 +285,7 @@ body {
         padding: 10px 5px; } }
   .nav-tabs .active {
     border-radius: 0px;
-    border-bottom: 3px solid #0062cc !important; }
+    border-bottom: 3px solid #00ac9f!important; }
 
 .tab-content {
   background-color: #FFF; }
@@ -451,5 +451,13 @@ body {
 
   .rgbf {
     text-align: center; } }
+    
+    
 
 /*# sourceMappingURL=style.css.map */
+
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #343a40;
+}

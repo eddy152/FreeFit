@@ -2,12 +2,20 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<style>
+.tab-pane{
+min-height: 600px;
+}
+</style>
 		<link rel="stylesheet" href="/spring/resources/assets/dist/css/fontawsom-all.min.css">
 		
 
 
 
 		<div class="container">
+		<div class="row justify-content-center mb-4 text-center">
+					<h1 align="center" class="page-header">마이페이지</h1>
+				</div>
 			<div class="row ml-lg-4">
 
 				<div class="row justify-content-lg-left w-100">
@@ -16,7 +24,8 @@
 
 						<div>
 <div class="bg-white p-2 my-2 border border-white rounded">  
-							<img class="mb-2" src="/spring/resources/images/gym.png">
+							<img class="mb-4" src="/spring/resources/images/gym.png">
+							 
 										<h6>${admin.name} 님</h6>
 										<h6>포인트 : ${admin.all_point }</h6>
 </div>
@@ -45,17 +54,17 @@
 					</div>
 					<div class="col-10">
 
-						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade exp-cover show active" id="profile" role="tabpanel"
-								aria-labelledby="profile-tab"  style="min-height: 600px;">
-<div class="row justify-content-center">
+						<div class="tab-content border rounded" id="myTabContent">
+							<div class="tab-pane fade exp-cover show active" id="profile" role="tabpanel" 
+								aria-labelledby="profile-tab">
+<div class="row justify-content-center border-bottom mb-xl-5 ">  
 										<h4 class="ltitle">메인</h4>
 									</div>
 
 								<div class="data-box">
 
 									
-									<div class="row exp-row justify-content-center">
+									<div class="row justify-content-center">
 										<c:if test="${not empty fitList}">
 											<div class="row"">
 												<c:forEach var="fitness" items="${fitList}" varStatus="status">
@@ -65,11 +74,11 @@
 															<c:choose>
 																<c:when test="${fitness.active eq '1'}">
 																	<a href="/spring/fitnessHome?fitness_id=${fitness.fitness_id}"
-																		class="btn btn-primary d-flex">피트니스 홈</a>
+																		class="btn btn-success d-flex">피트니스 관리페이지로</a>
 																</c:when>
 																<c:when test="${fitness.active eq '0'}">
 																	<a href="/spring/membership/pricing"
-																		class="btn btn-primary d-flex">멤버십 등록</a>
+																		class="btn btn-dark d-flex">멤버십 등록</a>
 																</c:when>
 															</c:choose>
 
@@ -87,10 +96,10 @@
 
 
 
-							<div class="tab-pane fade exp-cover" id="home" role="tabpanel" aria-labelledby="home-tab"  style="min-height: 600px;">
+							<div class="tab-pane fade exp-cover" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 								<form method="post" action="/spring/members/updateOwner">
-									<div class="row justify-content-center">
+									<div class="row justify-content-center   border-bottom mb-xl-5 "> 
 										<h4 class="ltitle">개인정보</h4>
 									</div>
 									<div class="row no-margin fitness-det justify-content-center align-items-center"
@@ -161,7 +170,7 @@
 									<div class="row justify-content-center">
 
 										<div class="col-6 mt-5">
-											<button class="btn btn-primary btn-lg btn-block postFormBtn"
+											<button class="btn btn-dark btn-lg btn-block postFormBtn"
 												type="button">수정</button>
 										</div>
 									</div>
@@ -171,8 +180,8 @@
 
 
 							<div class="tab-pane fade exp-cover" id="fitness" role="tabpanel"
-								aria-labelledby="fitness-tab"  style="min-height: 600px;">
-<div class="row justify-content-center">
+								aria-labelledby="fitness-tab"  >
+<div class="row justify-content-center   border-bottom mb-xl-5 "> 
 										<h4 class="ltitle">피트니스정보</h4>
 									</div>
 
@@ -193,17 +202,21 @@
 								<div class="tab-content" id="pills-tabContent">
 									<div class="tab-pane fade show active" id="pills-home" role="tabpanel"
 										aria-labelledby="pills-home-tab">
+										<div class="row justify-content-center"> 
+												<h4 class="ltitle">피트니스 등록</h4>
+
+											</div>
 										<c:if test="${fitList ne null}">
 											<div class="row"> 
 												<c:forEach var="fitness" items="${fitList}" varStatus="status">
 													<c:choose>
 														<c:when test="${fitness.active eq '1'}">
-															<div class="card border-primary col-4">
+															<div class="card border-success col-4">
 																<div class="card-header">${fitness.fitness_name}</div>
 																<div class="card-body">
-																	<p class="btn btn-light d-flex">멤버십 적용중</p>
+																	<p class="btn btn-outline-success d-flex py-2 px-5 mb-2 text-align-center ">멤버십 적용중</p>
 																	<a name="${status.index}"
-																		class="btn btn-primary d-flex py-2 px-5 mb-2 text-align toFitnessDetail">상세페이지</a>
+																		class="btn btn-outline-dark d-flex py-2 px-5 mb-2 text-align-center toFitnessDetail">상세페이지</a>
 																</div>
 															</div>
 														</c:when>
@@ -213,9 +226,9 @@
 																<div class="card-header">${fitness.fitness_name}</div>
 																<div class="card-body">
 																	<a href="/spring/membership/pricing"
-																		class="btn btn-light d-flex">멤버십 등록</a>
+																		class="btn btn-outline-secondary d-flex py-2 px-5 mb-2 text-align-center ">멤버십 등록</a>
 																	<a name="${status.index}"
-																		class="btn btn-primary d-flex py-2 px-5 mb-2 text-align toFitnessDetail">상세페이지</a>
+																		class="btn btn-outline-dark d-flex py-2 px-5 mb-2 text-align-center toFitnessDetail">상세페이지</a>
 																</div>
 															</div>
 														</c:when>
@@ -231,7 +244,7 @@
 
 										<form method="post" action="/spring/members/addFitness">
 											<div class="row justify-content-center">
-												<h4 class="ltitle border border-primary">피트니스 등록</h4>
+												<h4 class="ltitle">피트니스 등록</h4>
 
 											</div>
 											<div class="row no-margin fitness-det justify-content-center align-items-center fitnessAdd"
@@ -239,7 +252,7 @@
 											<div class="row justify-content-center">
 
 												<div class="col-6 mt-5">
-													<button class="btn btn-primary btn-lg btn-block postFormBtn"
+													<button class="btn btn-dark btn-lg btn-block postFormBtn"
 														type="button">등록</button>
 												</div>
 
@@ -260,7 +273,7 @@
 											<div class="row justify-content-center">
 
 												<div class="col-6 mt-5">
-													<button class="btn btn-primary btn-lg btn-block postFormBtn"
+													<button class="btn btn-dark btn-lg btn-block postFormBtn"
 														type="button">등록</button>
 												</div>
 
@@ -278,13 +291,14 @@
 
 
 							<div class="tab-pane fade exp-cover" id="membership" role="tabpanel"
-								aria-labelledby="membership-tab"  style="min-height: 600px;">
-								<div class="row justify-content-center">
+								aria-labelledby="membership-tab">
+								<div class="row justify-content-center   border-bottom mb-xl-5 "> 
+
 										<h4 class="ltitle">멤버십내역</h4>
 									</div>
-								<div class="data-box py-lg-5">
+								<div class="data-box">
 									<c:if test="${memList ne null }">
-										<table class="table justify-content-center text-center">
+										<table class="table justify-content-center text-center border border-bottom">
 											<tr>
 												<th>no</th>
 												<th>등급</th>
@@ -311,14 +325,15 @@
 							</div>
 
 							<div class="tab-pane fade exp-cover" id="resume" role="tabpanel"
-								aria-labelledby="contact-tab" style="min-height: 600px;">
-								<div class="row justify-content-center">
+								aria-labelledby="contact-tab" >
+							<div class="row justify-content-center   border-bottom mb-xl-5 "> 
+										
 										<h4 class="ltitle">결제내역</h4>
 									</div>
-								<div class="data-box py-lg-5">
+								<div class="data-box">
 								
 									<c:if test="${memList ne null }">
-										<table class="table justify-content-center text-center">
+										<table class="table justify-content-center text-center  border border-bottom">
 											<tr>
 												
 												<th>no</th>
@@ -371,9 +386,9 @@ fitness_id.push('${fitness.fitness_id}');
 
 
 				//피트니스 등록수정폼
-				var fitform = '<div class="form-group row justify-content-between"><label for="fitness_name"class="col-form-label text-left">피트니스명</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="fitness_name"name="fitness_name"placeholder="피트니스명"required="required"></div></div><div class="form-group row justify-content-between"><label for="tel_number"class="col-form-label text-left">전화번호</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="tel_number"name="tel_number"placeholder="전화번호"required="required"></div></div><div class="form-group row justify-content-between"><label for="zipcode"class="col-form-label text-left">우편번호</label><div class="col-8 mb-md-2"><div class="input-group"style="margin-bottom: 20px;"><input type="number"class="form-control"id="zipcode"name="zipcode"placeholder="우편번호"required="required"><div class="input-group-append"><input class="btn btn-primary"type="button"id="execPostCode"value="우편번호 찾기"></div></div><div class="invalid-feedback">우편번호를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address"class="col-form-label text-left">주소</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address"name="address"placeholder="헬스클럽 주소"required="required"><div class="invalid-feedback">헬스클럽주소를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address_detail"class="col-form-label text-left">주소상세<span class="text-muted">(Optional)</span></label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address_detail"name="address_detail"placeholder="주소 상세"></div></div><input type="text" name="fitness_id" id="fitness_id" hidden="hidden">';
+				var fitform = '<div class="form-group row justify-content-between"><label for="fitness_name"class="col-form-label text-left">피트니스명</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="fitness_name"name="fitness_name"placeholder="피트니스명"required="required"></div></div><div class="form-group row justify-content-between"><label for="tel_number"class="col-form-label text-left">전화번호</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="tel_number"name="tel_number"placeholder="전화번호"required="required"></div></div><div class="form-group row justify-content-between"><label for="zipcode"class="col-form-label text-left">우편번호</label><div class="col-8 mb-md-2"><div class="input-group"style="margin-bottom: 20px;"><input type="number"class="form-control"id="zipcode"name="zipcode"placeholder="우편번호"required="required"><div class="input-group-append"><input class="btn btn-dark"type="button"id="execPostCode"value="우편번호 찾기"></div></div><div class="invalid-feedback">우편번호를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address"class="col-form-label text-left">주소</label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address"name="address"placeholder="헬스클럽 주소"required="required"><div class="invalid-feedback">헬스클럽주소를입력해주세요.</div></div></div><div class="form-group row justify-content-between"><label for="address_detail"class="col-form-label text-left">주소상세<span class="text-muted">(Optional)</span></label><div class="col-8 mb-md-2"><input type="text"class="form-control"id="address_detail"name="address_detail"placeholder="주소 상세"></div></div><input type="text" name="fitness_id" id="fitness_id" hidden="hidden">';
 
-
+ 
 
 				//피트니스등록수정폼에인덱스넘기기 펑션
 				function gotoupdate(index) {
