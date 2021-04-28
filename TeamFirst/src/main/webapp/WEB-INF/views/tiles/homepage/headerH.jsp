@@ -11,7 +11,7 @@
     
   </nav>
   <div class="col-md-2 p-2 d-flex justify-content-end" id="homepageLogin"> <!-- col-md-2정도 , flex 우측에서 -->
-  <a class="btn btn-outline-primary" id="loginBtn">로그인</a><a class="btn btn-outline-primary" id="joinBtn">회원가입</a>
+  <a class="btn btn-outline-dark" id="loginBtn">로그인</a><a class="btn btn-outline-dark" id="joinBtn">회원가입</a>
   </div>
 </header>
 

@@ -89,15 +89,13 @@ public class MemberController {
 
 	// 아이디, fitness_id 세션저장
 	@RequestMapping("/log")
-	@ResponseBody
 	public String log(HttpSession session) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); // 인증정보
 		String username = auth.getName(); // 이름(id)을 가져온다
 
-		System.out.println("username=" + username);
 		if (username.equals("anonymousUser")) { // 로그인한 상태가 아닐 경우
 			session.invalidate(); // 세션을 삭제한다
-			return "delSession";
+			return "redirect:/";
 		} else {
 			//오너 권한 있는지 확인
 			boolean hasOwnerRole = auth.getAuthorities().stream()
@@ -110,10 +108,10 @@ public class MemberController {
 			if(!hasOwnerRole) {
 			session.setAttribute("fitness_id", vo.getFitness_id());
 
-			return "users";
+			return "redirect:/appMain";
 			
 			}
-			return "owner";
+			return "redirect:/members/profile";
 		}
 
 	}

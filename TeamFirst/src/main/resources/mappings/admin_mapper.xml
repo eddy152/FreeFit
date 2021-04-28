@@ -14,7 +14,7 @@
 		where
 			admin_id=#{admin_id}
 
-
+order by payment_date desc
 	</select>
 
 
@@ -32,7 +32,7 @@
 
 	<select id="getPayment" resultType="int" parameterType="String">
 		select
-		count(admin_id) from payment where admin_id=#{admin_id}
+		count(admin_id) from payment where admin_id=#{admin_id} order by payment_date desc
 	</select>
 
 	<!-- 어드민 정보 단건조회 -->
@@ -71,7 +71,7 @@
 	<!-- 멤버쉽 리스트조회(admin_id/fitness_id로거름) -->
 	<select id="ownerMemberships" resultType="adminVO"
 		parameterType="adminVO">
-		select * from membership_dday
+		select * from membership_dday 
 
 		<where>
 
@@ -82,7 +82,7 @@
 				and fitness_id=#{fitness_id}
 			</if>
 		</where>
-
+order by membership_end desc
 	</select>
 	<!-- 멤버쉽 단건조회(mem_reg_id로거름) -->
 	<select id="selectedMembership" resultType="adminVO"

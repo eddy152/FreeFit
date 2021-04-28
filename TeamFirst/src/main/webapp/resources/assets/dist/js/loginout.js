@@ -19,7 +19,7 @@
                 
                 if (typeof homepageLogin!== "undefined"){
                 profile=document.createElement("a");
-                profile.setAttribute("class","btn btn-outline-primary");
+                profile.setAttribute("class","btn btn-outline-dark");
                 profile.setAttribute("id","profileBtn");
                 profile.text = "마이페이지";                
                 profile.onclick=function(){
@@ -83,22 +83,15 @@
 
                 .then(response => response.url)
                 .then(response =>{
-                
-                console.log(response);
-                    
+                                    
                     $('#Loadingmodal').modal('hide');
                     if (response.includes('error')) {
-                        console.log(response.url);
+                        console.log(response);
                         alert('로그인 실패하였습니다. 아이디와 비밀번호를 확인해주세요.');
                     }
                     else {
-                        fetch('log').then(result=>result.text()).then(function(result) {
-                        if(result =='owner'){
-                            location.href="/spring/members/profile";}
-                        
-                        else {location.href="/spring/appNoticeList";}
-                        })
-
+                    console.log('로그가기전');
+                    location.replace('log');
                     }
                 })
                 .catch(error => console.error('Error:', error))

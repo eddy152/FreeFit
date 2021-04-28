@@ -41,6 +41,7 @@
 </style>
 <link href="/spring/resources/assets/dist/css/dashboard.css"
 	rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 </head>
 <body>
 
