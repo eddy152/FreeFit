@@ -24,7 +24,7 @@
 
 <style>
 
-body{overflow: hidden;
+body{overflow: scroll;
 margin:0;
 width:100%;
 min-height: 1000px;
