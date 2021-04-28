@@ -201,9 +201,9 @@
 		<div class="comments">
 			<c:forEach items="${comment }" var="comm">
 				<div class="form-inline">
-					<input type="text" class="border-0" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" style="width: 200px;">
 					<input style="display: none;" value="${comm.diet_comment }" class="hide_comment">
 					<input type="text" value="${comm.comment_no }" name="comment_no" hidden="hidden">
+					<input type="text" class="border-0" value="${comm.diet_comment }" name="comment_upd" readonly="readonly" style="width: 200px;">
 					<button id="updateComment" class="btn btn-primary btn-sm">수정</button>
 					<button id="updateComment2" style="display: none;" class="btn btn-primary btn-sm">수정</button>
 					<button id="deleteComment" class="btn btn-danger btn-sm">삭제</button><hr><br>
@@ -219,8 +219,8 @@
 <c:when test="${comment ne '[]'}">
 <c:forEach items="${comment }" var="comm">
 	<div class="form-inline">
-	<input type="text" class="form-control" style="width:60px;" value="${comm.diet_comment }">
-	<input type="text" class="form-control border-0" value="${comm.comment_no }">
+	<input type="text" class="form-control" style="width:60px;" value="${comm.comment_no }">
+	<input type="text" class="form-control border-0" value="${comm.diet_comment }">
 	</div>
 	<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>	
 </c:forEach>

@@ -7,14 +7,14 @@
 <style type="text/css">
 	
 	
-	#button4 {
+	.button4 {
 		background-color: white;
   		color: black;
   		border: 2px solid #e7e7e7;
   		margin: 10px;
 	}
 	
-	#button4:hover {background-color: #e7e7e7;}
+	.button4:hover {background-color: #e7e7e7;}
 	
 	#button_group {
 		float:left;
@@ -31,15 +31,15 @@
 		margin-left: 100px;
 	}
 	
-	#using_locker {
+	.using_locker {
 		background-color: #87CEEB;
 	}
 	
-	#broken_btn {
+	.broken_btn {
 		background-color: #C8C8C8;
 	}
 	
-	#button4, #using_locker, #broken_btn {
+	.button4, .using_locker, .broken_btn {
 		font-size: 20px; padding: 10px 20px; margin: 10px;
 	}
 	
@@ -99,7 +99,7 @@
 
 	// 해당 락커의 회원 상세조회
 	$(document).ready(function() {
-		$('.btn').click(function() { // 다중 값을 넘길 때는 class를 사용한다. 단건이면 id 속성 사용
+		$('button[name="click_btn"]').click(function() { // 다중 값을 넘길 때는 class를 사용한다. 단건이면 id 속성 사용
 			$.ajax({
 				url : "getLocker",
 				type : "get",
@@ -394,8 +394,8 @@
 <div id="button_group">
 	<div>
 		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
-		<button id="male" onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=1'">남자</button>&nbsp;
-		<button id="female" onclick="location.href='http://192.168.0.171/spring/getSearchLocker?gender=2'">여자</button>
+		<button id="male" onclick="location.href='getSearchLocker?gender=1'">남자</button>&nbsp;
+		<button id="female" onclick="location.href='getSearchLocker?gender=2'">여자</button>
 	</div>
 </div>
 
@@ -411,13 +411,13 @@
 			<c:set var="j" value="${list[0].lock_width}" />
 			<c:forEach var="locker" items="${list }">
 				<c:if test='${locker.user_id ne null && locker.broken_locker eq "0"}'>
-					<td><button type="button" class="btn" id="using_locker" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button type="button" name="click_btn" class="using_locker" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.broken_locker eq '1'}">
-					<td><button class="btn" id="broken_btn" type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button name="click_btn" class="broken_btn" type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.user_id eq null && locker.broken_locker eq '0'}">
-					<td><button class="btn" id="button4" type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
+					<td><button name="click_btn" class="button4" type="button" value="${locker.lock_no }">${locker.each_lock_no }</button></td>
 				</c:if>
 				<c:if test="${locker.each_lock_no % j == 0}">			
 					</tr>
