@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -9,19 +9,20 @@
 	.cent {
 		margin: 45px;
 	}
+	
+	.jm{font-family: 'Jeju Myeongjo', serif;}
 
 </style>
 
 <div>
+<br>
 	<div>
-		<h1>${food.name } 회원님의 식단</h1>
+		<h1 class="jm">${food.name } 회원님의 식단</h1>
 		<input type="text" name="id" hidden="hidden" value="${food.id }"><br>
-		<div>
-			<button type="button" class="btn btn-outline-secondary" onclick="location.href='getMemberFoodInsert?id=${food.id}'">상세보기</button>
-		</div>
 		<br>
 		
 		<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">회원정보</a>
+		<button type="button" class="btn btn-outline-secondary" onclick="location.href='getMemberFoodInsert?id=${food.id}'">상세보기</button>
 		<div class="row">
 		  <div class="col">
 		    <div class="collapse multi-collapse" id="multiCollapseExample1">
@@ -48,10 +49,6 @@
 					<tr>
 						<td>몸무게</td>
 						<td>${food.weight }<input type="text" hidden="hidden" name="weight" value="${food.weight }">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3" style="width: 200px;"><textarea>특이사항</textarea>
 						</td>
 					</tr>
 				</table> 

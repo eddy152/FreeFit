@@ -1,62 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+<link href="http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css" rel="stylesheet">
 <style type="text/css">
 	
+	#div_bottom {
+		margin-top: 5%;
+	}
+	
+	.ngc{font-family: 'Nanum Gothic Coding', monospace;}
+	
+	.jm{font-family: 'Jeju Myeongjo', serif;}
+	
+	#right_div {
+		width: 50%;
+	}
+	
+	#left_div {
+		width: 50%;
+	}
 	
 	.button4 {
 		background-color: white;
   		color: black;
   		border: 2px solid #e7e7e7;
-  		margin: 10px;
 	}
 	
 	.button4:hover {background-color: #e7e7e7;}
 	
-	#button_group {
-		float:left;
-		position: static;
-	}
-	
-	#left_div {
-		display: inline-block;
-		margin-left: 100px;
-	}
-	
-	#right_div {
-		display: inline-block;
-		margin-left: 100px;
-	}
-	
 	.using_locker {
 		background-color: #87CEEB;
+		border: none;
 	}
 	
 	.broken_btn {
-		background-color: #C8C8C8;
+		background-color: LightGray;
+		border: none;
+	}
+	
+	.broken_btn:hover {
+		background-color: #e7e7e7;
+		border: none;
 	}
 	
 	.button4, .using_locker, .broken_btn {
-		font-size: 20px; padding: 10px 20px; margin: 10px;
+		font-size: 20px; padding: 10px 20px; margin: 10px; border-radius: 8px;
 	}
 	
 	#male {
 		border-radius: 4px;
 		font-size: 20px;
   		margin: 4px 2px;
-  		padding: 5px;
-  		border: none;
+  		padding: 3px 5px 3px 5px;
+  		border-color: gray;
+  		background-color: white;
 	}
 	
 	#female {
 		border-radius: 4px;
 		font-size: 20px;
   		margin: 4px 2px;
-  		padding: 5px;
-  		border: none;
+  		padding: 3px 5px 3px 5px;
+  		border-color: gray;
+  		background-color: white;
 	}
 	
 	#btn-primary {
@@ -66,32 +74,6 @@
   		border: none;
 	}
 	
-	
-	.add_btn {
-		background-color: white;
-		border-color: red;
-		border-radius: 4px;
-	}
-	
-	.add_btn:hover {
-		background-color: #f44336;
-		color: white;
-}
-
-	.del_btn {
-		background-color: white;
-		border-color: DodgerBlue;
-		border-radius: 4px;
-	}
-	
-	.del_btn:hover {
-		background-color: DodgerBlue;
-		color: white;
-	}
-	
-	.right_button {
-		float: right;
-	}
 	
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -158,7 +140,7 @@
 
 	// 락커 수정
 	$(document).ready(function() {
-		$('#btnUpdate').click(function() { // 다중 값을 넘길 때는 class를 사용한다. 단건이면 id 속성 사용
+		$('#btnUpdate_1').click(function() { // 다중 값을 넘길 때는 class를 사용한다. 단건이면 id 속성 사용
 			if(window.confirm('정말 수정하시겠습니까?')){
 				
 			$.ajax({
@@ -391,19 +373,76 @@
 	
 	
 </script>
-<div id="button_group">
+
+<div id="div_bottom">
+<h3 class="jm">락커 상세보기</h3>
+<div id="right_div">
+	<br>
 	<div>
-		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
-		<button id="male" onclick="location.href='getSearchLocker?gender=1'">남자</button>&nbsp;
-		<button id="female" onclick="location.href='getSearchLocker?gender=2'">여자</button>
+		<form id="form1">
+			<table class="table table-md">
+				<tr>
+					<td class="">락커 번호</td>
+					<td><input type="text" id="lock_no" name="lock_no" readonly="readonly" hidden="hidden">
+						<input type="text" name="each_no" class="form-control" readonly="readonly">
+					</td>
+				</tr>
+				<tr>
+					<td class="ngc">고장 여부</td>
+					<td>
+						<input type="radio" name="broken_locker" value="0" class="form-control-md">고장안남&nbsp;
+						<input type="radio" name="broken_locker" value="1" class="form-control-md">고장
+					</td>
+					<td>
+					</td>
+				</tr>
+				<tr>
+					<td class="ngc">첫사용일자</td>
+					<td><input type="date" name="first_date" id="first_date" oninput="inDate()" class="form-control-sm border-0"></td>
+				</tr>
+				<tr>
+					<td class="ngc">종료일</td>
+					<td class="row" style="padding-left: 29px;"><input type="date" name="final_date" id="final_date" class="form-control-sm border-0">&nbsp;&nbsp;
+						<button type="button" id="addDate" onclick="addDate()" style="margin-right: 0px;" class="btn btn-outline-danger btn-sm">+</button>&nbsp;
+						<button type="button" id="delDate" onclick="delDate()" class="btn btn-outline-primary btn-sm">-</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="ngc">회원이름</td>
+					<td>
+						<input type="text" name="user_name" class="user_name">
+						<input type="text" name="user_id" class="user_id" hidden="hidden">
+					</td>
+				</tr>
+				<tr>
+					<td class="ngc">락커룸 번호</td>
+					<td><input type="text" name="room_no" readonly="readonly" class="form-control"></td>
+				</tr>
+			</table>
+		</form>
+		<div class="right_button">
+			<input type="button" class="btn btn-info" id="btnInsert" value="추가">&nbsp; 
+			<input type="button" class="btn btn-primary" value="수정" id="btnUpdate_1">&nbsp; 
+			<input type="button" class="btn btn-danger" value="삭제" id="btnDelete">&nbsp;
+		</div>
 	</div>
 </div>
+</div>
+<br>
+<br>
+	<div>
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
+		<button class="ngc" id="male" onclick="location.href='getSearchLocker?gender=1'">남자</button>&nbsp;
+		<button class="ngc" id="female" onclick="location.href='getSearchLocker?gender=2'">여자</button>
+	</div>
+
 
 <br>
 <div id="left_div">
 
-<h3>락커관리</h3>
-	<hr>
+<h3 class="jm">락커관리</h3>
+<hr style="border:1px color:gray; height: !important; display: block !important; width: 100% !important;"/>
+
 	<!-- start 락카버튼 -->
 	<form id="form2">
 	<table>
@@ -428,56 +467,7 @@
 	</form>
 </div>
 	<!-- end 락카버튼 -->
-<div id="right_div">
-	<h3>락커 상세보기</h3>
-	<br>
-	<div>
-		<form id="form1">
-			<table class="table">
-				<tr>
-					<td>락커 번호</td>
-					<td><input type="text" id="lock_no" name="lock_no" readonly="readonly" hidden="hidden">
-						<input type="text" name="each_no" readonly="readonly">
-					</td>
-				</tr>
-				<tr>
-					<td>고장 여부</td>
-					<td>
-						<input type="radio" name="broken_locker" value="0">고장안남
-						<input type="radio" name="broken_locker" value="1">고장&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<td>첫사용일자</td>
-					<td><input type="date" name="first_date" id="first_date" oninput="inDate()"></td>
-				</tr>
-				<tr>
-					<td>종료일</td>
-					<td><input type="date" name="final_date" id="final_date">
-						<button type="button" id="addDate" onclick="addDate()" class="add_btn">+</button>
-						<button type="button" id="delDate" onclick="delDate()" class="del_btn">-</button>
-					</td>
-				</tr>
-				<tr>
-					<td>회원이름</td>
-					<td>
-						<input type="text" name="user_name" class="user_name">
-						<input type="text" name="user_id" class="user_id" hidden="hidden">
-					</td>
-				</tr>
-				<tr>
-					<td>락커룸 번호</td>
-					<td><input type="text" name="room_no" readonly="readonly"></td>
-				</tr>
-			</table>
-		</form>
-		<div class="right_button">
-			<input type="button" style="background-color: DodgerBlue;" id="btnInsert" value="추가">&nbsp; 
-			<input type="button" style="background-color: MediumSeaGreen;" value="수정" id="btnUpdate">&nbsp; 
-			<input type="button" style="background-color: Tomato;" value="삭제" id="btnDelete">&nbsp;
-		</div>
-	</div>
-</div>
+
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 		data-bs-keyboard="false" tabindex="-1"
@@ -494,20 +484,20 @@
 
 					<table class="table">
 						<tr>
-							<td>락커룸번호</td>
-							<td>성별</td>
-							<td>가로락카수</td>
-							<td>락카수</td>
+							<td class="ngc">락커룸번호</td>
+							<td class="ngc">성별</td>
+							<td class="ngc">가로락카수</td>
+							<td class="ngc">락카수</td>
 						</tr>
 						<c:forEach items="${room }" var="room">
 							<tr class="roomTr">
 								<td>${room.room_no }<input class="roomNO" type="hidden" value="${room.room_no }">
 								</td>
 								<c:if test="${room.gender eq '1'}">
-									<td>남</td>
+									<td class="ngc">남</td>
 								</c:if>
 								<c:if test="${room.gender eq '2'}">
-									<td>여</td>
+									<td class="ngc">여</td>
 								</c:if>
 								<td>${room.lock_width }</td>
 								<td>${room.lock_sum }</td>
@@ -517,11 +507,11 @@
 					<br>
 					<table class="table">
 						<tr>
-							<td>락커룸번호</td>
+							<td class="ngc">락커룸번호</td>
 							<td><input type="text" name="room_no" class="form-control" ></td>
 						</tr>
 						<tr>
-							<td>성별</td>
+							<td class="ngc">성별</td>
 							<td>
 								<input type="text" name="gender" hidden="hidden">
 								<input type="radio" name="radio_gender">&nbsp;남자&nbsp;
@@ -529,18 +519,18 @@
 							</td> 
 						</tr>
 						<tr>
-							<td>가로락카수</td>
+							<td class="ngc">가로락카수</td>
 							<td><input type="text" name="lock_width" class="form-control" ></td>
 						</tr>
 						<tr>
-							<td>락카 수</td>
+							<td class="ngc">락카 수</td>
 							<td><input type="text" name="lock_sum" class="form-control" ></td>
 						</tr>
 					</table>
 
 				</div>
 				<div class="modal-footer">
-					<input type="button" name="manageBtn" style="background-color: DodgerBlue;" value="등록하기">
+					<input type="button" name="manageBtn" class="btn btn-primary" value="등록하기">
 					<!-- <input type="button" name="deleteBtn" value="삭제하기"> -->
 				</div>
 			</div>
@@ -562,10 +552,10 @@
 					
 						<table class="table">
 							<tr>
-								<td>회원이름</td>
-								<td>나이</td>
-								<td>성별</td>
-								<td>핸드폰번호</td>
+								<td class="ngc">회원이름</td>
+								<td class="ngc">나이</td>
+								<td class="ngc">성별</td>
+								<td class="ngc">핸드폰번호</td>
 							</tr>
 					<c:forEach var="user" items="${user}" >
 							<tr class="userTr">
@@ -583,3 +573,4 @@
 			</div>
 		</div>
 	</div>
+
