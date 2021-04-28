@@ -83,7 +83,7 @@ $(function() {
 		
 		$("#exeSet").append('<input type="hidden" name=exe_no value=' + exeNo + '>');
 		$("#exeSetCount").append('<button type="button" name="setDel">삭제하기</button>'
-												+ '<button type="button" name="setSub">추가하기</button>');
+							   + '<button type="button" name="setSub">추가하기</button>');
 	})// End of set
 	
 	//버튼 클릭 이벤트(운동 목록 삭제)
@@ -263,6 +263,9 @@ ul.sub li a {
 
 ul.sub li:hover {
 	background: #cf0;
+}
+input {
+	border: none; 
 }
 </style>
 <title>Insert title here</title>
