@@ -279,6 +279,8 @@ input {
 								<li><a class="menuLink" id="가슴">가슴</a></li>
 								<li><a class="menuLink" id="등">등</a></li>
 								<li><a class="menuLink" id="이두">이두</a></li>
+							</ul>
+							<ul>
 								<li><a class="menuLink" id="삼두">삼두</a></li>
 								<li><a class="menuLink" id="하체">하체</a></li>
 								<li><a class="menuLink" id="복근">복근</a></li>

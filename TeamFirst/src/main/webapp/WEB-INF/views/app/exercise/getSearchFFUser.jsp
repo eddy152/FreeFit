@@ -77,6 +77,17 @@ th {
 			form.submit();
 		})
 	})
+	
+	$(document).on("click", "#btnBack", function() {
+		var form = document.createElement('form');
+		
+		form.setAttribute('method', 'get');
+		form.setAttribute('action', "tilesTestApp");
+
+		document.body.appendChild(form);
+
+		form.submit();
+	})
 </script>
 </head>
 <body>
@@ -111,8 +122,7 @@ th {
 			<br>
 			<br>
 			<div class="col-sm-10 col-sm-offset-1">
-				<button onclick="history.back()" class="btn btn-primary">뒤로
-					가기</button>
+				<button id="btnBack" class="btn btn-primary">메인으로</button>
 			</div>
 		</div>
 	</div>

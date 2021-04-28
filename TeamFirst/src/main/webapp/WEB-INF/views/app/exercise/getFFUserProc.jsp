@@ -47,6 +47,17 @@
 			
 			form.submit();
 		})
+		
+		$(document).on("click", "#backBt", function() {
+			var form = document.createElement('form');
+			
+			form.setAttribute('method', 'get');
+			form.setAttribute('action', "getSearchFFUser");
+			
+			document.body.appendChild(form);
+			
+			form.submit();
+		})
 	});
 </script>
 <style type="text/css">
@@ -163,7 +174,7 @@ th {
 				</c:choose>
 			</tr>
 		</table>
-		<button class="btn btn-primary" onclick="history.back()">뒤로 가기</button>
+		<button class="btn btn-primary" id="backBt">뒤로 가기</button>
 		<button class="btn btn-primary" id="btnRsv">운동기록</button>
 		<button class="btn btn-primary" id="btnPro">프로그램</button>
 	</div>
