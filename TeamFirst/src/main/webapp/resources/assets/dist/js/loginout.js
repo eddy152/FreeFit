@@ -93,10 +93,11 @@
                     }
                     else {
                         fetch('log').then(result=>result.text()).then(function(result) {
-                        if(result.includes('setSession')){
-                            history.go(-1);}
-                        })
+                        if(result =='owner'){
+                            location.href="/spring/members/profile";}
                         
+                        else {location.href="/spring/appNoticeList";}
+                        })
 
                     }
                 })

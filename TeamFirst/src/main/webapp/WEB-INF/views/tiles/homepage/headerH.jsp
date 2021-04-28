@@ -8,6 +8,7 @@
     <a class="p-2 text-dark" href="/spring/getGymList">가맹점</a>
     <a class="p-2 text-dark" href="/spring/membership/pricing">요금제</a>
     <a class="p-2 text-dark" href="/spring/getAdminNoticeBoardList">공지(404)</a>
+    
   </nav>
   <div class="col-md-2 p-2 d-flex justify-content-end" id="homepageLogin"> <!-- col-md-2정도 , flex 우측에서 -->
   <a class="btn btn-outline-primary" id="loginBtn">로그인</a><a class="btn btn-outline-primary" id="joinBtn">회원가입</a>

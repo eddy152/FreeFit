@@ -5,8 +5,9 @@
 
 <div class="container">
 <div class="row justify-content-center">
-
+<a href="/spring/fitnessHome">
 <img class="img-fluid" src="https://i.imgur.com/Zc84gUJ.jpg">
+</a>
 
 </div>
 </div>
