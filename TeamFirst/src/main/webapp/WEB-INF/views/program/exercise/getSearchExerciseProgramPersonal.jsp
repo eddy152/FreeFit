@@ -16,7 +16,7 @@
 <script type="text/javascript">
 	var arr = {};
 	var exep_no;
-	var user_id;
+	var user_id = $(".user_id").val();
 	
 	$(function() {
 		$(".exeProgram").on("click", function() {
@@ -64,6 +64,7 @@
 							$("#" + exep_no).append(
 								"<ul>" +
 								"<li><button class='exeAdd'>운동 추가하기</button></li>" +
+								"<li><button class='exeDel'>삭제하기</button></li>" +
 								"</ul>"
 							);
 						}
@@ -128,7 +129,7 @@
 								form.appendChild(objs);
 								form.appendChild(objs2);
 								form.setAttribute('method', 'post');
-								form.setAttribute('action', "getSearchExerciseRecordList");
+								form.setAttribute('action', "doExerciseProgram");
 
 								document.body.appendChild(form);
 
@@ -149,6 +150,22 @@
 				data: "user_id=" + user_id + "&exep_no=" + exep_no,
 				success: function(result) {
 					alert("삭제 완료");
+					
+					var form = document.createElement('form');
+					var objs;
+					
+					objs = document.createElement('input');
+					objs.setAttribute('type', 'hidden');
+					objs.setAttribute('name', 'user_id');
+					objs.setAttribute('value', user_id);
+					
+					form.appendChild(objs);
+					form.setAttribute('method', 'post');
+					form.setAttribute('action', "getSearchExerciseProgramPersonal");
+					
+					document.body.appendChild(form);
+					
+					form.submit();
 				}
 			}) // End of ajax
 		})

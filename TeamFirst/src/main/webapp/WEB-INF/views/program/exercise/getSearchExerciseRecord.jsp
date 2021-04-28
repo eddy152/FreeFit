@@ -382,7 +382,7 @@
 .container {
 	display: grid;
 	grid-template-rows: 400px 400px 400px;
-	grid-template-columns: 600px 500px 500px;
+	grid-template-columns: 500px 400px 400px;
 	grid-gap: 5px;
 }
 .ui-datepicker{ font-size: 20px; }
@@ -398,6 +398,7 @@
     margin-left:-200px;
     margin-top:-130px;
 }
+
 </style>
 </head>
 <body>
@@ -407,7 +408,7 @@
 		</div>
 		
 		<div>
-			<h3>월간 부위별 근력운동 분석(횟수)</h3>
+			<h3>월간 부위별 운동 분석(횟수)</h3>
 			<div id="drawChart2" style="height: 90%;"></div>
 		</div>
 		

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import co.team.food.service.FoodService_kdh;
 import co.team.food.service.FoodVO;
+import co.team.security.service.MemberVO;
+import co.team.user.service.UserVO;
 
 @Service
 public class FoodServiceImpl_kdh implements FoodService_kdh{
@@ -207,6 +209,12 @@ public class FoodServiceImpl_kdh implements FoodService_kdh{
 	// TODO Auto-generated method stub
 	public List<FoodVO> getWeeks(FoodVO vo) {
 		return dao.getWeeks(vo);
+	}
+
+	@Override
+	// session 회원 단건 조회
+	public MemberVO getEachMember(MemberVO vo) {
+		return dao.getEachMember(vo);
 	}
 
 

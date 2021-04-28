@@ -15,7 +15,7 @@
 <title>Pyramid Fit</title>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<link href="/spring/resources/assets/dist/js/form-validation.css" rel="stylesheet">
+<link href="/spring/resources/assets/dist/css/form-validation.css" rel="stylesheet">
 
 
 <!-- Bootstrap core CSS -->
@@ -23,23 +23,30 @@
 <link href="/spring/resources/assets/dist/css/pricing.css" rel="stylesheet">
 
 <style>
-{
+
 body{overflow: scroll;
+margin:0;
+width:100%;
+min-height: 1000px;
+}
+main{
+margin-top:document.getElementsByTagName('header')[0].offsetHeight;
 }
 </style>
 <!-- Custom styles for this template -->
 <!-- <link href="pricing.css" rel="stylesheet"> -->
 </head>
-<body class="d-flex flex-column h-100"> 
+<body>
 
-	<div class="container-fluid">
+
 			<tiles:insertAttribute name="header" />
 
-	<div style="margin-bottom: 120px"></div>
-			<tiles:insertAttribute name="content" />
-	<div style="margin-bottom: 120px"></div>	 	
-
-	</div>
+<div style="height: 80px;"> </div>
+	<main role="main" class="main pt-xl-5">
+			<tiles:insertAttribute name="content" />	 	
+	</main>
+<div style="height: 80px;"> </div>
+	
 			<tiles:insertAttribute name="footer" />
 
 

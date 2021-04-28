@@ -24,29 +24,23 @@
 	padding: 0 10px;
 	list-style: none;
 }
-
 table {
 	width: 70%;
 }
-
 td {
 	padding: 15px;
 	text-align: center;
 }
-
 th {
 	padding: 15px;
 	text-align: center;
 }
-
 #t01 tr:nth-child(even) {
 	background-color: #eee;
 }
-
 #t01 tr:nth-child(odd) {
 	background-color: #fff;
 }
-
 #t01 th {
 	background-color: black;
 	color: white;

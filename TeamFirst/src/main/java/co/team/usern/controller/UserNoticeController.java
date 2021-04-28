@@ -32,7 +32,9 @@ public class UserNoticeController {
 	public String appuserNList(@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "search", required = false) String search, Model model, HttpSession session) throws Exception {
 		UserNSearch c = new UserNSearch();
-		c.setFitness_id((String) session.getAttribute("fitness_id"));
+		//c.setFitness_id((String) session.getAttribute("fitness_id"));
+		
+		c.setFitness_id(String.valueOf(session.getAttribute("fitness_id")));
 		
 		c.setPage(page - 1);
 		c.setSearch(StringUtils.isNotBlank(search) ? ("%" + StringUtils.trim(search) + "%") : null);
@@ -57,7 +59,7 @@ public class UserNoticeController {
 		return "app/userNotice/appNoticeList";
 	}
 
-	// 단건 + 조회수
+	// 상세조회
 	@GetMapping("/appNoticeUserh")
 	public String appNoticeUserh(Model model, @RequestParam("board_no") int board_no) {
 		model.addAttribute("us", userNoticeService.appNoticeUserh(board_no));

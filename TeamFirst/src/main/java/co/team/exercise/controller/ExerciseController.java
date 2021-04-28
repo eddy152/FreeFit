@@ -1,7 +1,6 @@
 package co.team.exercise.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -171,11 +170,11 @@ public class ExerciseController {
 	}
 	
 	// 리스트 조회
-		@PostMapping("/getSearchExerciseProgramPersonalView")
-		public String getSearchExerciseProgramPersonalView(ExerciseProgramPersonalVO vo, Model model) {
-			model.addAttribute("list", service.getSearchExerciseProgramPersonal(vo));
-			return "nolayout/program/exercise/getSearchExerciseProgramPersonalView";
-		}
+	@PostMapping("/getSearchExerciseProgramPersonalView")
+	public String getSearchExerciseProgramPersonalView(ExerciseProgramPersonalVO vo, Model model) {
+		model.addAttribute("list", service.getSearchExerciseProgramPersonal(vo));
+		return "nolayout/program/exercise/getSearchExerciseProgramPersonalView";
+	}
 
 	// 단건 조회
 	@ResponseBody
@@ -186,9 +185,10 @@ public class ExerciseController {
 
 	// 단건 등록
 	@PostMapping("/insertExerciseProgramPersonal")
-	public String insertExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
+	@ResponseBody
+	public int insertExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
 		service.insertExerciseProgramPersonal(vo);
-		return "redirect:/getSearchExerciseProgramPersonal";
+		return 0;
 	}
 	
 	// 단건 등록폼 호출
@@ -206,9 +206,10 @@ public class ExerciseController {
 
 	// 단건 삭제
 	@PostMapping("/deleteExerciseProgramPersonal")
-	public String deleteExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
+	@ResponseBody
+	public int deleteExerciseProgramPersonal(ExerciseProgramPersonalVO vo) {
 		service.deleteExerciseProgramPersonal(vo);
-		return "redirect:/getSearchExerciseProgramPersonal";
+		return 0;
 	}
 	// EXERCISE_PROGRAM_PERSONAL end
 
@@ -298,26 +299,28 @@ public class ExerciseController {
 	// 단건 등록
 	@PostMapping("/insertExerciseRecord")
 	@ResponseBody
-	public boolean insertExerciseRecord(@RequestBody Map<String, Object> params, Model model) throws Exception {
+	public boolean insertExerciseRecord(@RequestBody Map<String, Object> params) throws Exception {
 		for (String key : params.keySet()) {
-			Map map2 = (Map)params.get(key);
 			service.insertExerciseRecord((Map<String, Object>) params.get(key));
 		}
 		return true;
 	}
 	
 	// 운동 시작 페이지
-	@PostMapping("/getSearchExerciseRecordList")
+	@PostMapping("/doExerciseProgram")
 	public String getSearchExerciseRecordList(ExerciseRecordVO vo, Model model) {
-		model.addAttribute("list", service.getSearchExerciseRecordList(vo));
+		model.addAttribute("exe", service.getSearchExerciseRecordList(vo));
 		return "program/exercise/doExerciseProgram";
 	}
 	
 	// 단건 수정
 	@PostMapping("/updateExerciseRecord")
-	public String updateExerciseRecord(ExerciseRecordVO vo) {
-		service.updateExerciseRecord(vo);
-		return "redirect:/getSearchExerciseRecord";
+	@ResponseBody
+	public boolean updateExerciseRecord(@RequestBody Map<String, Object> params) throws Exception {
+		for (String key : params.keySet()) {
+			service.updateExerciseRecord((Map<String, Object>) params.get(key));
+		}
+		return true;
 	}
 
 	// 단건 삭제

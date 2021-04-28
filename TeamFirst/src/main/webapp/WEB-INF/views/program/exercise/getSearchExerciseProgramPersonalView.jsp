@@ -87,6 +87,22 @@
 				data: "user_id=" + user_id + "&exep_no=" + exep_no,
 				success: function(result) {
 					alert("삭제 완료");
+					
+					var form = document.createElement('delform');
+					var objs;
+
+					objs = document.createElement('input');
+					objs.setAttribute('type', 'hidden');
+					objs.setAttribute('name', 'user_id');
+					objs.setAttribute('value', user_id);
+
+					form.appendChild(objs);
+					form.setAttribute('method', 'post');
+					form.setAttribute('action', "getSearchExerciseProgramPersonal");
+
+					document.body.appendChild(form);
+
+					form.submit();
 				}
 			}) // End of ajax
 		})
@@ -105,6 +121,9 @@
 					myForm.method = "post";
 					myForm.target = "popForm";
 					myForm.submit();
+					
+					alert("등록 완료");
+					window.close();
 				}
 			}) // End of Ajax
 		})

@@ -29,7 +29,8 @@ public class FoodVO {
 	private String weight;
 	private String notice;
 	private String gender;
-	private String mem_reg_id;
+	private String role_name;
+	private Integer fitness_id;
 	
 	private String dat;
 	private String day;

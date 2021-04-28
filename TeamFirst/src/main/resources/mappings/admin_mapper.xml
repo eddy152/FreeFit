@@ -11,9 +11,9 @@
 		select payment_number, item_name, 
 		to_char(payment_date,'YYYY-MM-DD HH24:MI:SS') as payment_date, amount, admin_id from payment
 
-		<where>
+		where
 			admin_id=#{admin_id}
-		</where>
+
 
 	</select>
 

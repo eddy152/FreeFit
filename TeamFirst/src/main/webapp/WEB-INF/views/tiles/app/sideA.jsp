@@ -29,8 +29,8 @@
 			</a> <a class="nav-link" href="/spring/getAppFoodList"> <span
 					data-feather="user-check"></span> 추천식단리스트
 			</a> <sec:authorize access="hasRole('ROLE_USER')">
-					<a class="nav-link" href="/spring/getEachMemer"> <span
-						data-feather="user-check"></span> 식단관리(개인용,없음)
+					<a class="nav-link" href="/spring/getEachMember"> <span
+						data-feather="user-check"></span> 식단관리
 					</a>
 					<a class="nav-link" href="#"
 						onclick="javascript:document.myForm.submit();"> <span

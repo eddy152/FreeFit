@@ -21,8 +21,9 @@
             <li>회원 50명</li>
             <li>피트니스 관리</li>
           </ul>
-          <button type="button" id="silver" class="btn btn-lg btn-block btn-outline-primary priceGoBtn">무료 체험</button>
-        </div>
+          
+          <a class="btn btn-lg btn-block btn-outline-primary priceGoBtn" href="/spring/members/profile#fitness">무료 체험</a>
+        </div> 
       </div>
       <div class="card mb-4 shadow-sm">
         <div class="card-header">

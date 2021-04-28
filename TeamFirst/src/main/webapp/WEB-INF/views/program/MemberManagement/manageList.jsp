@@ -89,7 +89,7 @@ th {
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="button" value="수강회원 등록" style="float: right;"
-							class="btn btn-primary" onclick="location.href='userNW';">
+							class="btn btn-primary" onclick="location.href='#';">
 					</div>
 				</div>
 				<!--row 끝 -->

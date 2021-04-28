@@ -5,6 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
 <title>appNoticeist.jsp</title>
 </head>
 <body>
@@ -27,7 +31,7 @@
                             </button>
                         </div>
 
-                        <a href="" class="white-text mx-3">앱  공지사항</a>
+                        <a class="white-text mx-3">앱  공지사항</a>
 
                         <div>
                             <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
@@ -39,10 +43,7 @@
                                 <i class="fa fa-info-circle mt-0"></i>
                             </button>
                         </div>
-
                     </div>
-				
-				
 								<c:forEach items="${uList}" var="us">
 							 	<span class="subject-add">
 							 		<span class="subjectin">제목 ${us.title}</span>
@@ -103,7 +104,9 @@
 	$(function() {
 		$(".dataRow").click(function() {
 			var no = $(this)
-			location ="appNoticeUserh?board_no="+no;
+			console.log(no);
+			console.log(no.value);
+		//	location ="appNoticeUserh?board_no="+no;
 		})
 	});
 

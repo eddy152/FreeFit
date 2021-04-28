@@ -14,4 +14,5 @@ public class ExerciseListVO {
 	String exe_kinds;
 	String exe_part;
 	String exe_name;
+	String exer_url;
 }

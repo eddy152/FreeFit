@@ -105,14 +105,6 @@ a{
 	  <i class="fab fa-accusoft"></i>
   	  <a href="/spring/">Fitness</a>
   </div>
-    
-    <ul class="navbar_menu">
-      <li><a href="/spring/">메인가기</a></li>
-      <li><a href="/spring/fitnessHome?fitness_id=7">프로그램메인</a></li>
-      <li><a href="/spring/tilesTestApp">앱메인</a></li>
-      <li><a href="/spring/members/profile">마이페이지</a></li>     
-    </ul>
-    
     <ul class="navbar_icons">
     	<li><i class="fas fa-dumbbell"></i></li>
     	<li><i class="fas fa-running"></i></li>

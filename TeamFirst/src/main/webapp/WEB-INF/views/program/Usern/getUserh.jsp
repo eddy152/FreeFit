@@ -11,10 +11,6 @@
 	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
 	crossorigin="anonymous">
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-	crossorigin="anonymous"></script>
-<script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css"
@@ -78,7 +74,7 @@ textarea {
 				readonly="readonly" type="text" name="title" style="width: 30%;"
 				placeholder="제목" value="${us.title}" />
 
-			<textarea readonly="readonly" id="summernote" name="content"></textarea>
+			<textarea id="summernote" name="content"></textarea>
 
 			<input id="subBtn" type="submit" class="btn btn-primary" value="수정하기"
 				style="float: right;"
