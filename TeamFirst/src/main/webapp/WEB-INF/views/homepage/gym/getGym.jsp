@@ -13,21 +13,21 @@
 <script type="text/javascript">
 	
 	
-	function search() {
+	/* function search() {
 		window.open("http://map.naver.com", "프리핏헬스장검색",
                     "width=700,height=500");
-	}
+	} */
 
-	function openMap(){  
+	/* function openMap(){  
 	    window.open("https://map.naver.com/", "네이버지도", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
-		}  
+		}  */ 
 
 </script>
 
 <style>
 
 	div#divTag1 {
-    right: -550px;
+    right: -420px;
     margin-right: ;
 	}
 	
@@ -72,7 +72,8 @@
 						</tr>
 						<tr>
 							<th>매장주소</th>
-							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type=button value="위치찾기" onclick="javascript:openMap();"></td> 
+							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type="button" value="지도검색" onClick="window.open('http://naver.me/FLB1z7Rg','헬스장찾기', 'width=700, height=700')"></td> 
+							<!-- <input type=button value="위치찾기" onclick="javascript:openMap();"> -->
 						</tr>
 						<tr>
 							<th>연락처</th>
