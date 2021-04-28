@@ -20,7 +20,7 @@
 <!-- Bootstrap core CSS -->
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/spring/resources/assets/dist/css/pricing.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
+
 
 <style>
 
@@ -61,4 +61,5 @@ var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute(
 <script src="/spring/resources/assets/dist/js/loginout.js"></script>
 
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 </html>

@@ -18,7 +18,7 @@
 	href="https://getbootstrap.com/docs/4.6/examples/pricing/"> -->
 <!-- Bootstrap core CSS -->
 <link href="/spring/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
+
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -37,6 +37,7 @@
 </style>
 <link href="/spring/resources/assets/dist/css/dashboard.css"
 	rel="stylesheet">
+	
 </head>
 <body>
 
@@ -70,4 +71,5 @@ var isLogin<%=session.getAttribute("id") != null ? ("='" + session.getAttribute(
 	src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script src="/spring/resources/assets/dist/js/dashboard.js"></script>
 <script src="/spring/resources/assets/dist/js/loginout.js"></script>
+<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 </html>

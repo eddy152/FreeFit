@@ -41,7 +41,7 @@
 </style>
 <link href="/spring/resources/assets/dist/css/dashboard.css"
 	rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
+	
 </head>
 <body>
 
@@ -76,4 +76,5 @@
 	src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script src="/spring/resources/assets/dist/js/dashboard.js"></script>
 <script src="/spring/resources/assets/dist/js/loginout.js"></script>
+<link rel="stylesheet" type="text/css" href="/spring/resources/assets/dist/css/style.css" />
 </html>
