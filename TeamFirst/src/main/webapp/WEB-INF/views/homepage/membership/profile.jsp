@@ -234,7 +234,7 @@
 
 										<form method="post" action="/spring/members/addFitness">
 											<div class="row justify-content-center">
-												<h4 class="ltitle">피트니스 등록</h4>
+												<h4 class="ltitle border border-primary">피트니스 등록</h4>
 
 											</div>
 											<div class="row no-margin fitness-det justify-content-center align-items-center fitnessAdd"
@@ -284,7 +284,7 @@
 								aria-labelledby="membership-tab">
 								<div class="data-box">
 									<c:if test="${memList ne null }">
-										<table>
+										<table class="table">
 											<tr>
 												<th>멤버십 번호</th>
 												<th>멤버십 등급</th>
