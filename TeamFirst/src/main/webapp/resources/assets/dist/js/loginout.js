@@ -86,8 +86,8 @@
                 
                 console.log(response);
                     
-                    if (response.includes('error')) {
                     $('#Loadingmodal').modal('hide');
+                    if (response.includes('error')) {
                         console.log(response.url);
                         alert('로그인 실패하였습니다. 아이디와 비밀번호를 확인해주세요.');
                     }
