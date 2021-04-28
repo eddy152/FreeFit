@@ -11,39 +11,29 @@
 <title>pyramidNotice</title>
 <script>
 
-// 비주얼섹션 배경 동영상 및 동영상 위젯 자동재생 환경 설정
-var section_youtube_list = [];
-var yt_player = {};
-var vimeo_player = [];
-var site_video_list = [];
-var video_autoplay_youtube_list = [];
-function onYouTubeIframeAPIReady() {
-$.each(section_youtube_list,function(_e, _data){
-	yt_player[_data.slide_code] = new SITE_SECTION_YOUTUBE();
-	yt_player[_data.slide_code].init(_data.type,_data.code,_data.id, _data.slide_code);
-});
-$.each(video_autoplay_youtube_list, function(k, v){
-	site_video_list[v].play();
-})
-}
-
-$(function() {
-$('body').smoothScroll({
-	delegateSelector: 'a',
-	speed: 1200,
-	easing: 'easeInOutExpo'
-});
-		$('.pms_check').remove();
-				var recentScrollUrl = IMWEB_SESSIONSTORAGE.get('RECENT_PROD_SCROLL_URL');
-if(recentScrollUrl && recentScrollUrl !== document.location.href){
-	IMWEB_SESSIONSTORAGE.remove('RECENT_PROD_SCROLL');
-	IMWEB_SESSIONSTORAGE.remove('RECENT_PROD_SCROLL_URL');
-}
-	});
 </script>
 
 </head>
 <body>
-test1
+	<img src="resources/images/FreeFit4.png" width="1900" height="900">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<img src="resources/images/FreeFit5.png" width="1900" height="900">
+	<br>
+	<br>
+	<br>
+	<img src="resources/images/FreeFit6.png" width="1900" height="700">
+	<br>
+	<br>
+	<br>
+	<img src="resources/images/FreeFit7.png" width="1900" height="900">
+	<br>
+	<br>
+	<br>
+	<img src="resources/images/FreeFit8.png" width="1900" height="900">
 </body>
 </html>

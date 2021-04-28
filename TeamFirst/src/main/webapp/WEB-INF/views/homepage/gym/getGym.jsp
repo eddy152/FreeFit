@@ -18,7 +18,12 @@
                     "width=700,height=500");
 	}
 
+	function openMap(){  
+	    window.open("https://map.naver.com/", "네이버지도", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+		}  
+
 </script>
+
 <style>
 
 	div#divTag1 {
@@ -38,7 +43,7 @@
   	margin: 3px 1px;
   	cursor: pointer;
 	}
-
+	
 </style>
 <title>getGym</title>
 </head>
@@ -67,7 +72,7 @@
 						</tr>
 						<tr>
 							<th>매장주소</th>
-							<td>${gym.address.concat(' ').concat(gym.address_detail)}</td>
+							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type=button value="위치찾기" onclick="javascript:openMap();"></td> 
 						</tr>
 						<tr>
 							<th>연락처</th>
