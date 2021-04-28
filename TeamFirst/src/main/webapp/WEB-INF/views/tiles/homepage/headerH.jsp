@@ -7,7 +7,7 @@
     <a class="p-2 text-dark" href="#">피라미드핏 안내</a>
     <a class="p-2 text-dark" href="/spring/getGymList">가맹점</a>
     <a class="p-2 text-dark" href="/spring/membership/pricing">요금제</a>
-    <a class="p-2 text-dark" href="/spring/getAdminNoticeBoardList">공지(404)</a>
+    <a class="p-2 text-dark" href="/spring/getAdminNoticeBoardList">공지사항</a>
     
   </nav>
   <div class="col-md-2 p-2 d-flex justify-content-end" id="homepageLogin"> <!-- col-md-2정도 , flex 우측에서 -->

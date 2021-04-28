@@ -106,7 +106,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 
                 
                 //누구나 접근가능한 경로 ("/**" 로 전부 접근가능한 상태 )
-                //.antMatchers("/members/profile").hasRole("OWNER") //로그인함 + 유저 롤만 접근가능
+                .antMatchers("/members/profile").hasRole("OWNER") //로그인함 + 유저 롤만 접근가능
                 //.anyRequest().authenticated() // 그 외에는 인증해야만 접근 가능
                 
   
@@ -122,7 +122,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout()
                     .logoutUrl("/members/logout") //"/logout"요청이 오면 세션에서 로그인 정보를 삭제한 후 "/"로 리다이렉트
-                   .logoutSuccessUrl("/")
+                   .logoutSuccessUrl("/members/log")
                     
                    
                     .and()

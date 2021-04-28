@@ -32,7 +32,7 @@ public class HomeController {
 				session.setAttribute("fitness_id", fitness_id);						
 			}
 			if(session.getAttribute("fitness_id")!=null) {
-				return "program/test/home";
+				return "redirect:/calendar";
 			}		
 			else {
 				return "redirect:/members/profile";

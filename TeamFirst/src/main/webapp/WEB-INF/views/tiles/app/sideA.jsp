@@ -9,7 +9,7 @@
 	<div class="sidebar-sticky pt-1">
 		<ul class="nav flex-column nav-fills">
 			<li class="nav-item"><a class="nav-link active"
-				href="/spring/tilesTestApp"> <span data-feather="home"></span>메인(임시)
+				href="/spring/appMain"> <span data-feather="home"></span>메인
 					<span class="sr-only">(current)</span>
 			</a></li>
 			<!-- <li class="nav-item dropdown">
@@ -36,6 +36,12 @@
 						onclick="javascript:document.myForm.submit();"> <span
 						data-feather="file"></span> 운동(개인용)
 					</a>
+					<a class="nav-link" href="/spring/insertReserv"> <span
+						data-feather="user-check"></span>트레이너예약
+					</a>
+					<a class="nav-link" href="/spring/myReserv"> <span
+						data-feather="user-check"></span>예약관리
+					</a>
 				</sec:authorize> <sec:authorize access="hasRole('ROLE_TRAINER')">
 					<a class="nav-link" href="/spring/Test"> <span
 						data-feather="user-check"></span> 회원식단관리(트레이너용)
@@ -43,7 +49,9 @@
 					<a class="nav-link" href="/spring/getSearchFFUser"> <span
 						data-feather="file"></span> 회원 운동 관리(트레이너용)
 					</a>
-
+<a class="nav-link" href="/spring/getTrainerReserv"> <span
+						data-feather="user-check"></span>예약확인
+					</a>
 				</sec:authorize></li>
 
 		</ul>

@@ -95,7 +95,7 @@ public class MemberController {
 
 		if (username.equals("anonymousUser")) { // 로그인한 상태가 아닐 경우
 			session.invalidate(); // 세션을 삭제한다
-			return "redirect:/";
+			return "redirect:/members/loginform";
 		} else {
 			//오너 권한 있는지 확인
 			boolean hasOwnerRole = auth.getAuthorities().stream()

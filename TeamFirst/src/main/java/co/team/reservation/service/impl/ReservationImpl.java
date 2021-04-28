@@ -21,8 +21,8 @@ public class ReservationImpl implements ReservationService {
 	@Override
 	public int insertReserv(ReservationVO vo) {
 
-		dao.insertReserv(vo);
-		return 0;
+		
+		return dao.insertReserv(vo);
 	}
 	
 	

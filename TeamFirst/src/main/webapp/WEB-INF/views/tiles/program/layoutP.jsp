@@ -47,11 +47,10 @@
 	<div class="container-fluid">
 		<div class="row">
 			<tiles:insertAttribute name="side" />
-			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-				<div
-					class="justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<main role="main" class="col mt-lg-2 justify-content-center">
+			
 					<tiles:insertAttribute name="content" />
-				</div>
+				
 			</main>
 		</div>
 	</div>

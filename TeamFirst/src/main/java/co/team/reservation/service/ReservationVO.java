@@ -11,5 +11,7 @@ public class ReservationVO {
 	private String reservation_date;
 	private String content;
 	private String reg_date;
-	
+	private String user_name;
+	private String trainer_name;
+	private int fitness_id;
 }

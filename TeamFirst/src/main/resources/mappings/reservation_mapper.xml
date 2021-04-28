@@ -6,14 +6,31 @@
 
 <!-- RESERVATION 전체 조회 -->
 <select id="getReserv" resultType="ReservationVO" parameterType="ReservationVO">
- 		SELECT reservation_no,
+select * from
+(select t.name trainer_name,r.trainer_id, r.user_id, r.name user_name, r.reservation_date, r.content from trainer t, 
+(select * from ff_user f,
+(SELECT reservation_no,
  			   to_char(reservation_date, 'yyyy-mm-dd') || 'T' || to_char(reservation_date, 'hh:mi:ss') reservation_date,
  			   
- 			   content
- 		FROM RESERVATION
+ 			   content, trainer_id, user_id, rownum
+ 		FROM RESERVATION order by reservation_date desc) r 
+ 		
+ 		where f.id=r.user_id)r 
+ 		<where>
+
+ 		t.id=r.trainer_id
+
+ 		<if test=" user_id!=null and user_id!='' ">
+ 		and r.user_id=#{user_id}
+ 		</if>
+ 		<if test=" trainer_id!=null and trainer_id!='' ">
+ 		and r.trainer_id=#{trainer_id}
+ 		</if>
+ 		</where>) 		
+ 		where rownum between 1 and 10
+ 		 
  	</select>
-
-
+ 		
 <!-- RESERVATION 단건 조회 -->
  	<select id="getReservation" parameterType="ReservationVO">
  		SELECT *
@@ -38,7 +55,7 @@
 			#{user_id},
 			#{trainer_id},
 			#{reservation_date},
-			#{content}
+			'PT 예약'
 		)
 	</insert>
 	

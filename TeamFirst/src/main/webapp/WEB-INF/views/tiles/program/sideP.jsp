@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <nav id="sidebarMenu"
-	class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-	<div class="sidebar-sticky pt-3">
-		<ul class="nav flex-column">
-			<li class="nav-item"><a class="nav-link active"
+
+	class="col-md-2 d-block bg-light sidebar collapse px-0">
+	<div class="sidebar-sticky pt-3 px-1">
+		<ul class="nav flex-column d-inline">
+			<li class="nav-item"><a class="nav-link"
 				href="/spring/"> <span data-feather="home"></span>
 					메인(임시) <span class="sr-only">(current)</span>
 			</a></li>
@@ -39,7 +40,7 @@
 
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/userNList"> <span data-feather="thumbs-up"></span>
-					공지사항
+					공지사항등록
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/spring/productManagement"> <span data-feather="thumbs-up"></span>
@@ -50,11 +51,11 @@
 					data-feather="user-check"></span> 수강회원 목록
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="/spring/tilesTestHomepage"> <span
+				href="/spring/"> <span
 					data-feather="user-check"></span> 홈페이지로
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="/spring/tilesTestApp"> <span data-feather="thumbs-up"></span>
+				href="/spring/appMain"> <span data-feather="thumbs-up"></span>
 					앱으로
 			</a></li>
 			

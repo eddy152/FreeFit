@@ -53,12 +53,12 @@ function date_to_str(format)
  	
     
      calendar = new FullCalendar.Calendar(calendarEl, {
-    	 
+    	 height: "auto",
     	headerToolbar: {
     	hour: 'numeric',
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        right: 'timeGridWeek,timeGridDay,listWeek'
       },
       
       locale : 'ko',
@@ -70,18 +70,7 @@ function date_to_str(format)
       selectMirror: true,
       /*  삭제 */
       eventClick: function(arg) {
-    	  console.log(arg)
-        if (confirm('삭제합니까?')) {
-    		 $.ajax({
-    	       	  url : 'deleteReserv',
-    	       	  type: 'post',
-    	       	  data : {reservation_no : arg.event._def.publicId},
-    	       	  dataType : 'json',
-    	       	  success : function(data){
-    	       	  }
-    	   	  }) // ajax
-      
-        } // if
+
     	 }, // function
         
       
@@ -99,55 +88,27 @@ function date_to_str(format)
     		  <c:forEach items="${list}" var="calendar">
         {
           id : '${calendar.reservation_no}',
-          title: '${calendar.content}' ,
-          start: '${calendar.reservation_date}'
-        	  
+          groupId : '${calendar.trainer_id}',
+          title: '${calendar.trainer_name} : ${calendar.user_name} 님 예약' ,
+          start: '${calendar.reservation_date}',
+          display:'auto'
         },
-        
+
     		  </c:forEach>
-      ]
+      ],
+      eventColor: '#000b28'
+      
     });
     
     calendar.render();
   });
 </script>
-	<div align="center">
-		<h2>트레이너 스케줄</h2>
-		<br>
-		<br>
-		<div id='calendar'></div>
-		<br>
-		<br>
-		<!-- Button trigger modal -->
-		<input type="button" class="btn btn-primary" data-toggle="modal"
-			data-target="#exampleModal" value="클릭하면 일정입력">
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">일정 입력</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<form name="calForm">
-					<div class="modal-body">
-						<input name="reservation_date" class="formInput" type="date"
-							id="day" /><br> <input name="content" type="text"
-							placeholder="일정입력합니까?" />
-					</div>
-				</form>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
-					<button type="button" onclick="form_ajax()" class="btn btn-primary"
-						id="">저장</button>
-				</div>
 
-			</div>
-		</div>
+<div>
+	<div class="text-center border-bottom my-4">
+		<h2>트레이너 스케줄</h2>
+	</div>
+
+		<div id='calendar' class="m-xl-4"></div>
+
 	</div>
