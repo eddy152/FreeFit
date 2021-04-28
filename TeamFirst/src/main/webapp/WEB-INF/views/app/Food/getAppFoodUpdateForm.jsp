@@ -2,12 +2,20 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
+
+	.jm{font-family: 'Jeju Myeongjo', serif;}
 	#counts {
 		width: 70px;
 	}
+	
+	.food_input {
+		padding: .5em .5em;
+		border-radius: 4px;
+	}
+	
 </style>
 <script type="text/javascript">
 //해당 음식과 갯수로 인한 칼로리 계산
@@ -35,13 +43,13 @@
 				if(calorie == '' || calorie == '0') {
 					$('.frm1').append(
 							'<div>' +
-							'<input type="text" name="food_name" class="form-control" value="' 
+							'<input type="text" name="food_name" class="food_input" value="' 
 							+ selectFoodName 
 							+ '">' 
-							+ '<input type="text" name="food_calorie" class="form-control" hidden="hidden" value="' 
+							+ '<input type="text" name="food_calorie" class="food_input" hidden="hidden" value="' 
 							+ selectFood 
 							+ '">' + '&nbsp;'
-							+ '<input type="text" id="counts" name="count" class="form-control" onchange="change(this)" value="' 
+							+ '<input type="text" id="counts" name="count" class="food_input" onchange="change(this)" value="' 
 							+ count 
 							+ '">'
 							+ '<button type="button" id="deleteFood" class="btn btn-outline-danger">-</button>'
@@ -60,13 +68,13 @@
 						if(i == length -1) {
 							$('.frm1').append(
 								'<div>' +
-								'<input type="text" name="food_name" class="form-control"  value="' 
+								'<input type="text" name="food_name" class="food_input" value="' 
 								+ selectFoodName 
 								+ '">' 
-								+ '<input type="text" name="food_calorie" class="form-control"  hidden="hidden" value="' 
+								+ '<input type="text" name="food_calorie" class="food_input" hidden="hidden" value="' 
 								+ selectFood 
 								+ '">' + '&nbsp;'
-								+ '<input type="text" id="counts" class="form-control" name="count" onchange="change(this)" value="' 
+								+ '<input type="text" id="counts" class="food_input" name="count" onchange="change(this)" value="' 
 								+ count 
 								+ '">' + '&nbsp;'
 								+ '<button type="button" id="deleteFood" class="btn btn-outline-danger">-</button>'
@@ -148,8 +156,9 @@
 
 </script>
 <div>
-
-	<h1>식단 수정하기</h1> 
+<br>
+	<h1 class="jm">식단 수정하기</h1> 
+	<br>
 	<label for="inputEmail4">식단번호</label>
 	<input type="text" id="diet_no1" value="${vo.diet_no}" class="form-control"><br>
 	<label for="inputEmail4">제목</label>
@@ -162,7 +171,7 @@
 		<div class="addFoodInput">
 			<select id="foods" class="form-control">
 				<option value="">선택</option>
-				<c:forEach var="food" items="${foodList }">
+				<c:forEach var="food" items="${list }">
 					<option value="${food.calorie}">${food.food_name }</option>
 				</c:forEach>
 			</select>
@@ -180,13 +189,13 @@
 	<div class="frm1">
 		<c:forEach var="content" items="${arr}">
 			<div>
-				<input type="text" value="${content.food_name }" name="food_name" class="form-control">
+				<input type="text" value="${content.food_name }" name="food_name" class="food_input">
 					<c:forEach var="food" items="${list }">
 						<c:if test="${food.food_name eq content.food_name}">
-							<input type="text" value="${food.calorie }" name="food_calorie" hidden="hidden" class="form-control">
+							<input type="text" value="${food.calorie }" name="food_calorie" hidden="hidden" class="food_input">
 						</c:if>
 					</c:forEach>
-				<input type="text" value="${content.food_cnt }" id="counts" name="count" onchange="change(this)" class="form-control">
+				<input type="text" value="${content.food_cnt }" id="counts" name="count" onchange="change(this)" class="food_input">
 				<button type="button" id="deleteFood" class="btn btn-outline-danger">-</button>
 			</div>
 		</c:forEach>

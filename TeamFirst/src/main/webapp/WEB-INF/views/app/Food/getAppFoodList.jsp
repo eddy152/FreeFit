@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 <style type="text/css">
+	.jm{font-family: 'Jeju Myeongjo', serif;}
+
 	h1 {
 		margin-top: 5%;
 	}
@@ -18,7 +20,7 @@
 	
 	.font-table {
 		font-size: 12px;
-		width : 390px;
+		width : 380px;
 	}
 </style>
 <script type="text/javascript">
@@ -44,7 +46,7 @@
 					}
 					console.log(food);
 					$('#diet_content').text(food);
-					$('#diet_no').text(res[0].diet_no);
+					$('#diet_no').val(res[0].diet_no);
 					$('#diet_title').text(res[0].diet_title);
 					$('#total_calorie').text(res[0].total_calorie);
 
@@ -57,7 +59,7 @@
 	});
 	
 	function insertFoodForm() {
-		var no = $('#diet_no').text();
+		var no = $('#diet_no').val();
 		console.log(no);
 		location.href='updateFood?diet_no=' + no;
 	}
@@ -86,7 +88,7 @@
 </script>
 
 <div>
-<h1>추천별 식단</h1>
+<h1 class="jm">추천별 식단</h1>
 <br>
 	<div class="tbl-size">
 		<table class="table table-striped">
@@ -131,7 +133,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">식단 리스트</h5>
@@ -143,18 +145,17 @@
         <div class="font-table">
    		<table class="table">
    			<tr>
-   				<td>번호</td>
-   				<td>제목</td>
-   				<td>내용</td>
-   				<td>총 칼로리</td>
+   				<th style="width: 20%">제목</th>
+   				<th>내용</th>
+   				<th style="width: 20%">총 칼로리</th>
    			</tr>
    			<tr>
-   				<td id="diet_no"></td>
    				<td id="diet_title"></td>
    				<td id="diet_content"></td>
    				<td id="total_calorie"></td>
    			</tr>
    		</table>
+   		<input id="diet_no" type="text" hidden="hidden">
         </div>
         
       </div>

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html><html><head>
 <title>userNList.jsp</title>
+<link href="http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </head>
@@ -13,6 +14,8 @@ $(document).ready(function() { $('.btnClick').click(function(e) {
 e.preventDefault(); $('#staticBackdrop').modal("show"); }); });
 </script>
 <style>
+
+.jm{font-family: 'Jeju Myeongjo', serif;}
 .right {
 	display: inline-block;
 	text-align: center;
@@ -53,33 +56,46 @@ th {
 </style>
 <body>
 	<br>
+	<br>
 	<div class="page-wrapper">
 		<div class="container-fluid">
 		<div class="row row-2">
 			<div class="col-sm-5">
-				<h1 class="page-header">회원 식단관리</h1>
-			</div>
+				<h1 class="jm">회원 식단관리</h1>
+			</div><br>
 			<div class="table-responsive">
-				<table class="table table">	
-					<tr>
-						<td>아이디</td>
-						<td>이름</td>
-						<td>나이</td>
-						<td>성별</td>
-						<td>전화번호</td>
-						<td>식단상세</td>
+				<table class="table table-striped">	
+					<thead>
+					<tr>  
+						<th>아이디</th>
+						<th>이름</th>
+						<th>나이</th>
+						<th>성별</th>
+						<th>전화번호</th>
+						<th>식단상세</th>
 					</tr>
+					</thead>
+					<tbody>
 					<c:forEach var="list" items="${list }">
 						<tr>
 							<td id="id">${list.id }</td>
 							<td>${list.name }</td>
 							<td>${list.age }</td>
-							<td>${list.gender }</td>
+							<c:if test="${list.gender eq '1' }">
+							<td>남자</td>
+							</c:if>
+							<c:if test="${list.gender eq '2' }">
+							<td>여자</td>
+							</c:if>
+							<c:if test="${list.gender ne '2' && list.gender ne '1'}">
+							<td>X</td>
+							</c:if>
 							<td>${list.phone_number }</td>
 							<td><button type="button" class="btn btn-info"
 									onclick="location.href='getFood?id=${list.id}'">식단</button></td>
 						</tr>
 					</c:forEach>
+					</tbody>
 				</table>
 				<br>
 			</div>
