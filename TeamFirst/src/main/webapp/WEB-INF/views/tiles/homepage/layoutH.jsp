@@ -41,7 +41,7 @@ margin-top:document.getElementsByTagName('header')[0].offsetHeight;
 
 			<tiles:insertAttribute name="header" />
 
-
+<div style="height: 80px;"> </div>
 	<main role="main" class="main pt-xl-5">
 			<tiles:insertAttribute name="content" />	 	
 	</main>
