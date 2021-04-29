@@ -95,8 +95,8 @@
 					series.dataFields.valueY = "value";
 					series.dataFields.categoryX = "direction";
 					series.name = "Wind direction";
-					//series.strokeWidth = 3;
-					//series.fillOpacity = 0.2;
+					series.strokeWidth = 3;
+					series.fillOpacity = 0.2;
 				}); // end drawChart2	
 				
 				am4core.ready(function() {
@@ -421,8 +421,8 @@
 	<div class="container">
 		<ul class="gallery">
 			<li>
-				<div id="wrap">
-					<h6>${id}님의 운동 기록입니다.</h6>
+				<div id="wrap" align="center">
+					<h3>${id}님의 운동 기록입니다.</h3><p>
 					<input type="hidden" id="user_id" value="${id}">
 					<div id="datepicker" style="display: inline-block;" class="box"></div>
 				</div>
@@ -430,13 +430,13 @@
 			<li>
 				<div>
 					<h6>월간 부위별 운동 분석(횟수)</h6>
-					<div id="drawChart2" style="width: 100%;"></div>
+					<div id="drawChart2" style="width: 100%; height: 200px"></div>
 				</div>
 			</li>
 			<li>
 				<div>
 					<h6>주간 운동부위 상세</h6>
-					<div id="drawChart3" style="width: 100%;"></div>
+					<div id="drawChart3" style="width: 100%; height: 300px"></div>
 				</div>
 			</li>
 			<li>
@@ -453,13 +453,13 @@
 			<li>
 				<div>
 					<h6>일간 운동 시간(분)</h6>
-					<div id="drawChart5" style="width: 100%;"></div>
+					<div id="drawChart5" style="width: 100%; height: 300px"></div>
 				</div>
 			</li>
 			<li>
 				<div>
 					<h6>일간 운동부위 상세</h6>
-					<div id="drawChart6" style="width: 100%;"></div>
+					<div id="drawChart6" style="width: 100%; height: 300px"></div>
 				</div>
 			</li>
 		</ul>
