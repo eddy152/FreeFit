@@ -99,6 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/updateAdminNoticeBoard").hasRole("ADMIN")
                 .antMatchers("/members/profile").hasRole("OWNER")
                 .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinformP", "/members/joinformH"
                 		
