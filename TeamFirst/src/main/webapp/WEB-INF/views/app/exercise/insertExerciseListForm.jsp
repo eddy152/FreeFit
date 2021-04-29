@@ -68,7 +68,6 @@ button:hover:before,button:hover:after{
 					<th>운동 이름</th>
 				</tr>
 				<tr>
-					<!-- <td><input type="text" name=exe_no></td> -->
 					<td>
 						<select name="exe_kinds" size="1">
 							<option value="기구">기구운동</option>
