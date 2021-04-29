@@ -62,7 +62,7 @@ public class ExerciseController {
 	@GetMapping("/insertExerciseList")
 	public String insertExerciseList(ExerciseListVO vo) {
 		service.insertExerciseList(vo);
-		return "app/exercise/insertExerciseListForm";
+		return "nolayout/app/exercise/insertExerciseListForm";
 	}
 
 	// 등록 폼
@@ -82,7 +82,7 @@ public class ExerciseController {
 	@GetMapping("/deleteExerciseList")
 	public String deleteExerciseList(ExerciseListVO vo) {
 		service.deleteExerciseList(vo);
-		return "app/exercise/deleteExerciseListForm";
+		return "nolayout/app/exercise/deleteExerciseListForm";
 	}
 	// EXERCISE_LIST end
 
