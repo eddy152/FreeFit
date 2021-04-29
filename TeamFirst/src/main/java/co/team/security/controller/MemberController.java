@@ -97,18 +97,21 @@ public class MemberController {
 			session.invalidate(); // 세션을 삭제한다
 			return "redirect:/members/loginform";
 		} else {
+			MemberVO vo = mapper.getMemberById(username);
 			//오너 권한 있는지 확인
 			boolean isAdmin = auth.getAuthorities().stream()
 			          .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
 			if(isAdmin) {
+				session.setAttribute("id", vo.getId());
 				session.setAttribute("fitness_id","7");
 				return "redirect:/";
+				
 			}
 			
 			boolean hasOwnerRole = auth.getAuthorities().stream()
 			          .anyMatch(r -> r.getAuthority().equals("ROLE_OWNER"));
 
-			MemberVO vo = mapper.getMemberById(username);
+			
 			
 			//오너가 아니면 로그인할때 fitness_id 값을 세션저장한다
 			session.setAttribute("id", vo.getId());
