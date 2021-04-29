@@ -69,7 +69,7 @@
 			$.ajax({
 				url: 'deleteFood',
 				type: 'post',
-				data: { diet_no : $('#diet_no').text() },
+				data: { diet_no : $('#diet_no').val() },
 				dataType: 'json',
 				success: function() {
 					alert('삭제완료!');
