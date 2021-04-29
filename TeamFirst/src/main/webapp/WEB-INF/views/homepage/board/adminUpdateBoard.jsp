@@ -29,7 +29,8 @@ $(document).ready(function() {
 	  $("#summernote").summernote('code',  '${board.content}');
 	});
 
-function goModify(frm) {
+function goModify() {
+	var frm=document.querySelector("#updatform");
 	var title = frm.title.value;
 	var content = frm.content.value;
 	
@@ -79,7 +80,7 @@ function goModify(frm) {
 					<h2 align="center" class="page-header">공지사항 수정</h2>
 				</div>
 		
-			<form method="post" action="updateAdminNoticeBoard" >
+			<form method="post" action="updateAdminNoticeBoard" id="updatform">
 				<label for="category">카테고리 : </label>
 					<select id="category" name="category">
 						<option value="공지">공지</option>
@@ -90,7 +91,7 @@ function goModify(frm) {
 					   <textarea id="summernote" name="content"></textarea>
 	  		 </form>																		
 		       		   <div>
-		       		   <input class="btn btn-primary" id="subBtn" type="button" value="수정완료" style="float: right;" onclick="goModify(this.form)"/>
+		       		   <input class="btn btn-primary" id="subBtn" type="button" value="수정완료" style="float: right;" onclick="goModify()"/>
 	       		       <input class="btn btn-primary" type="button" value="목록" style="float: right;" onclick="location.href='getAdminNoticeBoardList';">
 						</div>
 		</div>
