@@ -146,8 +146,6 @@
 <style type="text/css">
 ul {display: table;}
 li {list-style-type: none; margin-left: 5px; margin-bottom: 5px; display: table-cell;}
-.box{position:relative;padding-bottom:56.25%;padding-top:30px;height:0;overflow:hidden;}
-.box iframe,.box object,.box embed{position:absolute;top:0;left:0;width:100%;height:90%;}
 </style>
 <title>Insert title here</title>
 </head>
@@ -161,7 +159,7 @@ li {list-style-type: none; margin-left: 5px; margin-bottom: 5px; display: table-
 						<c:when test="${num1 eq 0}">
 							<div class="carousel-item active">
 								<div class="box">
-									<iframe width="800" height="400" src="https://www.youtube.com/embed/${list.exe_url }?rel=0&amp;" frameborder="0"></iframe>
+									<iframe width="480" height="400" src="https://www.youtube.com/embed/${list.exe_url }?rel=0&amp;" frameborder="0"></iframe>
 								</div><p>
 								<ul>
 									<li>- ${list.exe_part} 운동 -
@@ -225,7 +223,7 @@ li {list-style-type: none; margin-left: 5px; margin-bottom: 5px; display: table-
 						<c:otherwise>
 							<div class="carousel-item">
 								<div class="box">
-									<iframe width="800" height="400" src="https://www.youtube.com/embed/${list.exe_url}" frameborder="0"></iframe>
+									<iframe width="480" height="400" src="https://www.youtube.com/embed/${list.exe_url}" frameborder="0"></iframe>
 								</div><p>
 								<ul>
 									<li>- ${list.exe_part} 운동 -

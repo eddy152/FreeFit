@@ -247,7 +247,7 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 </head>
 <body>
 <div>
-	<div align="center">
+	<div align="center" style="width: 480px">
 		<div id="accordion" align="center">
 			<ul>
 				<li>프로그램명</li>
