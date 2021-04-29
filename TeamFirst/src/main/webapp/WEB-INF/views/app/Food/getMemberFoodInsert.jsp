@@ -1135,7 +1135,7 @@ window.onload= function() {
 				
 			$.ajax({
 				url: 'updateComment',
-				data: { comment_no : $(this).closest('div').children('input')[2].value,
+				data: { comment_no : $(this).closest('div').children('input')[1].value,
 						diet_comment : $(this).parent().find('.hide_comment').val()
 				},
 				dataType: 'json',
@@ -1182,10 +1182,11 @@ window.onload= function() {
 	$(document).ready(function() {
 		$(document).on('click', '#deleteComment', function(e) {
 			if(confirm('삭제하시겠습니까?')) {
+				console.log($(this).closest('div').children('input')[1].value);
 				$(this).closest('div').remove();
 			 $.ajax({
 				url: 'deleteComment',
-				data: { comment_no : $(this).closest('div').children('input')[2].value }, // no , comment
+				data: { comment_no : $(this).closest('div').children('input')[1].value }, // no , comment
 				dataType: 'json',
 				type: 'post',
 				success : function() {

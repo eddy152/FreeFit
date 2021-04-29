@@ -29,13 +29,13 @@
 
 <!-- LOCKER 회원 정보 등록 -->
 	<update id="insertLocker" parameterType="LockerVO">
-		update locker set first_date=#{first_date}, final_date=#{final_date}, user_id= #{user_id}
+		update locker set first_date=to_date(#{first_date}, 'yyyy-MM-dd'), final_date=to_date(#{final_date}, 'yyyy-MM-dd'), user_id= #{user_id}
 		where lock_no = #{lock_no}
 	</update>
 
 <!-- LOCKER 수정 -->
 	<update id="updateLocker" parameterType="LockerVO">
-		update locker set broken_locker=#{broken_locker}, first_date=#{first_date}, final_date=#{final_date}, user_id=#{user_id}, room_no=#{room_no}
+		update locker set broken_locker=#{broken_locker}, first_date=to_date(#{first_date},'yyyy-MM-dd'), final_date=to_date(#{final_date}, 'yyyy-MM-dd'), user_id=#{user_id}, room_no=#{room_no}
 		where lock_no = #{lock_no}
 	</update>
 <!-- LOCKER 삭제 -->

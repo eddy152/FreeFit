@@ -163,11 +163,11 @@ $(function() {
 	
 	//버튼 클릭 이벤트(운동 추가 & 삭제 & 불러오기)
 	$(document).on("click", "a[name=exeAdd]", function() {
-		window.open("insertExerciseListForm", "insertExeForm", "width=570, height=350, resizable = no, scrollbars = no");
+		window.open("insertExerciseListForm", "insertExeForm", "width=570, height=350, left = 1000, top = 100, resizable = no, scrollbars = no");
 	})
 	
 	$(document).on("click", "a[name=exeDel]", function() {
-		window.open("deleteExerciseListForm?exe_part=" + part , "DelExeForm", "width=570, height=350, resizable = no, scrollbars = no");
+		window.open("deleteExerciseListForm?exe_part=" + part , "DelExeForm", "width=570, height=350, left = 1000, top = 100, resizable = no, scrollbars = no");
 	})
 	
 	$(document).on("click", "a[name=exeGet]", function() {
@@ -178,8 +178,7 @@ $(function() {
 			success: function(result) {
 				window.name = "parentForm";
 				var myForm = document.popForm;
-		        window.open("", "popForm"
-		                	, "childForm", "width=800, height=500, resizable = no, scrollbars = no");
+		        window.open("", "popForm", "width=800, height=500, resizable = no, left = 1000, top = 100, scrollbars = no");
 				myForm.action = "getSearchExerciseProgramPersonalView";
 				myForm.method = "post";
 				myForm.target = "popForm";
