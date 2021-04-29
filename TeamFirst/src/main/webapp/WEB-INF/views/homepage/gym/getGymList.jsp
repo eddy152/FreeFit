@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>getGym.jsp</title>
 	
-	<script type="text/javascript">
+<script type="text/javascript">
 	$(function() {
 		$(".dataRow").click(function() {
 			var id = $($(this)[0].children[0]).attr("id")
@@ -24,36 +18,34 @@
 			location = "getGymList?search="+$("#search_text").val();
 	}
 </script>
-	
-<style>
-	div#divTag1 {
-	right : -300px;
-	margin-right: ;
-	}
-</style>
+
 </head>
 <body>
 	<div class="page-wrapper">
-		<div class="container-fluid">
-			<div class="col-lg-8" id="divTag1">
+		<div class="row justify-content-center">
+			<div class="col-lg-10" id="divTag1">
 				<!--게시판 넓이 -->
-				<div class="col-lg-12" style="color:white; background-color:#01DFD7; padding:20px;"align="center">
-					<h1 class="page-header">프리핏 이용 헬스장</h1>
+				<div class="col justify-content-center mb-4 text-center">
+					<h1 align="center" class="page-header">프리핏 이용 헬스장</h1>
+					<p class="text-center">프리핏을 이용중인 헬스장 목록입니다.</p>
 				</div>
-				<div class="row">
-					<div class="col-lg-12" align="right">
-						<input type="text" id="search_text" style="width: 300px;" value="${search}"/>
-						<input type="button" value="헬스장 이름으로 검색"
-							   onclick="search()">
-						<!--  </button>-->
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">헬스장 상세목록</div>
-					<div align="center" class="panel-body">
+				
+				<div class="row justify-content-center mb-3">
+				<div class="col-3 input-group border border-secondary">
+					<input type="text" id="search_text" class="form-control border-0" placeholder="검색" aria-label="Recipient's username" aria-describedby="button-addon2" value="${search}">
+					<div class="input-group-append">
+   					 <button class="btn" type="button" id="button-addon2" onclick="search()"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-search align-middle" viewBox="0 0 21 21">
+  					 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				     </svg></button>
+			 	 </div>
+		 	</div>
+	 	</div>
+				
+				
+					<div class="row">
 						<table class="table table-hover">
 							<thead>
-								<tr>
+								<tr class="bg-secondary text-white text-center">
 									<th>헬스장이름</th>
 									<th>주소</th>
 									<th>전화번호</th>

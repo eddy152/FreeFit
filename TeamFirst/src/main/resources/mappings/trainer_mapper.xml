@@ -8,8 +8,8 @@
 		    parameterType="TrainerVO">
 	
 			SELECT 
-					NAME
-					,GENDER
+			NAME
+			,GENDER
 			FROM 	TRAINER
 			WHERE 	FITNESS_ID = #{fitness_id}
 	</select>
