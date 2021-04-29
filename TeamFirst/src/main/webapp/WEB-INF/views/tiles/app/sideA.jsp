@@ -8,10 +8,10 @@
 	class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
 	<div class="sidebar-sticky pt-1">
 		<ul class="nav flex-column nav-fills">
-			<li class="nav-item"><a class="nav-link active"
+		<!-- 	<li class="nav-item"><a class="nav-link active"
 				href="/spring/appMain"> <span data-feather="home"></span>메인
 					<span class="sr-only">(current)</span>
-			</a></li>
+			</a></li> -->
 			<!-- <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 						role="button" aria-haspopup="true" aria-expanded="false">
