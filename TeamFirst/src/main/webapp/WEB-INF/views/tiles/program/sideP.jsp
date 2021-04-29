@@ -5,10 +5,6 @@
 	class="col-md-2 d-block bg-light sidebar collapse px-0">
 	<div class="sidebar-sticky pt-3 px-1">
 		<ul class="nav flex-column d-inline">
-			<li class="nav-item"><a class="nav-link"
-				href="/spring/"> <span data-feather="home"></span>
-					메인(임시) <span class="sr-only">(current)</span>
-			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/spring/calendar">
 					<span data-feather="bar-chart-2"></span> 일정관리
 			</a></li>

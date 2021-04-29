@@ -99,6 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/members/profile").hasRole("OWNER")
                 .antMatchers("/", "/main", "/memembers/loginerror", "/members/joinformP", "/members/joinformH"
                 		
                 		,"/members/joinT", "/members/joinU", "/members/log"
@@ -106,8 +107,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 
                 
                 //누구나 접근가능한 경로 ("/**" 로 전부 접근가능한 상태 )
-                .antMatchers("/members/profile").hasRole("OWNER") //로그인함 + 유저 롤만 접근가능
-                //.anyRequest().authenticated() // 그 외에는 인증해야만 접근 가능
+                 //로그인함 + 유저 롤만 접근가능
+                .anyRequest().authenticated() // 그 외에는 인증해야만 접근 가능
                 
   
                 .and() //loginform 설정

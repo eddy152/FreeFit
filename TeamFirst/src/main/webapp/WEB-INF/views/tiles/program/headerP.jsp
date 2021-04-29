@@ -103,7 +103,7 @@ a{
 <nav class="navbar">
   <div class="navbar_logo">
 	  <i class="fab fa-accusoft"></i>
-  	  <a href="/spring/">Fitness</a>
+  	  <a href="/spring/fitnessHome">Fitness</a>
   </div>
     <ul class="navbar_icons">
     	<li><i class="fas fa-dumbbell"></i></li>
