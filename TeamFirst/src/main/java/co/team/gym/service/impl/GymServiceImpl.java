@@ -29,4 +29,10 @@ public class GymServiceImpl implements GymService {
 	public GymVO getGym(String id) {
 		return dao.getGym(id);
 	}
+
+	@Override
+	public List<GymVO> mainGymList(String vo) {
+		// TODO Auto-generated method stub
+		return dao.mainGymList(vo);
+	}
 }

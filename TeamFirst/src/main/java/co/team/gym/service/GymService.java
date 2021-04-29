@@ -9,5 +9,5 @@ public interface GymService {
 	public int countGymList(GymListSearch vo);
 	
 	public GymVO getGym(String id);
-	
+	public List<GymVO> mainGymList(String vo);
 }

@@ -1,25 +1,33 @@
 package co.team.home.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import co.team.gym.service.GymService;
+import co.team.gym.service.GymVO;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
-
+	@Autowired
+	GymService gymService;
 //	@Autowired
 //	String uploadPath;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-
+	public String home(Model model) {
+		List<GymVO> vo = gymService.mainGymList("");
+		model.addAttribute("fitnesses", vo);
 		return "homepage/home";
 	}
 	

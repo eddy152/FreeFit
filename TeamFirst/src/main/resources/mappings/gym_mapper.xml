@@ -56,7 +56,13 @@
 		where ROWNUM <= 10
 		]]>
 	</select>	
- 	
+ 			<select id="mainGymList"
+		parameterType="String" resultType="GymVO">
+		SELECT fitness_name
+		,address
+		
+		FROM FITNESS where active=1
+	</select>	
  	<select id="countGymList" resultType="int" parameterType="GymListSearch">
  	
  		SELECT COUNT (1)
