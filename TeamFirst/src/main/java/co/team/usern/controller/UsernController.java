@@ -85,7 +85,7 @@ public class UsernController {
 	}
 
 	// 수정 Post
-	@PostMapping("/userUpdate")
+	@GetMapping("/userUpdate")
 	public String userUpdate(UsernVO vo) {
 		usernService.userUpdate(vo);
 		return "redirect:/getUserh?board_no=" + vo.getBoard_no();
