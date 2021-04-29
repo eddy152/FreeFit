@@ -24,7 +24,7 @@
 				<ul class="exercise">
 				<c:forEach items="${listAll}" var="listAll">
 					<li>
-						<button type="button" name="exeName" id="${listAll.exe_no }">${listAll.exe_name }</button>
+						<button type="button" name="exeName" id="${listAll.exe_no }" style="width: 120px">${listAll.exe_name }</button>
 					</li>
 				</c:forEach>
 				</ul>

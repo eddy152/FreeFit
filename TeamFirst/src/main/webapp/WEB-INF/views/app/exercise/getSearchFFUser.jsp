@@ -89,6 +89,9 @@ th {
 		form.submit();
 	})
 </script>
+<style type="text/css">
+ tr.ffuser:hover { background-color: #D9D7D9; }
+</style>
 </head>
 <body>
 	<div class="col-md-9 pr-30 padding-top-40">

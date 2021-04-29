@@ -2,17 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
+<title>Insert title here</title>
 <script type="text/javascript">
 	var arr = {};
 	var exep_no;
@@ -246,6 +246,7 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 </style>
 </head>
 <body>
+<div>
 	<div align="center">
 		<div id="accordion" align="center">
 			<ul>
@@ -256,7 +257,7 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 				<li>열기</li>
 			</ul>
 			<c:forEach items="${list}" var="list">
-				<div>
+				<div align="center">
 					<ul class="exeProgram">
 						<li>
 							${list.exep_name}
@@ -287,5 +288,6 @@ li {list-style-type: none; float: left; margin-left: 5px; margin-bottom: 5px; di
 		<button type="button" class="btn btn-primary" id="goToBack">뒤로 가기</button>
 		<button type="button" class="btn btn-primary" id="prAdd">추가하기</button>
 	</div>
+</div>
 </body>
 </html>

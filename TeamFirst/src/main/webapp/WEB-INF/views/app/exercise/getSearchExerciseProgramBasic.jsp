@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script>
 var arr = {};
 
@@ -82,7 +86,7 @@ $(function() {
 		+ '<td><input type="number" name="epd_weight" value="0"></tr>')
 		
 		$("#exeSet").append('<input type="hidden" name=exe_no value=' + exeNo + '>');
-		$("#exeSetCount").append('<button type="button" name="setDel">삭제하기</button>'
+		$("#exeSetCount").append('<button type="button" name="setDel">삭제하기</button>&nbsp;'
 							   + '<button type="button" name="setSub">추가하기</button>');
 	})// End of set
 	
@@ -188,8 +192,8 @@ $(function() {
 </script>
 <style type="text/css">
 #topMenu {
-	height: 30px;
-	width: 850px;
+	height: 50px;
+	width: 480px;
 }
 
 #topMenu ul li {
@@ -206,7 +210,7 @@ $(function() {
 	text-decoration: none;
 	color: white;
 	display: block;
-	width: 130px;
+	width: 80px;
 	font-size: 12px;
 	font-weight: bold;
 	font-family: "Trebuchet MS", Dotum, Arial;
@@ -267,29 +271,63 @@ ul.sub li:hover {
 input {
 	border: none; 
 }
+
+button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:25px;
+  padding:0.2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 	<div align="center">
-		<div style="height: 800px; width: 800px;">
-			<div id="div1" style="float: left; padding: 10px;">
+		<div style="height: 800px; width: 480px;">
+			<div id="div1" style="float: left; width: 480px">
 						<nav id="topMenu">
 							<ul>
 								<li><a class="menuLink" id="가슴">가슴</a></li>
 								<li><a class="menuLink" id="등">등</a></li>
 								<li><a class="menuLink" id="이두">이두</a></li>
-							</ul>
-							<ul>
 								<li><a class="menuLink" id="삼두">삼두</a></li>
 								<li><a class="menuLink" id="하체">하체</a></li>
 								<li><a class="menuLink" id="복근">복근</a></li>
 							</ul>
 						</nav>
-				<table id="tbl1" style="height: 150px; width: 800px;">
+				<table id="tbl1" style="height: 150px; width: 480px;">
 					<tr>
 						<td>
-							<div style="float: left; width: 150px; padding: 10px;">
+							<div style="float: left; width: 150px;">
 								<ul id="navi">
 									<li class="group" style="text-align: center;">
 										<div class="title" id="title">가슴</div>
@@ -303,11 +341,11 @@ input {
 							</div>
 						</td>
 						<td>
-							<div id="exe" style="float: left; width: 490px; padding: 10px;">
+							<div id="exe" style="float: left; width: 150px;">
 							</div>
 						</td>
 						<td>
-							<div style="float: left; width: 150px; padding: 10px;">
+							<div style="float: left; width: 150px;">
 								<ul id="navi">
 									<li class="group" style="text-align: center;">
 										<div class="title" id="exeTitle">가슴</div>
@@ -324,32 +362,22 @@ input {
 				</table>
 			</div>
 			<div style="border: 1px solid;">
-				<div style="float: left; width: 30%; padding: 10px;">
-					<table border="1">
-						<tr>
-							<th>준비 운동</th>
-						</tr>
-						<tr>
-							<td><input type="number" id="warmingUp" name="0" min="0" max="50">회
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div style="float: left; width: 30%; padding: 10px;">
+				<div style="float: left; width: 100%;">
 					<form action="insertExercisePersonalDetail" id=insertExercisePersonalDetail>
-						<table border="1" id="exeNameTbl">
+						<table border="1" id="exeNameTbl" class="table table-hover">
 							<tr>
-								<td>운동 목록</td><td>설정 횟수</td>
+								<th scope="col" style="width: 30%">운동 목록</th>
+								<th scope="col">설정 횟수</th>
 							</tr>
 						</table>
 						<button type="button" id="setExePr" style="display: none;">등록하기</button>
 					</form>
 				</div>
-				<div id="divThird" style="float: left; width: 30%; padding: 10px;">
+				<div id="divThird" style="float: left; width: 100%;">
 					<form action="" id="exeSetCount">
-						<table border="1" id="exeSet"></table>
-						<br><input type="hidden" name="exep_no" value="${ffUser1}"><br>
-						<br><input type="hidden" name="user_id" value="${ffUser.id }"><br>
+						<table border="1" id="exeSet" class="table table-hover"></table><br>
+						<input type="hidden" name="exep_no" value="${ffUser1}">
+						<input type="hidden" name="user_id" value="${ffUser.id }">
 					</form>
 					<form name="popForm">
 						<input type="hidden" name="user_id" value="${ffUser.id }" />
