@@ -27,7 +27,7 @@
 <style>
 
 	div#divTag1 {
-    right: -420px;
+    right: -520px;
     margin-right: ;
 	}
 	
@@ -72,7 +72,7 @@
 						</tr>
 						<tr>
 							<th>매장주소</th>
-							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type="button" value="지도검색" onClick="window.open('http://naver.me/FLB1z7Rg','헬스장찾기', 'width=700, height=700')"></td> 
+							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type="button" value="지도검색" onClick="window.open('http://naver.me/FLB1z7Rg','헬스장찾기', 'width=1000, height=700')"></td> 
 							<!-- <input type=button value="위치찾기" onclick="javascript:openMap();"> -->
 						</tr>
 						<tr>
