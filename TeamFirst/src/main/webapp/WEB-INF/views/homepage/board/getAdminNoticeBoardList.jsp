@@ -81,11 +81,10 @@
 						</table>
 					
 				</div>
-				<!-- 
-				어차피 어드민으로는 로그인해서 뭐 안보여줄거라서 버튼 숨김
+				
 				<div class="row justify-content-end">
-				<input type="button" class="btn btn-secondary" value="작성하기" onclick="location.href='adminBoard';">style="float: right;" 
-				</div> -->
+				<input type="button" class="btn btn-secondary" value="작성하기" onclick="location.href='adminBoard';" style="float: right;">
+				</div> 
 			</div>
 		</div>
 	</div>
