@@ -98,6 +98,13 @@ public class MemberController {
 			return "redirect:/members/loginform";
 		} else {
 			//오너 권한 있는지 확인
+			boolean isAdmin = auth.getAuthorities().stream()
+			          .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
+			if(isAdmin) {
+				session.setAttribute("fitness_id","7");
+				return "redirect:/";
+			}
+			
 			boolean hasOwnerRole = auth.getAuthorities().stream()
 			          .anyMatch(r -> r.getAuthority().equals("ROLE_OWNER"));
 
