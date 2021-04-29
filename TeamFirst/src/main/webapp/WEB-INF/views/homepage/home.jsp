@@ -14,7 +14,7 @@
 			<div class="carousel-item active text-center" data-interval="2000"
 				style="font-size: 70px; font-weight: bold; color: white;">
 				
-					<a href="/spring/fitnessHome"> <img
+					<a href="/spring/getGymList"> <img
 						src="https://i.imgur.com/Zc84gUJ.jpg"
 						style="width: 2000px; height:500px; object-fit: none; padding: 0px;">
 					</a>
@@ -25,7 +25,7 @@
 			<c:forEach items="${fitnesses }" var="fit">
 				<div class="carousel-item" data-interval="8000"
 					style="font-size: 70px; font-weight: bold; color: white;">
-					<a href="/spring/fitnessHome"> <img
+					<a href="/spring/getGymList"> <img
 						src="https://i.imgur.com/Zc84gUJ.jpg"
 						style="width: 2000px; height: 500px; object-fit: none; padding: 0px;">
 					</a>
