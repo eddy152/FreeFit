@@ -191,7 +191,7 @@
 
 	// Modal - 관리팝업창
 	$(document).ready(function() {
-		$('.btn-primary').click(function(e) {
+		$('#locker_butn').click(function(e) {
 			e.preventDefault();
 			$('#staticBackdrop').modal("show");
 		});
@@ -431,7 +431,7 @@
 <br>
 <br>
 	<div>
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
+		<button type="button" id="locker_butn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">관리</button>
 		<button class="ngc" id="male" onclick="location.href='getSearchLocker?gender=1'">남자</button>&nbsp;
 		<button class="ngc" id="female" onclick="location.href='getSearchLocker?gender=2'">여자</button>
 	</div>
