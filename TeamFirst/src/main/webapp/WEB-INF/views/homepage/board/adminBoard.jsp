@@ -83,13 +83,12 @@
 </style>
 </head>
 <body>
-	<div id="divTag1" class="col-lg-7" style="color:white; background-color:#01DFD7; padding:20px;">
+	<div id="divTag1" class="col-lg-7" style="color:black;  padding:20px;">
 	<h2 style="text-align: center;">공지사항 작성</h2>
 	</div>
 	<div style="width: 60%; margin: auto;">
 		<form method="post" action="insertAdminNoticeBoard">
-		 	 <br>
-		 	 제목 :  <input type="text" name="title" style="width: 40%;" placeholder="제목" /><br>
+		 	<input type="text" name="title" style="width: 40%;" placeholder="제목" /><br>
 			<label for="category">카테고리 : </label>
 			<select id="category" name="category">
 				<option value="공지">공지</option>

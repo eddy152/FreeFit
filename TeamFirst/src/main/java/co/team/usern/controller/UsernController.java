@@ -91,7 +91,7 @@ public class UsernController {
 		return "redirect:/getUserh?board_no=" + vo.getBoard_no();
 	}
 
-	// 삭제
+	// 삭제 
 	@GetMapping("/userDelete")
 	public String userDelete(UsernVO vo, Model model, @RequestParam("board_no") int board_no) {
 		model.addAttribute("del", usernService.userDelete(board_no));

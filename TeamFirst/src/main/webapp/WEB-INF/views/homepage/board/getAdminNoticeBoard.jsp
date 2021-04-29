@@ -77,7 +77,7 @@
     <div class="col-8">
     <!-- <h2 class="text-center">게시글상세보기</h2><p>&nbsp;</p> -->
     <div class="table table-responsive">
-        <table class="table" style="color:white; background-color:#01DFD7; padding:20px;">
+        <table class="table" style="color:white; background-color:gray; padding:20px;">
   
         <tbody>
          <tr>

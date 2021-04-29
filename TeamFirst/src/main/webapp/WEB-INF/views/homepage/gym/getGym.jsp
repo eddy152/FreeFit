@@ -13,21 +13,21 @@
 <script type="text/javascript">
 	
 	
-	function search() {
+	/* function search() {
 		window.open("http://map.naver.com", "프리핏헬스장검색",
                     "width=700,height=500");
-	}
+	} */
 
-	function openMap(){  
+	/* function openMap(){  
 	    window.open("https://map.naver.com/", "네이버지도", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
-		}  
+		}  */ 
 
 </script>
 
 <style>
 
 	div#divTag1 {
-    right: -550px;
+    right: -520px;
     margin-right: ;
 	}
 	
@@ -53,12 +53,12 @@
 	<div align="center" class="container-fluid">
 		<div id="divTag1" class="col-lg-5">
 			<!--게시판 넓이 -->
-			<div class="col-lg-15" style="color:white; background-color:#01DFD7; padding:20px;">
+			<div class="col-lg-15" style="color:black; background-color:white; padding:20px;">
 				<h1 class="page-header">헬스장 상세조회</h1>
 			</div>
 			<div class="row"></div>
 			<div class="panel panel-default">
-				<div class="panel-heading">Free Fit</div>
+				<div class="panel-heading" style="background-color:gray">Free Fit</div>
 				<div align="center" class="panel-body">
 					<table class="table table-hover">
 						<thead>
@@ -72,7 +72,8 @@
 						</tr>
 						<tr>
 							<th>매장주소</th>
-							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type=button value="위치찾기" onclick="javascript:openMap();"></td> 
+							<td>${gym.address.concat(' ').concat(gym.address_detail)}&nbsp;<input type="button" value="지도검색" onClick="window.open('http://naver.me/FLB1z7Rg','헬스장찾기', 'width=1000, height=700')"></td> 
+							<!-- <input type=button value="위치찾기" onclick="javascript:openMap();"> -->
 						</tr>
 						<tr>
 							<th>연락처</th>
