@@ -63,7 +63,7 @@ public class HomeController {
 	// 앱 타일즈
 	@RequestMapping("/appMain")
 	public String tilesTestApp(Model model) {
-		return "app/main/home";
+		return "app/userNotice/appNoticeList";
 	}
 
 	// 타일즈 적용을 원하지 않는 경우 (팝업 등)
